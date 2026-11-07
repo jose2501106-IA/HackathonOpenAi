@@ -6,7 +6,7 @@ Reglas: fechas `AAAA-MM-DD`; una línea por hecho; cada hecho con **evidencia** 
 
 ## Estado actual
 - Fecha: 2026-11-07 (CDMX)
-- Fase: **construyendo Tócale** (nombre provisional): P12 respondido, PRD, contrato de API, pitch y checklist de entrega escritos; servidor y pantallas en construcción por agentes en paralelo.
+- Fase: **Tócale listo para desplegar** (nombre provisional): servidor, pantallas, pruebas y documentación terminados y verificados en SIMULACIÓN; falta que José despliegue y haga el cobro real.
 - Publicado en: GitHub `main` (todavía sin el código de Tócale). Vercel: sin proyecto.
 - Cobro real con pey: **ninguno todavía**.
 - Última verificación (2026-11-07, docs de Tócale): `python3 scripts/verificar_conocimiento.py` ✓ (ver Historial).
@@ -28,16 +28,21 @@ Reglas: fechas `AAAA-MM-DD`; una línea por hecho; cada hecho con **evidencia** 
   7. 🧑 Un cobro real de $0.01 a $1 confirmado por pey, con `transactionId`, hora y banco anotados aquí (sin el celular).
   8. 🧑 Tarjeta NFC grabada desde la Caja y leída por otro celular (⚪ si José compra tarjetas hoy).
 - Evidencia esperada: salida de `npm test`, capturas, salida del verificador, URL de producción, `transactionId` y commits.
-- Resultado: pendiente.
+- Resultado parcial (14:45): criterios 1 a 5 ✓; 6 a 8 pendientes de José.
+  1. ✓ `node --test`: 23 pruebas, 23 pasan, 0 fallas (fetch simulado; no llaman servicios reales).
+  2. ✓ Servidor local sin llaves + Playwright (Chromium móvil): Caja → "Entender pedido" (interpretación básica) → "Crear cobro" → liga y QR → Cliente → celular de prueba → "¡Pagado! Gracias · $1.00 · SIMULACIÓN"; QR CoDi de respaldo con confirmación previa; liga inválida muestra el error. Resultado del script: "SIN FALLAS".
+  3. ✓ Liga alterada → `PEDIDO_INVALIDO` (`test/pedido.test.js`); pedido de $180 → cobra $1.00 con "Cobro de prueba" (`test/pey.test.js` y captura 1).
+  4. ✓ A 360 y 390 px: sin desplazamiento horizontal y ningún botón ni casilla de menos de 44 px. Capturas en `docs/capturas/`.
+  5. ✓ `python3 scripts/verificar_conocimiento.py`: "Todo en orden".
+  - ⚪ Web NFC sin probar con tarjeta real (no hay tarjetas; solo Chrome en Android).
 
 ## Contratos anteriores (cumplidos)
 - **Proyecto definido y entorno de Claude Code en Codespaces (7-nov, 13:05):** CoDi y pey completos, `docs/PROYECTO.md` (P1–P12), `.devcontainer/`, `.claude/` y guía. Resultado 13:28: 6 de 6 criterios ✓. **Cumplido.**
 - **Base limpia del concurso y de pey (7-nov):** solo bases del concurso y documentación de pey en Markdown, sin «¿Ya cayó?» salvo su nota. Resultado 13:02: cumplido salvo la etiqueta `ya-cayo-v1` (403 al subirla).
 
 ## Siguientes pasos
-1. 🤖 Terminar servidor, pantallas y pruebas; probar el flujo en SIMULACIÓN; verificador; commit.
-2. 🧑 Aprobar el push a `main`.
-3. 🧑 Preguntar en la sede a qué hora y dónde se entrega (José cree que hoy a las 16:00; K00 dice domingo a las 13:00).
+1. 🧑 Aprobar el push a `main`.
+2. 🧑 Confirmar en la sede dónde está el portal (Luma: cierre domingo 8, 13:00).
 4. 🧑 Vercel, llave de pey con la cuenta de prueba, variables de entorno y webhook ([`docs/ENTREGA.md`](docs/ENTREGA.md)).
 5. 🧑 Cobro real de $0.01 a $1 y anotarlo aquí.
 6. 🧑 Tarjetas NFC (si da tiempo), video de respaldo y ensayo del [pitch](docs/PITCH.md).

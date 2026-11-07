@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Caja de Tócale: arma el pedido y cobra con CoDi® sin terminal.">
+  <title>Tócale · Caja</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/estilos.css">
+  <script type="module" src="/js/caja.js"></script>
+</head>
+<body>
+  <a class="saltar" href="#principal">Saltar al contenido</a>
+  <p id="banner-simulacion" class="banner-simulacion" hidden>SIMULACIÓN: no se cobra dinero real</p>
+
+  <header class="encabezado">
+    <p class="marca">Tócale <span>· Caja</span></p>
+    <p class="negocio" id="negocio">Cargando menú…</p>
+    <p class="nota-ejemplo" id="nota-ejemplo" hidden>Menú y precios de ejemplo</p>
+  </header>
+
+  <main id="principal">
+    <noscript><p class="mensajes">Necesitas activar JavaScript para usar Tócale.</p></noscript>
+
+    <section id="seccion-pin" class="tarjeta" hidden aria-labelledby="titulo-pin">
+      <h2 id="titulo-pin">PIN de caja</h2>
+      <label for="pin">PIN de caja</label>
+      <input id="pin" name="pin" type="password" inputmode="numeric" autocomplete="off" aria-describedby="ayuda-pin">
+      <p class="ayuda" id="ayuda-pin">Lo pide el servidor para crear cobros. Se guarda solo mientras esta pestaña esté abierta.</p>
+    </section>
+
+    <section id="seccion-armar" aria-labelledby="titulo-pedido">
+      <h1 id="titulo-pedido" tabindex="-1">Arma el pedido</h1>
+
+      <div id="productos" class="productos" role="group" aria-label="Productos del menú: toca para agregar uno"></div>
+
+      <div class="tarjeta separado">
+        <label for="texto-pedido">Dicta o escribe el pedido</label>
+        <p class="ayuda" id="ayuda-dictado">Toca el micrófono de tu teclado para dictar. Ejemplo: “cuatro de pastor con todo y una horchata”.</p>
+        <textarea id="texto-pedido" name="texto-pedido" rows="3" maxlength="500" aria-describedby="ayuda-dictado aviso-ia"></textarea>
+        <p class="nota" id="aviso-ia"></p>
+        <button type="button" id="btn-interpretar" class="boton secundario">Entender pedido con IA</button>
+        <p id="resultado-interpretacion" class="nota" role="status" aria-live="polite"></p>
+      </div>
+
+      <h2 id="titulo-lista" tabindex="-1">Pedido</h2>
+      <ul id="lista-pedido" class="lista-pedido" aria-labelledby="titulo-lista"></ul>
+      <p id="pedido-vacio" class="nota">Aún no hay productos. Toca un producto o dicta el pedido.</p>
+      <p class="total" aria-live="polite"><span>Total</span> <strong id="total">$0.00</strong></p>
+
+      <button type="button" id="btn-crear" class="boton primario" disabled>Crear cobro</button>
+      <div id="mensajes-caja" class="mensajes" role="alert"></div>
+      <button type="button" id="btn-reintentar" class="boton secundario" hidden>Reintentar</button>
+    </section>
+
+    <section id="seccion-cobro" hidden aria-labelledby="titulo-cobro">
+      <h1 id="titulo-cobro" tabindex="-1">Cobro listo · Pedido #<span id="cobro-id"></span></h1>
+      <p class="total-grande" id="cobro-total"></p>
+      <p id="cobro-prueba" class="aviso-prueba" hidden></p>
+      <ul id="cobro-productos" class="lista-resumen" aria-label="Productos del pedido"></ul>
+
+      <div id="estado-caja" class="estado" role="status" aria-live="polite"></div>
+
+      <div class="tarjeta">
+        <h2 id="titulo-liga">El cliente escanea o toca</h2>
+        <div id="qr-liga" class="qr"></div>
+        <p class="nota">El cliente lo escanea con la cámara de su celular.</p>
+        <p class="liga"><a id="liga" href="#" target="_blank" rel="noopener noreferrer"></a></p>
+        <button type="button" id="btn-copiar" class="boton secundario">Copiar liga</button>
+        <button type="button" id="btn-nfc" class="boton primario">Grabar en tarjeta NFC</button>
+        <p id="estado-acciones" class="nota" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="tarjeta">
+        <h2>Respaldo</h2>
+        <button type="button" id="btn-qr-codi" class="boton secundario" aria-controls="confirmar-qr">Mostrar QR CoDi® (si al cliente no le llegó la notificación)</button>
+        <div id="confirmar-qr" class="confirmar" hidden>
+          <p id="texto-confirmar-qr">Si el cliente ya autorizó la notificación, no lo escanee: se cobraría dos veces.</p>
+          <button type="button" id="btn-qr-si" class="boton primario">Sí, mostrar el QR CoDi®</button>
+          <button type="button" id="btn-qr-no" class="boton secundario">Cancelar</button>
+        </div>
+        <div id="qr-codi-bloque" hidden>
+          <div id="qr-codi" class="qr"></div>
+          <p class="nota">Escanéalo con la app de tu banco.</p>
+          <p class="nota" id="qr-codi-vence"></p>
+        </div>
+        <p id="qr-codi-nota" class="nota" role="status" aria-live="polite"></p>
+        <div id="mensajes-cobro" class="mensajes" role="alert"></div>
+      </div>
+
+      <button type="button" id="btn-simular" class="boton aviso" hidden>Simular aviso de pago (SIMULACIÓN)</button>
+      <button type="button" id="btn-nuevo" class="boton secundario">Nuevo pedido</button>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>Cobro con CoDi® a través de pey®. Tócale es un prototipo del DevDay Exchange Community Hackathon; no está avalado por pey ni por Banxico.</p>
+  </footer>
+</body>
+</html>
