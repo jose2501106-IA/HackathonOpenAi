@@ -181,6 +181,7 @@ del archivo que la usa y vuelve a correr el script.
 | SC63 | OpenAI Codex (AI agent) (Wikipedia) | https://en.wikipedia.org/wiki/OpenAI_Codex_(AI_agent) | 2026-11-06 | K05 |
 | SC64 | OpenAI DevDay 2026: Everything Announced and What It All Means (God of Prompt; el contenido describe el DevDay 2025) | https://godofprompt.ai/blog/openai-devday-2026/ | 2026-11-06 | K04 |
 | SC65 | Functions API Reference (Vercel) | https://vercel.com/docs/functions/functions-api-reference | 2026-11-07 | K05 |
+| SC66 | Advanced Configuration: adding utility files to the /api directory (Vercel) | https://vercel.com/docs/functions/configuring-functions/advanced-configuration | 2026-11-07 | K05 |
 | SD01 | DOF · Circular 9/2026 de Banxico (modifica la 14/2017; homologación de transferencias móviles) | https://dof.gob.mx/nota_detalle_popup.php?codigo=5790862 | 2026-11-06 | K06 TL;DR, K06.4, K06.5, K06.10 |
 | SD02 | SIDOF · Circular 10/2026 de Banxico (modifica la 3/2012), DOF 17-jun-2026 | https://sidof.segob.gob.mx/notas/5790863 | 2026-11-06 | K06.5 |
 | SD03 | Expansión · La CLABE no desaparece: Banco de México cambiará las transferencias (6-sep-2026) | https://expansion.mx/finanzas-personales/2026/09/06/clabe-no-desaparece-banco-de-mexico-cambiara-transferencias | 2026-11-06 | K06 TL;DR, K06.5, K06.6 |

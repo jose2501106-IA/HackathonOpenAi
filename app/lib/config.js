@@ -12,9 +12,13 @@ export function leerConfig(env = process.env) {
   if (!tienePey) modoPago = "simulacion";
 
   const max = Number(env.MAX_MONTO_MXN);
+  let maxMontoMxn = Number.isFinite(max) && max > 0 ? max : 20;
+  // MODO PRUEBA = dinero real que llega a la cuenta de prueba de pey y no se devuelve:
+  // de $0.01 a $1 pase lo que pase (K03.3, AGENTS.md §3). El tope de MAX_MONTO_MXN aplica en SIMULACIÓN y COMERCIO.
+  if (modoPago === "prueba") maxMontoMxn = Math.min(maxMontoMxn, 1);
   return {
     modoPago,
-    maxMontoMxn: Number.isFinite(max) && max > 0 ? max : 20,
+    maxMontoMxn,
     expiracionSegundos: 600, // pey: 0 = no vence, o 360 s o más (K03.4)
     pey: {
       apiKey: env.PEY_API_KEY || "",

@@ -56,7 +56,7 @@ const TIPOS = {
 };
 
 // Carpetas que en Vercel no se sirven como páginas (o no deberían): se bloquean también aquí.
-const BLOQUEADAS = new Set(["node_modules", "tests", "lib", "api"]);
+const BLOQUEADAS = new Set(["node_modules", "tests", "lib", "api", "package.json", "package-lock.json", "vercel.json", "servidor-local.mjs"]);
 
 function leerCuerpo(req) {
   return new Promise((resolve, reject) => {

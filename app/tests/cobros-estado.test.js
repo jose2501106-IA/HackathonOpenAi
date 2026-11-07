@@ -134,14 +134,23 @@ test("cobros: sin confirmado === true → 400 CONFIRMACION_REQUERIDA y no se lla
 test("cobros: monto fuera de rango o con más de 2 decimales → 400 MONTO_INVALIDO", async (t) => {
   conEntorno(t, PRUEBA);
   const llamadas = simularFetch(t, []);
-  for (const monto of [0, -1, 0.001, 1.005, 20.01, 1000, "abc", "", null, undefined, Number.NaN, Infinity]) {
+  // En MODO PRUEBA el tope es $1 aunque MAX_MONTO_MXN diga 20 (dinero real que no se devuelve, K03.3).
+  for (const monto of [0, -1, 0.001, 1.005, 1.01, 20.01, 1000, "abc", "", null, undefined, Number.NaN, Infinity]) {
     const res = await crearCobro({ concepto: "Chicle", monto, confirmado: true });
     assert.equal(res.status, 400, `monto ${monto}`);
     const { error } = await res.json();
     assert.equal(error.codigo, "MONTO_INVALIDO");
-    assert.equal(error.mensaje, "El monto debe ser de $0.01 a $20.00.");
+    assert.equal(error.mensaje, "El monto debe ser de $0.01 a $1.00.");
   }
   assert.equal(llamadas.length, 0);
+});
+
+test("config: MODO PRUEBA nunca pasa de $1; SIMULACIÓN y COMERCIO usan MAX_MONTO_MXN", () => {
+  assert.equal(leerConfig({ PEY_API_KEY: "k", MODO_PAGO: "prueba", MAX_MONTO_MXN: "20" }).maxMontoMxn, 1);
+  assert.equal(leerConfig({ PEY_API_KEY: "k", MODO_PAGO: "prueba", MAX_MONTO_MXN: "0.5" }).maxMontoMxn, 0.5);
+  assert.equal(leerConfig({ PEY_API_KEY: "k" }).maxMontoMxn, 1, "con llave y sin MODO_PAGO, el modo es prueba");
+  assert.equal(leerConfig({ PEY_API_KEY: "k", MODO_PAGO: "comercio", MAX_MONTO_MXN: "20" }).maxMontoMxn, 20);
+  assert.equal(leerConfig({ MAX_MONTO_MXN: "20" }).maxMontoMxn, 20, "SIMULACIÓN no mueve dinero");
 });
 
 test("cobros: el tope sale de MAX_MONTO_MXN", async (t) => {

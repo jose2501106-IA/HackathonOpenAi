@@ -26,7 +26,7 @@
 Si la pantalla dice **SIMULACIÓN**, dilo antes del paso 1: "Hoy la demo está en modo simulación; lo dice la pantalla. Con la llave de pey, el mismo flujo cobra de verdad."
 
 ## 2:00–2:30 · Cómo lo construí
-> "Lo construí hoy con agentes de programación: primero escribí un contrato de API y las reglas; luego tres agentes trabajaron en paralelo —pagos, IA e interfaz— con [N] pruebas automáticas, y Codex revisó la documentación de pey y la ley. Tres decisiones: la IA solo lee y propone; nada se cobra sin confirmar; y el pago lo confirma pey, nunca una imagen."
+> "Lo construí hoy con agentes de programación: primero escribí un contrato de API y las reglas; luego tres agentes trabajaron en paralelo —pagos, IA e interfaz— con 89 pruebas automáticas, y Codex revisó la documentación de pey y la ley. Tres decisiones: la IA solo lee y propone; nada se cobra sin confirmar; y el pago lo confirma pey, nunca una imagen."
 
 ## 2:30–3:00 · Bien público y cierre
 > "Es bien público: cobrar con CoDi cuesta cero —con tarjeta, una miscelánea paga hasta 3.95 % por cobro, según Banxico— y protege a quien menos puede perder. El 14 de diciembre todas las apps bancarias deben procesar cobros CoDi con el mismo estándar. Siguiente paso: un piloto con comercios de barrio y llevarlo al Hackatón México. Está en vivo: escaneen el QR. Gracias."

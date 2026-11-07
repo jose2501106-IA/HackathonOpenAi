@@ -99,6 +99,23 @@ def revisar_enlaces():
                     f"{rel}: enlace roto → {destino}")
 
 
+def revisar_ids_repetidos():
+    """Un mismo ID de fuente con dos URL distintas (entre archivos de conocimiento y REGISTRO) es un error."""
+    fila = re.compile(r"^\|\s*(S[A-Z]\d{2,3})\s*\|[^|]*\|\s*([^|]*?)\s*\|")
+    urls = {}
+    for p in sorted((RAIZ / "conocimiento").glob("[0-9][0-9]-*.md")) + [REGISTRO]:
+        if not p.is_file():
+            continue
+        for linea in p.read_text(encoding="utf-8").splitlines():
+            m = fila.match(linea)
+            if m and m.group(2).startswith("http"):
+                urls.setdefault(m.group(1), {}).setdefault(m.group(2), p.relative_to(RAIZ).as_posix())
+    for sid, por_url in sorted(urls.items()):
+        if len(por_url) > 1:
+            donde = "; ".join(f"{archivo}: {url}" for url, archivo in por_url.items())
+            errores.append(f"{sid} tiene más de una URL → {donde}")
+
+
 def revisar_secretos():
     for p in RAIZ.rglob("*"):
         if not p.is_file() or IGNORAR & set(p.relative_to(RAIZ).parts):
@@ -120,6 +137,7 @@ def main():
         avisos.append("fuentes/REGISTRO.md no existe o no tiene filas")
     print("Base de conocimiento:")
     n, secciones, sin = revisar_conocimiento(registro_ids)
+    revisar_ids_repetidos()
     revisar_enlaces()
     revisar_secretos()
     agents = RAIZ / "AGENTS.md"

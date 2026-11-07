@@ -89,7 +89,7 @@ sequenceDiagram
 
 ## Seguridad y privacidad
 - Las llaves (`OPENAI_API_KEY`, `PEY_API_KEY`, `PEY_WEBHOOK_SECRET`, `APP_SECRET`) viven solo como variables de entorno del servidor; el navegador solo habla con `/api` y el repo público no contiene ninguna.
-- Ningún cobro sin confirmación explícita (`confirmado: true`); tope por cobro en el servidor (`MAX_MONTO_MXN`, 20 por defecto).
+- Ningún cobro sin confirmación explícita (`confirmado: true`); tope por cobro en el servidor (`MAX_MONTO_MXN`, 20 por defecto). En MODO PRUEBA el tope es **$1** aunque la variable diga más: es dinero real que no se devuelve (K03.3).
 - El servidor no confía en montos del navegador: usa el ticket firmado; un ticket alterado se rechaza.
 - Webhooks verificados con Standard Webhooks (firma HMAC y tolerancia de 5 minutos).
 - No se guarda nada: la captura se manda a OpenAI solo para leerla y no se almacena; los registros llevan códigos e ids, nunca llaves, imágenes ni cuerpos completos.
@@ -105,14 +105,15 @@ sequenceDiagram
 ## Cómo se construyó
 - **Antes del evento (5 y 6 de noviembre):** base de conocimiento en Markdown con fuentes fechadas ([`conocimiento/`](conocimiento/INDICE.md), [`fuentes/REGISTRO.md`](fuentes/REGISTRO.md)), reglas para agentes ([`AGENTS.md`](AGENTS.md)) y plantillas. Sin código del producto.
 - **Durante el evento (7 de noviembre):** todo `app/` y `docs/`. El historial de git tiene la hora de cada paso.
-- **Quién hizo qué:** Codex revisó la documentación de pey y el marco normativo (PR #1, fusionado). Claude Code escribió el contrato de la API y construyó la app con tres subagentes en paralelo —pagos (pey), IA (OpenAI) e interfaz— más la integración y las pruebas. José eligió el problema, fijó las reglas (la IA propone, la persona confirma, pey confirma el pago, nunca decir "falso"), aprobó el plan, desplegó en Vercel y presenta.
+- **Quién hizo qué:** Codex revisó la documentación de pey y el marco normativo (PR #1, fusionado). Claude Code escribió el contrato de la API y construyó la app con tres subagentes en paralelo —pagos (pey), IA (OpenAI) e interfaz— más la integración y las pruebas. José eligió el problema, fijó las reglas (la IA propone, la persona confirma, pey confirma el pago, nunca decir "falso"), aprobó el plan, se encarga del despliegue en Vercel (pendiente al escribir esto) y presenta.
 
 ## Limitaciones honestas
 - Prototipo para un solo comercio, sin cuentas ni historial.
 - Sin cobro previo, la comparación usa los pagos recientes de pey; que `trackingKey` sea la clave de rastreo SPEI no está verificado (⚪).
 - La lectura depende de la calidad de la imagen; si no se lee, se pide el monto a mano.
 - pey no tiene sandbox: el MODO PRUEBA usa dinero real de centavos que no se devuelve.
-- [POR LLENAR: TODO(⚪) que queden en el código].
+- Sin verificar en la documentación oficial (marcados `TODO(⚪)` en el código): `store: false` en la Responses API y los formatos de imagen que acepta (K04.15); el código de error de pey para una llave inválida, su límite de peticiones y el largo máximo del concepto (K03.8, K03.7); que `trackingKey` sea la clave de rastreo SPEI (K07.3).
+- **No probado todavía:** el micrófono y la voz en español (el Chrome de las pruebas automáticas no tiene voces) y el cobro real con pey (aún no hay llave, así que no se ha generado ningún QR real). Todo lo demás se probó en SIMULACIÓN.
 
 ## Qué sigue
 1. Piloto con comercios de barrio: medir cobros confirmados y capturas revisadas.

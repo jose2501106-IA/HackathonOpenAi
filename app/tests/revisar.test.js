@@ -361,3 +361,22 @@ test("POST /api/revisar con ticket alterado → 400 TICKET_INVALIDO", async () =
   assert.equal(r.status, 400);
   assert.equal((await r.json()).error.codigo, "TICKET_INVALIDO");
 });
+
+test("SIMULACIÓN: los mensajes no dicen que pey confirmó ni que no tiene nada (no se le consultó)", () => {
+  const leido = { es_comprobante: true, monto: 1, fecha: "2026-11-07", hora: "13:58", clave_rastreo: "EJEMPLO123", legible: true };
+  const cobro = { id: "sim_x", montoCentavos: 100, modoPago: "simulacion" };
+  const pendiente = decidirVeredicto({ leido, cobro, estadoCobro: { estado: "pendiente", monto: 1 }, simulacion: true });
+  assert.equal(pendiente.veredicto.codigo, "todavia_no_cae");
+  assert.match(pendiente.veredicto.mensaje, /SIMULACIÓN/);
+  assert.doesNotMatch(pendiente.veredicto.mensaje, /\bpey\b/);
+  const pagado = decidirVeredicto({ leido, cobro, estadoCobro: { estado: "pagado", monto: 1 }, simulacion: true });
+  assert.equal(pagado.veredicto.codigo, "ya_cayo");
+  assert.match(pagado.veredicto.mensaje, /Pago simulado/);
+  const sinCobro = decidirVeredicto({ leido, pagosRecientes: [], simulacion: true });
+  assert.equal(sinCobro.veredicto.codigo, "no_encontrado");
+  assert.match(sinCobro.veredicto.mensaje, /pagos de ejemplo \(SIMULACIÓN\)/);
+  assert.equal(sinCobro.veredicto.titulo, "No lo encuentro");
+  // Fuera de SIMULACIÓN, el mismo caso sí habla de pey.
+  const real = decidirVeredicto({ leido, cobro: { ...cobro, modoPago: "prueba" }, estadoCobro: { estado: "pendiente", monto: 1 } });
+  assert.equal(real.veredicto.mensaje, "pey no tiene ningún pago para este cobro: no entregues.");
+});

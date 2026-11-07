@@ -2185,7 +2185,7 @@ responde:
   - "¿Cómo escribo buenas tareas para Codex y cuál es el flujo del sábado?"
 actualizado: 2026-11-07
 confianza: media
-fuentes: [SC01, SC02, SC22, SC25, SC33, SC34, SC35, SC36, SC37, SC38, SC39, SC40, SC41, SC42, SC43, SC44, SC45, SC46, SC47, SC48, SC49, SC50, SC51, SC52, SC53, SC54, SC55, SC56, SC57, SC58, SC59, SC60, SC61, SC62, SC63, SC64, SC65]
+fuentes: [SC01, SC02, SC22, SC25, SC33, SC34, SC35, SC36, SC37, SC38, SC39, SC40, SC41, SC42, SC43, SC44, SC45, SC46, SC47, SC48, SC49, SC50, SC51, SC52, SC53, SC54, SC55, SC56, SC57, SC58, SC59, SC60, SC61, SC62, SC63, SC65, SC66]
 ---
 
 # K05 · Codex, ChatGPT y Codespaces: flujo 100% en la nube
@@ -2397,7 +2397,7 @@ codex exec --sandbox workspace-write "Haz que npm test --prefix app pase sin toc
 - **Variables por entorno:** Production, Preview (todas las ramas que no son de producción, o una rama específica que sobrescribe) y Development (`vercel env pull`). Tipos: Config o Secret; un Secret ya no se puede leer después de guardarlo.
 - **Los cambios a variables sólo aplican a deploys nuevos:** haz Redeploy.
 - Tope de 64 KB de variables por deploy. Variables de sistema útiles: `VERCEL_GIT_PULL_REQUEST_ID` y `VERCEL_GIT_COMMIT_REF`.
-- **Funciones sin framework (verificado el 7-nov):** cada archivo de `api/` es una función; se escribe `export function GET(request) { return new Response(...) }` y el `package.json` necesita `"type": "module"` (o archivos `.mjs`) [SC65]. Vercel no convierte en función los **archivos** de `api/` que empiezan con `_` o `.` o terminan en `.d.ts`, y recomienda poner el código compartido **fuera** de `api/` e importarlo desde la función [SC64]. Por eso el código compartido de la app vive en `app/lib/`.
+- **Funciones sin framework (verificado el 7-nov):** cada archivo de `api/` es una función; se escribe `export function GET(request) { return new Response(...) }` y el `package.json` necesita `"type": "module"` (o archivos `.mjs`) [SC65]. Vercel no convierte en función los **archivos** de `api/` que empiezan con `_` o `.` o terminan en `.d.ts`, y recomienda poner el código compartido **fuera** de `api/` e importarlo desde la función [SC66]. Por eso el código compartido de la app vive en `app/lib/`.
 - ⚪ No verificado hoy: el ajuste "Root Directory = `app`"; que los previews pidan sesión de Vercel.
 
 **Recomendación:** antes del primer PR carga en Production y Preview las variables de `.env.example` (`OPENAI_API_KEY`, `OPENAI_MODEL`, `PEY_API_KEY`, `PEY_WEBHOOK_SECRET`, `MAX_MONTO_MXN`, `MODO_PAGO`; la tabla por entorno está en `dia-del-evento/CHECKLIST.md`), con las llaves como Secret. Abre un preview en incógnito para ver si pide sesión; la demo, en la URL de producción.
@@ -2494,7 +2494,7 @@ Entrega: PR "[T3] Agente con Responses API" con Qué cambió · Cómo probarlo �
 | SC61 | Environment variables (Vercel) | https://vercel.com/docs/environment-variables.md | 2026-11-06 |
 | SC62 | Forwarding ports in your codespace (GitHub Docs) | https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace?tool=webui | 2026-11-06 |
 | SC63 | OpenAI Codex (AI agent) (Wikipedia) | https://en.wikipedia.org/wiki/OpenAI_Codex_(AI_agent) | 2026-11-06 |
-| SC64 | Advanced Configuration: adding utility files to the /api directory (Vercel) | https://vercel.com/docs/functions/configuring-functions/advanced-configuration | 2026-11-07 |
+| SC66 | Advanced Configuration: adding utility files to the /api directory (Vercel) | https://vercel.com/docs/functions/configuring-functions/advanced-configuration | 2026-11-07 |
 | SC65 | Functions API Reference (Vercel) | https://vercel.com/docs/functions/functions-api-reference | 2026-11-07 |
 
 <!-- ===== FIN: conocimiento/05-codex-chatgpt-y-codespaces.md ===== -->

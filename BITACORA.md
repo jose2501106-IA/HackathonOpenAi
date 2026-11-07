@@ -8,7 +8,7 @@ Reglas: fechas `AAAA-MM-DD`; una línea por hecho; cada hecho con **evidencia** 
 - Fecha: 2026-11-07, 11:45 (CDMX)
 - Fase: **"¿Ya cayó?" construida y probada en SIMULACIÓN** (`app/`); falta desplegar en Vercel y, con llaves, el pago real de $1
 - Publicado en: GitHub `main`. Vercel: sin conectar (GitHub reportaba 0 despliegues); José lo importa con Root Directory `app`
-- Última verificación (2026-11-07 11:42): `npm test --prefix app` 87/87 · `python3 scripts/demo_e2e.py` sin problemas (360 px, botones ≥ 44 px, sin "falso", sin errores de consola) · `scripts/verificar_conocimiento.py` ✓ (238 fuentes)
+- Última verificación (2026-11-07 12:10): `npm test --prefix app` 89/89 · `python3 scripts/demo_e2e.py` sin problemas (360 px, botones ≥ 44 px, sin "falso", sin errores de consola, con CSP) · `scripts/verificar_conocimiento.py` ✓ (239 fuentes)
 - Superficies: Claude Code (sesión en la nube) construye; Codex aportó el PR #1; José decide, despliega y presenta
 
 ## Tarea en curso
@@ -25,7 +25,8 @@ Reglas: fechas `AAAA-MM-DD`; una línea por hecho; cada hecho con **evidencia** 
   4. Sin llaves en el repo ni en el navegador.
   5. README de entrega, deck y guion del pitch listos.
   6. Con llaves: un pago real de $1 llega a "¡Ya cayó!" confirmado por pey en menos de 10 s.
-- Resultado parcial (11:55): 1 ✓ (87/87), 2 ✓ (capturas en `docs/capturas/`), 4 ✓ (grep sin coincidencias), 5 ✓ salvo la URL (README, `docs/PITCH.md`, deck de 10 diapositivas y video de respaldo), 3 y 6 pendientes de José (Vercel y llaves).
+- Evidencia: salida de `npm test --prefix app` y de `python3 scripts/demo_e2e.py` (capturas en `docs/capturas/`), `git grep` sin llaves, la URL de producción con `/api/salud`, y el id del cobro real con la hora del pago.
+- Resultado parcial (12:10): 1 ✓ (89/89), 2 ✓ (capturas en `docs/capturas/`), 4 ✓ (grep sin coincidencias), 5 ✓ salvo la URL (README, `docs/PITCH.md`, deck de 10 diapositivas y video de respaldo), 3 y 6 pendientes de José (Vercel y llaves).
 
 ## Contrato anterior (cumplido)
 **Contrato: base de conocimiento lista para el 7 de noviembre**
@@ -62,7 +63,7 @@ Reglas: fechas `AAAA-MM-DD`; una línea por hecho; cada hecho con **evidencia** 
 | 2026-11-07 | Construir el producto con Claude Code (sustituye la decisión del 06-nov) | Los organizadores dijeron que se puede usar Claude; decisión de José | Solo Codex web |
 | 2026-11-07 | Cobro sin base de datos: cada cobro viaja en un ticket firmado (HMAC-SHA256) | Serverless sin estado; el servidor no confía en montos del navegador | Base de datos o KV |
 | 2026-11-07 | El veredicto de la captura lo decide el código con datos de pey; la IA solo lee; nunca decir "falso" | Confianza y trato digno (K07.3) | Que el modelo juzgue la captura |
-| 2026-11-07 | Código compartido en `app/lib/`, fuera de `api/` | Recomendación de la doc de Vercel (SC64, K05.16) | `app/api/_lib/` |
+| 2026-11-07 | Código compartido en `app/lib/`, fuera de `api/` | Recomendación de la doc de Vercel (SC66, K05.16) | `app/api/_lib/` |
 | 2026-11-07 | La SIMULACIÓN vence igual que un cobro real (`expirado`, `409 COBRO_VENCIDO`) | Que la pantalla y el estado digan lo mismo | Simulación sin vencimiento |
 
 ## Bloqueos y preguntas abiertas
@@ -84,15 +85,17 @@ Reglas: fechas `AAAA-MM-DD`; una línea por hecho; cada hecho con **evidencia** 
 | 2026-11-07 | Consistencia: herramienta `crear_cobro`, `MODO_PAGO` en lugar de `PEY_ENV`, 404 de pey con aviso, `npm test --prefix app` | `git diff` | este commit |
 | 2026-11-07 | K07 (idea "¿Ya cayó?"), K00, INDICE y TODO-EN-UNO generados; verificador con 0 errores | Salida de `scripts/verificar_conocimiento.py` | este commit |
 | 2026-11-07 10:51 | Codex: revisión de pey y del marco normativo (PR #1) | `docs/REVISION-PEY-2026-11-07.md` | 4ba936d |
-| 2026-11-07 11:18 | PR #1 fusionado; K06.5 con la ley firmada el 4-nov (⚪ fecha del DOF) | `git log` | 583ae5c |
-| 2026-11-07 11:25 | Base: PRD, contrato de la API, config con SIMULACIÓN forzada sin llaves, tickets firmados, `/api/salud` y servidor local | `GET /api/salud` → 200 `{"ok":true,"modoPago":"simulacion"}` | d033bb5 |
+| 2026-11-07 11:18 | PR #1 fusionado | `git log` | 583ae5c |
+| 2026-11-07 11:25 | Base: PRD, contrato de la API, config con SIMULACIÓN forzada sin llaves, tickets firmados, `/api/salud` y servidor local; K06.5 con la ley firmada el 4-nov (⚪ fecha del DOF) | `GET /api/salud` → 200 `{"ok":true,"modoPago":"simulacion"}` | d033bb5 |
 | 2026-11-07 11:29 | Subagente de pagos: cliente de pey, QR, estado, cobros, simular-pago y webhook (Standard Webhooks) | 39 pruebas con `fetch` simulado | este commit |
 | 2026-11-07 11:35 | Subagente de IA: Responses API con `crear_cobro` estricta, lectura de captura con salida estructurada, reglas locales y veredicto por código | 36 pruebas | este commit |
 | 2026-11-07 11:41 | Subagente de interfaz: móvil en español, modo siempre visible, captura de ejemplo ficticia, voz y vibración | 10 pruebas + recorrido en Chrome | este commit |
 | 2026-11-07 11:42 | Integración: código compartido a `app/lib/`, plurales del catálogo, vencimiento en SIMULACIÓN, prueba de la demo completa | `npm test` 87/87 · `scripts/demo_e2e.py` sin problemas | 906c530 |
 | 2026-11-07 11:51 | Encabezados de seguridad (CSP estricta, nosniff, sin iframes) también en el servidor local | `curl -D -` muestra los encabezados; demo con CSP sin errores de consola | a281a7c |
 | 2026-11-07 11:50 | Deck de 10 diapositivas (7 + 3 de reserva) con capturas reales y notas del orador, en claude.ai (privado hasta que José lo comparta) | Publicado como artefacto de Slides; faltan URL y QR de producción | — |
-| 2026-11-07 11:54 | Video de respaldo de 24 s (1920×1080, SIMULACIÓN rotulada) | `scripts/video_demo.py` → `docs/video/demo-ya-cayo.mp4` | este commit |
+| 2026-11-07 11:54 | Video de respaldo de 24 s (1920×1080, SIMULACIÓN rotulada) | `scripts/video_demo.py` → `docs/video/demo-ya-cayo.mp4` | 35fa6f2 |
+| 2026-11-07 12:01 | Verificador independiente: RECHAZADO (criterio 5 con `[POR LLENAR]`; 3 y 6 pendientes). Hallazgos: README decía "desplegó" y "probado" sin evidencia; MODO PRUEBA aceptaba hasta $20; SC64 con dos URL; en SIMULACIÓN el veredicto decía "pey no tiene" sin consultar a pey | Reporte del verificador | — |
+| 2026-11-07 12:10 | Corregido: textos del README, tope de $1 forzado en MODO PRUEBA, fuente de Vercel renumerada a SC66 (el verificador de la base ahora detecta IDs con dos URL), mensajes honestos en SIMULACIÓN, redirecciones que ocultan `lib/` y `package*.json` | `npm test` 89/89 · `verificar_conocimiento.py` ✓ (239 fuentes) | este commit |
 
 ## Revisión pey y normativa — 2026-11-07
 - Contrastadas páginas oficiales de pey, OpenAPI y DOF; ver docs/REVISION-PEY-2026-11-07.md y K06.5.

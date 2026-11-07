@@ -77,6 +77,10 @@ Salida `200`:
 - Sin `OPENAI_API_KEY` y sin `montoManual`: en `simulacion`, lectura de ejemplo con `origen: "simulacion"`; en `prueba`/`comercio`, `503 IA_NO_DISPONIBLE` con mensaje "Escribe el monto a mano".
 - `pago` (definido en la construcción): `null` o `{ id, monto, pagadoEn, claveRastreo }`, más `simulacion: true` en los pagos de ejemplo.
 
+## Cambios de la integración
+- En `prueba`, `maxMontoMxn` nunca pasa de 1 (dinero real que no se devuelve, K03.3); en `simulacion` y `comercio` manda `MAX_MONTO_MXN`.
+- En `simulacion`, los mensajes del veredicto no dicen que pey confirmó o que no tiene nada (no se le consultó): hablan del cobro de SIMULACIÓN y de los pagos de ejemplo.
+
 ## Códigos agregados durante la construcción
 La interfaz muestra `error.mensaje` para cualquier código. Además de los de arriba: `PEY_RECHAZO` (502, otro 4xx de pey al crear), `IA_SIN_SALDO` (503), `TEXTO_INVALIDO` (400, `/api/agente`), `IMAGEN_REQUERIDA` e `IMAGEN_INVALIDA` (400) y `MONTO_INVALIDO` (400, `montoManual`) en `/api/revisar`, `COBRO_VENCIDO` (409, `/api/simular-pago`). Con ticket y estado `no_verificable`, el veredicto es `no_verificable` ("no entregues todavía").
 

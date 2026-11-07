@@ -89,9 +89,9 @@ with sync_playwright() as p:
 
 TEXTOS = [
     ("intro", 0, marcas["paso1"], "¿Ya cayó?", "La captura no es dinero.\nCaja de cobro CoDi con la IA de OpenAI\ny los pagos de pey."),
-    ("p1", marcas["paso1"], marcas["paso2"], "1 · Cobra con tus palabras", "«Cóbrale un dulce de tamarindo»:\nla IA propone $1.00, tú confirmas\ny pey genera el QR CoDi."),
-    ("p2", marcas["paso2"], marcas["paso3"], "2 · La captura no es dinero", "La IA lee la captura: $1.00, 13:58.\npey no tiene ese pago:\n«Todavía no cae: no entregues»."),
-    ("p3", marcas["paso3"], marcas["fin"] + 5, "3 · ¡Ya cayó!", "El pago llega y lo confirma pey,\nno una captura."),
+    ("p1", marcas["paso1"], marcas["paso2"], "1 · Cobra con tus palabras", "«Cóbrale un dulce de tamarindo»:\nla IA propone $1.00, tú confirmas\ny aparece el QR CoDi."),
+    ("p2", marcas["paso2"], marcas["paso3"], "2 · La captura no es dinero", "La IA lee la captura: $1.00, 13:58.\nEl cobro no tiene ese pago:\n«Todavía no cae: no entregues»."),
+    ("p3", marcas["paso3"], marcas["fin"] + 5, "3 · ¡Ya cayó!", "El pago llega (aquí, simulado)\ny la pantalla se pone verde.\nCon llaves, lo confirma pey."),
 ]
 
 

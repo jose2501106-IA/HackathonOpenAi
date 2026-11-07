@@ -1,5 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/lib/:ruta*", "destination": "/", "permanent": false },
+    { "source": "/package.json", "destination": "/", "permanent": false },
+    { "source": "/package-lock.json", "destination": "/", "permanent": false },
+    { "source": "/vercel.json", "destination": "/", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/(.*)",

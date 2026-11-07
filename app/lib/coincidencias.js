@@ -27,6 +27,33 @@ export function pesos(monto) {
   return `$${n.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
+// Quién habla en cada mensaje. En SIMULACIÓN no se consultó a pey, así que ningún texto dice que pey
+// confirmó o que no tiene nada: se habla del cobro de SIMULACIÓN y de los pagos de ejemplo.
+const VOZ = Object.freeze({
+  real: {
+    titulos: {},
+    confirmo: (m) => `pey confirmó el pago de ${m} de este cobro. Ya puedes entregar.`,
+    sinPago: "pey no tiene ningún pago para este cobro: no entregues.",
+    otroMonto: "pey tiene un pago con otro monto para este cobro: no entregues hasta revisarlo.",
+    vencido: "pey no tiene ningún pago para este cobro y el QR ya venció: no entregues. Genera un cobro nuevo.",
+    cuenta: "lo que cuenta es lo que dice pey.",
+    registro: "que registró pey",
+    hayPago: "pey tiene un pago",
+    noEncuentro: "No encuentro este pago en tus cobros de pey de las últimas 2 horas.",
+  },
+  simulacion: {
+    titulos: { no_encontrado: "No lo encuentro", no_verificable: "No pude revisar" },
+    confirmo: (m) => `Pago simulado de ${m} registrado en este cobro (SIMULACIÓN). En un cobro real lo confirma pey.`,
+    sinPago: "Este cobro de SIMULACIÓN no tiene ningún pago: no entregues.",
+    otroMonto: "Este cobro de SIMULACIÓN tiene un pago con otro monto: no entregues hasta revisarlo.",
+    vencido: "Este cobro de SIMULACIÓN no tiene pago y ya venció: no entregues. Genera un cobro nuevo.",
+    cuenta: "lo que cuenta es el estado del cobro.",
+    registro: "de los pagos de ejemplo (SIMULACIÓN)",
+    hayPago: "Hay un pago de ejemplo (SIMULACIÓN)",
+    noEncuentro: "No encuentro este pago en los pagos de ejemplo (SIMULACIÓN).",
+  },
+});
+
 const aMs = (fecha) => (typeof fecha === "number" ? fecha : Date.parse(fecha));
 
 /** "HH:MM" en hora de CDMX para un ISO o milisegundos. */
@@ -51,8 +78,8 @@ export function instanteDeCaptura(leido, ahora) {
 const mismoMonto = (a, b) => Math.abs(aCentavos(a) - aCentavos(b)) <= TOLERANCIA_CENTAVOS;
 const normalizarClave = (c) => (typeof c === "string" ? c.replace(/\s+/g, "").toUpperCase() : "");
 
-function veredicto(codigo, mensaje, detalle = "") {
-  return { codigo, titulo: TITULOS[codigo], mensaje, detalle };
+function veredicto(codigo, mensaje, detalle = "", voz = VOZ.real) {
+  return { codigo, titulo: voz.titulos[codigo] ?? TITULOS[codigo], mensaje, detalle };
 }
 
 function resumenLectura(leido) {
@@ -60,11 +87,11 @@ function resumenLectura(leido) {
   return `La captura dice ${pesos(leido.monto)}${leido.hora ? ` a las ${leido.hora}` : ""}.`;
 }
 
-function detalleConCobro(leido, montoCobro) {
+function detalleConCobro(leido, montoCobro, voz) {
   if (!leido.legible || leido.monto == null) {
     return leido.legible && !leido.es_comprobante
-      ? "La imagen no parece un comprobante; lo que cuenta es lo que dice pey."
-      : "No pude leer bien la captura; lo que cuenta es lo que dice pey.";
+      ? `La imagen no parece un comprobante; ${voz.cuenta}`
+      : `No pude leer bien la captura; ${voz.cuenta}`;
   }
   if (!mismoMonto(leido.monto, montoCobro)) {
     return `La captura dice ${pesos(leido.monto)}; tu cobro es de ${pesos(montoCobro)}.`;
@@ -78,13 +105,13 @@ function pagoDe(p) {
   return pago;
 }
 
-function conCobro(leido, cobro, estado) {
+function conCobro(leido, cobro, estado, voz) {
   const montoCobro = Number.isFinite(Number(cobro.montoCentavos)) ? Number(cobro.montoCentavos) / 100 : Number(estado?.monto) || 0;
-  const detalle = detalleConCobro(leido, montoCobro);
+  const detalle = detalleConCobro(leido, montoCobro, voz);
   const e = estado?.estado;
   if (e === "pagado") {
     return {
-      veredicto: veredicto("ya_cayo", `pey confirmó el pago de ${pesos(montoCobro)} de este cobro. Ya puedes entregar.`, detalle),
+      veredicto: veredicto("ya_cayo", voz.confirmo(pesos(montoCobro)), detalle, voz),
       pago: {
         id: estado.transactionId ?? estado.id ?? cobro.id ?? null,
         monto: estado.monto ?? montoCobro,
@@ -95,13 +122,13 @@ function conCobro(leido, cobro, estado) {
   }
   if (e === "pendiente" || e === "expirado") {
     // Diga lo que diga la captura: sin pago en pey no se entrega.
-    let mensaje = "pey no tiene ningún pago para este cobro: no entregues.";
+    let mensaje = voz.sinPago;
     if (estado.aviso === "pago_con_monto_distinto") {
-      mensaje = "pey tiene un pago con otro monto para este cobro: no entregues hasta revisarlo.";
+      mensaje = voz.otroMonto;
     } else if (e === "expirado") {
-      mensaje = "pey no tiene ningún pago para este cobro y el QR ya venció: no entregues. Genera un cobro nuevo.";
+      mensaje = voz.vencido;
     }
-    return { veredicto: veredicto("todavia_no_cae", mensaje, detalle), pago: null };
+    return { veredicto: veredicto("todavia_no_cae", mensaje, detalle, voz), pago: null };
   }
   // no_verificable (404, red, 5xx) o estado desconocido: no sabemos, así que no se entrega todavía.
   return {
@@ -109,12 +136,13 @@ function conCobro(leido, cobro, estado) {
       "no_verificable",
       "Ahorita no pude confirmar este cobro con pey. No entregues todavía: intenta de nuevo con «¿Ya cayó?».",
       detalle,
+      voz,
     ),
     pago: null,
   };
 }
 
-function sinCobro(leido, pagos, ahora) {
+function sinCobro(leido, pagos, ahora, voz) {
   if (!leido.legible || !leido.es_comprobante || leido.monto == null) {
     const mensaje =
       leido.legible && !leido.es_comprobante
@@ -147,8 +175,9 @@ function sinCobro(leido, pagos, ahora) {
     return {
       veredicto: veredicto(
         "coincide",
-        `Coincide con el pago de ${pesos(porClave.monto)} de las ${horaCdmx(porClave.fechaPago) ?? "--:--"} que registró pey.`,
+        `Coincide con el pago de ${pesos(porClave.monto)} de las ${horaCdmx(porClave.fechaPago) ?? "--:--"} ${voz.registro}.`,
         `${detalle} La clave de rastreo también coincide.`.trim(),
+        voz,
       ),
       pago: pagoDe(porClave),
     };
@@ -164,8 +193,9 @@ function sinCobro(leido, pagos, ahora) {
       return {
         veredicto: veredicto(
           "coincide",
-          `Coincide con el pago de ${pesos(cercano.p.monto)} de las ${horaCdmx(cercano.p.fechaPago)} que registró pey.`,
+          `Coincide con el pago de ${pesos(cercano.p.monto)} de las ${horaCdmx(cercano.p.fechaPago)} ${voz.registro}.`,
           detalle,
+          voz,
         ),
         pago: pagoDe(cercano.p),
       };
@@ -177,17 +207,18 @@ function sinCobro(leido, pagos, ahora) {
     const elegido = [...candidatos].sort((a, b) => Math.abs(aMs(a.fechaPago) - ref) - Math.abs(aMs(b.fechaPago) - ref))[0];
     const horaPago = horaCdmx(elegido.fechaPago);
     const mensaje = leido.hora
-      ? `pey tiene un pago de ${pesos(elegido.monto)}${horaPago ? ` a las ${horaPago}` : ""}, pero la captura dice ${leido.hora}. Revisa antes de entregar.`
-      : `pey tiene un pago de ${pesos(elegido.monto)}${horaPago ? ` a las ${horaPago}` : ""}, pero no sé la hora de la captura para compararla. Revisa antes de entregar.`;
-    return { veredicto: veredicto("dudoso", mensaje, detalle), pago: pagoDe(elegido) };
+      ? `${voz.hayPago} de ${pesos(elegido.monto)}${horaPago ? ` a las ${horaPago}` : ""}, pero la captura dice ${leido.hora}. Revisa antes de entregar.`
+      : `${voz.hayPago} de ${pesos(elegido.monto)}${horaPago ? ` a las ${horaPago}` : ""}, pero no sé la hora de la captura para compararla. Revisa antes de entregar.`;
+    return { veredicto: veredicto("dudoso", mensaje, detalle, voz), pago: pagoDe(elegido) };
   }
 
   const conClave = leido.clave_rastreo ? `la clave de rastreo ${leido.clave_rastreo}` : "la clave de rastreo del comprobante";
   return {
     veredicto: veredicto(
       "no_encontrado",
-      `No encuentro este pago en tus cobros de pey de las últimas 2 horas. Si te transfirieron directo a tu cuenta, revisa tu banco o el CEP de Banxico con ${conClave}.`,
+      `${voz.noEncuentro} Si te transfirieron directo a tu cuenta, revisa tu banco o el CEP de Banxico con ${conClave}.`,
       detalle,
+      voz,
     ),
     pago: null,
   };
@@ -196,7 +227,15 @@ function sinCobro(leido, pagos, ahora) {
 /** FUNCIÓN PURA. → { veredicto: { codigo, titulo, mensaje, detalle }, pago | null }.
  *  cobro = datos del ticket ({ id, montoCentavos, … }) o null; estadoCobro = objeto de /api/estado;
  *  pagosRecientes = [{ id, monto, fechaPago, claveRastreo }] o null si no se pudieron consultar. */
-export function decidirVeredicto({ leido, cobro = null, estadoCobro = null, pagosRecientes = null, ahora = Date.now() } = {}) {
+export function decidirVeredicto({
+  leido,
+  cobro = null,
+  estadoCobro = null,
+  pagosRecientes = null,
+  ahora = Date.now(),
+  simulacion = false,
+} = {}) {
+  const voz = simulacion ? VOZ.simulacion : VOZ.real;
   const lectura = {
     es_comprobante: leido?.es_comprobante === true,
     monto: typeof leido?.monto === "number" && Number.isFinite(leido.monto) ? leido.monto : null,
@@ -205,7 +244,7 @@ export function decidirVeredicto({ leido, cobro = null, estadoCobro = null, pago
     clave_rastreo: leido?.clave_rastreo ?? null,
     legible: leido?.legible === true,
   };
-  return cobro ? conCobro(lectura, cobro, estadoCobro) : sinCobro(lectura, pagosRecientes, ahora);
+  return cobro ? conCobro(lectura, cobro, estadoCobro, voz) : sinCobro(lectura, pagosRecientes, ahora, voz);
 }
 
 // ---------- orquestador (con E/S) ----------
@@ -264,12 +303,13 @@ export async function revisarCaptura({ leido, ticketDatos = null }, cfg, { ahora
 
   if (ticketDatos) {
     const estadoCobro = await obtenerEstado(ticketDatos, cfg, ahora, resolverEstado);
-    return decidirVeredicto({ leido, cobro: ticketDatos, estadoCobro, pagosRecientes: null, ahora });
+    const simulacion = ticketDatos.modoPago === "simulacion";
+    return decidirVeredicto({ leido, cobro: ticketDatos, estadoCobro, pagosRecientes: null, ahora, simulacion });
   }
   const { pagos, simulacion } = await obtenerPagos(cfg, ahora, listarPagosRecientes);
-  const r = decidirVeredicto({ leido, cobro: null, estadoCobro: null, pagosRecientes: pagos, ahora });
+  const r = decidirVeredicto({ leido, cobro: null, estadoCobro: null, pagosRecientes: pagos, ahora, simulacion });
   if (simulacion && Array.isArray(pagos)) {
-    r.veredicto.detalle = `${r.veredicto.detalle} SIMULACIÓN: se comparó con pagos de ejemplo.`.trim();
+    r.veredicto.detalle = `${r.veredicto.detalle} Se comparó con pagos de ejemplo (SIMULACIÓN).`.trim();
   }
   return r;
 }
