@@ -11,7 +11,7 @@
 | 2:30–3:00 | Bien público y cierre | 6–7 | C1, C5 |
 
 ## 0:00–0:20 · Gancho
-> "Pensemos, como ejemplo, en una dulcería de barrio. Un cliente se lleva sus dulces, enseña el celular y dice: 'ya te transferí'. ¿Entrega o no entrega? Una captura se fabrica en segundos y circulan plantillas de comprobantes falsos. Y el fraude digital crece: según Condusef, 2.48 millones de reclamaciones por posible fraude en el primer semestre de 2025."
+> "Pensemos, como ejemplo, en una dulcería de barrio. Un cliente se lleva sus dulces, enseña el celular y dice: 'ya te transferí'. ¿Entrega o no entrega? Una captura se fabrica en segundos y circulan plantillas para hacerlas. Y el fraude digital crece: según Condusef, 2.48 millones de reclamaciones por posible fraude en el primer semestre de 2025."
 
 ## 0:20–0:45 · Solución y por qué ahora
 > "**¿Ya cayó?** es una caja de cobro CoDi que nunca acepta una captura como pago. La IA de OpenAI entiende lo que vendiste y lee la captura que te enseñan, pero quien decide es el dinero: pey nos dice si de verdad llegó. Sin comisión. Y es el momento: la Ley de Economía Digital, firmada el 4 de noviembre, reconoce los pagos con QR."
@@ -23,10 +23,10 @@
 | 2 · La captura no es dinero | "Revisar una captura" → "Usar captura de ejemplo" | "El cliente me enseña su captura. La IA la lee: un peso, 13:58, clave de rastreo. Pero pey dice que no ha llegado nada: **Todavía no cae, no entregues**. La IA lee; el código decide; y nunca acusamos a nadie." |
 | 3 · ¡Ya cayó! | Pagas $1 desde la app de tu banco (en SIMULACIÓN: "Simular pago (demo)") | "Ahora sí pago un peso real… **¡Ya cayó!** Confirmado por pey, no por una captura." |
 
-Si la pantalla dice **SIMULACIÓN**, dilo antes del paso 1: "Hoy la demo está en modo simulación; lo dice la pantalla. Con la llave de pey, el mismo flujo cobra de verdad."
+Si la pantalla dice **SIMULACIÓN**, dilo antes del paso 1: "Hoy la demo está en modo simulación; lo dice la pantalla. Con la llave de pey, el mismo flujo cobra de verdad." Y cambia dos frases para no decir nada que no pasó: en el paso 2, "este cobro no tiene ningún pago: todavía no cae, no entregues" (en simulación no se consulta a pey); en el paso 3, "simulo el pago… ¡Ya cayó! Con un cobro real, esto lo confirma pey".
 
 ## 2:00–2:30 · Cómo lo construí
-> "Lo construí hoy con agentes de programación: primero escribí un contrato de API y las reglas; luego tres agentes trabajaron en paralelo —pagos, IA e interfaz— con 89 pruebas automáticas, y Codex revisó la documentación de pey y la ley. Tres decisiones: la IA solo lee y propone; nada se cobra sin confirmar; y el pago lo confirma pey, nunca una imagen."
+> "Lo construí hoy con agentes de programación: primero fijamos las reglas y un contrato de API; luego tres agentes trabajaron en paralelo —pagos, IA e interfaz— con 89 pruebas automáticas, y Codex revisó la documentación de pey y la ley. Tres decisiones: la IA solo lee y propone; nada se cobra sin confirmar; y el pago lo confirma pey, nunca una imagen."
 
 ## 2:30–3:00 · Bien público y cierre
 > "Es bien público: cobrar con CoDi cuesta cero —con tarjeta, una miscelánea paga hasta 3.95 % por cobro, según Banxico— y protege a quien menos puede perder. El 14 de diciembre todas las apps bancarias deben procesar cobros CoDi con el mismo estándar. Siguiente paso: un piloto con comercios de barrio y llevarlo al Hackatón México. Está en vivo: escaneen el QR. Gracias."
@@ -42,7 +42,7 @@ Si la pantalla dice **SIMULACIÓN**, dilo antes del paso 1: "Hoy la demo está e
 3. **¿Es real o simulado?** Lo dice la pantalla: SIMULACIÓN sin llaves; MODO PRUEBA con pey (dinero real de $1, que no se devuelve).
 4. **¿Y si falla pey o el internet?** La app dice "no se puede verificar ahora" y nunca muestra "¡Ya cayó!" sin confirmación.
 5. **¿Qué datos guardan?** Ninguno: no hay base de datos; la imagen se analiza y se descarta; las llaves viven solo en el servidor.
-6. **¿Qué hizo la IA y qué hiciste tú?** Yo elegí el problema, escribí el contrato y las reglas (confirmación humana, nunca "falso", tope de monto), revisé y probé; los agentes escribieron el código. El historial de git tiene la hora de cada paso.
+6. **¿Qué hizo la IA y qué hiciste tú?** Yo elegí el problema y las reglas (confirmación humana, nunca "falso", tope de monto), aprobé el plan y probé; los agentes escribieron el contrato de la API, el código y las pruebas. El historial de git tiene la hora de cada paso.
 7. **¿Por qué CoDi y no tarjeta?** Cero comisión contra hasta 3.95 % con débito (Banxico, jul-2026) y el dinero llega en segundos.
 8. **¿Cuánto cuesta operar?** pey es gratis por ahora y CoDi no cobra comisión; el costo de la IA lo mido en el panel de uso de OpenAI (⚪ no medido todavía).
 9. **¿La ley obliga a cobrar con QR?** No afirmamos una fecha obligatoria: la ley ya está firmada y reconoce el QR; Hacienda define en semanas a qué sectores aplica. El plazo del 14 de diciembre es de Banxico para las apps bancarias.
