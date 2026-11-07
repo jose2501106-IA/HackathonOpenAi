@@ -12,7 +12,7 @@ responde:
   - "¿Hay sandbox? ¿Cómo hago un pago real en la demo y cuál es el plan B?"
   - "¿Qué errores y límites debo manejar?"
   - "¿Cómo expongo la API de Pey como herramientas de un agente de IA sin riesgos?"
-actualizado: 2026-11-06
+actualizado: 2026-11-07
 confianza: media
 fuentes: [SB01, SB02, SB03, SB04, SB05, SB06, SB07, SB08, SB09, SB10, SB11, SB12, SB13, SB14, SB15, SB16, SB17, SB18, SB19, SB20, SB21, SB22, SB23, SB24, SB25, SB26, SB27, SB28, SB29, SB30, SB31, SB32, SB33, SB34, SB35, SB36, SB37, SB38, SB39, SB40, SB41, SB42, SB43, SB44, SB45, SB46]
 ---
@@ -106,9 +106,9 @@ Base `https://api.pey.mx`; headers `Authorization: Bearer <PEY_API_KEY>`, `Conte
 
 | Respuesta de Pey | Estado sugerido |
 |---|---|
-| Algún item `PAID` | `pagado` |
+| `PAID` vinculado al cobro, con monto esperado y moneda MXN | `pagado`; validar del lado servidor |
 | Lista vacía o solo `PENDING` | `pendiente` |
-| 404 `NOT_FOUND` | `pendiente` + aviso visible: según la doc, el QR no existe o es de **otra llave** [SB15]. Causa típica: un QR de respaldo creado con una llave distinta a la de Production |
+| 404 `NOT_FOUND` | `no_verificable` + aviso visible: según la doc, el QR no existe o es de **otra llave** [SB15]. Causa típica: un QR de respaldo creado con una llave distinta a la de Production |
 | Pasó `expiraEn` sin `PAID` | `expirado` (lo calcula la app) |
 
 **Cancelar o devolver:** no hay endpoint (⚪ no verificado si hay otra vía); usa `expiration` corta y devuelve desde la app bancaria del titular [SB10][SB28].
@@ -180,6 +180,8 @@ Código del handler: K03.7.
 **Recomendación:** mañana temprano pregunta a los mentores de Pey si hay llaves o entorno especial para el hackatón (⚪ no verificado).
 
 ## K03.7 · Ejemplos mínimos en Node.js 20+ (probados)
+
+> Revisión 2026-11-07: los ejemplos históricos no son un checkout completo. Antes de producción, asociar el QR a un pedido del servidor y validar monto, moneda y destinatario; no basta encontrar cualquier PAID. La corrección de 404 a no_verificable es documental y no se ha ejecutado como aplicación. Ver [plan de integración](../docs/REVISION-PEY-2026-11-07.md).
 
 Node 20+ ya trae `fetch`. Vercel crea una función por archivo dentro de `api/`; exportas `GET` o `POST`, que reciben un `Request` web. Para módulos ES usa `.mjs` o `"type": "module"` en el `package.json` más cercano [SB41]. No encontré un SDK oficial de Pey (⚪ no verificado). Pey sugiere los SDK de Standard Webhooks [SB16]; aquí se usa `node:crypto` para no depender de nada [SB40].
 
@@ -306,10 +308,9 @@ export async function GET(request) {
     const pago = items.find((t) => t.status === "PAID"); // estados de Pey: PENDING | PAID
     return Response.json({ id, estado: pago ? "pagado" : "pendiente", transactionId: pago?.id ?? null });
   } catch (e) {
-    // La doc dice que 404 = el QR no existe o es de otra llave [SB15]. Seguimos en "pendiente" (no rompe la demo)
-    // pero mandamos un aviso para que la interfaz lo muestre: casi siempre es un QR creado con otra PEY_API_KEY.
+    // 404 no demuestra falta de pago: mostrar no_verificable y revisar QR/llave [SB15].
     if (e instanceof PeyError && e.status === 404) {
-      return Response.json({ id, estado: "pendiente", transactionId: null, aviso: "qr_no_encontrado_con_esta_llave" });
+      return Response.json({ id, estado: "no_verificable", transactionId: null, aviso: "qr_no_encontrado_con_esta_llave" });
     }
     return respuestaDeError(e);
   }
@@ -554,7 +555,7 @@ export async function ejecutarHerramienta(nombre, args) {
         const pago = items.find((t) => t.status === "PAID");
         return pago ? { estado: "pagado", monto: pago.amount, transactionId: pago.id } : { estado: "pendiente" };
       } catch (e) {
-        if (e instanceof PeyError && e.status === 404) return { estado: "pendiente", aviso: "qr_no_encontrado_con_esta_llave" };
+        if (e instanceof PeyError && e.status === 404) return { estado: "no_verificable", aviso: "qr_no_encontrado_con_esta_llave" };
         throw e;
       }
     case "resumen_de_ventas":

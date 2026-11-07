@@ -245,3 +245,5 @@ del archivo que la usa y vuelve a correr el script.
 | SD63 | Banxico · Tasas de descuento con tarjeta de crédito por giro (periodo no indicado; archivo de 2025) | https://www.banxico.org.mx/servicios/tasas-de-descuento-para-tarjetas-de-credito/%7BA896D818-3D13-4922-B54B-4B6D58E99479%7D.pdf | 2026-11-06 | K06.3, K06.9 |
 | SM01 | Perfil público de GitHub de José (lista de repositorios) | https://github.com/jose2501106-IA | 2026-11-05 | K10 |
 | SM02 | Correos personales de José (confirmaciones de eventos y resultados) | no público | 2026-11-05 | K10 |
+
+| SD64 | DOF · Ley de Economía Digital: texto y transitorios | https://sidof.segob.gob.mx/notas/docFuente/5803017 | 2026-11-07 |

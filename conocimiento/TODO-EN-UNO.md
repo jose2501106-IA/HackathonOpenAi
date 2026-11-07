@@ -838,7 +838,7 @@ responde:
   - "¿Hay sandbox? ¿Cómo hago un pago real en la demo y cuál es el plan B?"
   - "¿Qué errores y límites debo manejar?"
   - "¿Cómo expongo la API de Pey como herramientas de un agente de IA sin riesgos?"
-actualizado: 2026-11-06
+actualizado: 2026-11-07
 confianza: media
 fuentes: [SB01, SB02, SB03, SB04, SB05, SB06, SB07, SB08, SB09, SB10, SB11, SB12, SB13, SB14, SB15, SB16, SB17, SB18, SB19, SB20, SB21, SB22, SB23, SB24, SB25, SB26, SB27, SB28, SB29, SB30, SB31, SB32, SB33, SB34, SB35, SB36, SB37, SB38, SB39, SB40, SB41, SB42, SB43, SB44, SB45, SB46]
 ---
@@ -932,9 +932,9 @@ Base `https://api.pey.mx`; headers `Authorization: Bearer <PEY_API_KEY>`, `Conte
 
 | Respuesta de Pey | Estado sugerido |
 |---|---|
-| Algún item `PAID` | `pagado` |
+| `PAID` vinculado al cobro, con monto esperado y moneda MXN | `pagado`; validar del lado servidor |
 | Lista vacía o solo `PENDING` | `pendiente` |
-| 404 `NOT_FOUND` | `pendiente` + aviso visible: según la doc, el QR no existe o es de **otra llave** [SB15]. Causa típica: un QR de respaldo creado con una llave distinta a la de Production |
+| 404 `NOT_FOUND` | `no_verificable` + aviso visible: según la doc, el QR no existe o es de **otra llave** [SB15]. Causa típica: un QR de respaldo creado con una llave distinta a la de Production |
 | Pasó `expiraEn` sin `PAID` | `expirado` (lo calcula la app) |
 
 **Cancelar o devolver:** no hay endpoint (⚪ no verificado si hay otra vía); usa `expiration` corta y devuelve desde la app bancaria del titular [SB10][SB28].
@@ -1006,6 +1006,8 @@ Código del handler: K03.7.
 **Recomendación:** mañana temprano pregunta a los mentores de Pey si hay llaves o entorno especial para el hackatón (⚪ no verificado).
 
 ## K03.7 · Ejemplos mínimos en Node.js 20+ (probados)
+
+> Revisión 2026-11-07: los ejemplos históricos no son un checkout completo. Antes de producción, asociar el QR a un pedido del servidor y validar monto, moneda y destinatario; no basta encontrar cualquier PAID. La corrección de 404 a no_verificable es documental y no se ha ejecutado como aplicación. Ver [plan de integración](../docs/REVISION-PEY-2026-11-07.md).
 
 Node 20+ ya trae `fetch`. Vercel crea una función por archivo dentro de `api/`; exportas `GET` o `POST`, que reciben un `Request` web. Para módulos ES usa `.mjs` o `"type": "module"` en el `package.json` más cercano [SB41]. No encontré un SDK oficial de Pey (⚪ no verificado). Pey sugiere los SDK de Standard Webhooks [SB16]; aquí se usa `node:crypto` para no depender de nada [SB40].
 
@@ -1132,10 +1134,9 @@ export async function GET(request) {
     const pago = items.find((t) => t.status === "PAID"); // estados de Pey: PENDING | PAID
     return Response.json({ id, estado: pago ? "pagado" : "pendiente", transactionId: pago?.id ?? null });
   } catch (e) {
-    // La doc dice que 404 = el QR no existe o es de otra llave [SB15]. Seguimos en "pendiente" (no rompe la demo)
-    // pero mandamos un aviso para que la interfaz lo muestre: casi siempre es un QR creado con otra PEY_API_KEY.
+    // 404 no demuestra falta de pago: mostrar no_verificable y revisar QR/llave [SB15].
     if (e instanceof PeyError && e.status === 404) {
-      return Response.json({ id, estado: "pendiente", transactionId: null, aviso: "qr_no_encontrado_con_esta_llave" });
+      return Response.json({ id, estado: "no_verificable", transactionId: null, aviso: "qr_no_encontrado_con_esta_llave" });
     }
     return respuestaDeError(e);
   }
@@ -1380,7 +1381,7 @@ export async function ejecutarHerramienta(nombre, args) {
         const pago = items.find((t) => t.status === "PAID");
         return pago ? { estado: "pagado", monto: pago.amount, transactionId: pago.id } : { estado: "pendiente" };
       } catch (e) {
-        if (e instanceof PeyError && e.status === 404) return { estado: "pendiente", aviso: "qr_no_encontrado_con_esta_llave" };
+        if (e instanceof PeyError && e.status === 404) return { estado: "no_verificable", aviso: "qr_no_encontrado_con_esta_llave" };
         throw e;
       }
     case "resumen_de_ventas":
@@ -2511,7 +2512,7 @@ responde:
   - "¿Qué barreras digitales tienen las personas mayores y qué canal conviene usar?"
   - "¿Qué hay en la Utopía Elena Poniatowska, Coyoacán y la CDMX que sirva al producto?"
   - "¿Qué personas, datos y oportunidades de IA + CoDi usar en el pitch?"
-actualizado: 2026-11-06
+actualizado: 2026-11-07
 confianza: media
 fuentes: [SD01, SD02, SD03, SD04, SD05, SD06, SD07, SD08, SD09, SD10, SD11, SD12, SD13, SD14, SD15, SD16, SD17, SD18, SD19, SD20, SD21, SD22, SD23, SD24, SD25, SD26, SD27, SD28, SD29, SD30, SD31, SD32, SD33, SD34, SD35, SD36, SD37, SD38, SD39, SD40, SD41, SD42, SD43, SD44, SD45, SD46, SD47, SD48, SD49, SD50, SD51, SD52, SD53, SD54, SD55, SD56, SD57, SD58, SD59, SD60, SD61, SD62, SD63]
 ---
@@ -2608,9 +2609,9 @@ CoDi (Cobro Digital) es la plataforma de Banxico, lanzada el 30-sep-2019, para c
 
 **En paralelo**
 - Circular 11/2026: cuenta Nivel 2 Bis de hasta 15,000 UDIs al mes (≈$130–132 mil; hasta 3,000 UDIs en efectivo), sin RFC y con apertura remota [SD09, SD08, SD37]. ⚪ Fecha de oferta en cada banco: no verificada.
-- Ley de Economía Digital para Pagos Digitales y Electrónicos: aprobada por Diputados (6-oct) y Senado (20-oct-2026) [SD10, SD11]; ⚪ publicación en el DOF no verificada al 6-nov. Hacienda definirá en 15 días hábiles sectores solo digitales (primero gasolineras y casetas); reconoce QR, NFC, CoDi y DiMo [SD10, SD11]; la banca promete gradualidad [SD13] y la iniciativa preveía QR en terminales [SD14].
+- Ley de Economía Digital para Pagos Digitales y Electrónicos: publicación federal el 4-nov-2026; vigente desde el 5-nov. Transitorios tercero y cuarto: 15 días hábiles para la determinación de sectores por SHCP y otros 15 tras publicarla para reglas sectoriales. No acredita una obligación general de QR en CDMX el 19-nov. Artículo 19-IV: disposiciones Banxico/CNBV sobre QR en terminales [SD64]. ⚪ Sectores y calendarios concretos: pendientes de verificar.
 
-**Recomendación (por qué ahora):** en 37 días todas las apps hablarán el mismo idioma para transferir y atender cobros CoDi; falta la herramienta del comercio.
+**Recomendación (por qué ahora):** ayudar al comercio a adoptar cobros digitales; distinguir el plazo bancario del 14-dic de las reglas sectoriales pendientes. El plazo normativo no demuestra implementación efectiva en todas las apps.
 
 ## K06.6 · Fraude y desconfianza
 **Datos (Condusef y ENIF)**
@@ -2773,6 +2774,7 @@ Confianza: alta en datos de INEGI, Banxico y DOF; media en cifras citadas por la
 | SD61 | El CEO · Ley de Economía Digital carga con obstáculos por conectividad y costos (10-sep-2026) | https://elceo.com/negocios/ley-de-economia-digital-carga-con-obstaculos-para-pagos-sin-efectivo-por-conectividad-y-costos/ | 2026-11-06 |
 | SD62 | El CEO · CoDi y DiMo se fusionan: lo que se sabe (7-abr-2026) | https://elceo.com/economia/codi-y-dimo-se-fusionan-esto-es-lo-que-se-sabe-del-impulso-a-la-digitalizacion-de-pagos-en-mexico/ | 2026-11-06 |
 | SD63 | Banxico · Tasas de descuento con tarjeta de crédito por giro (periodo no indicado; archivo de 2025) | https://www.banxico.org.mx/servicios/tasas-de-descuento-para-tarjetas-de-credito/%7BA896D818-3D13-4922-B54B-4B6D58E99479%7D.pdf | 2026-11-06 |
+| SD64 | DOF · Ley de Economía Digital: texto y transitorios | https://sidof.segob.gob.mx/notas/docFuente/5803017 | 2026-11-07 |
 
 <!-- ===== FIN: conocimiento/06-contexto-pagos-y-comercios-mx.md ===== -->
 
