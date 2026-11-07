@@ -62,3 +62,8 @@ Reglas: fechas `AAAA-MM-DD`; una línea por hecho; cada hecho con **evidencia** 
 | 2026-11-07 | Revisión independiente: ~215 datos cotejados, 2 correcciones menores en K04 | Sección "Correcciones" al final de K04 | este commit |
 | 2026-11-07 | Consistencia: herramienta `crear_cobro`, `MODO_PAGO` en lugar de `PEY_ENV`, 404 de pey con aviso, `npm test --prefix app` | `git diff` | este commit |
 | 2026-11-07 | K07 (idea "¿Ya cayó?"), K00, INDICE y TODO-EN-UNO generados; verificador con 0 errores | Salida de `scripts/verificar_conocimiento.py` | este commit |
+
+## Revisión pey y normativa — 2026-11-07
+- Contrastadas páginas oficiales de pey, OpenAPI y DOF; ver docs/REVISION-PEY-2026-11-07.md y K06.5.
+- Corregido estado sugerido de 404 a no_verificable; documentada validación del pago contra el pedido.
+- Cambios documentales: no se han usado credenciales, creado cobros ni desplegado producto.

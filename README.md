@@ -16,6 +16,8 @@ Base de conocimiento y espacio de trabajo para ganar el **DevDay Exchange Commun
 
 Paso a paso del día: [`dia-del-evento/RUNBOOK.md`](dia-del-evento/RUNBOOK.md). Lo que hay que tener listo antes: [`dia-del-evento/CHECKLIST.md`](dia-del-evento/CHECKLIST.md).
 
+Revisión del 7-nov: [pey, límites, decisiones y pruebas pendientes](docs/REVISION-PEY-2026-11-07.md); actualización normativa en K06.5.
+
 ## Mapa del repo
 | Ruta | Qué es |
 |---|---|
