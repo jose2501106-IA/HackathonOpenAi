@@ -1,0 +1,17 @@
+{
+  "name": "ya-cayo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "¿Ya cayó? — caja de cobro CoDi (API de pey) con IA de OpenAI: la captura no es dinero.",
+  "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "test": "node --test",
+    "local": "node servidor-local.mjs"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  }
+}

@@ -109,7 +109,7 @@ CoDi (Cobro Digital) es la plataforma de Banxico, lanzada el 30-sep-2019, para c
 
 **En paralelo**
 - Circular 11/2026: cuenta Nivel 2 Bis de hasta 15,000 UDIs al mes (≈$130–132 mil; hasta 3,000 UDIs en efectivo), sin RFC y con apertura remota [SD09, SD08, SD37]. ⚪ Fecha de oferta en cada banco: no verificada.
-- Ley de Economía Digital para Pagos Digitales y Electrónicos: publicación federal el 4-nov-2026; vigente desde el 5-nov. Transitorios tercero y cuarto: 15 días hábiles para la determinación de sectores por SHCP y otros 15 tras publicarla para reglas sectoriales. No acredita una obligación general de QR en CDMX el 19-nov. Artículo 19-IV: disposiciones Banxico/CNBV sobre QR en terminales [SD64]. ⚪ Sectores y calendarios concretos: pendientes de verificar.
+- Ley de Economía Digital para Pagos Digitales y Electrónicos: el Ejecutivo firmó el decreto el 4-nov-2026 y su texto ya aparece en el SIDOF; entra en vigor al día siguiente de su publicación en el DOF (⚪ la copia consultada no muestra la fecha de publicación) [SD64]. Transitorios tercero y cuarto: 15 días hábiles para la determinación de sectores por SHCP y otros 15 tras publicarla para reglas sectoriales. No acredita una obligación general de QR en CDMX el 19-nov. Artículo 19-IV: disposiciones Banxico/CNBV sobre QR en terminales [SD64]. ⚪ Sectores y calendarios concretos: pendientes de verificar.
 
 **Recomendación (por qué ahora):** ayudar al comercio a adoptar cobros digitales; distinguir el plazo bancario del 14-dic de las reglas sectoriales pendientes. El plazo normativo no demuestra implementación efectiva en todas las apps.
 
