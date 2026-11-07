@@ -11,7 +11,7 @@ fuentes:
 
 ## Requisito
 
-Una API key ligada a una cuenta de pago con acceso `codi` ([02](02-primeros-pasos-cuenta-llaves-y-prueba.md)). Es el único ejemplo de la categoría "Ejemplos" de la documentación.
+Una API key ligada a una cuenta de pago con acceso `codi` ([02](02-primeros-pasos-cuenta-llaves-y-prueba.md)). Es el único ejemplo de la categoría "Ejemplos" de la documentación. Encabezados oficiales, anclas y valores exactos del ejemplo: [14](14-tutoriales-paso-a-paso.md).
 
 Fuente: [pey: tutorial Mostrar un QR CoDi](https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr) · [pey: Ejemplos](https://docs.pey.mx/docs/category/examples) · consultado 2026-11-07
 

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(npm test *)",
+      "Bash(npm run test *)",
+      "Bash(node --test *)",
+      "Bash(node --check *)",
+      "Bash(python3 scripts/verificar_conocimiento.py)",
+      "Bash(python3 scripts/unir_registros.py)",
+      "Bash(python3 scripts/construir_indice.py)",
+      "Bash(python3 scripts/construir_todo_en_uno.py)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git grep *)",
+      "Bash(git ls-files *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(git reset *)",
+      "Bash(git restore *)",
+      "Bash(git rebase *)",
+      "Bash(git clean *)",
+      "Bash(vercel *)",
+      "Bash(gh *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(npm install *)",
+      "Bash(npm i *)",
+      "Bash(npx *)",
+      "Bash(rm -rf *)"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(!.env.example)",
+      "Read(.vercel/**)",
+      "Read(*.pem)",
+      "Read(*.key)",
+      "Read(~/.claude/.credentials.json)",
+      "Edit(.env)",
+      "Edit(.env.*)",
+      "Edit(!.env.example)",
+      "Bash(printenv *)",
+      "Bash(env)",
+      "Bash(echo *API_KEY*)",
+      "Bash(echo *SECRET*)",
+      "Bash(echo *TOKEN*)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git push * --force*)",
+      "Bash(git push * -f*)"
+    ]
+  }
+}

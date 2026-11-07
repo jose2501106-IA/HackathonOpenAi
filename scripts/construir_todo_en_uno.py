@@ -4,8 +4,8 @@
 Uso:    python3 scripts/construir_todo_en_uno.py
 Salida: conocimiento/TODO-EN-UNO.md (se regenera completo; no lo edites a mano).
 
-Orden: INDICE.md, luego K00… por número de archivo, la documentación de pey (pey/README.md y pey/NN-*.md)
-y al final AGENTS.md (reglas para agentes).
+Orden: INDICE.md, docs/PROYECTO.md (definición del proyecto), K00… por número de archivo, la documentación
+de pey (pey/README.md y pey/NN-*.md), la de CoDi (codi/README.md y codi/NN-*.md) y al final AGENTS.md.
 """
 import datetime as dt
 import pathlib
@@ -25,8 +25,16 @@ def titulo_de(texto, respaldo):
 
 
 def main():
-    pey = [RAIZ / "pey" / "README.md"] + sorted((RAIZ / "pey").glob("[0-9][0-9]-*.md"))
-    archivos = [CON / "INDICE.md"] + sorted(CON.glob("[0-9][0-9]-*.md")) + pey + [RAIZ / "AGENTS.md"]
+    def carpeta(nombre):
+        return [RAIZ / nombre / "README.md"] + sorted((RAIZ / nombre).glob("[0-9][0-9]-*.md"))
+
+    archivos = (
+        [CON / "INDICE.md", RAIZ / "docs" / "PROYECTO.md"]
+        + sorted(CON.glob("[0-9][0-9]-*.md"))
+        + carpeta("pey")
+        + carpeta("codi")
+        + [RAIZ / "AGENTS.md"]
+    )
     archivos = [p for p in archivos if p.is_file()]
     hoy = dt.date.today().isoformat()
 
@@ -35,16 +43,18 @@ def main():
     for p in archivos:
         texto = p.read_text(encoding="utf-8").strip()
         rel = p.relative_to(RAIZ).as_posix()
-        if p.parent.name == "pey":
-            # Los enlaces relativos de pey/ apuntan a su carpeta: se ajustan para que funcionen desde conocimiento/.
-            texto = re.sub(r"\]\((?!https?://|mailto:|#|\.\./|/)([^)\s]+)\)", r"](../pey/\1)", texto)
+        if p.parent != CON and p.parent != RAIZ:
+            # Los enlaces relativos de pey/, codi/ y docs/ apuntan a su carpeta: se ajustan para que funcionen
+            # desde conocimiento/, donde vive TODO-EN-UNO.md.
+            carpeta_rel = p.parent.relative_to(RAIZ).as_posix()
+            texto = re.sub(r"\]\((?!https?://|mailto:|#|\.\./|/)([^)\s]+)\)", rf"](../{carpeta_rel}/\1)", texto)
         indice.append(f"- `{rel}` — {titulo_de(texto, rel)}")
         contenido.append(f"\n\n<!-- ===== INICIO: {rel} ===== -->\n\n{texto}\n\n<!-- ===== FIN: {rel} ===== -->")
 
     cabecera = (
         "# Base de conocimiento completa — HackathonOpenAi\n\n"
         f"> Archivo generado por `scripts/construir_todo_en_uno.py` el {hoy}. No lo edites a mano: "
-        "edita los archivos de `conocimiento/` o `pey/` y vuelve a correr el script.\n"
+        "edita los archivos de `conocimiento/`, `pey/`, `codi/` o `docs/PROYECTO.md` y vuelve a correr el script.\n"
         "> Úsalo cuando un asistente (por ejemplo ChatGPT) necesite leer todo de una vez. "
         "Cada sección conserva su ID (K03.4, etc.) para citarla.\n\n"
         "## Contenido\n" + "\n".join(indice)

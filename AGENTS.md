@@ -8,15 +8,18 @@ Construir, para el *DevDay Exchange Community Hackathon: Mexico City* (sábado 7
 José participa solo: él decide, aprueba y presenta. Tú construyes y verificas.
 
 ## 2. Cómo usar la base de conocimiento
-1. Empieza por `conocimiento/00-bases-del-concurso.md` (K00): todo lo que pide el concurso en un solo lugar. El índice de preguntas está en `conocimiento/INDICE.md`.
+1. Empieza por `docs/PROYECTO.md` (objetivo del hackatón y definición sistémica del proyecto) y `conocimiento/00-bases-del-concurso.md` (K00: todo lo que pide el concurso). El índice de preguntas está en `conocimiento/INDICE.md`.
 2. Lee solo lo que tu tarea necesita:
 
 | Si tu tarea toca… | Lee |
 |---|---|
+| Objetivo, requisitos, actores, flujos y restricciones del proyecto | `docs/PROYECTO.md` |
 | Qué pide el concurso, fechas, entrega y premios | K00 y K01 |
-| Organizadores y qué buscan | K02 |
-| Cobros CoDi, QR, webhooks y errores de pey | K03 y la carpeta `pey/` (empieza en `pey/README.md`) |
+| Organizadores y qué buscan (incluido pey) | K02 |
+| Cobros con pey: QR, push, ligas, webhooks, errores y marca | K03 y la carpeta `pey/` (empieza en `pey/README.md`) |
+| Qué es CoDi, cómo funciona, reglas de Banxico y cifras | La carpeta `codi/` (empieza en `codi/README.md`) |
 | Cómo se evalúa y qué resta puntos | K08 |
+| Cómo trabajar con Claude Code en Codespaces | `docs/GUIA-CODESPACES.md` y `.claude/commands/` |
 
 3. En la descripción del PR o del commit, cita los IDs que usaste ("según K03.4…").
 4. Lo marcado ⚪ no está verificado. Si necesitas un dato que no está (endpoint, campo, nombre de modelo de OpenAI, precio), **no lo inventes**: consulta la documentación oficial; si no puedes, deja `TODO(⚪): …` visible en el código y dilo.
@@ -41,7 +44,8 @@ José participa solo: él decide, aprueba y presenta. Tú construyes y verificas
 
 ## 6. Forma de trabajar
 - Tareas pequeñas y verificables. Las tareas en paralelo trabajan en archivos distintos.
-- No modifiques `conocimiento/`, `pey/` ni `fuentes/` salvo que la tarea lo pida. Si agregas un dato, agrega su fuente en la tabla "## Fuentes" del archivo y corre `python3 scripts/unir_registros.py` y `python3 scripts/verificar_conocimiento.py`.
+- Se programa con Claude Code dentro de GitHub Codespaces, con prompts; las fases tienen comandos en `.claude/commands/` (`/arrancar`, `/prd`, `/construir`, `/verificar`, `/desplegar`, `/entregar`).
+- No modifiques `conocimiento/`, `pey/`, `codi/` ni `fuentes/` salvo que la tarea lo pida. Si agregas un dato, agrega su fuente en la tabla "## Fuentes" del archivo y corre `python3 scripts/unir_registros.py` y `python3 scripts/verificar_conocimiento.py`.
 - Antes de terminar: corre las pruebas y revisa que el diff no tenga llaves.
 - Avance, decisiones y bloqueos: `BITACORA.md`.
 

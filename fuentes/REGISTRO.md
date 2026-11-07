@@ -128,6 +128,11 @@ del archivo que la usa y vuelve a correr el script.
 | SB55 | Documentación de pey: Get Payment Link | https://docs.pey.mx/docs/api/get-payment-link | 2026-11-07 | K03 |
 | SB56 | Documentación de pey: registro de cambios, introducción | https://docs.pey.mx/docs/changelog/introduction | 2026-11-07 | K03 |
 | SB57 | Documentación de pey: Referencia de la API (categoría) | https://docs.pey.mx/docs/category/api-reference | 2026-11-07 | K03 |
+| SB58 | Documentación de pey: Crear una API key, paso "2. Agrega una cuenta de pago" (cuenta de prueba) | https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key#2-agrega-una-cuenta-de-pago | 2026-11-07 | K03 |
+| SB59 | Documentación de pey: Tutoriales (categoría) | https://docs.pey.mx/docs/category/tutorials | 2026-11-07 | K03 |
+| SB60 | Documentación de pey: Registro de cambios (categoría) | https://docs.pey.mx/docs/category/changelog | 2026-11-07 | K03 |
+| SB61 | Documentación de pey: etiqueta "general" del registro de cambios | https://docs.pey.mx/docs/tags/general | 2026-11-07 | K03 |
+| SB62 | Documentación de pey: Brand assets (versión en inglés de Recursos de marca) | https://docs.pey.mx/en/brand-assets | 2026-11-07 | K03 |
 | SD01 | DOF · Circular 9/2026 de Banxico (modifica la 14/2017; homologación de transferencias móviles) | https://dof.gob.mx/nota_detalle_popup.php?codigo=5790862 | 2026-11-07 | K00, K01 |
 | SD02 | SIDOF · Circular 10/2026 de Banxico (modifica la 3/2012), DOF 17-jun-2026 | https://sidof.segob.gob.mx/notas/5790863 | 2026-11-06 | K00 |
 | SD64 | DOF · Ley de Economía Digital: texto y transitorios | https://sidof.segob.gob.mx/notas/docFuente/5803017 | 2026-11-07 | K00 |

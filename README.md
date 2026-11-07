@@ -1,12 +1,21 @@
 # HackathonOpenAi
 
-Base de conocimiento en Markdown del **DevDay Exchange Community Hackathon: Mexico City** (sábado 7 de noviembre de 2026, UTOPÍA Elena Poniatowska Amor, Coyoacán, CDMX) y documentación de **pey**, la API de cobros CoDi del reto. Está hecha para que agentes de IA (Claude Code, Codex, ChatGPT) la usen como RAG al construir el proyecto del concurso.
+Base de conocimiento en Markdown del **DevDay Exchange Community Hackathon: Mexico City** (sábado 7 de noviembre de 2026, UTOPÍA Elena Poniatowska Amor, Coyoacán, CDMX), con la documentación de **pey** (la API de cobros del reto) y de **CoDi** (Banxico). Está hecha para programar el proyecto con **Claude Code dentro de GitHub Codespaces, solo con prompts**, y para que cualquier agente (Claude Code, Codex, ChatGPT) la use como RAG.
 
-**El reto oficial:** prototipar herramientas de **bien público** con OpenAI y CoDi, usando la API de pey. **Entrega:** domingo 8 a las 13:00. Todo lo que pide el concurso, en un solo lugar: [K00 · Bases del concurso](conocimiento/00-bases-del-concurso.md).
+**El reto oficial:** prototipar herramientas de **bien público** con OpenAI y CoDi, usando la API de pey. **Entrega:** domingo 8 a las 13:00. Empieza por la [definición del proyecto](docs/PROYECTO.md) y las [bases del concurso (K00)](conocimiento/00-bases-del-concurso.md).
+
+## Cómo se trabaja
+1. Abre un Codespace de este repo e inicia sesión en Claude Code con tu suscripción: [guía paso a paso](docs/GUIA-CODESPACES.md).
+2. Escribe `/arrancar`: Claude lee las bases, la definición del proyecto y la bitácora, y dice el siguiente paso.
+3. Sigue las fases con los comandos de `.claude/commands/`: `/prd` → `/construir` → `/verificar` → `/desplegar` → `/entregar`.
 
 ## Qué hay
 | Ruta | Qué es |
 |---|---|
+| [`docs/PROYECTO.md`](docs/PROYECTO.md) | Objetivo del hackatón y definición sistémica del proyecto: requisitos, actores, flujos, restricciones, arquitectura, criterios de éxito, riesgos y el problema por definir. |
+| [`docs/GUIA-CODESPACES.md`](docs/GUIA-CODESPACES.md) | Claude Code en Codespaces: secretos, inicio de sesión, flujo de trabajo, despliegue y biblioteca de prompts. |
+| [`.claude/commands/`](.claude/commands/) | Prompts listos por fase: arrancar, PRD, construir, verificar, desplegar y entregar. |
+| [`codi/`](codi/README.md) | Documentación de CoDi (Banxico) en Markdown: qué es, cómo funciona, reglas, cifras y marca. |
 | [`conocimiento/00-bases-del-concurso.md`](conocimiento/00-bases-del-concurso.md) | K00: requisitos, calendario, entrega, criterios, premios y pendientes del concurso. |
 | [`conocimiento/01-evento-verificado.md`](conocimiento/01-evento-verificado.md) | K01: el evento verificado (fecha, sede, agenda, reto, premios). |
 | [`conocimiento/02-organizadores-y-que-buscan.md`](conocimiento/02-organizadores-y-que-buscan.md) | K02: organizadores, aliados y qué buscan. |

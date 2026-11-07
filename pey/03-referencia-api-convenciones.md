@@ -101,6 +101,29 @@ No hay endpoints para cancelar un QR o una push, devolver un pago, listar cuenta
 
 Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
 
+## Qué muestra cada página de la referencia (revisadas una por una)
+
+La categoría "Referencia de la API" muestra cinco tarjetas: Introduction, CoDi (2 artículos), Bank Account (2), Payment Link (3) y Transaction (4). Las tarjetas de grupo abren directo su primer artículo: no hay páginas de grupo aparte. Las páginas escriben el parámetro de ruta como `:id` (por ejemplo `GET /bank-account/:id`); el OpenAPI lo escribe como `{id}`. Todas enlazan el OpenAPI ("Descargar especificación OpenAPI").
+
+| Página | Método y ruta | Códigos que lista | Lo que agrega su texto |
+|---|---|---|---|
+| [Introduction](https://docs.pey.mx/docs/api/codi-api) | — | — | Versión `2026-10-20`; URL base solo de producción, `https://api.pey.mx`; consejo de probar en producción con $0.01 MXN y sandbox "pronto"; autenticación "Bearer Auth" (HTTP bearer en `Authorization`). Trae un contacto (no se copia aquí) y no trae licencia. |
+| [Create QR](https://docs.pey.mx/docs/api/create-qr) | `POST /codi/qr` | 201, 400, 500, 503 | Crea un QR CoDi vía Banxico para recibir pagos. |
+| [Create Push Notification](https://docs.pey.mx/docs/api/create-push-notification) | `POST /codi/pn` | 200, 400, 500, 503 | Manda vía Banxico una notificación de cobro a un teléfono. |
+| [Register Bank Account](https://docs.pey.mx/docs/api/register-bank-account) | `POST /bank-account` | 200, 400, 500, 503 | Registra una CLABE bajo tu llave en `PENDING`; pasa a `ACTIVE` en hasta 5 días hábiles; revísala con Get Bank Account o espera el webhook; ya `ACTIVE`, usa su `id` como `bankAccountId`. |
+| [Get Bank Account](https://docs.pey.mx/docs/api/get-bank-account) | `GET /bank-account/{id}` | 200, 400, 404, 500, 503 | Solo cuentas de tu llave; una inexistente o de otra llave da 404; sirve para ver el paso de `PENDING` a `ACTIVE`. |
+| [Create Payment Link](https://docs.pey.mx/docs/api/create-payment-link) | `POST /payment-link/create` | 200, 400, 500 | Crea un link; al terminar o cancelar, el cliente regresa a tus URL. |
+| [Update Payment Link](https://docs.pey.mx/docs/api/update-payment-link) | `POST /payment-link/update` | 200, 400, 403, 404, 409, 500 | Solo cambia `amount`, solo links de tu llave y solo en `pending`. |
+| [Get Payment Link](https://docs.pey.mx/docs/api/get-payment-link) | `GET /payment-link/{id}` | 200, 400, 403, 404, 500 | Solo links creados con tu llave. |
+| [Get Transaction](https://docs.pey.mx/docs/api/get-transaction) | `GET /transaction/{id}` | 200, 400, 404, 500 | Solo transacciones de tu llave; 404 si no existe o es de otra; un QR no es una transacción. |
+| [Get API Key Transactions](https://docs.pey.mx/docs/api/get-api-key-transactions) | `GET /transaction/api-key` | 200, 400, 500 | Todas las de tu llave, 80 por página; la llave sale del header `Authorization`; sigue con `nextToken`. |
+| [Get CoDi QR Transactions](https://docs.pey.mx/docs/api/get-co-di-qr-transactions) | `GET /transaction/codi/qr/{id}` | 200, 400, 404, 500 | Pagos de un QR de tu llave, 20 por página, con `nextToken`; 404 si no existe o es de otra. |
+| [Get Bank Account Transactions](https://docs.pey.mx/docs/api/get-bank-account-transactions) | `GET /transaction/bank-account/{id}` | 200, 400, 404, 500, 503 | Solo pagadas, de la más reciente a la más antigua, 80 por página; QR y push creados con ese `bankAccountId`; sigue con `nextToken`; 404 si es ajena. |
+
+Los campos, tipos y errores de cada ruta no aparecen como texto en estas páginas: salen del OpenAPI ([04](04-api-codi-qr-y-push.md) a [07](07-api-transacciones.md) y [11](11-errores-y-limites.md)).
+
+Fuente: [Referencia de la API (categoría)](https://docs.pey.mx/docs/category/api-reference) · [CoDi API: introducción](https://docs.pey.mx/docs/api/codi-api) · páginas de cada endpoint enlazadas en la tabla · consultado 2026-11-07
+
 ## Lo que la referencia no documenta (⚪)
 
 Límite de peticiones (rate limit), idempotencia o llaves de idempotencia, encabezado de versión, CORS (asume que solo se llama desde servidor), tiempos de respuesta garantizados, largo máximo de `concept` y política de compatibilidad entre versiones.

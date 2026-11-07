@@ -1,10 +1,11 @@
 # Base de conocimiento completa — HackathonOpenAi
 
-> Archivo generado por `scripts/construir_todo_en_uno.py` el 2026-11-07. No lo edites a mano: edita los archivos de `conocimiento/` o `pey/` y vuelve a correr el script.
+> Archivo generado por `scripts/construir_todo_en_uno.py` el 2026-11-07. No lo edites a mano: edita los archivos de `conocimiento/`, `pey/`, `codi/` o `docs/PROYECTO.md` y vuelve a correr el script.
 > Úsalo cuando un asistente (por ejemplo ChatGPT) necesite leer todo de una vez. Cada sección conserva su ID (K03.4, etc.) para citarla.
 
 ## Contenido
 - `conocimiento/INDICE.md` — Índice de la base de conocimiento
+- `docs/PROYECTO.md` — Proyecto · Objetivo del hackatón y definición sistémica
 - `conocimiento/00-bases-del-concurso.md` — Bases del concurso: qué pide el DevDay Exchange Community Hackathon CDMX y cómo se evalúa
 - `conocimiento/01-evento-verificado.md` — Ficha verificada del evento: DevDay Exchange Community Hackathon CDMX (7 nov 2026)
 - `conocimiento/02-organizadores-y-que-buscan.md` — Organizadores y qué buscan: OpenAI/Codex, AI Builders México, pey, SpaceXAI y Gobierno CDMX
@@ -24,6 +25,19 @@
 - `pey/11-errores-y-limites.md` — Errores y límites de la API de pey
 - `pey/12-recursos-de-marca.md` — Recursos de marca de pey y CoDi
 - `pey/13-registro-de-cambios.md` — Registro de cambios de la API de pey
+- `pey/14-tutoriales-paso-a-paso.md` — Tutoriales oficiales de pey, paso a paso
+- `codi/README.md` — CoDi® (Cobro Digital de Banco de México) en Markdown
+- `codi/01-que-es-codi.md` — 01 · Qué es CoDi y para qué sirve
+- `codi/02-como-funciona.md` — 02 · Cómo funciona CoDi
+- `codi/03-actores-y-participantes.md` — 03 · Actores y participantes
+- `codi/04-como-paga-y-cobra-una-persona.md` — 04 · Cómo paga (y cómo cobra) una persona, paso a paso
+- `codi/05-seguridad-y-proteccion.md` — 05 · Seguridad y protección del usuario
+- `codi/06-regulacion-y-plazos.md` — 06 · Regulación y plazos
+- `codi/07-cifras-de-uso.md` — 07 · Cifras de uso de CoDi (con fecha)
+- `codi/08-preguntas-frecuentes.md` — 08 · Preguntas frecuentes
+- `codi/09-marca-logotipos-y-material.md` — 09 · Marca, logotipos y material de difusión
+- `codi/10-codi-spei-dimo.md` — 10 · CoDi, SPEI y DiMo comparados
+- `codi/11-como-encaja-pey.md` — 11 · Cómo encaja pey
 - `AGENTS.md` — AGENTS.md
 
 <!-- ===== INICIO: conocimiento/INDICE.md ===== -->
@@ -177,6 +191,200 @@ Archivo: [`08-criterios-y-jueces.md`](08-criterios-y-jueces.md)
 - `K08.13` Checklist de autoevaluación antes de entregar
 
 <!-- ===== FIN: conocimiento/INDICE.md ===== -->
+
+<!-- ===== INICIO: docs/PROYECTO.md ===== -->
+
+# Proyecto · Objetivo del hackatón y definición sistémica
+
+> Documento rector. Dice **qué** hay que lograr, **por qué**, **con quién** y **bajo qué reglas**, antes de decidir qué se construye. El problema concreto (el de la familia de José) se llena en la sección P12 y después se baja a `docs/PRD.md`. Secciones numeradas P1–P12 para citarlas ("según P6…"). Cada dato remite a su archivo de la base: [K00](../conocimiento/00-bases-del-concurso.md), [K01](../conocimiento/01-evento-verificado.md), [K02](../conocimiento/02-organizadores-y-que-buscan.md), [K03](../conocimiento/03-codi-y-api-pey.md), [K08](../conocimiento/08-criterios-y-jueces.md), [`pey/`](../pey/README.md) y [`codi/`](../codi/README.md).
+
+## P1 · Objetivo del hackatón
+
+**Lo que dice el reto escrito** (K00.2): prototipar herramientas de **bien público** con **OpenAI** y **CoDi**, cobrando a través de la **API de pey**. Ejemplos oficiales: cobro para comercios de barrio, comercio comunitario, flujos con QR y solicitudes de pago, y flujos empresariales sobre pagos instantáneos.
+
+**Lo que se pidió en el arranque** (K00.3, notas de José del 7-nov):
+1. Una solución **creativa**.
+2. **De la mano de la nueva ley de pagos digitales**, aprovechándola.
+3. Una **aplicación de un servicio, del que sea**, que **integre la API de pey** (que funciona con CoDi).
+4. Se puede usar **Claude** además de las herramientas de OpenAI.
+
+**Un producto para pey.** Según José, el hackatón es especialmente para hacer un producto sobre pey. Lo que pey busca, por lo que publica y por inferencia (K02.7–K02.8, ⚪ la parte inferida): que más negocios y servicios cobren con CoDi a través de su API, que es gratuita, de autoservicio y funciona con cualquier banco; casos de uso nuevos; y retroalimentación sobre su API y su documentación. Para este proyecto eso significa: **el cobro con pey va en el flujo principal, no de adorno**, y la demo muestra el ciclo completo de un cobro real.
+
+## P2 · Objetivo del proyecto
+
+**General:** que una persona resuelva un problema real (el de P12) con un **servicio** que **cobra con CoDi a través de pey**, donde la **IA de OpenAI** hace algo que un formulario no podría, desplegado en una URL pública y demostrable en **3 pasos**.
+
+**Específicos** (cada uno se puede comprobar):
+
+| # | Objetivo | Cómo se comprueba |
+|---|---|---|
+| O1 | Un cobro real con pey de punta a punta, de $0.01 a $1 | Id del cobro, hora del pago y pantalla de confirmación |
+| O2 | La IA de OpenAI tiene un papel necesario y acotado | Salida estructurada validada por código; la persona confirma |
+| O3 | Demo de 3 pasos en el celular, en el dominio de producción | URL pública probada dos veces |
+| O4 | Sin llaves, todo el flujo corre en **SIMULACIÓN** rotulada | La pantalla dice SIMULACIÓN |
+| O5 | Entrega completa: repo, README, video y pitch | Lista de K08.13 marcada |
+| O6 | Todos los criterios de la rúbrica en 4 o más | Autoevaluación con K08.4–K08.5 |
+| O7 | Entregado antes del domingo a las 12:00 (cierre a las 13:00) | Captura de la confirmación |
+
+**Fuera de alcance:** cuentas de usuario complejas, varias empresas, devoluciones (pey no las tiene, `pey/`), base de datos si no hace falta, promesas de cumplimiento legal y datos personales reales.
+
+## P3 · Requisitos
+
+**Del concurso (obligatorios):**
+
+| ID | Requisito | Cómo se cumple | Fuente |
+|---|---|---|---|
+| R1 | Usar OpenAI | Una llamada necesaria en el flujo principal | K00.2 |
+| R2 | Cobrar con CoDi a través de la API de pey | Crear cobro → pago → confirmación por consulta o webhook | K00.2, K03, `pey/` |
+| R3 | Bien público | El beneficio para la persona usuaria se dice en una frase | K00.2 |
+| R4 | Entregar en el portal antes del domingo 8 a las 13:00 | Paquete de K00.6 | K00.5–K00.6 |
+| R5 | Creatividad | Un ángulo propio explicable en una frase | K00.3, K08.5 |
+| R6 | Aprovechar la ley de pagos digitales sin exagerarla | Adopción voluntaria y preparación; nada de obligaciones ni fechas que la ley no tiene | K00.4 |
+
+**De calidad (reglas de este repo, `AGENTS.md`):**
+
+| ID | Requisito |
+|---|---|
+| Q1 | Español de México; mobile-first a 360 px; botones de al menos 44 px; accesible (AA, teclado, etiquetas) |
+| Q2 | Nada inventado; todo lo simulado dice SIMULACIÓN |
+| Q3 | Dinero real con cuidado: confirmación explícita, tope en el servidor, montos de $0.01 a $1 en pruebas |
+| Q4 | Llaves solo en el servidor; nunca en el navegador, el repo, los logs ni el chat |
+| Q5 | Webhooks de pey con firma verificada |
+| Q6 | Pruebas automáticas con `fetch` simulado y evidencia de cada avance en `BITACORA.md` |
+
+## P4 · El sistema: actores y límites
+
+```mermaid
+flowchart LR
+    subgraph Nuestro_sistema[Lo que construimos]
+        UI[Interfaz móvil]
+        API[Funciones de servidor]
+    end
+    U[Persona usuaria] --> UI
+    UI --> API
+    API -->|interpreta, lee, propone| OAI[OpenAI]
+    API -->|crea cobro, consulta| PEY[pey]
+    PEY -->|webhook firmado| API
+    PEY <--> CODI[CoDi de Banxico / SPEI]
+    CODI <--> BP[Banco de quien paga]
+    CODI <--> BC[Cuenta que cobra]
+    P[Quien paga] -->|escanea y autoriza| BP
+```
+
+**Límite del sistema:** dentro está solo nuestro código (interfaz y funciones). pey, OpenAI, Banxico, los bancos, Vercel y GitHub son externos: fallan, cambian o tardan, y el diseño tiene que aguantarlo (P6, P11).
+
+| Actor | Qué quiere | Qué aporta | Fuente |
+|---|---|---|---|
+| Persona usuaria (por definir en P12) | Resolver su problema sin complicarse | El caso real | P12 |
+| Quien paga | Pagar rápido, seguro y sin comisión | El pago desde la app de su banco | `codi/` |
+| pey | Más servicios cobrando con su API, casos nuevos, retroalimentación | La API, la cuenta de prueba y los webhooks | K02.7–K02.8 |
+| Banxico (CoDi y SPEI) | Pagos digitales instantáneos y gratuitos | La red de pagos | `codi/`, K03.1 |
+| OpenAI | Usos interesantes y visibles de sus modelos | La API | K00.2, K02 |
+| AI Builders México, UTOPÍAS y SEDECO | Bien público, adopción de pagos digitales, comunidad | El evento, mentores y jurado | K02 |
+| Jurado y comunidad | Proyectos útiles que funcionen y se entiendan | La evaluación y el voto | K08 |
+| José | Ganar con un proyecto honesto y útil | El problema, las decisiones y el pitch | K00 |
+| Agentes (Claude Code, Codex) | Instrucciones claras y verificables | El código, las pruebas y la documentación | `AGENTS.md` |
+
+## P5 · Flujos
+
+**Dinero (CoDi con pey).** Detalle técnico: K03.4–K03.5 y `pey/04`, `pey/07`, `pey/09`; la parte de Banxico, `codi/`.
+
+```mermaid
+sequenceDiagram
+    participant U as Persona usuaria
+    participant A as Nuestro sistema
+    participant P as pey
+    participant B as CoDi / banco de quien paga
+    U->>A: pide cobrar (con la ayuda de la IA)
+    A->>A: valida monto y tope; la persona confirma
+    A->>P: POST /codi/qr (o /codi/pn)
+    P-->>A: id + QR (o folio de la solicitud)
+    B->>P: quien paga escanea y autoriza en su banco
+    P-->>A: webhook firmado (pago recibido)
+    A->>P: GET /transaction/codi/qr/{id} (confirmación)
+    A-->>U: "pagado", solo si pey lo confirma
+```
+
+**Información (IA).** Entrada de la persona (texto, voz o imagen) → OpenAI interpreta → **salida estructurada** → el código valida (montos, tope, catálogo, estado) → la persona confirma → acción (crear el cobro). **El modelo nunca confirma pagos ni decide montos solo** (K02.12, K08.5).
+
+**Estados de un cobro.** `pendiente` → `pagado` (solo con PAID de pey y mismo monto) · `expirado` (sin pago al vencer; un pago tardío gana) · `no_verificable` (pey no responde o no reconoce el cobro con esa llave). Nunca se muestra "pagado" sin confirmación de pey (K03.4).
+
+## P6 · Restricciones
+
+| Restricción | Efecto en el diseño | Fuente |
+|---|---|---|
+| pey solo tiene producción; en pruebas se cobra dinero real de $0.01 a $1 que no se devuelve | Tope en el servidor, confirmación explícita y SIMULACIÓN rotulada sin llaves | K03.3, `pey/02` |
+| La CLABE propia tarda 5 días hábiles | Usar la cuenta de prueba de pey en el concurso | K03.3 |
+| pey no documenta idempotencia ni devoluciones | No reintentar creaciones a ciegas; no prometer reembolsos | `pey/04`, `pey/11` |
+| Un webhook por llave; los previews de Vercel piden sesión | Registrar el webhook en el dominio de producción y consultar el estado como respaldo | K03.5 |
+| La ley no obliga hoy a nadie a aceptar QR | Presentar el proyecto como adopción voluntaria y preparación | K00.4 |
+| Repo público | Cero llaves y cero datos personales; los ejemplos son ficticios | K00.9 |
+| Tiempo: el sábado cierra a las 16:00 y la entrega es el domingo a las 13:00 | Un flujo principal pequeño que funcione antes que muchas funciones | K00.5, K08.3 |
+| La API de OpenAI se paga aparte de ChatGPT Plus | Llamadas pocas y cortas; camino sin IA si se acaba el saldo | K00 ⚪ costo por llamada sin medir |
+
+## P7 · Arquitectura de referencia
+
+Sirve para cualquier servicio; el PRD la ajusta.
+
+- **Interfaz:** HTML, CSS y JavaScript sin framework ni build; móvil primero; el modo de pago siempre visible.
+- **Servidor:** funciones de Vercel en Node.js 22; código compartido fuera de `api/` (`AGENTS.md` §5).
+- **Rutas mínimas:** `GET /api/salud` (modo y si hay llaves, sin mostrarlas) · `POST /api/<acción de la IA>` · `POST /api/cobros` (exige confirmación) · `GET /api/estado` (consulta a pey) · `POST /api/webhook-pey` (firma verificada).
+- **Estado:** la verdad del pago vive en pey; si hace falta guardar un pedido sin base de datos, se firma en el servidor para que el navegador no pueda alterarlo.
+- **Pruebas:** `node:test` con `fetch` simulado; un recorrido de la demo en navegador antes de desplegar.
+
+## P8 · Criterios de éxito (rúbrica de K08)
+
+| Criterio (peso inferido) | Un 5 significa | Evidencia |
+|---|---|---|
+| C1 Impacto y alineación (25%) | Persona concreta, dolor medible, cobro CoDi y la ley bien usada | Frase de valor y dato con fuente |
+| C2 Ejecución (25%) | URL pública en celular: crear cobro → pago → webhook verificado → acción | Id del cobro real y video |
+| C3 OpenAI y herramientas (20%) | IA necesaria y acotada; uso visible de agentes con evidencia | Esquema de salida, commits con hora, bitácora |
+| C4 Creatividad (20%) | Un ángulo propio en una frase | La frase del pitch |
+| C5 Pitch y diseño (10%) | Problema → demo → impacto en 3 minutos; interfaz clara | Ensayo cronometrado |
+
+## P9 · Entregables y calendario
+
+| Cuándo | Qué |
+|---|---|
+| Sábado, en cuanto se defina P12 | `docs/PRD.md` con demo de 3 pasos y criterios de aceptación |
+| Sábado, primera hora de construcción | Esqueleto desplegado en SIMULACIÓN |
+| Sábado, antes de las 16:00 | Cobro real con pey en producción y video de respaldo |
+| Domingo, antes de las 12:00 | Entrega en el portal: URL, repo con README, video y pitch (K00.6, K08.13) |
+
+## P10 · Método de trabajo
+
+- **Herramienta:** Claude Code dentro de GitHub Codespaces, programando solo con prompts; Codex CLI también está disponible. Paso a paso y biblioteca de prompts: [`docs/GUIA-CODESPACES.md`](../docs/GUIA-CODESPACES.md). Comandos por fase en `.claude/commands/`: `/arrancar` → `/prd` → `/construir` (las veces que haga falta) → `/verificar` → `/desplegar` → `/entregar`.
+- **Ciclo:** una tarea a la vez; plan corto → construir → verificar → evidencia → commit. José aprueba lo irreversible (push a `main`, despliegues, cobros reales).
+- **Lecciones del primer intento (se conservan):** escribir primero un contrato de API permite repartir el trabajo entre agentes en paralelo sin choques; la SIMULACIÓN completa sin llaves salva la demo; en SIMULACIÓN ningún texto dice que pey confirmó algo; una verificación independiente antes de dar algo por terminado encuentra errores que el autor no ve.
+
+## P11 · Riesgos y mitigación
+
+| Riesgo | Señal | Mitigación |
+|---|---|---|
+| No hay llaves de pey u OpenAI a tiempo | `/api/salud` dice que faltan | SIMULACIÓN rotulada; camino sin IA (reglas o captura manual) |
+| pey responde 503 o falla la red | El estado no cambia | Mensaje "no se puede verificar"; reintento; video de respaldo |
+| OpenAI sin saldo o lenta | Error 429 o tiempo de espera | Respuesta de respaldo sin IA; no bloquear el cobro |
+| Falla el internet de la sede | Sin conexión | Hotspot del celular y video |
+| Demasiadas funciones | Pasa de las 13:00 sin cobro real | Congelar funciones y cerrar el flujo principal (K08.3) |
+| Datos personales o llaves en el repo | Revisión del diff | Verificador del repo y revisión antes de cada push |
+| Citar mal la ley | Una frase con obligación o fecha | Usar solo lo de K00.4 |
+
+## P12 · El problema (lo define José)
+
+Con estas respuestas, `/prd` escribe `docs/PRD.md`:
+
+1. ¿Quién lo vive? Persona y contexto, sin datos personales.
+2. ¿Qué pasa hoy? Un ejemplo real.
+3. ¿Qué cuesta hoy? Tiempo, dinero, confianza o salud.
+4. ¿Qué haría la app, en una frase?
+5. ¿Dónde entra el cobro con pey y CoDi? Quién le cobra a quién y por qué.
+6. ¿Qué hace la IA de OpenAI que un formulario no podría?
+7. ¿Cómo aprovecha la ley de pagos digitales (adopción voluntaria y preparación)?
+8. ¿Qué tiene de creativo, en una frase?
+
+Estado: **pendiente** (7-nov).
+
+<!-- ===== FIN: docs/PROYECTO.md ===== -->
 
 <!-- ===== INICIO: conocimiento/00-bases-del-concurso.md ===== -->
 
@@ -858,7 +1066,7 @@ responde:
   - "¿Cómo expongo la API de Pey como herramientas de un agente de IA sin riesgos?"
 actualizado: 2026-11-07
 confianza: media
-fuentes: [SB01, SB02, SB03, SB04, SB05, SB06, SB07, SB08, SB09, SB10, SB11, SB12, SB13, SB14, SB15, SB16, SB17, SB18, SB19, SB20, SB21, SB22, SB23, SB24, SB25, SB26, SB27, SB28, SB29, SB30, SB31, SB32, SB33, SB34, SB35, SB36, SB37, SB38, SB39, SB40, SB41, SB42, SB43, SB44, SB45, SB46, SB47, SB48, SB49, SB50, SB51, SB52, SB53, SB54, SB55, SB56, SB57]
+fuentes: [SB01, SB02, SB03, SB04, SB05, SB06, SB07, SB08, SB09, SB10, SB11, SB12, SB13, SB14, SB15, SB16, SB17, SB18, SB19, SB20, SB21, SB22, SB23, SB24, SB25, SB26, SB27, SB28, SB29, SB30, SB31, SB32, SB33, SB34, SB35, SB36, SB37, SB38, SB39, SB40, SB41, SB42, SB43, SB44, SB45, SB46, SB47, SB48, SB49, SB50, SB51, SB52, SB53, SB54, SB55, SB56, SB57, SB58, SB59, SB60, SB61, SB62]
 ---
 
 # K03 · CoDi y API de Pey
@@ -885,7 +1093,7 @@ CoDi® (Cobro Digital) es la plataforma de Banco de México para cobrar y pagar 
 
 **Devoluciones.** Quien cobró puede devolver parcial o totalmente [SB28]; la API de Pey no tiene endpoint para eso (K03.4).
 
-**Límites.** Cada banco fija su máximo; en 2019 Banxico pedía que no fuera menor a $8,000 MXN [SB32]. Límite vigente: ⚪ no verificado.
+**Límites.** Cada banco fija su máximo; en 2019 Banxico pedía que no fuera menor a $8,000 MXN [SB32]. Desde el 23-feb-2026 los participantes del SPEI deben aceptar mensajes de cobro de hasta 6,000 UDIS (o más, si el banco quiere) y también sin monto, según la Circular 2/2025; detalle y fuentes en [`codi/02-como-funciona.md`](../codi/02-como-funciona.md).
 
 **Contexto 2026 (pitch).** Los bancos deben homologar sus transferencias móviles, CoDi incluido, a más tardar el 14 de diciembre de 2026; además existe la cuenta "nivel 2 Bis", sin RFC, para micro y pequeños comercios [SB36][SB38].
 
@@ -910,7 +1118,7 @@ Pey (pey®) es una empresa de tecnología enfocada en integrar CoDi a negocios [
 Todo pasa en `portal.mipey.mx` [SB07][SB08]:
 
 1. **Perfil.** Qué datos pide (correo, RFC, INE…): ⚪ no verificado. Ten tu CLABE a la mano.
-2. **Finanzas → cuenta de pago `codi`** (solo cuentas mexicanas). Tu CLABE tarda 5 días hábiles en registrarse ante Banxico: no estará lista para el concurso. Mientras, registra la **cuenta de prueba** que publica la guía (sección "Prueba en producción"): se activa de inmediato, pero lo que se le pague no se devuelve; usa montos como $0.01 MXN [SB07]. También hay registro por API: `POST /bank-account` [SB13].
+2. **Finanzas → cuenta de pago `codi`** (solo cuentas mexicanas). Tu CLABE tarda 5 días hábiles en registrarse ante Banxico: no estará lista para el concurso. Mientras, registra la **cuenta de prueba** que publica la guía dentro del paso "2. Agrega una cuenta de pago"; la sección "Prueba en producción" solo la menciona y enlaza a ese paso [SB58]. Se activa de inmediato, pero lo que se le pague no se devuelve; usa montos como $0.01 MXN [SB07][SB58]. También hay registro por API: `POST /bank-account` [SB13].
 3. **Desarrollador → "Crear API Key"**: nombre y cuenta vinculada (una `codi`; una `stripe` si quieres tarjetas) [SB07]. Si la llave se muestra una sola vez: ⚪ no verificado; cópiala de inmediato.
 4. **Webhook**: engrane de la llave → URL → crear; guarda el secreto de firma (rotable). Un webhook por llave [SB08].
 5. **Secretos** en Vercel y Codespaces: `PEY_API_KEY` y `PEY_WEBHOOK_SECRET`. Nunca en el repo.
@@ -1018,7 +1226,7 @@ Código del handler: K03.7.
 2. Demo: QR de $1 con `expiration: 600`, en grande; pagas desde tu celular; la UI pasa a "Pagado" por polling o webhook.
 3. Con la cuenta de prueba ese dinero no regresa [SB07]; di en el pitch que en producción cae directo en la CLABE del comercio [SB38].
 4. Prefiere QR: la push depende de que el celular del pagador esté ligado a CoDi [SB28][SB30] (⚪ no verificado en detalle).
-5. UI: logos pey + CoDi de "Recursos de marca" [SB25].
+5. UI: usa los archivos oficiales de "Recursos de marca": `pey_codi_light.svg` en fondo claro, `pey_codi_dark.svg` en fondo oscuro y `loading_codi.gif` ("Animación de pago CoDi") mientras esperas el pago [SB25]. La única regla publicada es descargarlos en vez de recrearlos. Ni la página en español ni la inglesa publican colores, tipografía, área de respeto, tamaño mínimo o usos prohibidos, así que no inventes un color de marca (⚪) [SB25][SB62]. Detalle y guía propia: [pey/12](../pey/12-recursos-de-marca.md).
 
 **Plan B escalonado:**
 - **B1, no llega el webhook:** polling a `GET /transaction/codi/qr/{id}` cada 2 a 5 s mientras el QR siga vigente (límite de peticiones: ⚪ no verificado) [SB10][SB15].
@@ -1430,8 +1638,16 @@ Toda la documentación pública de pey quedó en Markdown, con redacción propia
 | Webhooks y sus campos | [pey/09](../pey/09-webhooks.md) |
 | Errores y límites | [pey/11](../pey/11-errores-y-limites.md) |
 | Logos y changelog | [pey/12](../pey/12-recursos-de-marca.md), [pey/13](../pey/13-registro-de-cambios.md) |
+| Los 3 tutoriales oficiales en su orden (encabezados, avisos, valores del ejemplo) | [pey/14](../pey/14-tutoriales-paso-a-paso.md) |
+| Lista práctica de lo que necesita el producto y lo que pey no tiene | [pey/README.md](../pey/README.md#lo-que-vamos-a-necesitar-para-el-producto) |
 
 Fuentes revisadas por primera vez hoy: [SB48] a [SB57]. El changelog no tiene entradas generales ni política de versiones [SB56]; los tipos de transacción y de cuenta bancaria están en [SB51] y [SB52].
+
+**Segunda pasada (2026-11-07).** Se abrieron una por una todas las páginas de Tutoriales, Referencia de la API, Registro de cambios y Recursos de marca. Resultados:
+- Hay 3 tutoriales: "Crear una API key" y "Configurar webhooks" en Primeros pasos, y "Mostrar un QR CoDi" en Ejemplos [SB59].
+- El changelog tiene solo 2 entradas: "Introducción", sin cambios, y "Cuentas bancarias". **Ninguna trae fecha**, ni en su página ni en la etiqueta "general", y el sitemap no tiene `lastmod` [SB60][SB61][SB47].
+- La versión en inglés de Recursos de marca tiene los mismos 5 archivos y tampoco publica reglas [SB62].
+- Corrección: la cuenta de prueba está en el paso 2 del tutorial, no en "Prueba en producción" (K03.3) [SB58].
 
 ## Fuentes
 
@@ -1494,6 +1710,11 @@ Fuentes revisadas por primera vez hoy: [SB48] a [SB57]. El changelog no tiene en
 | SB55 | Documentación de pey: Get Payment Link | https://docs.pey.mx/docs/api/get-payment-link | 2026-11-07 |
 | SB56 | Documentación de pey: registro de cambios, introducción | https://docs.pey.mx/docs/changelog/introduction | 2026-11-07 |
 | SB57 | Documentación de pey: Referencia de la API (categoría) | https://docs.pey.mx/docs/category/api-reference | 2026-11-07 |
+| SB58 | Documentación de pey: Crear una API key, paso "2. Agrega una cuenta de pago" (cuenta de prueba) | https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key#2-agrega-una-cuenta-de-pago | 2026-11-07 |
+| SB59 | Documentación de pey: Tutoriales (categoría) | https://docs.pey.mx/docs/category/tutorials | 2026-11-07 |
+| SB60 | Documentación de pey: Registro de cambios (categoría) | https://docs.pey.mx/docs/category/changelog | 2026-11-07 |
+| SB61 | Documentación de pey: etiqueta "general" del registro de cambios | https://docs.pey.mx/docs/tags/general | 2026-11-07 |
+| SB62 | Documentación de pey: Brand assets (versión en inglés de Recursos de marca) | https://docs.pey.mx/en/brand-assets | 2026-11-07 |
 
 <!-- ===== FIN: conocimiento/03-codi-y-api-pey.md ===== -->
 
@@ -1750,7 +1971,7 @@ Evidencia que un juez puede verificar:
 
 Versión de trabajo, en español de México y con redacción propia, de toda la documentación pública de pey, consultada el **2026-11-07**. Es la base RAG para agentes que construyan con pey. **No es documentación oficial:** ante cualquier duda, manda la página oficial enlazada al final de cada sección.
 
-- **Qué se recorrió:** las 37 URL del [mapa del sitio](https://docs.pey.mx/sitemap.xml), el [OpenAPI completo](https://docs.pey.mx/openapi.json) (versión `2026-10-20`, 11 rutas) y la [página comercial de la API](https://pey.mx/api-codi).
+- **Qué se recorrió:** las 37 URL del [mapa del sitio](https://docs.pey.mx/sitemap.xml), el [OpenAPI completo](https://docs.pey.mx/openapi.json) (versión `2026-10-20`, 11 rutas) y la [página comercial de la API](https://pey.mx/api-codi). En una segunda pasada del mismo día se abrieron una por una todas las páginas de Tutoriales, Referencia de la API, Registro de cambios y Recursos de marca, incluidos sus índices, las etiquetas y la versión en inglés de Recursos de marca.
 - **Marcas:** ⚪ = no confirmado en la fuente. "Recomendación" = decisión de ingeniería, no dicho por pey. Los ejemplos de código y JSON son propios, con valores ficticios.
 - **Síntesis con código probado y decisiones:** [K03 · CoDi y API de pey](../conocimiento/03-codi-y-api-pey.md).
 - **Datos personales:** no se copian la CLABE ni el titular de la cuenta de prueba, ni correos o teléfonos de personas; se enlaza la página oficial.
@@ -1761,6 +1982,29 @@ Versión de trabajo, en español de México y con redacción propia, de toda la 
 2. ¿Dudas de alta, llaves o pruebas? [02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md).
 3. ¿Un error de la API? Busca su `error.type` en [11](../pey/11-errores-y-limites.md).
 4. No inventes campos: si algo no está aquí ni en el OpenAPI, márcalo `TODO(⚪)`.
+
+## Lo que vamos a necesitar para el producto
+
+Lista corta para construir sobre pey en el hackatón. Cada punto enlaza al archivo que lo detalla.
+
+1. **Cuenta y llave.** Perfil en portal.mipey.mx → **Finanzas**: cuenta de pago `codi` → **Desarrollador**: "Crear API Key" vinculada a esa cuenta. La llave vive solo en `PEY_API_KEY`, en el servidor. → [02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md), [14](../pey/14-tutoriales-paso-a-paso.md)
+2. **Cuenta de prueba y montos.** Tu CLABE tarda 5 días hábiles. Para probar hoy, registra la cuenta de prueba que publica el paso 2 del tutorial: se activa al instante. Todo se cobra de verdad y lo pagado **no se devuelve**, así que usa de $0.01 a $1, con tope en el servidor. No hay sandbox. → [02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md)
+3. **Crear el cobro.** QR: `POST /codi/qr` responde 201; `amount` va en pesos, `expiration` es 0 o al menos 360, `numRef` lleva de 1 a 7 dígitos y `generateImage: true` agrega `qrImage`. Push: `POST /codi/pn` responde 200 y pide un celular de 10 dígitos. Para la demo conviene el QR. → [04](../pey/04-api-codi-qr-y-push.md)
+4. **Mostrar el QR.** Muestra `qrImage` como `data:image/png;base64,…` o dibuja `qrString` sin modificarlo. → [10](../pey/10-tutorial-mostrar-qr-codi.md)
+5. **Confirmar el pago por consulta.** QR: `GET /transaction/codi/qr/{id}` hasta ver un `PAID` con el monto esperado. Push: `GET /transaction/{transactionId}`. → [07](../pey/07-api-transacciones.md)
+6. **Confirmar el pago por webhook firmado.** Hay uno por llave y se crea desde el engrane de la llave con "Crear Webhook". El secreto va en `PEY_WEBHOOK_SECRET`. Verifica la firma Standard Webhooks con el cuerpo crudo, deduplica por `webhook-id` y espera el evento `codi.qr.payment_received`. → [09](../pey/09-webhooks.md)
+7. **Ligas de pago (opcional).** `POST /payment-link/create` pide `successUrl` y `backUrl` con HTTPS. Confirma con `GET /payment-link/{id}` (`paid`) o con `payment_link.status_updated`; la redirección no prueba el pago. → [06](../pey/06-api-ligas-de-pago.md)
+8. **Cobrar a nombre de varios comercios (opcional).** Registra cada cuenta con `POST /bank-account` y cobra con su `bankAccountId`, que solo sirve en `ACTIVE` (hasta 5 días hábiles). → [05](../pey/05-api-cuentas-bancarias.md)
+9. **Errores frecuentes.** `INVALID_STATE` (la llave no tiene CoDi habilitado), `PEY_CONSISTENCY_ERROR` (llave sin cuenta vinculada), `INVALID_PARAMETER` (`expiration` menor que 360), `INVALID_AMOUNT`, y 503 `SERVICE_UNAVAILABLE` o `FLAGS_UNAVAILABLE` (reintenta solo los GET). Programa contra `error.type`. → [11](../pey/11-errores-y-limites.md)
+10. **Marca permitida.** Solo los cinco archivos oficiales, descargados y sin redibujar: `pey_codi_light.svg` o `pey_codi_dark.svg` en la pantalla de cobro y `loading_codi.gif` mientras esperas el pago. pey no publica colores, tipografía ni reglas de uso. → [12](../pey/12-recursos-de-marca.md)
+11. **Lo que NO existe en la documentación del 2026-11-07.**
+    - Sandbox: está "próximamente". La página comercial menciona llaves de prueba, pero la referencia no ([01](../pey/01-que-es-pey-y-codi.md)).
+    - Cancelar un QR o una push, y devoluciones por API.
+    - Endpoints para listar cuentas o links, y para administrar el webhook por API ([03](../pey/03-referencia-api-convenciones.md)).
+    - Idempotencia al crear cobros (solo los webhooks traen `webhook-id`), límite de peticiones y código de error para una llave inválida ([11](../pey/11-errores-y-limites.md)).
+    - Eventos de pago rechazado o vencido, y política de reintentos de webhooks ([09](../pey/09-webhooks.md)).
+    - Fechas en el changelog y política de versiones ([13](../pey/13-registro-de-cambios.md)).
+    - Manual de marca ([12](../pey/12-recursos-de-marca.md)).
 
 ## Archivos
 
@@ -1777,8 +2021,9 @@ Versión de trabajo, en español de México y con redacción propia, de toda la 
 | [09-webhooks.md](../pey/09-webhooks.md) | Registro, firma Standard Webhooks, historial, 4 eventos con todos sus campos | [Webhooks](https://docs.pey.mx/docs/webhooks/introduction) · [Configurar webhooks](https://docs.pey.mx/docs/tutorials/getting-started/set-up-webhooks) |
 | [10-tutorial-mostrar-qr-codi.md](../pey/10-tutorial-mostrar-qr-codi.md) | Tutorial oficial de QR y versión propia en JavaScript | [Mostrar un QR CoDi](https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr) |
 | [11-errores-y-limites.md](../pey/11-errores-y-limites.md) | `error.type` por endpoint, cómo reaccionar, límites, lo no documentado | [OpenAPI](https://docs.pey.mx/openapi.json) |
-| [12-recursos-de-marca.md](../pey/12-recursos-de-marca.md) | Logos pey y pey + CoDi, animación CoDi | [Recursos de marca](https://docs.pey.mx/brand-assets) |
-| [13-registro-de-cambios.md](../pey/13-registro-de-cambios.md) | Changelog oficial y diferencias con K03 | [Registro de cambios](https://docs.pey.mx/docs/category/changelog) |
+| [12-recursos-de-marca.md](../pey/12-recursos-de-marca.md) | Los 5 archivos oficiales (nombres, formatos, descargas), versión en inglés, lo que no se publica y guía propia de uso | [Recursos de marca](https://docs.pey.mx/brand-assets) · [Brand assets](https://docs.pey.mx/en/brand-assets) |
+| [13-registro-de-cambios.md](../pey/13-registro-de-cambios.md) | Las 2 entradas del changelog en orden (sin fechas publicadas), etiqueta "general", versionado y diferencias con K03 | [Registro de cambios](https://docs.pey.mx/docs/category/changelog) · [Etiqueta general](https://docs.pey.mx/docs/tags/general) |
+| [14-tutoriales-paso-a-paso.md](../pey/14-tutoriales-paso-a-paso.md) | Los 3 tutoriales oficiales en su orden, con encabezados, anclas, avisos y valores del ejemplo | [Tutoriales](https://docs.pey.mx/docs/category/tutorials) |
 
 ## Endpoints (11)
 
@@ -1800,56 +2045,69 @@ Eventos de webhook (4): `codi.qr.payment_received`, `codi.pn.payment_received`, 
 
 ## Cobertura del mapa del sitio (37 URL, consultado 2026-11-07)
 
+Todas las URL quedaron abiertas y cubiertas; ninguna está pendiente. Las de las cuatro secciones del menú superior (Tutoriales, Documentación, Registro de cambios y Recursos de marca) se abrieron por segunda vez el 2026-11-07, una por una.
+
+| Sección | URL | Dónde quedó |
+|---|---|---|
+| Tutoriales | https://docs.pey.mx/docs/category/tutorials | 14 (índice: Primeros pasos y Ejemplos) |
+| Tutoriales | https://docs.pey.mx/docs/category/getting-started | 14 (índice: 2 tutoriales) |
+| Tutoriales | https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key | 02, 14 |
+| Tutoriales | https://docs.pey.mx/docs/tutorials/getting-started/set-up-webhooks | 09, 14 |
+| Tutoriales | https://docs.pey.mx/docs/category/examples | 10, 14 (índice: un solo ejemplo) |
+| Tutoriales | https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr | 10, 14 |
+| Referencia de la API | https://docs.pey.mx/docs/category/api-reference | 03 (índice y tabla por página) |
+| Referencia de la API | https://docs.pey.mx/docs/api/codi-api | 01, 03 |
+| Referencia de la API | https://docs.pey.mx/docs/api/create-qr | 03, 04 |
+| Referencia de la API | https://docs.pey.mx/docs/api/create-push-notification | 03, 04 |
+| Referencia de la API | https://docs.pey.mx/docs/api/register-bank-account | 03, 05 |
+| Referencia de la API | https://docs.pey.mx/docs/api/get-bank-account | 03, 05 |
+| Referencia de la API | https://docs.pey.mx/docs/api/create-payment-link | 03, 06 |
+| Referencia de la API | https://docs.pey.mx/docs/api/update-payment-link | 03, 06 |
+| Referencia de la API | https://docs.pey.mx/docs/api/get-payment-link | 03, 06 |
+| Referencia de la API | https://docs.pey.mx/docs/api/get-transaction | 03, 07 |
+| Referencia de la API | https://docs.pey.mx/docs/api/get-api-key-transactions | 03, 07 |
+| Referencia de la API | https://docs.pey.mx/docs/api/get-co-di-qr-transactions | 03, 07 |
+| Referencia de la API | https://docs.pey.mx/docs/api/get-bank-account-transactions | 03, 07 |
+| Registro de cambios | https://docs.pey.mx/docs/category/changelog | 13 (índice: 2 entradas) |
+| Registro de cambios | https://docs.pey.mx/docs/changelog/introduction | 13 |
+| Registro de cambios | https://docs.pey.mx/docs/changelog/bank-accounts | 13 |
+| Registro de cambios | https://docs.pey.mx/docs/tags | 13 (una sola etiqueta: general) |
+| Registro de cambios | https://docs.pey.mx/docs/tags/general | 13 (las 2 entradas del changelog) |
+| Recursos de marca | https://docs.pey.mx/brand-assets | 12 |
+| Webhooks | https://docs.pey.mx/docs/category/webhooks | 09 (índice) |
+| Webhooks | https://docs.pey.mx/docs/webhooks/introduction | 09 |
+| Webhooks | https://docs.pey.mx/docs/webhooks/codi/qr | 09 |
+| Webhooks | https://docs.pey.mx/docs/webhooks/codi/pn | 09 |
+| Webhooks | https://docs.pey.mx/docs/webhooks/bank-account/updated | 09 |
+| Webhooks | https://docs.pey.mx/docs/webhooks/payment-link/status-update | 09 |
+| Tipos | https://docs.pey.mx/docs/category/types | 08 (índice: 4 tipos; abierto el 2026-11-07) |
+| Tipos | https://docs.pey.mx/docs/types/transaction-object | 08 |
+| Tipos | https://docs.pey.mx/docs/types/amount-breakdown | 08 |
+| Tipos | https://docs.pey.mx/docs/types/metadata-response | 08 |
+| Tipos | https://docs.pey.mx/docs/types/bank-account | 05, 08 |
+| Inicio | https://docs.pey.mx/ | 01 |
+
+**Fuera del mapa del sitio:**
+
 | URL | Dónde quedó |
 |---|---|
-| https://docs.pey.mx/ | 01 |
-| https://docs.pey.mx/brand-assets | 12 |
-| https://docs.pey.mx/docs/api/codi-api | 01, 03 |
-| https://docs.pey.mx/docs/api/create-qr | 04 |
-| https://docs.pey.mx/docs/api/create-push-notification | 04 |
-| https://docs.pey.mx/docs/api/register-bank-account | 05 |
-| https://docs.pey.mx/docs/api/get-bank-account | 05 |
-| https://docs.pey.mx/docs/api/create-payment-link | 06 |
-| https://docs.pey.mx/docs/api/update-payment-link | 06 |
-| https://docs.pey.mx/docs/api/get-payment-link | 06 |
-| https://docs.pey.mx/docs/api/get-transaction | 07 |
-| https://docs.pey.mx/docs/api/get-api-key-transactions | 07 |
-| https://docs.pey.mx/docs/api/get-co-di-qr-transactions | 07 |
-| https://docs.pey.mx/docs/api/get-bank-account-transactions | 07 |
-| https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key | 02 |
-| https://docs.pey.mx/docs/tutorials/getting-started/set-up-webhooks | 09 |
-| https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr | 10 |
-| https://docs.pey.mx/docs/types/transaction-object | 08 |
-| https://docs.pey.mx/docs/types/amount-breakdown | 08 |
-| https://docs.pey.mx/docs/types/metadata-response | 08 |
-| https://docs.pey.mx/docs/types/bank-account | 05, 08 |
-| https://docs.pey.mx/docs/webhooks/introduction | 09 |
-| https://docs.pey.mx/docs/webhooks/codi/qr | 09 |
-| https://docs.pey.mx/docs/webhooks/codi/pn | 09 |
-| https://docs.pey.mx/docs/webhooks/bank-account/updated | 09 |
-| https://docs.pey.mx/docs/webhooks/payment-link/status-update | 09 |
-| https://docs.pey.mx/docs/changelog/introduction | 13 |
-| https://docs.pey.mx/docs/changelog/bank-accounts | 13 |
-| https://docs.pey.mx/docs/category/api-reference | 03 (índice) |
-| https://docs.pey.mx/docs/category/webhooks | 09 (índice) |
-| https://docs.pey.mx/docs/category/examples | 10 (índice: un solo ejemplo) |
-| https://docs.pey.mx/docs/category/getting-started | Índice de las guías de 02 y 09 (⚪ página no abierta; sus enlaces sí) |
-| https://docs.pey.mx/docs/category/tutorials | Índice de tutoriales (⚪ no abierta; sus enlaces sí) |
-| https://docs.pey.mx/docs/category/types | Índice de tipos (⚪ no abierta; sus 4 tipos sí) |
-| https://docs.pey.mx/docs/category/changelog | Índice del changelog (⚪ no abierta; sus 2 entradas sí) |
-| https://docs.pey.mx/docs/tags | Índice de etiquetas (⚪ no abierta) |
-| https://docs.pey.mx/docs/tags/general | Etiqueta "general" de las entradas del changelog (⚪ no abierta) |
+| https://docs.pey.mx/openapi.json | 03 a 08, 11 |
+| https://docs.pey.mx/en/brand-assets | 12 (mismos 5 archivos; sus descargas apuntan a `/en/img/design/…`, ⚪ no verificadas) |
+| https://docs.pey.mx/img/design/pey_blue.svg y los otros 4 archivos de marca | 12 (enlazados; ⚪ su contenido no se pudo leer: el lector web dio error) |
+| Las demás páginas en inglés (`/en/...`) | ⚪ No se recorrieron por separado. Las páginas en español enlazan su versión en inglés. |
 
-Notas del recorrido: las páginas `/docs/api/...` se dibujan en el navegador desde el OpenAPI; leídas como texto solo traen descripción y códigos, así que los campos salen del OpenAPI. docs.pey.mx no respondió a `curl` desde este entorno (proxy); todo se leyó con un lector web. Las versiones en inglés (`/en/...`) no se recorrieron por separado.
+Notas del recorrido: las páginas `/docs/api/...` se dibujan en el navegador desde el OpenAPI. Leídas como texto solo traen descripción y códigos HTTP (resumidos en [03](../pey/03-referencia-api-convenciones.md)), así que los campos salen del OpenAPI. El sitemap no trae `lastmod`. docs.pey.mx no respondió a `curl` desde este entorno (el proxy regresa 403), así que todo se leyó con un lector web.
 
 ## Contradicciones y huecos principales
 
 - **Llaves de prueba:** la página comercial dice que hay llaves de prueba y productivas; la documentación técnica solo tiene producción y un sandbox "próximamente" ([01](../pey/01-que-es-pey-y-codi.md)).
 - **Estados de link de pago:** la API incluye `partial`; el webhook no ([06](../pey/06-api-ligas-de-pago.md)).
 - **Respuesta ante firma inválida:** el ejemplo de pey responde 500; K03 usa 401. Ambos son "no 2xx" ([09](../pey/09-webhooks.md)).
+- **Dónde está la cuenta de prueba:** en el paso "2. Agrega una cuenta de pago" del tutorial, no en "Prueba en producción", que solo la menciona. Se corrigió en [02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md) y en K03.3.
+- **Changelog sin fechas:** ninguna entrada trae fecha y el sitemap no tiene `lastmod` ([13](../pey/13-registro-de-cambios.md)).
 - **⚪ Sin documentar:** límite de peticiones, idempotencia, código de llave inválida, reintentos y orden de webhooks, cancelación y devoluciones, comisión por tarjeta ([11](../pey/11-errores-y-limites.md)).
 
-Fuente: [pey: mapa del sitio](https://docs.pey.mx/sitemap.xml) · [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: API CoDi®](https://pey.mx/api-codi) · consultado 2026-11-07
+Fuente: [pey: mapa del sitio](https://docs.pey.mx/sitemap.xml) · [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: API CoDi®](https://pey.mx/api-codi) · [pey: Tutoriales](https://docs.pey.mx/docs/category/tutorials) · [pey: Referencia de la API](https://docs.pey.mx/docs/category/api-reference) · [pey: Registro de cambios](https://docs.pey.mx/docs/category/changelog) · [pey: Recursos de marca](https://docs.pey.mx/brand-assets) · consultado 2026-11-07
 
 <!-- ===== FIN: pey/README.md ===== -->
 
@@ -1996,10 +2254,11 @@ Fuente: [pey: Crear una API key](https://docs.pey.mx/docs/tutorials/getting-star
 ## Prueba en producción y cuenta de prueba
 
 - **No hay sandbox.** pey dice que tendrá un entorno de pruebas dedicado "pronto"; mientras, recomienda probar en producción con bancos, notificaciones CoDi y webhooks reales, usando montos pequeños como **$0.01 MXN**.
-- **Cuenta de prueba:** la guía publica una cuenta bancaria de prueba (CLABE y titular) en su sección "Prueba en producción". Se activa **de inmediato**, así que puedes probar el mismo día mientras se activa tu CLABE. **Lo que se le pague no se devuelve.**
-- Por privacidad, esta carpeta **no copia** la CLABE ni el nombre del titular: tómalos de la [sección oficial](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key#test-in-production).
+- **Cuenta de prueba:** la guía publica una cuenta bancaria de prueba (CLABE y titular) **dentro del paso "2. Agrega una cuenta de pago"**, en el texto destacado "Comienza a probar de inmediato". La sección "Prueba en producción" solo la menciona y enlaza de regreso a ese paso. Se activa **de inmediato**, así que puedes probar el mismo día mientras se activa tu CLABE. **Lo que se le pague no se devuelve.**
+- Por privacidad, esta carpeta **no copia** la CLABE ni el nombre del titular: tómalos del [paso 2 oficial](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key#2-agrega-una-cuenta-de-pago).
+- Orden completo del tutorial, con sus avisos: [14](../pey/14-tutoriales-paso-a-paso.md).
 
-Fuente: [pey: Crear una API key, Prueba en producción](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key#test-in-production) · [CoDi API: introducción](https://docs.pey.mx/docs/api/codi-api) · consultado 2026-11-07
+Fuente: [pey: Crear una API key, paso 2](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key#2-agrega-una-cuenta-de-pago) · [pey: Crear una API key, Prueba en producción](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key#test-in-production) · [CoDi API: introducción](https://docs.pey.mx/docs/api/codi-api) · consultado 2026-11-07
 
 ## Entornos
 
@@ -2136,6 +2395,29 @@ Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) ·
 No hay endpoints para cancelar un QR o una push, devolver un pago, listar cuentas bancarias, listar links de pago ni administrar el webhook.
 
 Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+## Qué muestra cada página de la referencia (revisadas una por una)
+
+La categoría "Referencia de la API" muestra cinco tarjetas: Introduction, CoDi (2 artículos), Bank Account (2), Payment Link (3) y Transaction (4). Las tarjetas de grupo abren directo su primer artículo: no hay páginas de grupo aparte. Las páginas escriben el parámetro de ruta como `:id` (por ejemplo `GET /bank-account/:id`); el OpenAPI lo escribe como `{id}`. Todas enlazan el OpenAPI ("Descargar especificación OpenAPI").
+
+| Página | Método y ruta | Códigos que lista | Lo que agrega su texto |
+|---|---|---|---|
+| [Introduction](https://docs.pey.mx/docs/api/codi-api) | — | — | Versión `2026-10-20`; URL base solo de producción, `https://api.pey.mx`; consejo de probar en producción con $0.01 MXN y sandbox "pronto"; autenticación "Bearer Auth" (HTTP bearer en `Authorization`). Trae un contacto (no se copia aquí) y no trae licencia. |
+| [Create QR](https://docs.pey.mx/docs/api/create-qr) | `POST /codi/qr` | 201, 400, 500, 503 | Crea un QR CoDi vía Banxico para recibir pagos. |
+| [Create Push Notification](https://docs.pey.mx/docs/api/create-push-notification) | `POST /codi/pn` | 200, 400, 500, 503 | Manda vía Banxico una notificación de cobro a un teléfono. |
+| [Register Bank Account](https://docs.pey.mx/docs/api/register-bank-account) | `POST /bank-account` | 200, 400, 500, 503 | Registra una CLABE bajo tu llave en `PENDING`; pasa a `ACTIVE` en hasta 5 días hábiles; revísala con Get Bank Account o espera el webhook; ya `ACTIVE`, usa su `id` como `bankAccountId`. |
+| [Get Bank Account](https://docs.pey.mx/docs/api/get-bank-account) | `GET /bank-account/{id}` | 200, 400, 404, 500, 503 | Solo cuentas de tu llave; una inexistente o de otra llave da 404; sirve para ver el paso de `PENDING` a `ACTIVE`. |
+| [Create Payment Link](https://docs.pey.mx/docs/api/create-payment-link) | `POST /payment-link/create` | 200, 400, 500 | Crea un link; al terminar o cancelar, el cliente regresa a tus URL. |
+| [Update Payment Link](https://docs.pey.mx/docs/api/update-payment-link) | `POST /payment-link/update` | 200, 400, 403, 404, 409, 500 | Solo cambia `amount`, solo links de tu llave y solo en `pending`. |
+| [Get Payment Link](https://docs.pey.mx/docs/api/get-payment-link) | `GET /payment-link/{id}` | 200, 400, 403, 404, 500 | Solo links creados con tu llave. |
+| [Get Transaction](https://docs.pey.mx/docs/api/get-transaction) | `GET /transaction/{id}` | 200, 400, 404, 500 | Solo transacciones de tu llave; 404 si no existe o es de otra; un QR no es una transacción. |
+| [Get API Key Transactions](https://docs.pey.mx/docs/api/get-api-key-transactions) | `GET /transaction/api-key` | 200, 400, 500 | Todas las de tu llave, 80 por página; la llave sale del header `Authorization`; sigue con `nextToken`. |
+| [Get CoDi QR Transactions](https://docs.pey.mx/docs/api/get-co-di-qr-transactions) | `GET /transaction/codi/qr/{id}` | 200, 400, 404, 500 | Pagos de un QR de tu llave, 20 por página, con `nextToken`; 404 si no existe o es de otra. |
+| [Get Bank Account Transactions](https://docs.pey.mx/docs/api/get-bank-account-transactions) | `GET /transaction/bank-account/{id}` | 200, 400, 404, 500, 503 | Solo pagadas, de la más reciente a la más antigua, 80 por página; QR y push creados con ese `bankAccountId`; sigue con `nextToken`; 404 si es ajena. |
+
+Los campos, tipos y errores de cada ruta no aparecen como texto en estas páginas: salen del OpenAPI ([04](../pey/04-api-codi-qr-y-push.md) a [07](../pey/07-api-transacciones.md) y [11](../pey/11-errores-y-limites.md)).
+
+Fuente: [Referencia de la API (categoría)](https://docs.pey.mx/docs/category/api-reference) · [CoDi API: introducción](https://docs.pey.mx/docs/api/codi-api) · páginas de cada endpoint enlazadas en la tabla · consultado 2026-11-07
 
 ## Lo que la referencia no documenta (⚪)
 
@@ -2892,7 +3174,7 @@ fuentes:
 
 ## Requisito
 
-Una API key ligada a una cuenta de pago con acceso `codi` ([02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md)). Es el único ejemplo de la categoría "Ejemplos" de la documentación.
+Una API key ligada a una cuenta de pago con acceso `codi` ([02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md)). Es el único ejemplo de la categoría "Ejemplos" de la documentación. Encabezados oficiales, anclas y valores exactos del ejemplo: [14](../pey/14-tutoriales-paso-a-paso.md).
 
 Fuente: [pey: tutorial Mostrar un QR CoDi](https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr) · [pey: Ejemplos](https://docs.pey.mx/docs/category/examples) · consultado 2026-11-07
 
@@ -3031,35 +3313,74 @@ Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) ·
 
 ---
 titulo: "Recursos de marca de pey y CoDi"
-resumen: "Los cinco archivos oficiales (logos pey, pey + CoDi para fondo claro y oscuro, animación de pago CoDi) con sus URL y la única regla publicada."
+resumen: "Todo lo que publica la página oficial de recursos de marca: cinco archivos con nombre, formato y URL de descarga, la versión en inglés y la única regla publicada. También lo que no publica (colores, tipografía, área de respeto, tamaño mínimo, usos prohibidos) y una guía propia para el hackatón."
 actualizado: 2026-11-07
 fuentes:
   - https://docs.pey.mx/brand-assets
+  - https://docs.pey.mx/en/brand-assets
+  - https://pey.mx/api-codi
 ---
 
 # 12 · Recursos de marca
 
-## Archivos oficiales
+## La página
 
-pey publica logotipos para usarlos en tu checkout, app o documentación, y pide **descargarlos en lugar de recrearlos**.
-
-| Recurso | Formato | URL de descarga |
-|---|---|---|
-| Logo pey, azul | SVG | https://docs.pey.mx/img/design/pey_blue.svg |
-| Logo pey, blanco | SVG | https://docs.pey.mx/img/design/pey-logo-blanco.svg |
-| pey + CoDi, fondo claro | SVG | https://docs.pey.mx/img/design/pey_codi_light.svg |
-| pey + CoDi, fondo oscuro | SVG | https://docs.pey.mx/img/design/pey_codi_dark.svg |
-| Animación de pago CoDi | GIF | https://docs.pey.mx/img/design/loading_codi.gif |
-
-La vista previa de la animación usa `loading_codi_preview.gif`, pero la descarga apunta a `loading_codi.gif`.
+- **URL:** https://docs.pey.mx/brand-assets, con el título "Recursos de marca" y enlace en el menú superior de la documentación. Versión en inglés: https://docs.pey.mx/en/brand-assets ("Brand assets").
+- **Para qué es:** ofrece los logotipos oficiales de pey y de CoDi para usarlos en tu integración: checkout, app o documentación.
+- **Única indicación de uso:** descarga los archivos **en lugar de recrearlos**.
+- Pie de la página: "Copyright © 2026 Koshi SA de CV".
 
 Fuente: [pey: Recursos de marca](https://docs.pey.mx/brand-assets) · consultado 2026-11-07
 
-## Reglas de uso
+## Archivos oficiales (5)
 
-- La página no publica manual de marca: sin colores ni códigos hex, sin área de respeto, sin tamaño mínimo, sin lista de usos permitidos o prohibidos ni aviso de marcas (⚪).
-- pey.mx usa además `https://pey.mx/pey.svg` y `https://pey.mx/pey-white.svg` en su sitio; no están en la página de recursos (⚪ no confirmados como recursos para terceros).
-- **Recomendación:** usa los SVG tal cual (sin deformar ni recolorear), con buen contraste, y respeta el símbolo ® al escribir "pey®" y "CoDi®" en textos formales.
+| Nombre en la página | Archivo | Formato | Descarga oficial |
+|---|---|---|---|
+| Logotipo pey - azul | `pey_blue.svg` | SVG | https://docs.pey.mx/img/design/pey_blue.svg |
+| Logotipo pey - blanco | `pey-logo-blanco.svg` | SVG | https://docs.pey.mx/img/design/pey-logo-blanco.svg |
+| pey + CoDi - fondo claro | `pey_codi_light.svg` | SVG | https://docs.pey.mx/img/design/pey_codi_light.svg |
+| pey + CoDi - fondo oscuro | `pey_codi_dark.svg` | SVG | https://docs.pey.mx/img/design/pey_codi_dark.svg |
+| Animación de pago CoDi | `loading_codi.gif` | GIF | https://docs.pey.mx/img/design/loading_codi.gif |
+
+- Solo los dos logos combinados dicen para qué fondo son (claro u oscuro). Para el logo de pey solo, la página dice el color (azul o blanco), no el fondo.
+- La vista previa de la animación en la página usa `loading_codi_preview.gif` (https://docs.pey.mx/img/design/loading_codi_preview.gif); el botón de descarga apunta a `loading_codi.gif`.
+- No hay PNG, PDF ni ZIP: solo cuatro SVG y un GIF.
+- Esta carpeta **no guarda copias** de los archivos: enlaza los oficiales.
+- ⚪ No pude leer el interior de los SVG (colores exactos y proporciones): el lector web dio error al abrirlos el 2026-11-07 y el proxy de este entorno bloquea `curl` a docs.pey.mx.
+
+Fuente: [pey: Recursos de marca](https://docs.pey.mx/brand-assets) · consultado 2026-11-07
+
+## Versión en inglés
+
+Tiene los mismos cinco recursos: "pey logo - blue", "pey logo - white", "pey + CoDi - light background", "pey + CoDi - dark background" y "CoDi payment animation". Sus botones de descarga apuntan a `/en/img/design/<mismo archivo>` (por ejemplo, https://docs.pey.mx/en/img/design/pey_blue.svg). ⚪ No verifiqué que las rutas con `/en/` descarguen: usa las de la página en español. Tampoco publica reglas, colores ni tipografía.
+
+Fuente: [pey: Brand assets (inglés)](https://docs.pey.mx/en/brand-assets) · consultado 2026-11-07
+
+## Lo que la página no publica (⚪)
+
+Revisado en español y en inglés el 2026-11-07:
+
+- **Colores:** no hay paleta (ni hex, RGB, CMYK o Pantone). Solo aparecen las palabras "azul" y "blanco" en los nombres.
+- **Tipografía:** no se menciona.
+- **Área de respeto y tamaño mínimo:** no se mencionan.
+- **Usos permitidos y prohibidos:** no hay lista (deformar, recolorear, rotar, efectos, fondos con poco contraste).
+- **Aviso legal o licencia:** no hay aviso de marcas, licencia ni reglas para poner el logo junto a otra marca.
+- **Marca CoDi® de Banxico:** la página no da reglas propias de CoDi; ⚪ no consulté si Banxico publica un manual de uso.
+- pey.mx usa además `https://pey.mx/pey.svg` y `https://pey.mx/pey-white.svg` en su sitio. No aparecen en la página de recursos (⚪ no están confirmados como recursos para terceros).
+
+Fuente: [pey: Recursos de marca](https://docs.pey.mx/brand-assets) · [pey: Brand assets (inglés)](https://docs.pey.mx/en/brand-assets) · [pey: API CoDi®](https://pey.mx/api-codi) · consultado 2026-11-07
+
+## Guía propia para el producto (Recomendación, no es regla de pey)
+
+**Permitido según la página:** usar estos cinco archivos oficiales en el checkout, la app o la documentación, descargados y sin recrearlos.
+
+**Recomendaciones:**
+1. En la pantalla de cobro con fondo claro usa `pey_codi_light.svg`; con fondo oscuro, `pey_codi_dark.svg`. Si solo va pey: el azul sobre fondo claro y el blanco sobre fondo oscuro.
+2. Usa los SVG tal cual: sin deformar, recolorear, recortar, rotar ni agregar sombras, y escálalos de forma proporcional.
+3. Mientras esperas la confirmación del pago, `loading_codi.gif` encaja con su nombre ("Animación de pago CoDi"). Acompáñalo de texto ("Esperando tu pago…") y ofrece una alternativa sin movimiento para quien tiene activado `prefers-reduced-motion`.
+4. Pon texto alternativo en español, por ejemplo `alt="pey y CoDi"`.
+5. No inventes un "azul pey" en hex para botones: no está publicado (⚪). Usa tu propia paleta con contraste AA.
+6. No des a entender que pey o Banxico patrocinan o avalan el proyecto. En textos formales escribe "pey®" y "CoDi®", como lo hace pey en su sitio.
 
 Fuente: [pey: Recursos de marca](https://docs.pey.mx/brand-assets) · [pey: API CoDi®](https://pey.mx/api-codi) · consultado 2026-11-07
 
@@ -3069,52 +3390,938 @@ Fuente: [pey: Recursos de marca](https://docs.pey.mx/brand-assets) · [pey: API 
 
 ---
 titulo: "Registro de cambios de la API de pey"
-resumen: "Qué dice el changelog oficial (introducción vacía y la entrada de Cuentas bancarias), la versión del OpenAPI y qué cambió respecto a lo que se sabía antes."
+resumen: "Las dos entradas del changelog oficial (Introducción y Cuentas bancarias) en su orden, con lo que agregó y cambió cada una. Incluye la etiqueta 'general', la falta de fechas (ni en las páginas ni en el sitemap), la versión del OpenAPI y las diferencias con K03."
 actualizado: 2026-11-07
 fuentes:
+  - https://docs.pey.mx/docs/category/changelog
   - https://docs.pey.mx/docs/changelog/introduction
   - https://docs.pey.mx/docs/changelog/bank-accounts
+  - https://docs.pey.mx/docs/tags
+  - https://docs.pey.mx/docs/tags/general
+  - https://docs.pey.mx/sitemap.xml
   - https://docs.pey.mx/openapi.json
 ---
 
 # 13 · Registro de cambios
 
-## Versionado
+## Cómo está organizado
 
-- El OpenAPI declara la versión `2026-10-20` (forma de fecha).
-- La introducción del changelog dice que ahí irá el registro general conforme evolucione la API, y por ahora no tiene contenido.
-- ⚪ No documentado: encabezado para fijar versión, política de compatibilidad, avisos de cambios que rompen y fechas de cada entrada.
+| Página | URL | Qué contiene |
+|---|---|---|
+| Registro de cambios (categoría) | https://docs.pey.mx/docs/category/changelog | Lista dos entradas, en este orden: "Introducción" y "Cuentas bancarias", cada una con una línea de descripción. |
+| Introducción | https://docs.pey.mx/docs/changelog/introduction | Entrada 1 |
+| Cuentas bancarias | https://docs.pey.mx/docs/changelog/bank-accounts | Entrada 2, la última (no tiene página siguiente) |
+| Etiquetas | https://docs.pey.mx/docs/tags | Una sola etiqueta: "general" |
+| Etiqueta "general" | https://docs.pey.mx/docs/tags/general | "2 documentos etiquetados": las dos entradas |
 
-Fuente: [pey: registro de cambios, introducción](https://docs.pey.mx/docs/changelog/introduction) · [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+**Fechas: ninguna.** Ninguna entrada publica fecha, versión ni autor. La página de la etiqueta tampoco, y el sitemap no trae `lastmod` (sus 37 URL solo dicen `changefreq` semanal y prioridad 0.5). ⚪ No se puede saber cuándo salió cada cambio. El único dato con forma de fecha es la versión del OpenAPI, `2026-10-20`, que versiona la especificación; ⚪ no está confirmado que corresponda a la entrada "Cuentas bancarias".
 
-## Entrada "Cuentas bancarias" (sin fecha publicada)
+Fuente: [pey: Registro de cambios](https://docs.pey.mx/docs/category/changelog) · [pey: etiqueta general](https://docs.pey.mx/docs/tags/general) · [pey: etiquetas](https://docs.pey.mx/docs/tags) · [pey: mapa del sitio](https://docs.pey.mx/sitemap.xml) · consultado 2026-11-07
 
-**Se agregó:**
-- `POST /bank-account` (Register Bank Account): registra una CLABE bajo tu llave; empieza en `PENDING` y pasa a `ACTIVE` cuando termina el registro ante Banxico.
-- `GET /bank-account/{id}` (Get Bank Account): consulta la cuenta y su `codiStatus`.
-- El tipo "Cuenta bancaria".
-- El webhook `bank.account.updated`, al pasar a `ACTIVE`.
+## Entrada 1 · Introducción (sin fecha)
 
-**Cambió:**
-- `POST /codi/qr` y `POST /codi/pn` aceptan `bankAccountId` opcional: si viene, el pago va a esa cuenta; si no, a la cuenta `codi` de la llave.
-- Los webhooks `codi.qr.payment_received` y `codi.pn.payment_received` incluyen `bankAccountId` cuando se mandó al crear el cobro.
-- `GET /transaction/bank-account/{id}` documenta `externalMetadata` y solo lista transacciones CoDi.
+- Da la bienvenida a la documentación pública de pey.
+- Dice que esta sección llevará el registro general de cambios conforme evolucione la API, y que por ahora no tiene contenido.
+- Etiqueta: general. **No registra ningún cambio.**
 
-No se listan eliminaciones ni pasos de migración.
+Fuente: [pey: registro de cambios, Introducción](https://docs.pey.mx/docs/changelog/introduction) · consultado 2026-11-07
+
+## Entrada 2 · Cuentas bancarias (sin fecha)
+
+En resumen: ya puedes registrar cuentas bancarias CoDi por API y elegir qué cuenta recibe cada pago CoDi. Etiqueta: general.
+
+**Nuevos endpoints** (así se llama la sección oficial):
+
+| Elemento | Qué agrega | Detalle |
+|---|---|---|
+| Register Bank Account (`POST /bank-account`) | Registra una CLABE bajo tu API key. Empieza en `PENDING` y pasa a `ACTIVE` cuando pey termina el registro ante Banxico. | [05](../pey/05-api-cuentas-bancarias.md) |
+| Get Bank Account (`GET /bank-account/{id}`) | Regresa una cuenta registrada con su `codiStatus`. | [05](../pey/05-api-cuentas-bancarias.md) |
+| Tipo "Cuenta bancaria" | Describe el objeto y sus valores de estado. | [08](../pey/08-tipos-de-datos.md) |
+| Webhook "Cuenta bancaria actualizada" (`bank.account.updated`) | Se manda cuando una cuenta registrada por API pasa a `ACTIVE`. | [09](../pey/09-webhooks.md) |
+
+**Cambios:**
+
+| Elemento | Qué cambió | Detalle |
+|---|---|---|
+| Create QR (`POST /codi/qr`) y Create Push Notification (`POST /codi/pn`) | Aceptan `bankAccountId` opcional. Si no lo mandas, el pago va a la cuenta CoDi vinculada a tu API key. | [04](../pey/04-api-codi-qr-y-push.md) |
+| Webhooks "Notificación push" (`codi.pn.payment_received`) y "QR" (`codi.qr.payment_received`) | Incluyen `bankAccountId` cuando se mandó en la petición. | [09](../pey/09-webhooks.md) |
+| Get Bank Account Transactions (`GET /transaction/bank-account/{id}`) | Ahora documenta `externalMetadata` y solo lista transacciones CoDi. | [07](../pey/07-api-transacciones.md) |
+
+No lista eliminaciones, pasos de migración ni avisos de cambios incompatibles.
+
+Enlaces de la entrada: [Register Bank Account](https://docs.pey.mx/docs/api/register-bank-account), [Get Bank Account](https://docs.pey.mx/docs/api/get-bank-account), [Cuenta bancaria](https://docs.pey.mx/docs/types/bank-account), [Cuenta bancaria actualizada](https://docs.pey.mx/docs/webhooks/bank-account/updated), [Create QR](https://docs.pey.mx/docs/api/create-qr), [Create Push Notification](https://docs.pey.mx/docs/api/create-push-notification), [Notificación push](https://docs.pey.mx/docs/webhooks/codi/pn), [QR](https://docs.pey.mx/docs/webhooks/codi/qr) y [Get Bank Account Transactions](https://docs.pey.mx/docs/api/get-bank-account-transactions).
 
 Fuente: [pey: registro de cambios, Cuentas bancarias](https://docs.pey.mx/docs/changelog/bank-accounts) · consultado 2026-11-07
+
+## Versionado
+
+- El OpenAPI (3.1.1) declara la versión `2026-10-20` y seguía igual el 2026-11-07.
+- ⚪ No documentado: un header para fijar la versión, la política de compatibilidad y cómo se avisan los cambios incompatibles.
+- **Recomendación:** antes de la demo, vuelve a abrir la categoría del changelog y revisa la versión del OpenAPI. Si cambió algo, compáralo contra [03](../pey/03-referencia-api-convenciones.md) a [11](../pey/11-errores-y-limites.md).
+
+Fuente: [pey: registro de cambios, Introducción](https://docs.pey.mx/docs/changelog/introduction) · [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
 
 ## Diferencias frente a la síntesis previa del repo (K03, consultas del 2026-11-06)
 
 - Endpoint que K03 no listaba: `GET /transaction/bank-account/{id}`.
-- Errores de links de pago que K03 no listaba: `AUTH_ERROR`, `REQUEST_PARSING_ERROR`, `INVALID_URL`, `INVALID_HAS_TIP`, `INVALID_CLIENT_REFERENCE_ID` y `FORBIDDEN` (403, link de otra llave; no es el error de llave inválida).
-- `amountBreakdown.fee` lo paga quien paga; en links, el desglose omite componentes en cero.
-- `webhook-id` es la llave de idempotencia según pey; su ejemplo responde 500 ante firma inválida.
-- La misma versión del OpenAPI (`2026-10-20`) sigue publicada.
+- Errores de links de pago que K03 no listaba: `AUTH_ERROR`, `REQUEST_PARSING_ERROR`, `INVALID_URL`, `INVALID_HAS_TIP`, `INVALID_CLIENT_REFERENCE_ID` y `FORBIDDEN` (403 por un link de otra llave, no por una llave inválida).
+- `amountBreakdown.fee` lo paga quien paga; en links, el desglose omite los componentes en cero.
+- Según pey, `webhook-id` es la llave de idempotencia; su ejemplo responde 500 ante una firma inválida.
+- Sigue publicada la misma versión del OpenAPI (`2026-10-20`).
+- La cuenta de prueba está en el paso "2. Agrega una cuenta de pago" del tutorial, no en "Prueba en producción" (corregido en K03.3 y en [02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md)).
 
-Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: webhooks, introducción](https://docs.pey.mx/docs/webhooks/introduction) · consultado 2026-11-07
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: webhooks, introducción](https://docs.pey.mx/docs/webhooks/introduction) · [pey: Crear una API key, paso 2](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key#2-agrega-una-cuenta-de-pago) · consultado 2026-11-07
 
 <!-- ===== FIN: pey/13-registro-de-cambios.md ===== -->
+
+<!-- ===== INICIO: pey/14-tutoriales-paso-a-paso.md ===== -->
+
+---
+titulo: "Tutoriales oficiales de pey, paso a paso"
+resumen: "Los tres tutoriales de docs.pey.mx (Crear una API key, Configurar webhooks y Mostrar un QR CoDi) en su orden oficial: encabezados, anclas, pasos, avisos, enlaces e imágenes, con redacción propia y avisos para el hackatón."
+actualizado: 2026-11-07
+fuentes:
+  - https://docs.pey.mx/docs/category/tutorials
+  - https://docs.pey.mx/docs/category/getting-started
+  - https://docs.pey.mx/docs/category/examples
+  - https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key
+  - https://docs.pey.mx/docs/tutorials/getting-started/set-up-webhooks
+  - https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr
+---
+
+# 14 · Tutoriales oficiales, paso a paso
+
+Este archivo sigue el orden y los encabezados de cada tutorial oficial. El detalle técnico y el código propio están en [02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md), [09](../pey/09-webhooks.md) y [10](../pey/10-tutorial-mostrar-qr-codi.md).
+
+## Cómo está organizada la sección
+
+| Página | URL | Qué contiene |
+|---|---|---|
+| Tutoriales (categoría) | https://docs.pey.mx/docs/category/tutorials | Solo dos tarjetas: "Primeros pasos" (2 artículos) y "Ejemplos" (1 artículo). No tiene texto propio. |
+| Primeros pasos (categoría) | https://docs.pey.mx/docs/category/getting-started | Tarjetas de "Crear una API key" y "Configurar webhooks". |
+| Ejemplos (categoría) | https://docs.pey.mx/docs/category/examples | Una tarjeta: "Mostrar un QR CoDi". |
+
+- **Orden de la paginación del sitio:** Tutoriales → Primeros pasos → Crear una API key → Configurar webhooks → Ejemplos → Mostrar un QR CoDi.
+- El tutorial de QR vive en `/docs/tutorials/use-cases/...`, aunque su categoría se llame "Ejemplos".
+- Cada página tiene versión en inglés bajo `/en/...` (por ejemplo, https://docs.pey.mx/en/docs/category/tutorials). No se recorrieron por separado.
+- **No hay tutoriales** de notificación push, links de pago, registro de cuentas por API ni consulta de pagos: para eso usa [04](../pey/04-api-codi-qr-y-push.md), [05](../pey/05-api-cuentas-bancarias.md), [06](../pey/06-api-ligas-de-pago.md) y [07](../pey/07-api-transacciones.md).
+
+Fuente: [pey: Tutoriales](https://docs.pey.mx/docs/category/tutorials) · [pey: Primeros pasos](https://docs.pey.mx/docs/category/getting-started) · [pey: Ejemplos](https://docs.pey.mx/docs/category/examples) · consultado 2026-11-07
+
+## Tutorial 1 · Crear una API key
+
+URL: https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key. La página abre diciendo que lo primero es generar una API key en el portal de pey. Su esquema real es un título y cuatro secciones H2; "Comienza a probar de inmediato" y "Registra cuentas bancarias a través de la API" son textos destacados dentro del paso 2, no encabezados.
+
+| # | Sección oficial (ancla) | Qué se hace, en orden | Detalle |
+|---|---|---|---|
+| 1 | "1. Crea un perfil" (`#1-crea-un-perfil`) | Entra a https://portal.mipey.mx/ y crea tu perfil. Si ya tienes uno, sigue al paso 2. | [02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md) |
+| 2 | "2. Agrega una cuenta de pago" (`#2-agrega-una-cuenta-de-pago`) | En **Finanzas** (https://portal.mipey.mx/finance) crea una cuenta de pago. Tabla de tipos: `stripe` (tus datos bancarios por la integración con Stripe, para tarjetas, Apple Pay y Google Pay) y `codi` (solo cuentas bancarias mexicanas; capturas tus datos directo, para pagos CoDi®). | [02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md) |
+| 2.1 | Recuadro "aviso" | Registrar una cuenta bancaria ante Banxico tarda **5 días hábiles**. | [02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md) |
+| 2.2 | "Comienza a probar de inmediato" | La página publica una **cuenta bancaria de prueba** (CLABE y titular; aquí no se copian) que se activa al momento, para probar en producción el mismo día. Lo que se le pague **no se devuelve**; usa montos pequeños como $0.01 MXN. Puedes registrarla mientras se activa la tuya. | [02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md) |
+| 2.3 | "Registra cuentas bancarias a través de la API" | Alternativa: registra cuentas CoDi con Register Bank Account, revisa su estado con Get Bank Account y manda su `id` como `bankAccountId` al crear un QR o una push. | [05](../pey/05-api-cuentas-bancarias.md) |
+| 2.4 | Imagen | Captura de la pantalla de Finanzas con las opciones para aceptar pagos (texto alternativo oficial: "Elegir una opción de finanzas para aceptar pagos"). | — |
+| 3 | "3. Crea una API key" (`#3-crea-una-api-key`) | Con la cuenta de pago lista, entra a **Desarrollador** en la barra lateral (https://portal.mipey.mx/developers), da clic en **"Crear API Key"**, ponle nombre y vincula una de tus cuentas de pago. | [02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md) |
+| 3.1 | Recuadro "info" | Cada llave puede tener a la vez una cuenta `codi` y una `stripe`; necesita al menos una. | [02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md) |
+| 4 | "Prueba en producción" (`#test-in-production`) | pey recomienda probar directo en producción, con bancos, notificaciones CoDi® y webhooks reales, para ver el mismo flujo que tus clientes; montos como $0.01 MXN; no esperes a que se active tu cuenta: usa la de prueba (el enlace regresa a `#2-agrega-una-cuenta-de-pago`). Recuadro "nota": un sandbox dedicado llegará "pronto"; mientras, producción es la forma más confiable de validar de punta a punta. | [02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md) |
+
+Navegación: anterior "Primeros pasos", siguiente "Configurar webhooks".
+
+Fuente: [pey: Crear una API key](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key) · consultado 2026-11-07
+
+## Tutorial 2 · Configurar webhooks
+
+URL: https://docs.pey.mx/docs/tutorials/getting-started/set-up-webhooks
+
+| # | Sección oficial (ancla) | Qué se hace, en orden | Detalle |
+|---|---|---|---|
+| 0 | Recuadro "info" inicial | Tres consideraciones: el webhook se liga a una API key; cada llave tiene **un solo** webhook; las peticiones se firman con la especificación [Standard Webhooks](https://www.standardwebhooks.com/). | [09](../pey/09-webhooks.md) |
+| 0.1 | Recuadro de aviso (requisito) | Necesitas una API key antes de empezar; si no la tienes, ve al tutorial 1. | — |
+| 1 | "1. Configura un webhook" (`#1-configura-un-webhook`) | En **Desarrollador** (https://portal.mipey.mx/developers) busca tu llave en la lista y da clic en su **ícono de engrane**; en la ventana emergente escribe la URL que recibirá los eventos y da clic en **"Crear Webhook"**. Imagen con texto alternativo "Configuración de la API key para configurar el webhook". | [09](../pey/09-webhooks.md) |
+| 2 | "2. Guarda el secreto del webhook" (`#2-guarda-el-secreto-del-webhook`) | Al crear el webhook aparece el **secreto de firma**: guárdalo, tu endpoint lo necesita. Recuadro "info": puedes **rotar** el secreto cuando quieras desde el mismo engrane de la llave. | [09](../pey/09-webhooks.md) |
+| 3 | "3. Crea tu endpoint de webhooks" (`#3-crea-tu-endpoint-de-webhooks`) | Construye tu endpoint; para verificar firmas pey recomienda los SDK de Standard Webhooks ([implementaciones de referencia](https://github.com/standard-webhooks/standard-webhooks?tab=readme-ov-file#reference-implementations)); el resto está en la [introducción de Webhooks](https://docs.pey.mx/docs/webhooks/introduction). | [09](../pey/09-webhooks.md) |
+
+Esta página **no trae** código, nombres de headers, eventos, códigos HTTP ni política de reintentos: todo eso está en [09](../pey/09-webhooks.md). Navegación: anterior "Crear una API key", siguiente "Ejemplos".
+
+Fuente: [pey: Configurar webhooks](https://docs.pey.mx/docs/tutorials/getting-started/set-up-webhooks) · consultado 2026-11-07
+
+## Tutorial 3 · Mostrar un QR CoDi
+
+URL: https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr (ruta de migas: Inicio › Tutoriales › Ejemplos › Mostrar un QR CoDi). Explica cómo crear un QR CoDi por API y mostrarlo como imagen escaneable. Recuadro de aviso: necesitas una API key vinculada a una cuenta de pago `codi`.
+
+| # | Sección oficial (ancla) | Qué se hace, en orden | Detalle |
+|---|---|---|---|
+| 1 | "1. Crea un QR CoDi" (`#1-crea-un-qr-codi`) | `POST https://api.pey.mx/codi/qr` (enlace a [Create QR](https://docs.pey.mx/docs/api/create-qr)) con `Content-Type: application/json`, `Accept: application/json` y `Authorization: Bearer <tu llave>`. El ejemplo es Python con `requests`; cuerpo: `amount` 150, `concept` "Order #9423", `expiration` 0 y `numRef` "9423". Respuesta de ejemplo: `id` (10 caracteres hexadecimales) y `qrString` (texto con forma de JSON, recortado en la página). | [04](../pey/04-api-codi-qr-y-push.md), [10](../pey/10-tutorial-mostrar-qr-codi.md) |
+| 1.1 | Recuadro "info" | Si usas `generateImage` y quieres ver el `qrImage` en base64 en el navegador, sugiere un decodificador en línea (https://base64.guru/converter/decode/file). | [10](../pey/10-tutorial-mostrar-qr-codi.md) |
+| 2 | "2. Genera la imagen del QR" (`#2-genera-la-imagen-del-qr`) | `pip install qrcode` ([qrcode en PyPI](https://pypi.org/project/qrcode/)); lee `qrString` de la respuesta; `qrcode.QRCode(version=None, error_correction=qrcode.constants.ERROR_CORRECT_M, box_size=10, border=4)`, luego `add_data(...)`, `make(fit=True)`, `make_image(fill_color="black", back_color="white")` y `save("codi-qr.png")`. Cualquier app bancaria compatible con CoDi puede escanear la imagen. Imagen de muestra con texto alternativo "Ejemplo de QR CoDi". | [10](../pey/10-tutorial-mostrar-qr-codi.md) |
+| 3 | "3. Recibe la notificación del pago" | Cuando el cliente escanea y paga, llega el webhook `codi.qr.payment_received` (enlace a "Pago de QR CoDi recibido": https://docs.pey.mx/docs/webhooks/codi/qr). | [09](../pey/09-webhooks.md) |
+
+Navegación: anterior "Ejemplos"; no hay página siguiente en la sección.
+
+Fuente: [pey: tutorial Mostrar un QR CoDi](https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr) · [pey: Ejemplos](https://docs.pey.mx/docs/category/examples) · consultado 2026-11-07
+
+## Avisos para el hackatón (Recomendación)
+
+- El ejemplo oficial cobra **$150**: en producción es dinero real. En este repo, pruebas y demo van de $0.01 a $1 con tope en el servidor ([AGENTS.md](../AGENTS.md), sección 3).
+- `expiration: 0` crea un QR que no vence: úsalo solo para el QR de respaldo; en la demo, `expiration` de 600.
+- No pegues `qrImage` ni `qrString` reales en decodificadores de terceros: muéstralo en tu propia página como `data:image/png;base64,…` ([10](../pey/10-tutorial-mostrar-qr-codi.md)).
+- Los tutoriales están en Python; la versión propia en JavaScript para Vercel está en [10](../pey/10-tutorial-mostrar-qr-codi.md) y el handler de webhook verificado en [09](../pey/09-webhooks.md).
+
+Fuente: [pey: tutorial Mostrar un QR CoDi](https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr) · [pey: Crear una API key](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key) · consultado 2026-11-07
+
+<!-- ===== FIN: pey/14-tutoriales-paso-a-paso.md ===== -->
+
+<!-- ===== INICIO: codi/README.md ===== -->
+
+# CoDi® (Cobro Digital de Banco de México) en Markdown
+
+Versión de trabajo, en español de México y con redacción propia, de la documentación pública de CoDi y de su regulación, **consultada el 2026-11-07**. Es la base RAG para agentes que construyan sobre la API de pey. **No es documentación oficial ni asesoría legal:** ante cualquier duda, manda la fuente enlazada al final de cada sección.
+
+- **Marcas:** ⚪ = no confirmado en una fuente leída hoy. "Recomendación" = decisión de ingeniería, no lo dice Banxico. Los ejemplos usan datos ficticios.
+- **Datos personales:** no se copian correos ni teléfonos de personas; solo contactos institucionales de Banxico.
+- **Relación con el resto del repo:** la API de pey está en [pey/README.md](../pey/README.md); la síntesis con código probado, en [K03](../conocimiento/03-codi-y-api-pey.md); la ley de pagos digitales y el plazo del 14-dic, en [K00.4](../conocimiento/00-bases-del-concurso.md).
+
+## Resumen para quien construye (10 líneas)
+
+1. CoDi es una plataforma de Banxico para **cobrar**: quien cobra manda un mensaje de cobro y quien paga lo autoriza en la app de su banco. El dinero viaja por SPEI.
+2. Canales: **QR** con o sin monto, **notificación al celular** de quien paga y NFC. pey ofrece QR (`/codi/qr`) y notificación (`/codi/pn`).
+3. Funciona 24/7, **sin comisión** para nadie y **sin contracargos**. Quien cobró puede devolver el pago completo o en parte.
+4. **Monto:** desde el 23-feb-2026, los bancos deben aceptar mensajes de cobro de hasta **6,000 UDIS** (Circular 2/2025). Tu servidor pone su propio tope.
+5. **Tu app no puede pagar**, solo cobrar. Pagar es función exclusiva de los participantes del SPEI.
+6. **Sin cuentas concentradoras ni recargos** por pagar con CoDi: el dinero va directo a la CLABE de cada comercio (`bankAccountId`).
+7. **Pagado** solo cuando pey dice `PAID` o llega un webhook con firma válida. El formato del QR no es público: usa el `qrString` de pey.
+8. **14-dic-2026:** vence el plazo para que bancos y participantes homologuen sus apps, incluido el pago de mensajes de cobro CoDi (Circular 9/2026). Las cuentas de nivel 2 a 4 deben poder recibir transferencias con el número celular (Circular 10/2026).
+9. **Uso real:** más de 21 millones de cuentas validadas (sep-2025), pero ~2.9 millones han pagado y ~1.1 millones han cobrado; 11,375 operaciones el 20-oct-2026 (preliminar).
+10. Push de pey ≠ DiMo: DiMo es para **enviar** dinero al celular de quien recibe; CoDi es para **cobrar**.
+
+Fuente: síntesis de los archivos 01 a 11 de esta carpeta, cada uno con sus fuentes · [Banco de México: CoDi® Cobro Digital](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) · consultado 2026-11-07
+
+## Archivos
+
+| Archivo | Tema | Enlace oficial principal |
+|---|---|---|
+| [01-que-es-codi.md](../codi/01-que-es-codi.md) | Qué es, beneficios, requisitos, qué no es | [Banxico: CoDi®](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) |
+| [02-como-funciona.md](../codi/02-como-funciona.md) | Flujo, canales (QR, notificación, NFC), montos en UDIS, horarios, acreditación, Folio CoDi, devoluciones | [Banxico: CoDi®](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) · [codi.org.mx: cobrar](https://www.codi.org.mx/secundarias/cobrar.html) |
+| [03-actores-y-participantes.md](../codi/03-actores-y-participantes.md) | Banxico, SPEI, 34 participantes obligados, terceros desarrolladores, reglas y certificación | [Banxico: avances](https://www.banxico.org.mx/sistemas-de-pago/codi-avances-banco-mexico.html) · [Guía de participación](https://www.banxico.org.mx/sistemas-de-pago/d/%7BA21AA19F-C855-9E64-98A4-832D9A51B2B0%7D.pdf) |
+| [04-como-paga-y-cobra-una-persona.md](../codi/04-como-paga-y-cobra-una-persona.md) | Paso a paso en la app: pagar por QR o notificación, cobrar, app CoDi® Banxico | [codi.org.mx: pagar](https://www.codi.org.mx/secundarias/pagar.html) |
+| [05-seguridad-y-proteccion.md](../codi/05-seguridad-y-proteccion.md) | Autorización, abuso, requisitos de apps, aclaraciones, privacidad | [Términos de la Plataforma](https://www.banxico.org.mx/sistemas-de-pago/d/%7BC501F0E5-FC10-666F-C849-8C369FEE510F%7D.pdf) |
+| [06-regulacion-y-plazos.md](../codi/06-regulacion-y-plazos.md) | Circulares 14/2017, 2/2025, 9/2026 y 10/2026; Guías de homologación; línea de tiempo | [SIDOF: 9/2026](https://sidof.segob.gob.mx/notas/docFuente/5790862) · [SIDOF: 10/2026](https://sidof.segob.gob.mx/notas/docFuente/5790863) |
+| [07-cifras-de-uso.md](../codi/07-cifras-de-uso.md) | Cuentas validadas, operaciones y montos con fecha; contradicción de "cifras estimadas" | [codi.org.mx: estadísticas](https://www.codi.org.mx/secundarias/estadisticas.html) |
+| [08-preguntas-frecuentes.md](../codi/08-preguntas-frecuentes.md) | Preguntas oficiales y preguntas de quien construye | [codi.org.mx: preguntas frecuentes](https://www.codi.org.mx/secundarias/preguntas_frecuentes.html) |
+| [09-marca-logotipos-y-material.md](../codi/09-marca-logotipos-y-material.md) | Licencia de la marca, logos, PDF y video oficiales | [Términos de la Plataforma](https://www.banxico.org.mx/sistemas-de-pago/d/%7BC501F0E5-FC10-666F-C849-8C369FEE510F%7D.pdf) |
+| [10-codi-spei-dimo.md](../codi/10-codi-spei-dimo.md) | Comparación CoDi, SPEI y DiMo; confusiones comunes | [Banxico: CoDi®](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) |
+| [11-como-encaja-pey.md](../codi/11-como-encaja-pey.md) | pey como tercero desarrollador, mapa CoDi → API de pey, reglas para el producto, argumentos de pitch | [codi.org.mx: desarrolladores](https://www.codi.org.mx/secundarias/desarrolladores.html) · [pey/README](../pey/README.md) |
+
+Fuente: [codi.org.mx](https://www.codi.org.mx/index.html) · [Banco de México: CoDi® Cobro Digital](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) · consultado 2026-11-07
+
+## Fuentes consultadas el 2026-11-07
+
+| Fuente | Tipo | URL |
+|---|---|---|
+| Banco de México: CoDi® Cobro Digital | Oficial | https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html |
+| Banco de México: avances de las instituciones en CoDi® (act. 10-jul-2026) | Oficial | https://www.banxico.org.mx/sistemas-de-pago/codi-avances-banco-mexico.html |
+| Banco de México: Guía de participación en CoDi® para comercios y terceros desarrolladores (2-may-2023) | Oficial | https://www.banxico.org.mx/sistemas-de-pago/d/%7BA21AA19F-C855-9E64-98A4-832D9A51B2B0%7D.pdf |
+| Banco de México: Términos y condiciones de la Plataforma CoDi® | Oficial | https://www.banxico.org.mx/sistemas-de-pago/d/%7BC501F0E5-FC10-666F-C849-8C369FEE510F%7D.pdf |
+| Banco de México: modificaciones a la Circular 14/2017 (texto anterior y reformado) | Oficial | https://www.banxico.org.mx/marco-normativo/normativa-emitida-por-el-banco-de-mexico/circular-14-2017/%7B33EFD864-87F6-89BF-9F19-35E4D80E4CF4%7D.pdf |
+| Banxico SIE: cuadros CF881, CF882, CF884 y CF885 | Oficial | https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=21&accion=consultarCuadro&idCuadro=CF881&locale=es (cambia `idCuadro`) |
+| SIDOF: Circular 9/2026 (texto) | Oficial | https://sidof.segob.gob.mx/notas/docFuente/5790862 |
+| DOF: Circular 9/2026 (ya registrada como SD01) | Oficial | https://dof.gob.mx/nota_detalle_popup.php?codigo=5790862 |
+| SIDOF: Circular 10/2026 (ficha y texto; ficha registrada como SD02) | Oficial | https://sidof.segob.gob.mx/notas/5790863 · https://sidof.segob.gob.mx/notas/docFuente/5790863 |
+| codi.org.mx: qué es, cobrar, pagar, preguntas frecuentes, estadísticas, instituciones, desarrolladores | Oficial (sitio de Banxico) | https://www.codi.org.mx/index.html |
+| RegAlert: texto de la Circular 2/2025 | Transcripción de terceros | https://regalert.today/document/circular-2-2025-modifies-circular-14-2017-3e69eebd-1140-46c9-8b49-6e43b16cb5b0/text |
+| DPL News: Banxico publica guías (18-jun-2026) | Prensa | https://dplnews.com/banxico-publica-guias-para-homologar-experiencia-de-usuario-en-transferencias-electronicas/ |
+| La Razón: falta de promoción de CoDi (30-sep-2025) | Prensa | https://www.razon.com.mx/negocios/2025/09/30/acusan-falta-de-promocion-y-voluntad-en-impulso-de-codi/ |
+| El Financiero: SPEI, CoDi y DiMo (13-ago-2023) | Prensa | https://www.elfinanciero.com.mx/mis-finanzas/2023/08/13/spei-codi-y-dimo-banxico-diferencias-en-herramientas-de-transferencias-elecronicas/ |
+| Expansión: DiMo ya está disponible (28-abr-2023) | Prensa | https://expansion.mx/finanzas-personales/2023/04/28/dimo-de-banxico-ya-esta-disponible-como-funciona |
+| Publimetro: CoDi y DiMo (jun-2026; ya registrada como SB35) | Prensa | https://www.publimetro.com.mx/noticias/2026/06/29/aun-pagas-en-efectivo-codi-y-dimo-mueven-tu-dinero-desde-tu-celular/ |
+
+Fuente: las URL de esta tabla · consultado 2026-11-07
+
+## Huecos y contradicciones principales
+
+- **⚪ Guías de homologación:** no encontré su URL en banxico.org.mx ni leí su contenido. Solo las conozco por las circulares y por DPL News.
+- **⚪ Plazo de acreditación (numeral 19a):** mis dos lecturas muestran 1,500 y 6,000 UDIS para supuestos parecidos. Falta leer la Circular 14/2017 compilada.
+- **"Cifras estimadas" de Banxico vs. La Razón:** la tabla de la página de CoDi parece de metas, no de uso real ([07](../codi/07-cifras-de-uso.md)).
+- **"Entrada en vigor" del 14-dic-2026:** DPL News lo llama así; las circulares dicen que es el plazo para cumplir ([06](../codi/06-regulacion-y-plazos.md)).
+- **⚪ No leídos:** funciones por banco (tablas en imagen), tablas de voluntarios y no participantes, Circular 13/2017, página oficial de DiMo, descarga oficial de logos y los PDF de difusión.
+- **Acceso:** banxico.org.mx, dof.gob.mx y sidof.segob.gob.mx no respondieron a `curl` desde este entorno (proxy 403); todo se leyó con un lector web.
+
+Fuente: [Banco de México: CoDi® Cobro Digital](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) · [codi.org.mx](https://www.codi.org.mx/index.html) · consultado 2026-11-07
+
+<!-- ===== FIN: codi/README.md ===== -->
+
+<!-- ===== INICIO: codi/01-que-es-codi.md ===== -->
+
+# 01 · Qué es CoDi y para qué sirve
+
+> Redacción propia, consultada el 2026-11-07. ⚪ = no confirmado en una fuente leída hoy.
+
+## Definición
+
+- **CoDi®** (Cobro Digital) es una plataforma de **Banco de México (Banxico)** para cobrar y pagar con transferencias electrónicas desde el celular.
+- Funciona **sobre el SPEI®** (Sistema de Pagos Electrónicos Interbancarios), que también opera Banxico. CoDi no mueve dinero por su cuenta: el dinero se mueve con una transferencia SPEI o con una transferencia entre cuentas del mismo banco.
+- Lo inicia **quien cobra**: genera un **mensaje de cobro**; quien paga lo revisa y lo **autoriza** en la app de su banco. Por eso no hay contracargos.
+- Opera **24/7**, todos los días del año, y **no cobra comisión** ni a quien paga ni a quien cobra.
+- Banxico describe dos tecnologías para entregar el mensaje de cobro: **código QR** (fijo en el negocio o generado por venta) y **NFC** (acercar dos celulares). El sitio de CoDi describe además el cobro **por notificación** al número celular de quien paga (ver [02](../codi/02-como-funciona.md)).
+
+Fuente: [Banco de México: CoDi® Cobro Digital](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) · [codi.org.mx: ¿Qué es CoDi®?](https://www.codi.org.mx/secundarias/que_es_codi.html) · consultado 2026-11-07
+
+## Para qué sirve (beneficios que declara Banxico)
+
+| Para quien cobra | Para quien paga |
+|---|---|
+| Recibe el dinero en segundos, también en fin de semana | Paga rápido, a cualquier hora, solo con el celular |
+| Sin contracargos: cada pago lo acepta quien paga | Sin comisiones |
+| Dinero disponible de inmediato, como el efectivo | Menos necesidad de efectivo y de ir al cajero |
+| Sin comisiones adicionales | Historial de operaciones que puede abrir acceso a servicios financieros |
+| Historial de operaciones y mejor control de ingresos; menos costo y riesgo de manejar efectivo | |
+
+Fuente: [Banco de México: CoDi® Cobro Digital](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) · [codi.org.mx: ¿Qué es CoDi®?](https://www.codi.org.mx/secundarias/que_es_codi.html) · consultado 2026-11-07
+
+## Qué se necesita
+
+- **Para pagar:** una cuenta de depósito en una institución financiera, un celular con Internet y la app de esa institución con CoDi.
+- **Para cobrar:** una cuenta de depósito y una aplicación que genere mensajes de cobro. Puede ser la app del banco, el software de un desarrollador (como pey) o la app **CoDi® Banxico**.
+- La cuenta puede ser de las que se abren en línea con identificación oficial o de las que piden ir a sucursal; Banxico dice que cualquiera sirve, y que conviene preguntar al banco si pide algo más.
+
+Fuente: [Banco de México: CoDi® Cobro Digital](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) · [codi.org.mx: ¿Qué es CoDi®?](https://www.codi.org.mx/secundarias/que_es_codi.html) · consultado 2026-11-07
+
+## Fechas clave
+
+- **Lanzamiento:** 30 de septiembre de 2019, según La Razón (2025). ⚪ No lo confirmé en una página de Banxico hoy.
+- **Contexto 2026:** los Participantes del SPEI deben procesar los mensajes de cobro CoDi conforme a las nuevas Guías de homologación a más tardar el **14 de diciembre de 2026** (Circular 9/2026; ver [06](../codi/06-regulacion-y-plazos.md)).
+
+Fuente: [La Razón: Acusan falta de promoción y voluntad en impulso de CoDi (30-sep-2025)](https://www.razon.com.mx/negocios/2025/09/30/acusan-falta-de-promocion-y-voluntad-en-impulso-de-codi/) · [SIDOF: Circular 9/2026](https://sidof.segob.gob.mx/notas/docFuente/5790862) · consultado 2026-11-07
+
+## Lo que CoDi no es
+
+- **No es una cartera ni guarda dinero:** el dinero va de la cuenta de quien paga a la de quien cobra. Banxico no vende bienes ni servicios y no responde por ellos.
+- **No es DiMo:** DiMo sirve para *enviar* dinero con el número celular de quien recibe; en CoDi *cobra* quien recibe. Comparación en [10](../codi/10-codi-spei-dimo.md).
+- **El mensaje de cobro no es una transferencia:** es una solicitud. La transferencia ocurre hasta que quien paga la autoriza.
+
+Fuente: [Banco de México: Términos y condiciones de la Plataforma CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BC501F0E5-FC10-666F-C849-8C369FEE510F%7D.pdf) · [Expansión: DiMo de Banxico ya está disponible (28-abr-2023)](https://expansion.mx/finanzas-personales/2023/04/28/dimo-de-banxico-ya-esta-disponible-como-funciona) · consultado 2026-11-07
+
+<!-- ===== FIN: codi/01-que-es-codi.md ===== -->
+
+<!-- ===== INICIO: codi/02-como-funciona.md ===== -->
+
+# 02 · Cómo funciona CoDi
+
+> Redacción propia, consultada el 2026-11-07. ⚪ = no confirmado en una fuente leída hoy.
+
+## El flujo en tres pasos
+
+1. **Quien cobra genera un mensaje de cobro** desde su app o sistema.
+2. **Quien paga lo recibe y lo acepta.** Esa aceptación dispara una transferencia electrónica, interbancaria (SPEI) o dentro del mismo banco.
+3. **CoDi notifica a los dos** que el pago se hizo.
+
+```text
+Comercio (app/sistema)            Banxico (CoDi + SPEI)             Persona (app de su banco)
+   | 1. mensaje de cobro -------------->|----------------------------->| (QR, NFC o notificación)
+   |                                    |<----- 2. autoriza (NIP/huella/token)
+   |                                    |  transferencia SPEI o mismo banco
+   |<------- 3. confirmación ---------- | ------- 3. confirmación ---->|
+```
+
+Fuente: [Banco de México: CoDi® Cobro Digital](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) · consultado 2026-11-07
+
+## Canales para entregar el mensaje de cobro
+
+| Canal | Cómo llega a quien paga | Notas |
+|---|---|---|
+| **QR con monto** | Quien paga lo escanea o lo importa de su galería | Se genera por venta |
+| **QR sin monto** | Igual; quien paga escribe la cantidad | Se puede imprimir o compartir como imagen y usar muchas veces |
+| **Notificación al celular** | Quien cobra captura el número celular de quien paga; a esa persona le llega una notificación que abre la app de su banco | Quien paga debe dar su número antes |
+| **NFC** | Se acercan dos celulares | Banxico lo menciona; ⚪ no encontré qué apps lo ofrecen hoy |
+
+La guía de Banxico para desarrolladores llama al tercer canal "vía Internet": solicitudes que llegan directo al dispositivo, parecidas a la mensajería instantánea.
+
+Fuente: [codi.org.mx: CoDi® para cobrar](https://www.codi.org.mx/secundarias/cobrar.html) · [Banco de México: Guía de participación en CoDi® para comercios y terceros desarrolladores (2-may-2023)](https://www.banxico.org.mx/sistemas-de-pago/d/%7BA21AA19F-C855-9E64-98A4-832D9A51B2B0%7D.pdf) · consultado 2026-11-07
+
+## Montos
+
+- **Límite regulatorio actual:** desde el **23 de febrero de 2026**, los Participantes del SPEI deben permitir mensajes de cobro de **hasta 6,000 UDIS por mensaje**, o más si el banco lo decide. También deben permitir mensajes **sin monto**. Lo fijó la Circular 2/2025, que modificó el numeral 9a. Bis de la Circular 14/2017 (transitorio tercero).
+- **Límite anterior:** el documento de Banxico con el texto antes y después de cada cambio muestra **1,500 UDIS** como límite previo. La transcripción de RegAlert no muestra el texto anterior. ⚪ La UDI cambia a diario: convierte a pesos con el valor del día publicado por Banxico, no con un número fijo.
+- [K03.1](../conocimiento/03-codi-y-api-pey.md) cita una nota de 2019 con un mínimo de $8,000 MXN. Este dato regulatorio de 2026 la actualiza.
+
+Fuente: [Banco de México: modificaciones a la Circular 14/2017 (texto anterior y reformado)](https://www.banxico.org.mx/marco-normativo/normativa-emitida-por-el-banco-de-mexico/circular-14-2017/%7B33EFD864-87F6-89BF-9F19-35E4D80E4CF4%7D.pdf) · [RegAlert: texto de la Circular 2/2025](https://regalert.today/document/circular-2-2025-modifies-circular-14-2017-3e69eebd-1140-46c9-8b49-6e43b16cb5b0/text) · consultado 2026-11-07
+
+## Horarios y tiempos
+
+- **Horario:** 24 horas, todos los días del año. La Circular 2/2025 obliga a que las apps puedan recibir mensajes de cobro las 24 horas.
+- **Día operativo SPEI:** para estadísticas, Banxico cuenta el día de las 18:00 h de un día a las 18:00 h del siguiente. Tenlo en cuenta si cuadras ventas contra cifras de Banxico.
+- **Acreditación (numeral 19a, fr. I):** la Circular 2/2025 fija **5 segundos**, desde que Banxico pone el aviso de liquidación a disposición, para que una institución de crédito acredite transferencias de hasta 1,500 UDIS. Hay excepciones desde 6,000 UDIS. El documento de Banxico menciona además **30 segundos** como plazo general. ⚪ Mis dos lecturas muestran montos distintos para el mismo supuesto: verifícalo en la Circular 14/2017 compilada.
+- **Tiempos reales por banco:** Banxico publica tiempos promedio de procesamiento en su página de avances y un PDF histórico de tiempos de entrega de avisos de abono. ⚪ Vienen en imágenes y PDF que no leí.
+
+Fuente: [codi.org.mx: Preguntas frecuentes](https://www.codi.org.mx/secundarias/preguntas_frecuentes.html) · [RegAlert: texto de la Circular 2/2025](https://regalert.today/document/circular-2-2025-modifies-circular-14-2017-3e69eebd-1140-46c9-8b49-6e43b16cb5b0/text) · [Banxico SIE: cuadro CF882](https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=21&accion=consultarCuadro&idCuadro=CF882&locale=es) · [Banco de México: avances de CoDi®](https://www.banxico.org.mx/sistemas-de-pago/codi-avances-banco-mexico.html) · consultado 2026-11-07
+
+## Confirmación, folio, posponer y devolución
+
+- **Confirmación:** si el pago se procesa bien, las dos apps lo notifican y el estado se puede consultar en CoDi.
+- **Folio CoDi:** la Circular 2/2025 cambió el nombre "Folio de Operación" por **"Folio CoDi"**, definido en el Apéndice AD del Manual del SPEI. Para cualquier aclaración, guarda el folio y la fecha. En la transferencia SPEI, el campo "Folio del Esquema Cobro Digital" se llena según la sección 8 del Manual.
+- **Posponer:** la app puede guardar un mensaje de cobro para que quien paga lo acepte o lo rechace después, si el Apéndice AD lo permite.
+- **Devolución:** quien recibió el pago puede devolverlo completo o en parte.
+- **Formato técnico (QR, campos, vigencia):** no es público. Banxico entrega la documentación técnica después de firmar un convenio de confidencialidad. **Recomendación:** no armes tu propio QR CoDi; usa el `qrString` o la `qrImage` que devuelve pey ([pey/04](../pey/04-api-codi-qr-y-push.md)).
+
+Fuente: [codi.org.mx: Preguntas frecuentes](https://www.codi.org.mx/secundarias/preguntas_frecuentes.html) · [Banco de México: modificaciones a la Circular 14/2017](https://www.banxico.org.mx/marco-normativo/normativa-emitida-por-el-banco-de-mexico/circular-14-2017/%7B33EFD864-87F6-89BF-9F19-35E4D80E4CF4%7D.pdf) · [Banco de México: Guía de participación en CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BA21AA19F-C855-9E64-98A4-832D9A51B2B0%7D.pdf) · consultado 2026-11-07
+
+## Servicios web de la plataforma
+
+Según los términos y condiciones de Banxico, la Plataforma CoDi ofrece servicios web para: registrar comercios, recibir mensajes de cobro, consultar el estado de un mensaje, pedir la validación de una cuenta y consultar el estado de esa validación. Se entra por un portal de registro de comercios y desde dispositivos móviles autorizados. Un proveedor como pey usa estos servicios por ti. ⚪ Banxico no publica sus especificaciones.
+
+Fuente: [Banco de México: Términos y condiciones de la Plataforma CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BC501F0E5-FC10-666F-C849-8C369FEE510F%7D.pdf) · consultado 2026-11-07
+
+<!-- ===== FIN: codi/02-como-funciona.md ===== -->
+
+<!-- ===== INICIO: codi/03-actores-y-participantes.md ===== -->
+
+# 03 · Actores y participantes
+
+> Redacción propia, consultada el 2026-11-07. ⚪ = no confirmado en una fuente leída hoy. No se copian correos ni teléfonos de personas: consulta las páginas oficiales.
+
+## Mapa de actores
+
+| Actor | Qué hace en CoDi |
+|---|---|
+| **Banco de México (Banxico)** | Dueño de la plataforma y de la marca CoDi®. Opera el SPEI, emite las reglas (Circular 14/2017 y sus cambios) y registra y certifica a los terceros desarrolladores |
+| **SPEI®** | Infraestructura por la que viajan las transferencias que dispara un mensaje de cobro aceptado |
+| **Participantes del SPEI** (bancos y otras entidades) | Procesan mensajes de cobro y órdenes CoDi en sus apps. **Solo ellos pueden ofrecer al público la función de pagar** |
+| **Participantes indirectos** | Entidades que llegan al SPEI por medio de un participante; su contrato debe incluir la recepción y el envío de operaciones CoDi |
+| **Comercio** | Cobra con CoDi. Si no desarrolla software, solo sigue las instrucciones de cobro de Banxico |
+| **Comercio desarrollador** | Integra CoDi en sus propios sistemas o puntos de venta; obtiene la documentación técnica y certifica su desarrollo |
+| **Tercero desarrollador** (como pey) | Hace software con **función de cobro** para otros. Se registra y certifica ante Banxico, y puede comercializarlo |
+| **Persona que paga** | Autoriza cada mensaje de cobro en la app de su banco |
+| **App CoDi® Banxico** | App de Banxico para cobrar desde uno o varios celulares con una misma cuenta |
+
+Fuente: [Banco de México: Guía de participación en CoDi® para comercios y terceros desarrolladores (2-may-2023)](https://www.banxico.org.mx/sistemas-de-pago/d/%7BA21AA19F-C855-9E64-98A4-832D9A51B2B0%7D.pdf) · [Banco de México: modificaciones a la Circular 14/2017](https://www.banxico.org.mx/marco-normativo/normativa-emitida-por-el-banco-de-mexico/circular-14-2017/%7B33EFD864-87F6-89BF-9F19-35E4D80E4CF4%7D.pdf) · consultado 2026-11-07
+
+## Participantes obligados (34, actualizado al 10-jul-2026)
+
+Según la página de avances de Banxico: UALÁ, ACTINVER, AFIRME, ALBO, KAPITAL, AZTECA, BABIEN, BAJIO, BANCOPPEL, BANJERCITO, BANORTE, BANREGIO, BANSI, BBASE, BANAMEX, BBVA MÉXICO, BMONEX, COMPARTAMOS, CONSUBANCO, DONDE, HSBC, INBURSA, INMOBILIARIO, INTERCAM, INVEX, MIFEL, MULTIVA BANCO, PAGATODO, SABADELL, SANTANDER, SCOTIABANK, SPIN BY OXXO, VE POR MÁS y STP.
+
+- **Voluntarios y no participantes del SPEI:** Banxico los lista en tablas de imagen y PDF. ⚪ No las leí. La página llama "no participantes" a las empresas que quieren generar mensajes de cobro sin ser participantes del SPEI.
+- **Funciones por banco** (pagar, cobrar, QR, notificación): ⚪ también vienen en imágenes que no leí.
+- **Restricción temporal:** codi.org.mx dice que ASP INTEGRA OPC, INTERCAM, KAPITAL y MULTIVA no pueden procesar por ahora mensajes de cobro ni de pago CoDi. ⚪ La página no tiene fecha. Que un banco esté obligado no garantiza que hoy funcione: prueba con el banco real antes de la demo.
+
+Fuente: [Banco de México: avances de las instituciones en la implantación de CoDi®](https://www.banxico.org.mx/sistemas-de-pago/codi-avances-banco-mexico.html) · [codi.org.mx: Instituciones financieras](https://www.codi.org.mx/secundarias/instituciones.html) · consultado 2026-11-07
+
+## Qué puede y qué no puede hacer un tercero desarrollador
+
+- **Puede:** dar a comercios la función de **cobro** (QR, NFC o vía Internet) y ofrecer servicios adicionales que el usuario contrate si quiere.
+- **No puede:**
+  - ofrecer la función de **pago** (solo los participantes del SPEI);
+  - usar **cuentas concentradoras** ni intermediarios: el dinero va directo a la cuenta del beneficiario final, en un participante del SPEI inscrito en CoDi;
+  - cobrar a sus clientes por la mensajería CoDi;
+  - fijar tarifas según el número o el monto de mensajes;
+  - poner un **recargo** al precio cuando alguien paga con CoDi.
+- **Si comercializa su software:** debe describir cómo identifica a clientes que operen con activos virtuales.
+
+**Recomendación para el producto:** no cobres un extra por pagar con CoDi y no juntes el dinero de varios comercios en una cuenta. Con pey, cada comercio cobra a su propia CLABE (`bankAccountId`, ver [pey/05](../pey/05-api-cuentas-bancarias.md)).
+
+Fuente: [Banco de México: Guía de participación en CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BA21AA19F-C855-9E64-98A4-832D9A51B2B0%7D.pdf) · consultado 2026-11-07
+
+## Cómo se vuelve tercero desarrollador (resumen del proceso)
+
+1. **Carta de intención** con el formato de Banxico, la documentación del Anexo 1 (acta constitutiva, RFC, opinión de cumplimiento del SAT, reporte del Buró de Crédito, poder del representante, entre otros) y el caso de negocio del Anexo 2. Si Banxico hace comentarios, hay hasta 4 meses para atenderlos.
+2. **Convenio de confidencialidad.**
+3. **Documentación técnica**, carta de instrucciones y requisitos de seguridad informática.
+4. **Convenio de licencia de uso de marca** con Banxico.
+5. **Desarrollo** con acceso a un *sandbox* y a una mesa de ayuda.
+6. **Pre-check:** el producto opera y no tiene anomalías graves.
+7. **Certificación** para producción. La certificación de seguridad informática se puede pedir en paralelo.
+
+El registro de terceros desarrolladores se rige también por el Capítulo III Bis de la Circular 13/2017. ⚪ No la leí.
+
+**Para el hackatón:** no te certificas tú; cobras por medio de pey. pey dice que Banxico aprobó su integración con CoDi ([K03.2](../conocimiento/03-codi-y-api-pey.md)) y aparece en la lista de terceros desarrolladores de codi.org.mx ([11](../codi/11-como-encaja-pey.md)). ⚪ No vi un registro de Banxico que diga "certificada".
+
+Fuente: [Banco de México: Guía de participación en CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BA21AA19F-C855-9E64-98A4-832D9A51B2B0%7D.pdf) · [codi.org.mx: Contacta a tu desarrollador](https://www.codi.org.mx/secundarias/desarrolladores.html) · consultado 2026-11-07
+
+## Terceros desarrolladores listados en codi.org.mx
+
+- La página lista **25 empresas**; entre ellas aparecen **pey**, Aspel, National Soft (Soft Restaurant) y ANTAD.
+- El sitio no dice que estén "certificadas": las presenta como terceros desarrolladores, con los comercios que tienen enrolados.
+- Para un comercio, el camino es: contactar al desarrollador, registrarse ante Banxico, verificar la función con el desarrollador y empezar a cobrar.
+
+Fuente: [codi.org.mx: Contacta a tu desarrollador](https://www.codi.org.mx/secundarias/desarrolladores.html) · consultado 2026-11-07
+
+<!-- ===== FIN: codi/03-actores-y-participantes.md ===== -->
+
+<!-- ===== INICIO: codi/04-como-paga-y-cobra-una-persona.md ===== -->
+
+# 04 · Cómo paga (y cómo cobra) una persona, paso a paso
+
+> Redacción propia, consultada el 2026-11-07. Los menús cambian por banco: estos son los pasos genéricos del sitio oficial. Los ejemplos usan datos ficticios.
+
+## Antes del primer pago: activar CoDi
+
+- La persona necesita la app de su banco con CoDi y una cuenta de depósito validada.
+- Para validar la cuenta se puede registrar la **CLABE** (18 dígitos), el número de **tarjeta de débito** (16 dígitos) o el **número celular** asociado a la cuenta.
+- Si la app tiene CoDi pero no deja usarlo, hay que llamar al banco.
+- ⚪ Cada banco valida a su manera. K03.1 cita una nota de prensa sobre bancos que validan con un depósito de un centavo y un SMS ([K03](../conocimiento/03-codi-y-api-pey.md)).
+
+Fuente: [codi.org.mx: Preguntas frecuentes](https://www.codi.org.mx/secundarias/preguntas_frecuentes.html) · consultado 2026-11-07
+
+## Pagar con QR
+
+1. Abrir la app del banco → CoDi → **pagar**.
+2. **Escanear** el QR o **importarlo** de la galería.
+3. **Revisar** los datos del cobro. Si el QR no trae monto, escribir la cantidad.
+4. **Autorizar** con NIP, huella o token.
+5. La persona que paga y la que cobra reciben una **notificación** de confirmación.
+
+*Ejemplo ficticio:* la tiendita "Abarrotes La Esquina" muestra un QR de $37.50 con el concepto "2 refrescos". La clienta lo escanea, ve el monto y el nombre del comercio, pone su huella y las dos pantallas muestran "Pago realizado".
+
+Fuente: [codi.org.mx: CoDi® para pagar](https://www.codi.org.mx/secundarias/pagar.html) · consultado 2026-11-07
+
+## Pagar por notificación (a distancia)
+
+1. Dar el **número celular** a quien va a cobrar.
+2. Tocar la **notificación** que llega; abre la app del banco.
+3. Revisar los datos y **autorizar** con NIP, huella o token.
+4. Las dos partes reciben la confirmación.
+
+Banxico tiene un PDF con este caso: "Paga con CoDi® a distancia desde tu institución financiera". ⚪ No lo abrí.
+
+Fuente: [codi.org.mx: CoDi® para pagar](https://www.codi.org.mx/secundarias/pagar.html) · [Banco de México: Paga con CoDi® a distancia (PDF)](https://www.banxico.org.mx/sistemas-de-pago/d/%7B650AD156-3CCC-C2CC-8278-B6F50804B691%7D.pdf) · consultado 2026-11-07
+
+## Cobrar desde la app del banco
+
+- **Por QR:** CoDi → **cobrar** → datos del cobro → generar QR. Sin monto, el QR se puede imprimir o compartir como imagen y usar varias veces.
+- **Por notificación:** CoDi → cobrar → datos del cobro → **número celular** de quien paga. Esa persona recibe la notificación y autoriza.
+
+Fuente: [codi.org.mx: CoDi® para cobrar](https://www.codi.org.mx/secundarias/cobrar.html) · [Banco de México: Cobra con CoDi® desde tu institución financiera (PDF)](https://www.banxico.org.mx/sistemas-de-pago/d/%7B81FB2D16-65D3-E5E0-A677-645B5432A7E0%7D.pdf) · consultado 2026-11-07
+
+## Cobrar con la app CoDi® Banxico
+
+1. Descargar la app.
+2. Registrar la cuenta donde llegarán los pagos (CLABE, tarjeta de débito o celular) y esperar el aviso de validación.
+3. Capturar los datos del cobro, con monto o con la opción **"sin monto"**.
+4. Mostrar el QR o enviarlo al celular de quien paga.
+5. Quien paga revisa y autoriza; las dos partes reciben la confirmación.
+
+La app permite cobrar desde **uno o varios teléfonos** ligados a la misma cuenta, y solo el titular controla los ingresos.
+
+Fuente: [codi.org.mx: CoDi® para cobrar](https://www.codi.org.mx/secundarias/cobrar.html) · [Banco de México: Cobra con la app CoDi® Banxico (PDF)](https://www.banxico.org.mx/sistemas-de-pago/d/%7B02A0AA3D-449C-CD59-7C4D-6D6131002AD3%7D.pdf) · consultado 2026-11-07
+
+## Qué cambia cuando el cobro sale de un producto hecho con pey
+
+- La persona hace exactamente los mismos pasos: escanea el QR que muestra tu app o toca la notificación que manda pey.
+- Tu app **no ve** el NIP ni los datos bancarios de quien paga. Sabes que pagó cuando pey reporta `PAID` o llega el webhook firmado.
+- **Recomendación de UX:** pon el monto y el concepto en grande junto al QR, un contador de vigencia y el texto "Paga desde la app de tu banco, en la opción CoDi". Detalle técnico en [pey/10](../pey/10-tutorial-mostrar-qr-codi.md).
+
+Fuente: [codi.org.mx: CoDi® para pagar](https://www.codi.org.mx/secundarias/pagar.html) · [pey: documentación en Markdown](../pey/README.md) · consultado 2026-11-07
+
+<!-- ===== FIN: codi/04-como-paga-y-cobra-una-persona.md ===== -->
+
+<!-- ===== INICIO: codi/05-seguridad-y-proteccion.md ===== -->
+
+# 05 · Seguridad y protección del usuario
+
+> Redacción propia, consultada el 2026-11-07. ⚪ = no confirmado en una fuente leída hoy.
+
+## Protecciones del diseño
+
+- **Autorización explícita:** cada pago lo acepta quien paga, con NIP, huella o token en la app de su banco. Por eso no hay contracargos.
+- **Confirmación a las dos partes:** pagador y cobrador reciben la confirmación del pago.
+- **Bloqueo:** quien recibe mensajes de cobro puede bloquearlos desde su app, y Banxico puede bloquear mensajes abusivos y los certificados con los que se enviaron.
+- **El mensaje de cobro no mueve dinero:** solo la aceptación dispara la transferencia.
+
+Fuente: [Banco de México: CoDi® Cobro Digital](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) · [codi.org.mx: CoDi® para pagar](https://www.codi.org.mx/secundarias/pagar.html) · [Banco de México: Términos y condiciones de la Plataforma CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BC501F0E5-FC10-666F-C849-8C369FEE510F%7D.pdf) · consultado 2026-11-07
+
+## Qué cuenta como abuso (términos de Banxico)
+
+- El monto que se muestra no coincide con el monto real.
+- La persona recibe un cobro que no pidió.
+- El nombre del beneficiario no coincide con el del comercio.
+- El dinero se deposita en la cuenta de un tercero.
+
+Obligaciones de quien usa la plataforma: cuidar sus certificados y contraseñas, mandar cobros **solo a clientes que lo autorizaron**, describir con verdad lo que vende, hacer las pruebas que pida Banxico, no hacer ingeniería inversa y cumplir sus obligaciones fiscales.
+
+**Recomendación para el producto:** el agente de IA nunca envía cobros por notificación a números que la persona no capturó y confirmó. El concepto debe describir de verdad lo que se cobra.
+
+Fuente: [Banco de México: Términos y condiciones de la Plataforma CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BC501F0E5-FC10-666F-C849-8C369FEE510F%7D.pdf) · consultado 2026-11-07
+
+## Requisitos de seguridad para apps (Circular 2/2025)
+
+El numeral 58a, fracción I, apartado C de la Circular 14/2017 exige procesos documentados a quien procese mensajes de cobro y órdenes CoDi en apps móviles:
+
+- instalación y actualización seguras;
+- cifrado;
+- autenticación;
+- manejo de sesiones;
+- control de sistemas modificados;
+- integridad de las apps.
+
+Además, el contrato de participación indirecta debe pedir usuario y contraseña para enviar órdenes (9a. Bis 4, fr. XI Bis). Los terceros desarrolladores pasan una certificación de seguridad informática ante Banxico.
+
+Fuente: [Banco de México: modificaciones a la Circular 14/2017](https://www.banxico.org.mx/marco-normativo/normativa-emitida-por-el-banco-de-mexico/circular-14-2017/%7B33EFD864-87F6-89BF-9F19-35E4D80E4CF4%7D.pdf) · [RegAlert: texto de la Circular 2/2025](https://regalert.today/document/circular-2-2025-modifies-circular-14-2017-3e69eebd-1140-46c9-8b49-6e43b16cb5b0/text) · [Banco de México: Guía de participación en CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BA21AA19F-C855-9E64-98A4-832D9A51B2B0%7D.pdf) · consultado 2026-11-07
+
+## Si algo sale mal: aclaraciones
+
+- **Pagué y no llegó:** si el pago se procesó, las dos apps lo notifican y el estado se puede ver en CoDi. Si no hubo aviso ni se refleja el dinero, hay que ir a la atención a clientes del banco, con el **folio** y la **fecha** de la operación.
+- **Contactos institucionales de CoDi:** 800 BANXICO (800 226 9426, opción 3), 800-POR-CODI (800 767 2634) y el correo de CoDi publicado en las preguntas frecuentes.
+- **No reconozco una operación:** se aclara con la **Unidad Especializada** del banco, como cualquier transferencia. CONDUSEF publica el directorio de esas unidades.
+- **Controversias:** los términos de Banxico dicen que las reclamaciones por transferencias se resuelven con el banco que envía y el que recibe; Banxico no responde por los bienes o servicios.
+
+Fuente: [codi.org.mx: Preguntas frecuentes](https://www.codi.org.mx/secundarias/preguntas_frecuentes.html) · [Banco de México: Términos y condiciones de la Plataforma CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BC501F0E5-FC10-666F-C849-8C369FEE510F%7D.pdf) · consultado 2026-11-07
+
+## Datos personales
+
+- Los datos de la Plataforma CoDi se rigen por el aviso de privacidad de Banxico, que tiene versión integral y simplificada, conforme a la Ley General de Protección de Datos Personales en Posesión de Sujetos Obligados.
+- Según los términos, a la app bancaria del cliente se pueden transferir datos de identificación, de contacto, bancarios y patrimoniales.
+- La app CoDi® Banxico tiene una página para eliminar datos. ⚪ No la abrí.
+
+**Recomendación para el producto:** no guardes el número celular ni el nombre de quien paga si no hace falta. En logs, registra solo IDs (`codiQrId`, `transactionId`), como ya pide [K03.5](../conocimiento/03-codi-y-api-pey.md).
+
+Fuente: [Banco de México: Aviso de privacidad de la Plataforma CoDi® (integral)](https://transparencia.banxico.org.mx/documentos/%7B0D1619CD-0515-8BC7-F33C-0A08CAFD686D%7D.pdf) · [Banco de México: Términos y condiciones de la Plataforma CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BC501F0E5-FC10-666F-C849-8C369FEE510F%7D.pdf) · [codi.org.mx: Eliminación de datos app CoDi® Banxico](https://www.codi.org.mx/secundarias/datos.html) · consultado 2026-11-07
+
+<!-- ===== FIN: codi/05-seguridad-y-proteccion.md ===== -->
+
+<!-- ===== INICIO: codi/06-regulacion-y-plazos.md ===== -->
+
+# 06 · Regulación y plazos
+
+> Redacción propia, consultada el 2026-11-07. No es asesoría legal. ⚪ = no confirmado en una fuente leída hoy. Los números de circular y de numeral van exactos.
+
+## Línea de tiempo
+
+| Fecha | Qué pasó | Fuente |
+|---|---|---|
+| 30-sep-2019 | Arranca CoDi | La Razón (⚪ no lo confirmé en Banxico) |
+| 21-feb-2025 | DOF publica la **Circular 2/2025**, que modifica la 14/2017 (firmada el 13-feb-2025) | RegAlert (⚪ el índice de RegAlert dice 20-feb) |
+| 24-mar-2025 | Entra en vigor la Circular 2/2025 (transitorio primero) | RegAlert |
+| 25-nov-2025 | Entran en vigor sus cambios a participación indirecta: 9a. Bis 4 y 9a. Bis 10 (transitorio cuarto) | RegAlert |
+| 23-feb-2026 | Mensajes de cobro de hasta **6,000 UDIS** (transitorio tercero) | Banxico y RegAlert |
+| 8-jun-2026 | Banxico firma las Circulares **9/2026** y **10/2026** | SIDOF |
+| 17-jun-2026 | DOF publica las dos circulares | SIDOF y DPL News |
+| 18-jun-2026 | Entra en vigor la 9/2026 (día hábil bancario siguiente a la publicación) | Banxico |
+| **14-dic-2026** | Vence el plazo para cumplir la 9/2026, la 10/2026 y las **Guías** | SIDOF |
+
+Fuente: [SIDOF: Circular 9/2026](https://sidof.segob.gob.mx/notas/docFuente/5790862) · [SIDOF: Circular 10/2026](https://sidof.segob.gob.mx/notas/docFuente/5790863) · [Banco de México: modificaciones a la Circular 14/2017](https://www.banxico.org.mx/marco-normativo/normativa-emitida-por-el-banco-de-mexico/circular-14-2017/%7B33EFD864-87F6-89BF-9F19-35E4D80E4CF4%7D.pdf) · [RegAlert: texto de la Circular 2/2025](https://regalert.today/document/circular-2-2025-modifies-circular-14-2017-3e69eebd-1140-46c9-8b49-6e43b16cb5b0/text) · [DPL News: Banxico publica guías (18-jun-2026)](https://dplnews.com/banxico-publica-guias-para-homologar-experiencia-de-usuario-en-transferencias-electronicas/) · [La Razón (30-sep-2025)](https://www.razon.com.mx/negocios/2025/09/30/acusan-falta-de-promocion-y-voluntad-en-impulso-de-codi/) · consultado 2026-11-07
+
+## Circular 14/2017: reglas del SPEI, en lo que toca a CoDi
+
+Es la regla base de CoDi. Numerales clave según el texto vigente de Banxico, que muestra cada cambio:
+
+- **9a. Bis:** obligaciones CoDi de los participantes.
+  - **Fr. III, inc. a):** procesar mensajes de cobro y órdenes de transferencia CoDi conforme a las Guías (cambio de la 9/2026). Los programas deben tener las características del **Apéndice AD** del Manual.
+  - **Fr. IV, inc. b):** permitir mensajes de cobro de hasta 6,000 UDIS (antes 1,500).
+  - **Fr. V:** recibir mensajes 24/7, con o sin monto; "Folio CoDi"; posponer mensajes.
+- **9a. Bis 4 y 9a. Bis 10:** participación indirecta y transferencias entre participantes indirectos que vengan de mensajes de cobro. Desde la 2/2025 deben incluir el RFC o la CURP de quien envía.
+- **19a, fr. I:** plazos de acreditación (5 segundos; ver ⚪ en [02](../codi/02-como-funciona.md)).
+- **58a, fr. I, apdo. C:** seguridad de las apps que procesan CoDi.
+- **83a, fr. I, inc. i):** campo "Folio del Esquema Cobro Digital" en las transferencias CoDi.
+
+⚪ Leí el documento de Banxico con los cambios, no la versión compilada completa. Las definiciones formales ("Mensaje de Cobro", "Orden de Transferencia CoDi") y el Apéndice AD no venían en el extracto.
+
+Fuente: [Banco de México: modificaciones a la Circular 14/2017](https://www.banxico.org.mx/marco-normativo/normativa-emitida-por-el-banco-de-mexico/circular-14-2017/%7B33EFD864-87F6-89BF-9F19-35E4D80E4CF4%7D.pdf) · [RegAlert: texto de la Circular 2/2025](https://regalert.today/document/circular-2-2025-modifies-circular-14-2017-3e69eebd-1140-46c9-8b49-6e43b16cb5b0/text) · consultado 2026-11-07
+
+## Circular 9/2026 (modifica la 14/2017; dirigida a participantes del SPEI)
+
+- **Objetivo:** que las transferencias desde el celular tengan una experiencia de usuario homologada: intuitiva, fácil y rápida.
+- **2a., fr. XXVII Quáter:** agrega la definición de **"Guías"**. Las fracciones que seguían se recorren.
+- **7a.:** Banxico, como Administrador, publica las Guías con fecha, versión y entrada en vigor. Avisa los cambios con anticipación y conserva las versiones anteriores.
+- **9a. Bis, fr. III, inc. a):** los mensajes de cobro y las órdenes CoDi se procesan conforme a las Guías.
+- **9a. Bis 10, fr. I; 10a., fr. II y párrafo segundo; 71a., fr. V:** formularios, identificadores y solicitudes de envío desde el celular también siguen las Guías.
+- **98a.:** ajusta qué comunicaciones van por correo al Centro de Atención.
+- **Transitorios:** entra en vigor el día hábil bancario siguiente a su publicación. Participantes y participantes indirectos tienen **hasta el 14-dic-2026** para cumplir la circular y las Guías.
+- **No menciona** DiMo, QR, montos ni tiempos en segundos.
+
+Fuente: [SIDOF: Circular 9/2026](https://sidof.segob.gob.mx/notas/docFuente/5790862) · [DOF: Circular 9/2026](https://dof.gob.mx/nota_detalle_popup.php?codigo=5790862) · consultado 2026-11-07
+
+## Circular 10/2026 (modifica la 3/2012; dirigida a instituciones de crédito)
+
+- **Destinatarios:** instituciones de crédito, sofomes reguladas con vínculos patrimoniales con bancos y la Financiera Nacional de Desarrollo Agropecuario, Rural, Forestal y Pesquero.
+- **Art. 17, párrafo tercero:** solo ofrecen transferencias desde el celular las instituciones que participan en un sistema de transferencias del mismo día, y deben cumplir las Guías sin importar el canal.
+- **Art. 17 Ter, fr. II Bis:** cumplir las Guías.
+- **Art. 17 Ter, fr. III:** a petición del titular, las cuentas de **niveles 2, 3 y 4** deben asociarse a los **10 dígitos de un celular** para recibir transferencias. En nivel 1 es opcional.
+- **Art. 17 Ter, fr. IV:** una orden puede identificar la cuenta con esos 10 dígitos más el banco (3 dígitos o nombre), además de la CLABE o la tarjeta de débito de 16 dígitos.
+- **Transitorios:** entra en vigor el día hábil bancario siguiente a su publicación en el DOF (17-jun-2026). Hay plazo **hasta el 14-dic-2026**.
+- **No menciona** CoDi ni DiMo por nombre.
+
+Fuente: [SIDOF: Circular 10/2026](https://sidof.segob.gob.mx/notas/docFuente/5790863) · [SIDOF: ficha de la Circular 10/2026](https://sidof.segob.gob.mx/notas/5790863) · consultado 2026-11-07
+
+## Las Guías de homologación
+
+- **Nombre:** "Guías para la homologación de la experiencia de usuario en transferencias electrónicas de fondos a través de dispositivos móviles".
+- **Qué fijan:** especificaciones técnicas para que la interacción y la navegación sean homogéneas, con base en usabilidad, comunicación y estandarización.
+- **Etapas:** según DPL News, los requisitos mínimos se ordenan en cuatro: **inicio, ingreso de información, consistencia e integridad, y notificación**.
+- **Impacto:** DPL News cita a Banxico: las medidas buscan beneficiar a más de 80 millones de personas que transfieren dinero en forma digital.
+- **Contradicción:** DPL News llama "entrada en vigor" al 14-dic-2026. El texto de las circulares dice que entran en vigor al día hábil siguiente a su publicación y que el 14-dic es la **fecha límite para cumplir**.
+- ⚪ No encontré hoy la URL del documento de las Guías en banxico.org.mx ni leí su contenido. Si tu producto promete algo sobre las Guías, búscalas primero.
+
+Fuente: [SIDOF: Circular 9/2026](https://sidof.segob.gob.mx/notas/docFuente/5790862) · [DPL News: Banxico publica guías (18-jun-2026)](https://dplnews.com/banxico-publica-guias-para-homologar-experiencia-de-usuario-en-transferencias-electronicas/) · consultado 2026-11-07
+
+## Otras normas y la ley de pagos digitales
+
+- **Circular 13/2017, Capítulo III Bis:** registro de terceros desarrolladores, citado en la guía de participación de Banxico. ⚪ No la leí.
+- **Ley de Economía Digital para Pagos Digitales y Electrónicos (2026):** no menciona CoDi ni DiMo. Lo esencial y lo que no se puede afirmar está en [K00.4](../conocimiento/00-bases-del-concurso.md).
+- **Para el pitch:** "Antes del 14 de diciembre de 2026, los bancos deben homologar en sus apps el pago de mensajes de cobro CoDi y las transferencias por celular" es cierto (9/2026 y 10/2026). "CoDi será obligatorio para los comercios" no lo dice ninguna de estas normas.
+
+Fuente: [Banco de México: Guía de participación en CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BA21AA19F-C855-9E64-98A4-832D9A51B2B0%7D.pdf) · [SIDOF: Circular 9/2026](https://sidof.segob.gob.mx/notas/docFuente/5790862) · [SIDOF: Circular 10/2026](https://sidof.segob.gob.mx/notas/docFuente/5790863) · consultado 2026-11-07
+
+<!-- ===== FIN: codi/06-regulacion-y-plazos.md ===== -->
+
+<!-- ===== INICIO: codi/07-cifras-de-uso.md ===== -->
+
+# 07 · Cifras de uso de CoDi (con fecha)
+
+> Consultado el 2026-11-07. Cada cifra lleva su fecha de corte. ⚪ = interpretación no confirmada. Para el pitch, cita la fuente y la fecha tal cual.
+
+## Últimos datos diarios de Banxico (SIE, corte 20-oct-2026)
+
+| Cuadro | 18-oct-2026 | 19-oct-2026 | 20-oct-2026 (preliminar) | Qué mide |
+|---|---|---|---|---|
+| **CF881** Cuentas validadas | 7,154 | 8,220 | 7,988 | Cuentas **nuevas** validadas ese día (flujo) |
+| **CF884** Operaciones | 8,273 | 14,298 | 11,375 | Operaciones CoDi del día (enviadas = recibidas) |
+| **CF885** Monto procesado | $5,057,935 | $13,926,706 | $9,892,381 | Pesos del día (no miles) |
+| **CF882** Cuentas con al menos un pago | 2,910,134 | 2,911,718 | 2,913,322 | ⚪ Parece acumulado: sube poco cada día |
+| **CF882** Cuentas con al menos un cobro | 1,141,070 | 1,141,303 | 1,141,539 | ⚪ Igual |
+
+- **Cálculo propio:** el ticket promedio, monto entre operaciones, fue de $611.38 el 18-oct, $974.03 el 19-oct y $869.66 el 20-oct-2026.
+- **Notas de Banxico:**
+  - El último día de cada cuadro es preliminar y puede corregirse.
+  - CF881 solo cuenta cuentas asociadas a un dispositivo enrolado (desde el 8-jun-2020) y, desde el 25-ago-2020, solo altas nuevas; las cifras negativas son cuentas que dejaron de estar validadas.
+  - CF882 se calcula por día operativo SPEI, de 18:00 a 18:00 h.
+- **Por banco (20-oct-2026):** en operaciones **enviadas**, BBVA lidera con 2,948, seguido de Banco Azteca con 2,795. En **recibidas**, lidera HSBC con 3,665, seguido de BBVA con 2,532 e Inbursa con 2,516.
+- ⚪ La consulta solo mostró tres días. Para series largas, cambia el periodo en el SIE o descarga el Excel de codi.org.mx.
+
+Fuente: [Banxico SIE: CF881 Cuentas validadas](https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=21&accion=consultarCuadro&idCuadro=CF881&locale=es) · [CF882](https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=21&accion=consultarCuadro&idCuadro=CF882&locale=es) · [CF884 Operaciones](https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=21&accion=consultarCuadro&idCuadro=CF884&locale=es) · [CF885 Monto](https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=21&accion=consultarCuadro&idCuadro=CF885&locale=es) · consultado 2026-11-07
+
+## Acumulados y contexto
+
+| Dato | Cifra | Corte | Fuente |
+|---|---|---|---|
+| Cuentas validadas acumuladas | 2,643,974 | 23-may-2020 | Nota del cuadro CF881 (Banxico) |
+| Cuentas validadas acumuladas | 21.79 millones | sep-2025 | La Razón, con datos de Banxico |
+| Cuentas que han pagado al menos una vez | 2.47 millones | ⚪ sin fecha en la nota (2025) | La Razón |
+| Cuentas que han recibido al menos un pago | 1.08 millones | ⚪ sin fecha en la nota (2025) | La Razón |
+
+- **Lectura:** se validaron más de 21 millones de cuentas, pero solo unos 2.9 millones han pagado y unos 1.1 millones han cobrado (CF882, oct-2026). Hay muchas cuentas registradas y poco uso. Esto es lo que un producto puede atacar: hacer más fácil cobrar.
+- La Razón dice que las validaciones van a la baja.
+
+Fuente: [Banxico SIE: CF881](https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=21&accion=consultarCuadro&idCuadro=CF881&locale=es) · [La Razón: Acusan falta de promoción y voluntad en impulso de CoDi (30-sep-2025)](https://www.razon.com.mx/negocios/2025/09/30/acusan-falta-de-promocion-y-voluntad-en-impulso-de-codi/) · consultado 2026-11-07
+
+## Contradicción: la tabla de "cifras estimadas" en la página de Banxico
+
+- La página de CoDi de Banxico muestra una tabla rotulada "cifras estimadas":
+  - dic-2019: **1,389** miles de usuarios registrados y **1,886** miles de transferencias;
+  - sep-2020: **18,121** miles de usuarios y **27,934** miles de transferencias.
+- La Razón (2025) dice que las metas del lanzamiento eran **18.1 millones de usuarios en 2020** y **28 millones de transferencias** un año después, y que **no se cumplieron**.
+- ⚪ Todo indica que la tabla de Banxico son proyecciones, no datos observados. **No la uses como uso real.** Para uso real, usa los cuadros del SIE de arriba.
+
+Fuente: [Banco de México: CoDi® Cobro Digital](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) · [La Razón (30-sep-2025)](https://www.razon.com.mx/negocios/2025/09/30/acusan-falta-de-promocion-y-voluntad-en-impulso-de-codi/) · consultado 2026-11-07
+
+## Dónde actualizar las cifras
+
+- **Cuadros SIE:**
+  - CF881: cuentas validadas.
+  - CF882: cuentas con al menos una transacción.
+  - CF883: apps de participantes enrolados.
+  - CF884: operaciones.
+  - CF885: monto.
+- **Excel de cuentas validadas por cada mil habitantes**, por entidad, acumulado al cierre de cada trimestre: ver la página de estadísticas de codi.org.mx.
+- **Recomendación:** si la app muestra una cifra de CoDi, guárdala con su fecha de corte y su cuadro, por ejemplo: "11,375 operaciones el 20-oct-2026 (Banxico, CF884, preliminar)".
+
+Fuente: [codi.org.mx: Estadísticas](https://www.codi.org.mx/secundarias/estadisticas.html) · [Banxico: Excel de cuentas validadas por entidad](https://www.banxico.org.mx/sistemas-de-pago/d/%7BE50C9EF7-B0D3-99A9-0B62-F95B57CF0529%7D.xlsx) · [Banxico SIE: CF883](https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=21&accion=consultarCuadro&idCuadro=CF883&locale=es) · consultado 2026-11-07
+
+<!-- ===== FIN: codi/07-cifras-de-uso.md ===== -->
+
+<!-- ===== INICIO: codi/08-preguntas-frecuentes.md ===== -->
+
+# 08 · Preguntas frecuentes
+
+> Respuestas con redacción propia, consultadas el 2026-11-07. La primera parte resume las preguntas oficiales de codi.org.mx; la segunda responde las que surgen al construir con pey.
+
+## Preguntas oficiales (resumen)
+
+| Pregunta | Respuesta corta |
+|---|---|
+| ¿En qué horario funciona? | Las 24 horas, todos los días del año |
+| ¿Necesito Internet? | Sí, datos móviles o Wi-Fi |
+| ¿Cobra comisión? | No, sin importar el monto |
+| ¿Puedo pagar con tarjeta de crédito? | CoDi usa una **cuenta de depósito** (con o sin tarjeta de débito). Se valida con CLABE (18 dígitos), tarjeta de débito (16) o celular asociado |
+| ¿Hay devoluciones? | Sí. Quien recibió el pago puede devolverlo completo o en parte |
+| Mi app tiene CoDi pero no me deja usarlo | Hay que llamar al banco |
+| Pagué y no llegó | Si se procesó, las dos apps lo notifican. Si no, ve a atención a clientes del banco con el folio y la fecha; también hay líneas de Banxico (ver [05](../codi/05-seguridad-y-proteccion.md)) |
+| No reconozco una operación | Se aclara con la Unidad Especializada del banco (directorio de CONDUSEF) |
+| ¿Para qué sirve la app CoDi® Banxico? | Para cobrar desde el celular registrando la cuenta donde llegará el dinero |
+
+Fuente: [codi.org.mx: Preguntas frecuentes](https://www.codi.org.mx/secundarias/preguntas_frecuentes.html) · consultado 2026-11-07
+
+## Preguntas de quien construye
+
+**¿Necesito ser banco o certificarme para cobrar con CoDi en mi app?**
+No. Un tercero desarrollador, como pey, genera los mensajes de cobro por ti ([03](../codi/03-actores-y-participantes.md), [11](../codi/11-como-encaja-pey.md)).
+
+**¿Puedo hacer que mi app *pague* con CoDi?**
+No. Solo los participantes del SPEI ofrecen la función de pago. Tu app cobra y quien paga autoriza en la app de su banco.
+
+**¿Cuál es el monto máximo?**
+Desde el 23-feb-2026, los bancos deben permitir mensajes de cobro de hasta 6,000 UDIS, o más si el banco quiere. pey publica sus propios límites: push de hasta 1,000,000 y QR sin máximo publicado ([pey/11](../pey/11-errores-y-limites.md)). Además, tu servidor impone su propio tope (`MAX_MONTO_MXN`).
+
+**¿El dinero pasa por pey o por mi app?**
+No debe pasar. Banxico prohíbe a terceros las cuentas concentradoras: el dinero va directo a la cuenta del beneficiario ([03](../codi/03-actores-y-participantes.md)).
+
+**¿Puedo cobrar un extra por pagar con CoDi?**
+La guía de Banxico pide a los terceros desarrolladores no poner recargos por pagar con CoDi ni cobrar por la mensajería. **Recomendación:** no lo hagas.
+
+**¿Hay contracargos?**
+No. Cada pago lo autoriza quien paga. Sí puede haber devoluciones que inicia quien cobró.
+
+**¿Cuánto tarda?**
+Segundos. La regla de acreditación pide 5 segundos en ciertos casos ([02](../codi/02-como-funciona.md)). ⚪ El tiempo real depende del banco.
+
+**¿Cómo sé que me pagaron?**
+Por la notificación de CoDi en la app del banco. En tu producto, por pey: `PAID` en la consulta o el webhook firmado ([pey/07](../pey/07-api-transacciones.md), [pey/09](../pey/09-webhooks.md)).
+
+**¿Qué pasa el 14 de diciembre de 2026?**
+Vence el plazo para que bancos y participantes homologuen sus apps (Circulares 9/2026 y 10/2026). Desde entonces, las cuentas de nivel 2 a 4 deben poder recibir transferencias con el número celular si el titular lo pide. La CLABE sigue funcionando ([06](../codi/06-regulacion-y-plazos.md)).
+
+**¿El "push" de pey es DiMo?**
+No. `POST /codi/pn` manda un **mensaje de cobro CoDi** al celular de quien paga. DiMo es para **enviar** dinero a un número celular ([10](../codi/10-codi-spei-dimo.md)).
+
+Fuente: [Banco de México: Guía de participación en CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BA21AA19F-C855-9E64-98A4-832D9A51B2B0%7D.pdf) · [Banco de México: modificaciones a la Circular 14/2017](https://www.banxico.org.mx/marco-normativo/normativa-emitida-por-el-banco-de-mexico/circular-14-2017/%7B33EFD864-87F6-89BF-9F19-35E4D80E4CF4%7D.pdf) · [SIDOF: Circular 10/2026](https://sidof.segob.gob.mx/notas/docFuente/5790863) · consultado 2026-11-07
+
+<!-- ===== FIN: codi/08-preguntas-frecuentes.md ===== -->
+
+<!-- ===== INICIO: codi/09-marca-logotipos-y-material.md ===== -->
+
+# 09 · Marca, logotipos y material de difusión
+
+> Redacción propia, consultada el 2026-11-07. ⚪ = no confirmado en una fuente leída hoy.
+
+## La marca CoDi®
+
+- **CoDi** es marca de Banco de México. Los términos de la plataforma dan una **licencia gratuita, no exclusiva, intransferible y revocable** de la marca, en la **clase 36 de Niza**, en forma nominativa y como logotipo.
+- **Reglas:**
+  - no modificar la marca;
+  - usarla con la imagen que proporciona Banxico;
+  - no ponerla junto a contenidos ofensivos, políticos o religiosos, entre otras restricciones.
+- **Revocación y defensa:** Banxico puede revocar la licencia sin aviso, y solo Banxico ejerce las acciones legales para proteger la marca.
+- Los comercios desarrolladores y los terceros desarrolladores firman con Banxico un **convenio de licencia de uso de marca** como parte de su proceso.
+- **Recomendación de redacción:** escribe "CoDi®", con C y D mayúsculas y el símbolo ® al menos en la primera mención, como lo hacen los sitios de Banxico. Igual con "SPEI®".
+
+Fuente: [Banco de México: Términos y condiciones de la Plataforma CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BC501F0E5-FC10-666F-C849-8C369FEE510F%7D.pdf) · [Banco de México: Guía de participación en CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BA21AA19F-C855-9E64-98A4-832D9A51B2B0%7D.pdf) · consultado 2026-11-07
+
+## Logotipos: de dónde tomarlos
+
+- ⚪ En las páginas públicas de Banxico y codi.org.mx que leí no encontré una descarga pública del logotipo CoDi ni un manual de identidad.
+- **Para el prototipo:** usa los logos **pey + CoDi** que pey publica en su página de recursos de marca ([pey/12](../pey/12-recursos-de-marca.md)). pey es el tercero que tiene la relación con Banxico. ⚪ Si dudas del uso permitido, pregunta a los mentores de pey.
+- **No hagas** tu propia versión del logo ni lo deformes: la licencia lo prohíbe.
+
+Fuente: [Banco de México: CoDi® Cobro Digital](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) · [Banco de México: Términos y condiciones de la Plataforma CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BC501F0E5-FC10-666F-C849-8C369FEE510F%7D.pdf) · consultado 2026-11-07
+
+## Material de difusión oficial (PDF y video)
+
+Banxico enlaza este material desde su página de CoDi. ⚪ Solo se abrió el de participación; los demás se listan sin leer su contenido.
+
+| Material | Para quién |
+|---|---|
+| [Presentación "CoDi®: la nueva forma de pagar en México"](https://www.banxico.org.mx/publicaciones-y-prensa/presentaciones/%7B1CA33D18-A38C-EE29-41BF-6302A641D617%7D.pdf) | Público general (presentación institucional) |
+| [Cobra con CoDi® desde tu institución financiera](https://www.banxico.org.mx/sistemas-de-pago/d/%7B81FB2D16-65D3-E5E0-A677-645B5432A7E0%7D.pdf) | Quien cobra |
+| [Cobra con la app CoDi® Banxico](https://www.banxico.org.mx/sistemas-de-pago/d/%7B02A0AA3D-449C-CD59-7C4D-6D6131002AD3%7D.pdf) | Quien cobra |
+| [Paga con CoDi® desde tu institución financiera](https://www.banxico.org.mx/sistemas-de-pago/d/%7BE645D1AD-2502-0FB2-3A36-0EEB7962DAA6%7D.pdf) | Quien paga |
+| [Paga con CoDi® a distancia desde tu institución financiera](https://www.banxico.org.mx/sistemas-de-pago/d/%7B650AD156-3CCC-C2CC-8278-B6F50804B691%7D.pdf) | Quien paga |
+| [Tiempos históricos de entrega de avisos de abono](https://www.banxico.org.mx/sistemas-de-pago/d/%7B593E43FC-11D3-593E-9B69-96A8B862D70B%7D.pdf) | Análisis por banco |
+| [Términos y condiciones de la Aplicación CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7B39D5CB27-08ED-44C8-807F-BA11A75D237C%7D.pdf) | Usuarios de la app CoDi® Banxico |
+| [Video institucional](https://www.youtube.com/embed/O98tHixAWLc) | Público general |
+
+Fuente: [Banco de México: CoDi® Cobro Digital](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) · consultado 2026-11-07
+
+<!-- ===== FIN: codi/09-marca-logotipos-y-material.md ===== -->
+
+<!-- ===== INICIO: codi/10-codi-spei-dimo.md ===== -->
+
+# 10 · CoDi, SPEI y DiMo comparados
+
+> Redacción propia, consultada el 2026-11-07. ⚪ = no confirmado en una fuente leída hoy.
+
+## Tabla comparativa
+
+| | **SPEI®** | **CoDi®** (Cobro Digital) | **DiMo** (Dinero Móvil) |
+|---|---|---|---|
+| Qué es | El sistema de transferencias interbancarias de Banxico; sobre él corren los otros dos | Plataforma de **cobro**: quien recibe pide el pago | Esquema para **enviar** dinero con el número celular de quien recibe |
+| Quién inicia | Quien envía | **Quien cobra** genera el mensaje de cobro; quien paga lo autoriza | **Quien envía** |
+| Cómo se identifica el destino | CLABE o tarjeta de débito | QR, NFC o notificación al celular de quien **paga** | 10 dígitos del celular de quien **recibe**, más su banco |
+| Dónde se usa | App o banca en línea | App del banco (pagar); app del banco, app CoDi® Banxico o software de terceros como pey (cobrar) | App del banco |
+| Desde cuándo | ⚪ no lo revisé | 30-sep-2019 (La Razón) | Disponible desde fines de feb-2023, según la gobernadora de Banxico citada por Expansión |
+| Comisión | ⚪ depende del banco | Sin comisión (Banxico) | Sin comisión (Publimetro, 2026) ⚪ no confirmado en Banxico |
+| Horario | ⚪ | 24/7 | ⚪ |
+| ¿Sirve para un comercio? | Sí, pero hay que dictar la CLABE y conciliar a mano | **Sí: está hecho para cobrar**, con monto, concepto y confirmación | Para recibir envíos, sin mensaje de cobro |
+
+Fuente: [El Financiero: SPEI, CoDi y DiMo, diferencias (13-ago-2023)](https://www.elfinanciero.com.mx/mis-finanzas/2023/08/13/spei-codi-y-dimo-banxico-diferencias-en-herramientas-de-transferencias-elecronicas/) · [Expansión: DiMo de Banxico ya está disponible (28-abr-2023)](https://expansion.mx/finanzas-personales/2023/04/28/dimo-de-banxico-ya-esta-disponible-como-funciona) · [Publimetro: CoDi y DiMo mueven tu dinero (jun-2026)](https://www.publimetro.com.mx/noticias/2026/06/29/aun-pagas-en-efectivo-codi-y-dimo-mueven-tu-dinero-desde-tu-celular/) · [Banco de México: CoDi® Cobro Digital](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) · consultado 2026-11-07
+
+## DiMo y las Circulares de 2026
+
+- Las Circulares 9/2026 y 10/2026 **no nombran a DiMo**.
+- La 10/2026 obliga a las instituciones de crédito a asociar, a petición del titular, los **10 dígitos de un celular** a las cuentas de nivel 2, 3 y 4 para recibir transferencias, con plazo al **14-dic-2026**. Ese es el mecanismo que la prensa asocia con DiMo. ⚪ La relación formal entre DiMo y esa regla no la vi en un texto de Banxico.
+- La Circular 2/2025 ya preveía solicitudes de envío en las que quien envía solo indica los 10 dígitos de un celular (numerales 9a. Bis 4 y 58a de la 14/2017).
+- ⚪ No encontré hoy una página oficial de Banxico dedicada a DiMo. Las fuentes de DiMo de este archivo son prensa.
+
+Fuente: [SIDOF: Circular 10/2026](https://sidof.segob.gob.mx/notas/docFuente/5790863) · [SIDOF: Circular 9/2026](https://sidof.segob.gob.mx/notas/docFuente/5790862) · [RegAlert: texto de la Circular 2/2025](https://regalert.today/document/circular-2-2025-modifies-circular-14-2017-3e69eebd-1140-46c9-8b49-6e43b16cb5b0/text) · consultado 2026-11-07
+
+## Confusiones comunes al construir
+
+- **"Push" de pey ≠ DiMo.** `POST /codi/pn` manda un *mensaje de cobro* CoDi al celular de quien **paga**; esa persona autoriza. En DiMo, el celular es el de quien **recibe** y quien envía no recibe ninguna solicitud ([pey/04](../pey/04-api-codi-qr-y-push.md)).
+- **CoDi también es SPEI.** Cuando se acepta un cobro CoDi, la transferencia viaja por SPEI o dentro del mismo banco. Por eso aparece en el estado de cuenta como una transferencia, con su folio.
+- **Para un comercio, CoDi da algo que DiMo no:** el monto y el concepto los fija quien cobra, y la confirmación llega por pey (consulta o webhook). Así se concilia sin capturar nada a mano.
+
+Fuente: [Banco de México: CoDi® Cobro Digital](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) · [Banco de México: Términos y condiciones de la Plataforma CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BC501F0E5-FC10-666F-C849-8C369FEE510F%7D.pdf) · [pey: documentación en Markdown](../pey/README.md) · consultado 2026-11-07
+
+<!-- ===== FIN: codi/10-codi-spei-dimo.md ===== -->
+
+<!-- ===== INICIO: codi/11-como-encaja-pey.md ===== -->
+
+# 11 · Cómo encaja pey
+
+> Redacción propia, consultada el 2026-11-07. La documentación técnica de pey está en [pey/README.md](../pey/README.md); la síntesis con código probado, en [K03](../conocimiento/03-codi-y-api-pey.md).
+
+## pey en el ecosistema CoDi
+
+- pey aparece en la lista de **terceros desarrolladores** de codi.org.mx, con cinco comercios enrolados.
+- Un tercero desarrollador hace software de **cobro**, se registra y certifica ante Banxico y no puede usar cuentas concentradoras ([03](../codi/03-actores-y-participantes.md)). Eso cuadra con lo que pey dice de sí misma: el dinero llega directo a la cuenta del comercio ([K03.2](../conocimiento/03-codi-y-api-pey.md)).
+- **Lo que pey hace por ti:** generar el mensaje de cobro (QR o notificación), hablar con la plataforma CoDi de Banxico y avisarte cuando se pagó. **Lo que no hace:** la función de pago, que es de los bancos.
+
+Fuente: [codi.org.mx: Contacta a tu desarrollador](https://www.codi.org.mx/secundarias/desarrolladores.html) · [Banco de México: Guía de participación en CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BA21AA19F-C855-9E64-98A4-832D9A51B2B0%7D.pdf) · [pey: documentación en Markdown](../pey/README.md) · consultado 2026-11-07
+
+## Conceptos de CoDi → API de pey
+
+| Concepto CoDi (Banxico) | En la API de pey | Dónde leer |
+|---|---|---|
+| Mensaje de cobro por QR | `POST /codi/qr` → `id`, `qrString`, `qrImage` | [pey/04](../pey/04-api-codi-qr-y-push.md) |
+| QR sin monto (quien paga escribe la cantidad) | `amount: 0` en `POST /codi/qr` | [pey/04](../pey/04-api-codi-qr-y-push.md) |
+| Mensaje de cobro por notificación al celular | `POST /codi/pn` con `phoneNumber` de 10 dígitos | [pey/04](../pey/04-api-codi-qr-y-push.md) |
+| Folio CoDi | `codiId` (folio de 20 dígitos) en la respuesta de la push. ⚪ No verifiqué que sea el mismo "Folio CoDi" del Apéndice AD | [pey/04](../pey/04-api-codi-qr-y-push.md) |
+| Confirmación de pago | `status: PAID` en `/transaction/...` o webhook `codi.qr.payment_received` / `codi.pn.payment_received` | [pey/07](../pey/07-api-transacciones.md) · [pey/09](../pey/09-webhooks.md) |
+| Validación de la cuenta del beneficiario | `POST /bank-account` → `codiStatus` `PENDING` → `PROCESSING` → `ACTIVE` | [pey/05](../pey/05-api-cuentas-bancarias.md) |
+| Abono directo al beneficiario (sin cuenta concentradora) | `bankAccountId` por comercio | [pey/05](../pey/05-api-cuentas-bancarias.md) |
+| Devolución (la inicia quien cobró) | No hay endpoint; se hace desde la app bancaria del titular | [K03.4](../conocimiento/03-codi-y-api-pey.md) |
+| NFC | No aparece entre las 11 rutas de la API de pey | [pey/README](../pey/README.md) |
+| Límite de 6,000 UDIS por mensaje (regla de bancos) | pey no lo menciona. Pon tu propio tope en el servidor | [02](../codi/02-como-funciona.md) |
+
+Fuente: [pey: documentación en Markdown](../pey/README.md) · [Banco de México: modificaciones a la Circular 14/2017](https://www.banxico.org.mx/marco-normativo/normativa-emitida-por-el-banco-de-mexico/circular-14-2017/%7B33EFD864-87F6-89BF-9F19-35E4D80E4CF4%7D.pdf) · consultado 2026-11-07
+
+## Reglas de Banxico que tu producto debe respetar
+
+1. **Sin recargo por pagar con CoDi** y sin cobrar por la mensajería: así lo pide la guía de participación a los terceros desarrolladores.
+2. **Sin cuenta concentradora:** cada comercio cobra a su propia CLABE (`bankAccountId`).
+3. **Cobrar solo a quien lo autorizó:** no mandes notificaciones de cobro a números que la persona no confirmó. Mandar cobros no pedidos es abuso según los términos de Banxico.
+4. **Concepto verdadero:** que el nombre y la descripción coincidan con lo que se cobra.
+5. **El pago lo confirma el banco:** muestra "Pagado" solo con `PAID` o con un webhook de firma válida.
+6. **Marca:** usa los logos pey + CoDi de [pey/12](../pey/12-recursos-de-marca.md) sin modificarlos.
+
+Fuente: [Banco de México: Guía de participación en CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BA21AA19F-C855-9E64-98A4-832D9A51B2B0%7D.pdf) · [Banco de México: Términos y condiciones de la Plataforma CoDi®](https://www.banxico.org.mx/sistemas-de-pago/d/%7BC501F0E5-FC10-666F-C849-8C369FEE510F%7D.pdf) · consultado 2026-11-07
+
+## Argumentos de pitch con fuente
+
+- CoDi cobra sin comisión, 24/7, con el dinero en segundos y sin contracargos (Banxico; [01](../codi/01-que-es-codi.md)).
+- Hay más de 21 millones de cuentas validadas (sep-2025), pero solo unos 2.9 millones de cuentas han pagado y unos 1.1 millones han cobrado (oct-2026). El hueco está en la experiencia de quien cobra ([07](../codi/07-cifras-de-uso.md)).
+- El 20-oct-2026 se hicieron 11,375 operaciones CoDi por $9.89 millones, cifra preliminar del SIE de Banxico ([07](../codi/07-cifras-de-uso.md)).
+- Antes del 14-dic-2026, los bancos deben homologar en sus apps el pago de mensajes de cobro CoDi ([06](../codi/06-regulacion-y-plazos.md)).
+
+Fuente: [Banco de México: CoDi® Cobro Digital](https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html) · [Banxico SIE: CF884](https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=21&accion=consultarCuadro&idCuadro=CF884&locale=es) · [SIDOF: Circular 9/2026](https://sidof.segob.gob.mx/notas/docFuente/5790862) · consultado 2026-11-07
+
+<!-- ===== FIN: codi/11-como-encaja-pey.md ===== -->
 
 <!-- ===== INICIO: AGENTS.md ===== -->
 
@@ -3128,15 +4335,18 @@ Construir, para el *DevDay Exchange Community Hackathon: Mexico City* (sábado 7
 José participa solo: él decide, aprueba y presenta. Tú construyes y verificas.
 
 ## 2. Cómo usar la base de conocimiento
-1. Empieza por `conocimiento/00-bases-del-concurso.md` (K00): todo lo que pide el concurso en un solo lugar. El índice de preguntas está en `conocimiento/INDICE.md`.
+1. Empieza por `docs/PROYECTO.md` (objetivo del hackatón y definición sistémica del proyecto) y `conocimiento/00-bases-del-concurso.md` (K00: todo lo que pide el concurso). El índice de preguntas está en `conocimiento/INDICE.md`.
 2. Lee solo lo que tu tarea necesita:
 
 | Si tu tarea toca… | Lee |
 |---|---|
+| Objetivo, requisitos, actores, flujos y restricciones del proyecto | `docs/PROYECTO.md` |
 | Qué pide el concurso, fechas, entrega y premios | K00 y K01 |
-| Organizadores y qué buscan | K02 |
-| Cobros CoDi, QR, webhooks y errores de pey | K03 y la carpeta `pey/` (empieza en `pey/README.md`) |
+| Organizadores y qué buscan (incluido pey) | K02 |
+| Cobros con pey: QR, push, ligas, webhooks, errores y marca | K03 y la carpeta `pey/` (empieza en `pey/README.md`) |
+| Qué es CoDi, cómo funciona, reglas de Banxico y cifras | La carpeta `codi/` (empieza en `codi/README.md`) |
 | Cómo se evalúa y qué resta puntos | K08 |
+| Cómo trabajar con Claude Code en Codespaces | `docs/GUIA-CODESPACES.md` y `.claude/commands/` |
 
 3. En la descripción del PR o del commit, cita los IDs que usaste ("según K03.4…").
 4. Lo marcado ⚪ no está verificado. Si necesitas un dato que no está (endpoint, campo, nombre de modelo de OpenAI, precio), **no lo inventes**: consulta la documentación oficial; si no puedes, deja `TODO(⚪): …` visible en el código y dilo.
@@ -3161,7 +4371,8 @@ José participa solo: él decide, aprueba y presenta. Tú construyes y verificas
 
 ## 6. Forma de trabajar
 - Tareas pequeñas y verificables. Las tareas en paralelo trabajan en archivos distintos.
-- No modifiques `conocimiento/`, `pey/` ni `fuentes/` salvo que la tarea lo pida. Si agregas un dato, agrega su fuente en la tabla "## Fuentes" del archivo y corre `python3 scripts/unir_registros.py` y `python3 scripts/verificar_conocimiento.py`.
+- Se programa con Claude Code dentro de GitHub Codespaces, con prompts; las fases tienen comandos en `.claude/commands/` (`/arrancar`, `/prd`, `/construir`, `/verificar`, `/desplegar`, `/entregar`).
+- No modifiques `conocimiento/`, `pey/`, `codi/` ni `fuentes/` salvo que la tarea lo pida. Si agregas un dato, agrega su fuente en la tabla "## Fuentes" del archivo y corre `python3 scripts/unir_registros.py` y `python3 scripts/verificar_conocimiento.py`.
 - Antes de terminar: corre las pruebas y revisa que el diff no tenga llaves.
 - Avance, decisiones y bloqueos: `BITACORA.md`.
 

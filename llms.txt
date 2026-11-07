@@ -1,12 +1,13 @@
 # HackathonOpenAi
 
-> Base de conocimiento en Markdown del DevDay Exchange Community Hackathon: Mexico City (sábado 7 de noviembre de 2026, UTOPÍA Elena Poniatowska Amor, CDMX) y documentación de pey, la API de cobros CoDi del reto. Sirve para construir con agentes de IA un proyecto de bien público con la API de OpenAI y CoDi. Todo en español de México. Cada dato tiene fuente en fuentes/REGISTRO.md; lo no verificado está marcado con ⚪.
+> Base de conocimiento en Markdown del DevDay Exchange Community Hackathon: Mexico City (sábado 7 de noviembre de 2026, UTOPÍA Elena Poniatowska Amor, CDMX), con la documentación de pey (la API de cobros CoDi del reto) y de CoDi (Banxico). Sirve para programar con Claude Code en GitHub Codespaces, solo con prompts, un proyecto de bien público con la API de OpenAI y CoDi. Todo en español de México. Cada dato tiene fuente; lo no verificado está marcado con ⚪.
 
 ## Empieza aquí
+- [Definición del proyecto](docs/PROYECTO.md): objetivo del hackatón, requisitos, actores, flujos, restricciones, criterios de éxito y riesgos.
 - [K00 Bases del concurso](conocimiento/00-bases-del-concurso.md): todo lo que pide el concurso en un solo lugar.
-- [Índice de la base de conocimiento](conocimiento/INDICE.md): qué archivo y qué sección responde cada pregunta.
+- [Guía de Claude Code en Codespaces](docs/GUIA-CODESPACES.md): cómo trabajar solo con prompts.
+- [Reglas para agentes](AGENTS.md).
 - [Todo en un solo archivo](conocimiento/TODO-EN-UNO.md): la base completa para leerla de una vez.
-- [Reglas para agentes](AGENTS.md): cómo trabajar en este repo.
 
 ## Concurso
 - [K01 Evento verificado](conocimiento/01-evento-verificado.md)
@@ -16,8 +17,10 @@
 ## pey y CoDi
 - [K03 CoDi y API de pey (síntesis con código probado)](conocimiento/03-codi-y-api-pey.md)
 - [Documentación de pey en Markdown](pey/README.md)
+- [Documentación de CoDi en Markdown](codi/README.md)
 - [Revisión de pey del 7-nov](docs/REVISION-PEY-2026-11-07.md)
 
 ## Opcional
+- [Índice de preguntas](conocimiento/INDICE.md)
 - [Registro de fuentes](fuentes/REGISTRO.md)
 - [Bitácora](BITACORA.md)

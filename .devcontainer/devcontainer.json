@@ -1,34 +1,62 @@
 {
-  // GitHub Codespaces: terminal en la nube con Node 22, Python, Codex CLI, Vercel CLI, GitHub CLI y Claude Code.
-  // Paquetes verificados en npm el 2026-11-06: @openai/codex 0.167.0 y vercel 65.12.1.
-  // Feature de Claude Code: la oficial de Anthropic (documentación de Claude Code para dev containers).
+  // HackathonOpenAi · GitHub Codespaces con Node 22, Python, GitHub CLI, Claude Code, Codex CLI y Vercel CLI.
+  // Revisado el 2026-11-07. Paso a paso para usarlo: docs/GUIA-CODESPACES.md
+  // Si cambias este archivo dentro de un codespace: Command Palette → "Codespaces: Rebuild Container"
+  // (https://docs.github.com/en/codespaces/developing-in-a-codespace/rebuilding-the-container-in-a-codespace).
   "name": "HackathonOpenAi",
+
+  // Imagen oficial de dev containers con Node 22. La etiqueta `22` aparece en
+  // https://hub.docker.com/r/microsoft/devcontainers-javascript-node (consultado 2026-11-07).
   "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+
   "features": {
+    // Python para los scripts del repo (scripts/*.py). ⚪ Opciones de esta feature no reverificadas el 2026-11-07.
     "ghcr.io/devcontainers/features/python:1": { "version": "3.12" },
+    // GitHub CLI (`gh`): sirve, por ejemplo, para `gh codespace ports visibility 3000:public`.
+    // ⚪ Feature no reverificada el 2026-11-07.
     "ghcr.io/devcontainers/features/github-cli:1": {},
+    // Claude Code: feature oficial de Anthropic. El `:1.0` fija el script de instalación, no la versión
+    // de Claude Code: instala la más reciente y se actualiza sola. En Codespaces también agrega la
+    // extensión de VS Code. Fuente: https://code.claude.com/docs/en/devcontainer (consultado 2026-11-07).
     "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
   },
-  // Codespaces pide estos secretos al crear el codespace y los expone como variables de entorno.
-  // Guárdalos en GitHub → Settings → Codespaces → Secrets. NUNCA en el repo.
+
+  // Codex CLI y Vercel CLI (quedan los dos agentes: Claude Code y Codex). Versiones vistas con
+  // `npm view` el 2026-11-07: @openai/codex 0.167.0, vercel 65.12.1 y @anthropic-ai/claude-code 2.1.319.
+  // Se instala la última; las versiones impresas al final quedan como evidencia en el registro de creación.
+  "postCreateCommand": "npm install -g @openai/codex vercel && node --version && python3 --version && claude --version && codex --version && vercel --version",
+
+  // 3000: `vercel dev --listen 3000` (opción documentada en https://vercel.com/docs/cli/dev).
+  // Para recibir webhooks de pey en el codespace, cambia la visibilidad del puerto a pública en la
+  // pestaña PORTS (https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace).
+  // Esa página no documenta cómo fijar la visibilidad desde este archivo, por eso aquí solo va la etiqueta.
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": { "label": "App (vercel dev)" }
+  },
+
+  // Secretos recomendados: Codespaces los muestra al crear el codespace con "New with options";
+  // capturarlos es opcional. Se guardan en GitHub → Settings → Codespaces → Secrets (NUNCA en el repo)
+  // y llegan como variables de entorno a la terminal. Si agregas o cambias uno con el codespace
+  // encendido, detenlo y vuelve a iniciarlo.
+  // Fuentes: https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/configuring-dev-containers/specifying-recommended-secrets-for-a-repository
+  // y https://docs.github.com/en/codespaces/managing-your-codespaces/managing-your-account-specific-secrets-for-github-codespaces
+  // NO declares ANTHROPIC_API_KEY: si existe, Claude Code la usa antes que tu suscripción Pro/Max
+  // (orden de precedencia en https://code.claude.com/docs/en/authentication).
   "secrets": {
     "OPENAI_API_KEY": {
       "description": "Llave de la API de OpenAI (platform.openai.com). Se paga aparte de ChatGPT Plus."
     },
     "PEY_API_KEY": {
-      "description": "Llave de la API de Pey (portal.mipey.mx → Desarrollador). Solo hay producción: para el hackatón, ligada a la cuenta de prueba de la guía (ver K03.3)."
+      "description": "Llave de la API de pey (portal de pey → Desarrollador). Solo hay producción: en pruebas se cobran montos de $0.01 a $1 que no se devuelven (K03.3).",
+      "documentationUrl": "https://portal.mipey.mx/developers"
     },
     "PEY_WEBHOOK_SECRET": {
-      "description": "Secreto de firma del webhook de Pey (Standard Webhooks)."
+      "description": "Secreto de firma del webhook de pey (Standard Webhooks, prefijo whsec_). pey admite un solo webhook por llave (pey/09-webhooks.md)."
     },
     "CLAUDE_CODE_OAUTH_TOKEN": {
-      "description": "Opcional: token de Claude generado con `claude setup-token`."
+      "description": "Opcional: token de un año de tu suscripción Claude Pro/Max, generado con `claude setup-token`. Evita volver a iniciar sesión cuando reconstruyes el contenedor o creas otro codespace.",
+      "documentationUrl": "https://code.claude.com/docs/en/authentication#generate-a-long-lived-token"
     }
-  },
-  "postCreateCommand": "npm install -g @openai/codex vercel && codex --version && vercel --version && node --version",
-  // 3000: `vercel dev` o `npx serve app`. Para recibir webhooks de Pey, cambia la visibilidad del puerto a pública.
-  "forwardPorts": [3000],
-  "portsAttributes": {
-    "3000": { "label": "App (vercel dev)" }
   }
 }

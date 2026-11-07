@@ -14,7 +14,7 @@ responde:
   - "¿Cómo expongo la API de Pey como herramientas de un agente de IA sin riesgos?"
 actualizado: 2026-11-07
 confianza: media
-fuentes: [SB01, SB02, SB03, SB04, SB05, SB06, SB07, SB08, SB09, SB10, SB11, SB12, SB13, SB14, SB15, SB16, SB17, SB18, SB19, SB20, SB21, SB22, SB23, SB24, SB25, SB26, SB27, SB28, SB29, SB30, SB31, SB32, SB33, SB34, SB35, SB36, SB37, SB38, SB39, SB40, SB41, SB42, SB43, SB44, SB45, SB46, SB47, SB48, SB49, SB50, SB51, SB52, SB53, SB54, SB55, SB56, SB57]
+fuentes: [SB01, SB02, SB03, SB04, SB05, SB06, SB07, SB08, SB09, SB10, SB11, SB12, SB13, SB14, SB15, SB16, SB17, SB18, SB19, SB20, SB21, SB22, SB23, SB24, SB25, SB26, SB27, SB28, SB29, SB30, SB31, SB32, SB33, SB34, SB35, SB36, SB37, SB38, SB39, SB40, SB41, SB42, SB43, SB44, SB45, SB46, SB47, SB48, SB49, SB50, SB51, SB52, SB53, SB54, SB55, SB56, SB57, SB58, SB59, SB60, SB61, SB62]
 ---
 
 # K03 · CoDi y API de Pey
@@ -41,7 +41,7 @@ CoDi® (Cobro Digital) es la plataforma de Banco de México para cobrar y pagar 
 
 **Devoluciones.** Quien cobró puede devolver parcial o totalmente [SB28]; la API de Pey no tiene endpoint para eso (K03.4).
 
-**Límites.** Cada banco fija su máximo; en 2019 Banxico pedía que no fuera menor a $8,000 MXN [SB32]. Límite vigente: ⚪ no verificado.
+**Límites.** Cada banco fija su máximo; en 2019 Banxico pedía que no fuera menor a $8,000 MXN [SB32]. Desde el 23-feb-2026 los participantes del SPEI deben aceptar mensajes de cobro de hasta 6,000 UDIS (o más, si el banco quiere) y también sin monto, según la Circular 2/2025; detalle y fuentes en [`codi/02-como-funciona.md`](../codi/02-como-funciona.md).
 
 **Contexto 2026 (pitch).** Los bancos deben homologar sus transferencias móviles, CoDi incluido, a más tardar el 14 de diciembre de 2026; además existe la cuenta "nivel 2 Bis", sin RFC, para micro y pequeños comercios [SB36][SB38].
 
@@ -66,7 +66,7 @@ Pey (pey®) es una empresa de tecnología enfocada en integrar CoDi a negocios [
 Todo pasa en `portal.mipey.mx` [SB07][SB08]:
 
 1. **Perfil.** Qué datos pide (correo, RFC, INE…): ⚪ no verificado. Ten tu CLABE a la mano.
-2. **Finanzas → cuenta de pago `codi`** (solo cuentas mexicanas). Tu CLABE tarda 5 días hábiles en registrarse ante Banxico: no estará lista para el concurso. Mientras, registra la **cuenta de prueba** que publica la guía (sección "Prueba en producción"): se activa de inmediato, pero lo que se le pague no se devuelve; usa montos como $0.01 MXN [SB07]. También hay registro por API: `POST /bank-account` [SB13].
+2. **Finanzas → cuenta de pago `codi`** (solo cuentas mexicanas). Tu CLABE tarda 5 días hábiles en registrarse ante Banxico: no estará lista para el concurso. Mientras, registra la **cuenta de prueba** que publica la guía dentro del paso "2. Agrega una cuenta de pago"; la sección "Prueba en producción" solo la menciona y enlaza a ese paso [SB58]. Se activa de inmediato, pero lo que se le pague no se devuelve; usa montos como $0.01 MXN [SB07][SB58]. También hay registro por API: `POST /bank-account` [SB13].
 3. **Desarrollador → "Crear API Key"**: nombre y cuenta vinculada (una `codi`; una `stripe` si quieres tarjetas) [SB07]. Si la llave se muestra una sola vez: ⚪ no verificado; cópiala de inmediato.
 4. **Webhook**: engrane de la llave → URL → crear; guarda el secreto de firma (rotable). Un webhook por llave [SB08].
 5. **Secretos** en Vercel y Codespaces: `PEY_API_KEY` y `PEY_WEBHOOK_SECRET`. Nunca en el repo.
@@ -174,7 +174,7 @@ Código del handler: K03.7.
 2. Demo: QR de $1 con `expiration: 600`, en grande; pagas desde tu celular; la UI pasa a "Pagado" por polling o webhook.
 3. Con la cuenta de prueba ese dinero no regresa [SB07]; di en el pitch que en producción cae directo en la CLABE del comercio [SB38].
 4. Prefiere QR: la push depende de que el celular del pagador esté ligado a CoDi [SB28][SB30] (⚪ no verificado en detalle).
-5. UI: logos pey + CoDi de "Recursos de marca" [SB25].
+5. UI: usa los archivos oficiales de "Recursos de marca": `pey_codi_light.svg` en fondo claro, `pey_codi_dark.svg` en fondo oscuro y `loading_codi.gif` ("Animación de pago CoDi") mientras esperas el pago [SB25]. La única regla publicada es descargarlos en vez de recrearlos. Ni la página en español ni la inglesa publican colores, tipografía, área de respeto, tamaño mínimo o usos prohibidos, así que no inventes un color de marca (⚪) [SB25][SB62]. Detalle y guía propia: [pey/12](../pey/12-recursos-de-marca.md).
 
 **Plan B escalonado:**
 - **B1, no llega el webhook:** polling a `GET /transaction/codi/qr/{id}` cada 2 a 5 s mientras el QR siga vigente (límite de peticiones: ⚪ no verificado) [SB10][SB15].
@@ -586,8 +586,16 @@ Toda la documentación pública de pey quedó en Markdown, con redacción propia
 | Webhooks y sus campos | [pey/09](../pey/09-webhooks.md) |
 | Errores y límites | [pey/11](../pey/11-errores-y-limites.md) |
 | Logos y changelog | [pey/12](../pey/12-recursos-de-marca.md), [pey/13](../pey/13-registro-de-cambios.md) |
+| Los 3 tutoriales oficiales en su orden (encabezados, avisos, valores del ejemplo) | [pey/14](../pey/14-tutoriales-paso-a-paso.md) |
+| Lista práctica de lo que necesita el producto y lo que pey no tiene | [pey/README.md](../pey/README.md#lo-que-vamos-a-necesitar-para-el-producto) |
 
 Fuentes revisadas por primera vez hoy: [SB48] a [SB57]. El changelog no tiene entradas generales ni política de versiones [SB56]; los tipos de transacción y de cuenta bancaria están en [SB51] y [SB52].
+
+**Segunda pasada (2026-11-07).** Se abrieron una por una todas las páginas de Tutoriales, Referencia de la API, Registro de cambios y Recursos de marca. Resultados:
+- Hay 3 tutoriales: "Crear una API key" y "Configurar webhooks" en Primeros pasos, y "Mostrar un QR CoDi" en Ejemplos [SB59].
+- El changelog tiene solo 2 entradas: "Introducción", sin cambios, y "Cuentas bancarias". **Ninguna trae fecha**, ni en su página ni en la etiqueta "general", y el sitemap no tiene `lastmod` [SB60][SB61][SB47].
+- La versión en inglés de Recursos de marca tiene los mismos 5 archivos y tampoco publica reglas [SB62].
+- Corrección: la cuenta de prueba está en el paso 2 del tutorial, no en "Prueba en producción" (K03.3) [SB58].
 
 ## Fuentes
 
@@ -650,3 +658,8 @@ Fuentes revisadas por primera vez hoy: [SB48] a [SB57]. El changelog no tiene en
 | SB55 | Documentación de pey: Get Payment Link | https://docs.pey.mx/docs/api/get-payment-link | 2026-11-07 |
 | SB56 | Documentación de pey: registro de cambios, introducción | https://docs.pey.mx/docs/changelog/introduction | 2026-11-07 |
 | SB57 | Documentación de pey: Referencia de la API (categoría) | https://docs.pey.mx/docs/category/api-reference | 2026-11-07 |
+| SB58 | Documentación de pey: Crear una API key, paso "2. Agrega una cuenta de pago" (cuenta de prueba) | https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key#2-agrega-una-cuenta-de-pago | 2026-11-07 |
+| SB59 | Documentación de pey: Tutoriales (categoría) | https://docs.pey.mx/docs/category/tutorials | 2026-11-07 |
+| SB60 | Documentación de pey: Registro de cambios (categoría) | https://docs.pey.mx/docs/category/changelog | 2026-11-07 |
+| SB61 | Documentación de pey: etiqueta "general" del registro de cambios | https://docs.pey.mx/docs/tags/general | 2026-11-07 |
+| SB62 | Documentación de pey: Brand assets (versión en inglés de Recursos de marca) | https://docs.pey.mx/en/brand-assets | 2026-11-07 |
