@@ -25,7 +25,7 @@ Reglas: fechas `AAAA-MM-DD`; una línea por hecho; cada hecho con **evidencia** 
   4. Sin llaves en el repo ni en el navegador.
   5. README de entrega, deck y guion del pitch listos.
   6. Con llaves: un pago real de $1 llega a "¡Ya cayó!" confirmado por pey en menos de 10 s.
-- Resultado parcial (11:45): 1 ✓ (87/87), 2 ✓ (capturas en `docs/capturas/`), 4 ✓ (grep sin coincidencias), 5 en curso (README y `docs/PITCH.md` listos; deck pendiente), 3 y 6 pendientes de José (Vercel y llaves).
+- Resultado parcial (11:55): 1 ✓ (87/87), 2 ✓ (capturas en `docs/capturas/`), 4 ✓ (grep sin coincidencias), 5 ✓ salvo la URL (README, `docs/PITCH.md`, deck de 10 diapositivas y video de respaldo), 3 y 6 pendientes de José (Vercel y llaves).
 
 ## Contrato anterior (cumplido)
 **Contrato: base de conocimiento lista para el 7 de noviembre**
@@ -89,7 +89,10 @@ Reglas: fechas `AAAA-MM-DD`; una línea por hecho; cada hecho con **evidencia** 
 | 2026-11-07 11:29 | Subagente de pagos: cliente de pey, QR, estado, cobros, simular-pago y webhook (Standard Webhooks) | 39 pruebas con `fetch` simulado | este commit |
 | 2026-11-07 11:35 | Subagente de IA: Responses API con `crear_cobro` estricta, lectura de captura con salida estructurada, reglas locales y veredicto por código | 36 pruebas | este commit |
 | 2026-11-07 11:41 | Subagente de interfaz: móvil en español, modo siempre visible, captura de ejemplo ficticia, voz y vibración | 10 pruebas + recorrido en Chrome | este commit |
-| 2026-11-07 11:42 | Integración: código compartido a `app/lib/`, plurales del catálogo, vencimiento en SIMULACIÓN, prueba de la demo completa | `npm test` 87/87 · `scripts/demo_e2e.py` sin problemas | este commit |
+| 2026-11-07 11:42 | Integración: código compartido a `app/lib/`, plurales del catálogo, vencimiento en SIMULACIÓN, prueba de la demo completa | `npm test` 87/87 · `scripts/demo_e2e.py` sin problemas | 906c530 |
+| 2026-11-07 11:51 | Encabezados de seguridad (CSP estricta, nosniff, sin iframes) también en el servidor local | `curl -D -` muestra los encabezados; demo con CSP sin errores de consola | a281a7c |
+| 2026-11-07 11:50 | Deck de 10 diapositivas (7 + 3 de reserva) con capturas reales y notas del orador, en claude.ai (privado hasta que José lo comparta) | Publicado como artefacto de Slides; faltan URL y QR de producción | — |
+| 2026-11-07 11:54 | Video de respaldo de 24 s (1920×1080, SIMULACIÓN rotulada) | `scripts/video_demo.py` → `docs/video/demo-ya-cayo.mp4` | este commit |
 
 ## Revisión pey y normativa — 2026-11-07
 - Contrastadas páginas oficiales de pey, OpenAPI y DOF; ver docs/REVISION-PEY-2026-11-07.md y K06.5.

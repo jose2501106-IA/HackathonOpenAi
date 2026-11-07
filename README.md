@@ -2,7 +2,7 @@
 
 Caja de cobro CoDi para comercios de barrio. Dices lo que vendiste y la IA de OpenAI arma el cobro; si el cliente te enseña una captura de "ya te transferí", la IA la lee, pero **quien decide es pey**: el dinero llegó o no llegó. Sin comisión.
 
-**Demo en vivo:** [POR LLENAR: URL de producción en Vercel] · **Video (≤ 3 min):** [POR LLENAR] · **Deck:** [POR LLENAR] · **Guion del pitch:** [`docs/PITCH.md`](docs/PITCH.md)
+**Demo en vivo:** [POR LLENAR: URL de producción en Vercel] · **Video de respaldo (24 s, SIMULACIÓN):** [`docs/video/demo-ya-cayo.mp4`](docs/video/demo-ya-cayo.mp4) · **Video narrado (≤ 3 min):** [POR LLENAR] · **Deck:** [POR LLENAR: enlace público] · **Guion del pitch:** [`docs/PITCH.md`](docs/PITCH.md)
 
 Hecho en el *DevDay Exchange Community Hackathon: Mexico City* (sábado 7 de noviembre de 2026, UTOPÍA Elena Poniatowska Amor, Coyoacán) para el reto **"Prototipa herramientas de bien público con OpenAI y CoDi"**, con la API de OpenAI y cobros CoDi vía la API de pey.
 
