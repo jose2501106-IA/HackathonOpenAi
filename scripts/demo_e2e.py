@@ -18,6 +18,10 @@ from playwright.sync_api import expect, sync_playwright
 BASE = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:3000"
 SALIDA = sys.argv[2] if len(sys.argv) > 2 else os.path.join(os.path.dirname(__file__), "..", "docs", "capturas")
 os.makedirs(SALIDA, exist_ok=True)
+# SOLO_VISTA=1 captura solo lo que se ve en pantalla (para diapositivas); ANCHO y ALTO cambian el tamaño.
+SOLO_VISTA = os.environ.get("SOLO_VISTA") == "1"
+ANCHO = int(os.environ.get("ANCHO", "360"))
+ALTO = int(os.environ.get("ALTO", "780"))
 
 problemas = []
 
@@ -44,14 +48,14 @@ def revisar_pantalla(pagina, nombre):
 def capturar(pagina, nombre):
     revisar_pantalla(pagina, nombre)
     ruta = os.path.join(SALIDA, f"{nombre}.png")
-    pagina.screenshot(path=ruta, full_page=True)
+    pagina.screenshot(path=ruta, full_page=not SOLO_VISTA)
     print(f"✓ {nombre} → {os.path.relpath(ruta)}")
 
 
 with sync_playwright() as p:
     navegador = p.chromium.launch(executable_path="/usr/bin/google-chrome", args=["--no-sandbox"])
     contexto = navegador.new_context(
-        viewport={"width": 360, "height": 780}, device_scale_factor=2, locale="es-MX", has_touch=True, is_mobile=True
+        viewport={"width": ANCHO, "height": ALTO}, device_scale_factor=2, locale="es-MX", has_touch=True, is_mobile=True
     )
     pagina = contexto.new_page()
     errores_consola = []

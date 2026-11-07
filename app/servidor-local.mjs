@@ -3,7 +3,7 @@
 // y todo lo demás se sirve como archivo estático desde app/.
 // Si existe app/.env (ignorado por git), lo carga. Nunca imprime variables ni cuerpos.
 import { createServer } from "node:http";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { readFile, stat } from "node:fs/promises";
 import { extname, join, normalize, sep } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -13,6 +13,30 @@ const PUERTO = Number(process.env.PORT) || 3000;
 
 if (existsSync(join(RAIZ, ".env")) && typeof process.loadEnvFile === "function") {
   process.loadEnvFile(join(RAIZ, ".env"));
+}
+
+// Los mismos encabezados de seguridad que vercel.json, para probar en local lo que corre en producción.
+// Solo entiende fuentes simples como "/(.*)" o "/api/(.*)".
+const REGLAS_ENCABEZADOS = (() => {
+  try {
+    const conf = JSON.parse(readFileSync(join(RAIZ, "vercel.json"), "utf8"));
+    return (conf.headers || []).map((r) => {
+      const partes = String(r.source)
+        .split("(.*)")
+        .map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+      return { re: new RegExp(`^${partes.join("(.*)")}$`), headers: r.headers || [] };
+    });
+  } catch {
+    return [];
+  }
+})();
+
+function encabezadosPara(ruta) {
+  const extra = {};
+  for (const regla of REGLAS_ENCABEZADOS) {
+    if (regla.re.test(ruta)) for (const h of regla.headers) extra[h.key.toLowerCase()] = h.value;
+  }
+  return extra;
 }
 
 const TIPOS = {
@@ -115,6 +139,7 @@ async function manejarEstatico(req, res, url) {
 const servidor = createServer(async (req, res) => {
   const inicio = Date.now();
   const url = new URL(req.url || "/", `http://${req.headers.host || `localhost:${PUERTO}`}`);
+  for (const [clave, valor] of Object.entries(encabezadosPara(url.pathname))) res.setHeader(clave, valor);
   try {
     if (url.pathname.startsWith("/api/")) await manejarApi(req, res, url);
     else await manejarEstatico(req, res, url);
