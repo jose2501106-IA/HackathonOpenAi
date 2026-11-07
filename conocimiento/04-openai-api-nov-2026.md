@@ -24,7 +24,7 @@ fuentes: [SC01, SC02, SC03, SC04, SC05, SC06, SC07, SC08, SC09, SC10, SC11, SC12
 - El DevDay 2026 fue el 29 sep 2026 en San Francisco: GPT-6.1 Sol, Agents API con *computer use*, velocidad Ultrafast, Decisions API, extensiones de plugins y Codex Cloud que sigue trabajando con la laptop cerrada [SC01, SC02, SC03].
 - Texto: `gpt-6.1-sol` (US$2 / US$10 por 1M tokens) como default de hackatón; `gpt-6-astra` (US$10 / US$50) para máxima calidad; `gpt-6-luna` (US$0.10 / US$0.50) para clasificar barato [SC06, SC07].
 - Voz: `gpt-realtime-2.1` por WebRTC con llave efímera de `POST /v1/realtime/client_secrets`. Imagen: `gpt-image-2.6-flare` / `-sunburst`, lanzados el 4 nov [SC10, SC30].
-- Con GPT-6.x las herramientas sólo funcionan en la Responses API; salidas estructuradas con `text.format` o `responses.parse` [SC13, SC12].
+- Con GPT-6 Astra y GPT-6.1 Sol las herramientas sólo funcionan en la Responses API (la fuente no lo dice de Terra ni de Luna); salidas estructuradas con `text.format` o `responses.parse` [SC13, SC12].
 - La API se paga aparte de ChatGPT Plus: compra al menos US$5 de crédito para entrar al tier Build (Sol: 5,000 RPM y 1M TPM) [SC26, SC44].
 - No uses Agent Builder (se apaga el 30 nov 2026), Assistants API (ya apagada) ni `gpt-image-1` (ya apagado) [SC20, SC21].
 
@@ -322,7 +322,7 @@ console.log(r.usage.input_tokens_details); // cached_tokens, cache_write_tokens
 - **Límites en Build:** Astra, Sol y Terra 5,000 RPM y 1M TPM; Luna 5,000 RPM y 2M TPM [SC26].
 - **Free y GPT-6:** según un tercero, las páginas de GPT-6 marcan Free como "Not supported" [SC27] (⚪ no verificado en fuente oficial).
 - **Ver límites:** Settings › Organization › Limits. Encabezados `x-ratelimit-*` y `Retry-After`; los SDK oficiales reintentan 429 y 503 solos [SC26].
-- **Créditos en eventos hermanos:** en Charlotte, cada asistente registrado recibió US$50 en créditos de API y US$100 en créditos de Codex [SC05]; para CDMX (⚪ no verificado).
+- **Créditos en eventos hermanos:** en Charlotte (3 oct 2026), la página ofrecía US$50 en créditos de API y US$100 en créditos de Codex a cada asistente elegible que hiciera check-in [SC05]; para CDMX (⚪ no verificado).
 
 **Recomendación:** hoy mismo carga US$10–20, crea una llave por proyecto, fija un tope de gasto y prueba una llamada a `gpt-6.1-sol` y una sesión de voz. El repo es público: la llave vive sólo en variables de Vercel (tipo Secret) y en secretos de Codespaces o de Codex, nunca en archivos.
 
@@ -389,7 +389,7 @@ Revisa negativas e incompletos antes de usar el resultado (K04.5).
 
 ## K04.15 · Ejemplo (b): function calling con `crear_cobro` (Node.js y Python)
 
-Sigue el flujo oficial de dos llamadas [SC13]. `crearCobro` es simulada y sólo *prepara* el cobro: según AGENTS.md (§3) el cobro real ocurre hasta que la persona confirma en la interfaz, por eso `dia-del-evento/PROMPTS-CODEX.md` llama a esta herramienta `preparar_cobro`. La llamada a Pey va en el servidor (K03) y el tope sale de `MAX_MONTO_MXN` (aquí fijo en 10000 sólo como ejemplo).
+Sigue el flujo oficial de dos llamadas [SC13]. `crearCobro` es simulada y sólo *prepara* el cobro: según AGENTS.md (§3) el cobro real ocurre hasta que la persona confirma en la interfaz; por eso la herramienta `crear_cobro` solo propone. La llamada a Pey va en el servidor (K03) y el tope sale de `MAX_MONTO_MXN` (aquí fijo en 10000 sólo como ejemplo).
 
 ```js
 // Node.js — npm install openai
@@ -708,3 +708,8 @@ Evita en la demo: Agent Builder, Assistants API, `gpt-image-1` y el encabezado b
 | SC57 | ChatGPT Connectors (2026): Which Apps Connect and What Each Plan Gets (Justin McKelvey) | https://justinmckelvey.com/blog/chatgpt-connectors | 2026-11-06 |
 | SC59 | How to Connect GitHub to ChatGPT — via MCP (AnythingMCP) | https://anythingmcp.com/guides/connect-github-to-chatgpt | 2026-11-06 |
 | SC64 | OpenAI DevDay 2026: Everything Announced and What It All Means (God of Prompt; el contenido describe el DevDay 2025) | https://godofprompt.ai/blog/openai-devday-2026/ | 2026-11-06 |
+
+## Correcciones de la verificación independiente (2026-11-06)
+
+- TL;DR, viñeta de herramientas. Decía: "Con GPT-6.x las herramientas sólo funcionan en la Responses API". Dice ahora: "Con GPT-6 Astra y GPT-6.1 Sol las herramientas sólo funcionan en la Responses API (la fuente no lo dice de Terra ni de Luna)". Fuente: SC13, que dice textualmente "GPT-6 Astra and GPT-6.1 Sol require the Responses API for tool calling" y no menciona a GPT-6.1 Terra ni a GPT-6 Luna (K04.2 ya lo decía bien).
+- K04.13, créditos en eventos hermanos. Decía: "en Charlotte, cada asistente registrado recibió US$50 en créditos de API y US$100 en créditos de Codex". Dice ahora: "en Charlotte (3 oct 2026), la página ofrecía US$50 en créditos de API y US$100 en créditos de Codex a cada asistente elegible que hiciera check-in". Fuente: SC05 ("$100 in Codex credits and $50 in API credits for eligible checked-in attendees"); la página no confirma que se hayan entregado.

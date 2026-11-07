@@ -5,10 +5,11 @@
 Reglas: fechas `AAAA-MM-DD`; una línea por hecho; cada hecho con **evidencia** (salida de herramienta, prueba, URL, commit); lo que está a medias se dice a medias; lo bloqueado se marca `BLOQUEADO` y por qué.
 
 ## Estado actual
-- Fecha: 2026-11-06
-- Fase: 1 investigación → base de conocimiento para el evento del 7 de noviembre
+- Fecha: 2026-11-07 (madrugada)
+- Fase: base de conocimiento **lista** para el evento; el producto empieza el sábado en `app/`
 - Publicado en: nada todavía (`app/` vacío hasta el inicio oficial)
-- Última verificación (`python3 scripts/verificar_conocimiento.py`): pendiente
+- Última verificación (`python3 scripts/verificar_conocimiento.py`, 2026-11-07): ✓ 0 errores · 11 archivos · 120 secciones · 236 fuentes · 167 marcas ⚪
+- Idea recomendada: **"¿Ya cayó?"** (K07.3, K07.6)
 - Superficies: hoy Claude (sesión en la nube); el sábado Codex web + ChatGPT web + GitHub Codespaces
 
 ## Tarea en curso
@@ -27,11 +28,12 @@ Reglas: fechas `AAAA-MM-DD`; una línea por hecho; cada hecho con **evidencia** 
   6. No hay secretos en el repo.
   7. Una revisión independiente de los datos críticos (fechas, endpoints de Pey, nombres de modelos y precios de OpenAI, flujo de Codex web) no deja hallazgos críticos abiertos.
 - Evidencia: salida del script y reporte del verificador en el Historial.
+- Resultado (2026-11-07): criterios 1–6 ✓ (script con 0 errores; K00–K10, INDICE y TODO-EN-UNO existen; AGENTS.md 4.2 KB; dia-del-evento/ y plantillas/ completos; K01 con fuente SA01; sin secretos). Criterio 7 ✓: la revisión independiente cotejó ~215 datos de K01, K03, K04, K05 y K06.10 contra sus fuentes; corrigió 2 matices en K04 y no dejó hallazgos críticos abiertos. **Contrato cumplido.**
 
 ## Siguientes pasos
-1. 🧑 Instalar la Claude GitHub App en este repo para que Claude pueda hacer push (o subir el .zip a mano).
-2. 🧑 Esta noche: lo de `dia-del-evento/CHECKLIST.md` (API key de OpenAI con saldo, llave de desarrollo de Pey, Vercel ligado a GitHub, Codex web con el repo y su entorno, ChatGPT con el repo conectado).
-3. Sábado: seguir `dia-del-evento/RUNBOOK.md`.
+1. 🧑 Esta noche: `dia-del-evento/CHECKLIST.md` → "Esta noche" (API key de OpenAI con saldo, cuenta de prueba y llave de pey, cobro real de $0.01 grabado, Vercel con Root Directory `app`, entorno de Codex publicado, ChatGPT con el repo).
+2. 🧑 Probar una llamada de visión con una captura ficticia (K07.6) y la voz en el celular si se usará (K04.16 ⚪).
+3. Sábado: seguir `dia-del-evento/RUNBOOK.md`; preguntar al llegar lo de K01.11.
 
 ## Decisiones
 | Fecha | Decisión | Por qué | Alternativas descartadas |
@@ -43,11 +45,20 @@ Reglas: fechas `AAAA-MM-DD`; una línea por hecho; cada hecho con **evidencia** 
 | 2026-11-06 | No se copió el kit completo de `claude-tec-playbook` | Repo ligero para Codex; el playbook es privado | `/adoptar` completo |
 
 ## Bloqueos y preguntas abiertas
-- BLOQUEADO: push desde Claude → GitHub responde 403 hasta que se instale la Claude GitHub App.
-- ⚪ Reglas, criterios, premios y forma de entrega oficiales: confirmar en la página de Luma o al llegar.
+- ⚪ Criterios, jueces, reglas de código previo, URL del portal y formato de entrega: no publicados (K01.11). Preguntar al llegar.
+- ⚪ pey no tiene sandbox: solo cuenta de prueba en producción con montos de $0.01 a $1 (K03.3, K03.6).
+- ⚪ Forma exacta de la llamada de visión y eventos de herramientas en Realtime (K04.2, K04.16): probar esta noche.
 
 ## Historial
 | Fecha | Qué se hizo | Evidencia | Commit |
 |---|---|---|---|
 | 2026-11-05 | Verificado: el evento es el sábado 7 de noviembre, 10:00–16:00, en la Utopía Elena Poniatowska Amor | Correo de aprobación de Luma (2 nov) y newsletters de AI Builders (26 oct, 31 oct, 2 nov) | — |
-| 2026-11-06 | Estructura del repo, `AGENTS.md`, `CLAUDE.md`, devcontainer y scripts | Este commit | — |
+| 2026-11-06 | Estructura del repo, `AGENTS.md`, `CLAUDE.md`, devcontainer y scripts | `git log` | 375e9de |
+| 2026-11-06 | Página oficial de Luma leída: reto de bien público, entrega dom 8 13:00, ganadores lun 9, premio de 10 boletos | K01 (SA01) | 9df95d3 |
+| 2026-11-06 | Investigación en paralelo: K01–K06 y K08 (236 fuentes registradas) | `fuentes/REGISTRO.md` | 9df95d3 |
+| 2026-11-06 | Ejemplos de K03.7 probados: 9/9 pruebas con `fetch` simulado y firma de webhook con el vector oficial de Svix (Node 22.23) | Reporte de la investigación de pey | 9df95d3 |
+| 2026-11-06 | Runbook, checklist, prompts para Codex y ChatGPT, K09 y plantillas | `dia-del-evento/`, `plantillas/` | 9df95d3 |
+| 2026-11-06 | Primer push a `main` (la Claude GitHub App ya tiene acceso) | `git push` sin error | 9df95d3 |
+| 2026-11-07 | Revisión independiente: ~215 datos cotejados, 2 correcciones menores en K04 | Sección "Correcciones" al final de K04 | este commit |
+| 2026-11-07 | Consistencia: herramienta `crear_cobro`, `MODO_PAGO` en lugar de `PEY_ENV`, 404 de pey con aviso, `npm test --prefix app` | `git diff` | este commit |
+| 2026-11-07 | K07 (idea "¿Ya cayó?"), K00, INDICE y TODO-EN-UNO generados; verificador con 0 errores | Salida de `scripts/verificar_conocimiento.py` | este commit |

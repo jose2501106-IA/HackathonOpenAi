@@ -5,7 +5,7 @@ resumen: "Qué es CoDi y cómo se usa la API CoDi de Pey (alta, llaves, endpoint
 responde:
   - "¿Qué es CoDi y cómo paga un cliente con QR o con notificación?"
   - "¿Qué es Pey, cuánto cuesta su API CoDi y a dónde llega el dinero?"
-  - "¿Cómo saco hoy una API key de Pey, cuánto tarda en activarse y qué significa PEY_ENV?"
+  - "¿Cómo saco hoy una API key de Pey y cuánto tarda en activarse?"
   - "¿Cuál es la URL base, el header de autenticación y los campos para crear y consultar un cobro CoDi?"
   - "¿En qué formato llega el QR y cómo se mapean los estados de Pey a los de la app?"
   - "¿Cómo verifico la firma de los webhooks de Pey en una Vercel Function o en Codespaces?"
@@ -70,7 +70,7 @@ Todo pasa en `portal.mipey.mx` [SB07][SB08]:
 4. **Webhook**: engrane de la llave → URL → crear; guarda el secreto de firma (rotable). Un webhook por llave [SB08].
 5. **Secretos** en Vercel y Codespaces: `PEY_API_KEY` y `PEY_WEBHOOK_SECRET`. Nunca en el repo.
 
-**Entornos y `PEY_ENV`.** Pey solo documenta producción (`https://api.pey.mx`); el entorno de pruebas está "próximamente" [SB09][SB10]. La landing menciona llaves de prueba y de producción [SB01], pero la referencia técnica no. Así que `PEY_ENV` no debe cambiar la URL base (⚪ no verificado; pregúntalo a Pey).
+**Entornos.** Pey solo documenta producción (`https://api.pey.mx`); el entorno de pruebas está "próximamente" [SB09][SB10]. La landing menciona llaves de prueba y de producción [SB01], pero la referencia técnica no (⚪ pregúntalo a Pey en el evento). Por eso el repo no usa `PEY_ENV`: la URL base es siempre la de producción, y lo que se muestra en pantalla es `MODO_PAGO` (`simulacion`, `prueba` o `comercio`; ver `.env.example`).
 
 **Recomendación:** esta noche activa CoDi en la app bancaria con la que pagarás (algunos bancos validan con un depósito de un centavo y un SMS) [SB34], paga $0.01 de punta a punta con el `curl` de abajo y graba la pantalla. Con la cuenta de prueba, baja `MAX_MONTO_MXN` (p. ej. a 20).
 
@@ -108,7 +108,7 @@ Base `https://api.pey.mx`; headers `Authorization: Bearer <PEY_API_KEY>`, `Conte
 |---|---|
 | Algún item `PAID` | `pagado` |
 | Lista vacía o solo `PENDING` | `pendiente` |
-| 404 `NOT_FOUND` | `pendiente` hasta vencer (⚪ no verificado) |
+| 404 `NOT_FOUND` | `pendiente` + aviso visible: según la doc, el QR no existe o es de **otra llave** [SB15]. Causa típica: un QR de respaldo creado con una llave distinta a la de Production |
 | Pasó `expiraEn` sin `PAID` | `expirado` (lo calcula la app) |
 
 **Cancelar o devolver:** no hay endpoint (⚪ no verificado si hay otra vía); usa `expiration` corta y devuelve desde la app bancaria del titular [SB10][SB28].
@@ -190,7 +190,7 @@ Evidencia: estos archivos pasaron 9 pruebas con `fetch` simulado en Node 22.23 (
 ```js
 // app/api/_lib/pey.js: cliente mínimo de la API CoDi de Pey (Node.js 20+, ESM, sin dependencias).
 // Necesita "type": "module" en app/package.json (o archivos .mjs). Campos según openapi.json 2026-10-20 (K03.4).
-const BASE = "https://api.pey.mx"; // único entorno documentado (producción); PEY_ENV no cambia la URL (K03.3)
+const BASE = "https://api.pey.mx"; // único entorno documentado (producción) (K03.3)
 const MAX_MONTO = Number(process.env.MAX_MONTO_MXN ?? 500); // tope del producto (AGENTS.md), no es límite de Pey
 
 export class PeyError extends Error {
@@ -306,8 +306,11 @@ export async function GET(request) {
     const pago = items.find((t) => t.status === "PAID"); // estados de Pey: PENDING | PAID
     return Response.json({ id, estado: pago ? "pagado" : "pendiente", transactionId: pago?.id ?? null });
   } catch (e) {
-    // ⚪ No documentado si un QR sin pagos responde lista vacía o 404: tratamos 404 como "pendiente".
-    if (e instanceof PeyError && e.status === 404) return Response.json({ id, estado: "pendiente", transactionId: null });
+    // La doc dice que 404 = el QR no existe o es de otra llave [SB15]. Seguimos en "pendiente" (no rompe la demo)
+    // pero mandamos un aviso para que la interfaz lo muestre: casi siempre es un QR creado con otra PEY_API_KEY.
+    if (e instanceof PeyError && e.status === 404) {
+      return Response.json({ id, estado: "pendiente", transactionId: null, aviso: "qr_no_encontrado_con_esta_llave" });
+    }
     return respuestaDeError(e);
   }
 }
@@ -452,7 +455,7 @@ test("webhook: válido 200, repetido 200, firma ajena 401, sin firma 401, vacío
 
 ## K03.9 · La API como herramienta de un agente de IA
 
-En la Responses API cada herramienta lleva `type: "function"`, `name`, `description`, `parameters` (JSON Schema) y `strict` [SB45]. El modelo responde con items `function_call` (`call_id`, `name` y `arguments` como texto JSON) y tú devuelves un `function_call_output` con el mismo `call_id` [SB45]. Los ejemplos con `strict: true` listan todo en `required`, usan `additionalProperties: false` y modelan lo opcional con `["string", "null"]` [SB46]. Qué palabras clave se respetan en modo estricto: ⚪ no verificado; valida otra vez en el servidor. `crear_cobro` usa los mismos campos que K04.15 (`monto`, `concepto`); el flujo completo con OpenAI está en K04.6. Si tu plan la llama `preparar_cobro`, es la misma herramienta: solo propone.
+En la Responses API cada herramienta lleva `type: "function"`, `name`, `description`, `parameters` (JSON Schema) y `strict` [SB45]. El modelo responde con items `function_call` (`call_id`, `name` y `arguments` como texto JSON) y tú devuelves un `function_call_output` con el mismo `call_id` [SB45]. Los ejemplos con `strict: true` listan todo en `required`, usan `additionalProperties: false` y modelan lo opcional con `["string", "null"]` [SB46]. Qué palabras clave se respetan en modo estricto: ⚪ no verificado; valida otra vez en el servidor. `crear_cobro` usa los mismos campos que K04.15 (`monto`, `concepto`); el flujo completo con OpenAI está en K04.6. La herramienta solo propone: el servidor crea el QR hasta que la persona confirma.
 
 **Reglas de seguridad (Recomendación):**
 1. **Confirmación humana:** `crear_cobro` no cobra; devuelve una propuesta. Solo el botón "Confirmar" de la UI llama `POST /api/cobros`, fuera del control del modelo.
@@ -551,7 +554,7 @@ export async function ejecutarHerramienta(nombre, args) {
         const pago = items.find((t) => t.status === "PAID");
         return pago ? { estado: "pagado", monto: pago.amount, transactionId: pago.id } : { estado: "pendiente" };
       } catch (e) {
-        if (e instanceof PeyError && e.status === 404) return { estado: "pendiente" };
+        if (e instanceof PeyError && e.status === 404) return { estado: "pendiente", aviso: "qr_no_encontrado_con_esta_llave" };
         throw e;
       }
     case "resumen_de_ventas":

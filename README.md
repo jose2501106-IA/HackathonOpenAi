@@ -2,7 +2,9 @@
 
 Base de conocimiento y espacio de trabajo para ganar el **DevDay Exchange Community Hackathon: Mexico City**: sábado 7 de noviembre de 2026, Utopía Elena Poniatowska Amor, Coyoacán, CDMX.
 
-**El reto en una línea:** construir con Codex y la API de OpenAI una herramienta que acerque los cobros CoDi sin comisión (con la API de Pey) a comercios y personas. Detalle y fuentes en [K01](conocimiento/01-evento-verificado.md) y [K02](conocimiento/02-organizadores-y-que-buscan.md).
+**El reto oficial:** prototipar herramientas de **bien público** con OpenAI y CoDi, usando la API gratuita de pey. **Entrega:** domingo 8 a las 13:00. Detalle y fuentes en [K01](conocimiento/01-evento-verificado.md) y [K02](conocimiento/02-organizadores-y-que-buscan.md).
+
+**¿Solo tienes 2 minutos?** Lee el [resumen ejecutivo (K00)](conocimiento/00-resumen-ejecutivo.md): evento, idea recomendada (**"¿Ya cayó?"**), demo de 3 pasos, pendientes de esta noche y riesgos.
 
 ## Cómo se usa el sábado (todo en la nube)
 | Herramienta | Para qué | Empieza por |

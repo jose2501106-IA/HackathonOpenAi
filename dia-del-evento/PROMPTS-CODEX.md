@@ -313,7 +313,9 @@ QUÉ HACER
    QR: qrImage (PNG en base64) → "data:image/png;base64,…"; si qrImage viene null, genera la imagen desde qrString
    en el servidor (por eso puedes necesitar `qrcode`). Ejemplos probados en K03.7: úsalos como base.
 2. consultarEstado(id): GET /transaction/codi/qr/{id} (K03.4). Algún item con status PAID → 'pagado';
-   lista vacía, solo PENDING o 404 NOT_FOUND → 'pendiente'. 'expirado' lo calcula el navegador con expiraEn.
+   lista vacía o solo PENDING → 'pendiente'. 404 NOT_FOUND → 'pendiente' con aviso 'qr_no_encontrado_con_esta_llave'
+   (según la doc, el QR no existe o es de otra llave; la interfaz muestra el aviso y sigue consultando).
+   'expirado' lo calcula el navegador con expiraEn.
    Ante 503 (SERVICE_UNAVAILABLE) reintenta solo este GET, con espera creciente (K03.8).
 3. verificarWebhook(cuerpoCrudo, headers) con Standard Webhooks, como en K03.5 y el handler de K03.7:
    encabezados webhook-id, webhook-timestamp y webhook-signature; contenido firmado
@@ -339,7 +341,8 @@ Interfaz, agente, seguimiento en el navegador, base de datos, archivos congelado
 CRITERIOS DE ACEPTACIÓN
 1. `npm test --prefix app` pasa. Pruebas nuevas con fetch simulado y los ejemplos de K03.4 y K03.7: crear cobro OK
    (monto en pesos en el cuerpo, entorno 'prueba' o 'comercio' según MODO_PAGO); qrImage null → imagen generada desde
-   qrString; Pey responde 401 o INVALID_STATE → PEY_NO_AUTORIZADO; items PAID / PENDING / vacío / 404 se mapean bien;
+   qrString; Pey responde 401 o INVALID_STATE → PEY_NO_AUTORIZADO; items PAID / PENDING / vacío se mapean bien y 404 da
+   'pendiente' con el aviso qr_no_encontrado_con_esta_llave;
    webhook firmado con un secreto de prueba generado en la propia prueba → 200; firma inválida, encabezado ausente o
    timestamp viejo → 401 FIRMA_INVALIDA; cuerpo vacío → 400; mismo webhook-id repetido → 200.
 2. Las pruebas de la Tarea 1 siguen pasando.

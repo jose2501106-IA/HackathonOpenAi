@@ -25,7 +25,7 @@
 - [ ] Guárdala como secreto **solo** en Vercel Production y en Codespaces (`PEY_API_KEY`). Los Preview no la llevan.
 - [ ] 🧑 CoDi activo en la app de tu banco (algunos bancos validan con un depósito de un centavo y un SMS, K03.3).
 - [ ] **Pago de punta a punta de $0.01** con el `curl` de K03.3: crea el QR, págalo desde tu app y **graba la pantalla**. Ese video es tu primer respaldo.
-- [ ] (Opcional, plan B2 de K03.6) QR de respaldo con `expiration: 0`. **No lo subas al repo.**
+- [ ] (Opcional, plan B2 de K03.6) QR de respaldo con `expiration: 0`, creado con la **misma** `PEY_API_KEY` que usará Production (si es de otra llave, Pey responde 404 y el estado nunca cambia). **No lo subas al repo.**
 - [ ] Webhook: ubica en el portal dónde se crea (Desarrollador → engrane de la llave). La URL va a ser `https://<proyecto>.vercel.app/api/webhook-pey` (dominio de producción, nunca un preview). Lo creas mañana a las 11:20 (RUNBOOK) y guardas el secreto `whsec_…` como `PEY_WEBHOOK_SECRET` en Production.
 - [ ] Anota tus dudas para el equipo de pey (RUNBOOK, 9:30).
 

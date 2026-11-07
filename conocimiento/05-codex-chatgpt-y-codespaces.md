@@ -229,7 +229,7 @@ codex exec --sandbox workspace-write "Haz que npm test --prefix app pase sin toc
 - Tope de 64 KB de variables por deploy. Variables de sistema útiles: `VERCEL_GIT_PULL_REQUEST_ID` y `VERCEL_GIT_COMMIT_REF`.
 - ⚪ No verificado hoy: el ajuste "Root Directory = `app`"; que las carpetas con `_` inicial dentro de `api/` (como `app/api/_lib/`) no se publiquen como funciones; que los previews pidan sesión de Vercel.
 
-**Recomendación:** antes del primer PR carga en Production y Preview las variables de `.env.example` (`OPENAI_API_KEY`, `OPENAI_MODEL`, `PEY_API_KEY`, `PEY_ENV`, `PEY_WEBHOOK_SECRET`, `MAX_MONTO_MXN`), con las llaves como Secret. Abre un preview en incógnito para ver si pide sesión; la demo, en la URL de producción.
+**Recomendación:** antes del primer PR carga en Production y Preview las variables de `.env.example` (`OPENAI_API_KEY`, `OPENAI_MODEL`, `PEY_API_KEY`, `PEY_WEBHOOK_SECRET`, `MAX_MONTO_MXN`, `MODO_PAGO`; la tabla por entorno está en `dia-del-evento/CHECKLIST.md`), con las llaves como Secret. Abre un preview en incógnito para ver si pide sesión; la demo, en la URL de producción.
 
 ## K05.17 · Codespaces: puerto público para webhooks
 
