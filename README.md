@@ -1,72 +1,50 @@
-# Tócale · toca la tarjeta y paga con CoDi®
+# Punto de venta de Tacos El Gran Abanico · NFC en la mesa y cobro CoDi®
 
-Proyecto de José para el **DevDay Exchange Community Hackathon: Mexico City** (sábado 7 de noviembre de 2026, UTOPÍA Elena Poniatowska Amor, CDMX). El reto: herramientas de **bien público** con **OpenAI** y **CoDi**, cobrando con la **API de pey** (K00).
+Proyecto de José para el **DevDay Exchange Community Hackathon: Mexico City** (7 de noviembre de 2026, CDMX). El reto: herramientas de **bien público** con **OpenAI** y **CoDi**, cobrando con la **API de pey** (K00).
 
-**El problema** (José, cliente de una taquería de la CDMX): "El cliente llega queriendo pagar con tarjeta, y el cajero de la taquería solamente les puede vender en efectivo. Se pierden ventas."
-
-**La idea:** tocas una tarjeta NFC (o escaneas un QR), escribes tu celular y pagas con CoDi desde la app de tu banco. El cajero ve "pagado" sin terminal y sin revisar comprobantes. Sirve para cualquier puesto que hoy solo acepta efectivo. "Tócale" es nombre provisional.
+**La idea:** cada mesa tiene una etiqueta NFC con una URL fija. El cliente la toca, ve su cuenta (productos, descuentos, IVA y total), escribe su celular y oprime **Pagar**: le llega una solicitud de pago CoDi a la app de su banco. Cuando pey confirma el pago, el punto de venta descuenta los ingredientes, registra lo vendido y muestra **"¡Pago aprobado!"**. Sin terminal, sin efectivo y sin comisión.
 
 ## Estado (honesto)
+Construido el 7 de noviembre de 2026. Las pruebas automáticas pasan y el flujo completo funciona en **SIMULACIÓN**. Hasta que `BITACORA.md` lo registre con evidencia, **no está desplegado ni probado con un cobro real de pey**. El menú, los precios y las existencias son **de ejemplo**.
 
-Prototipo en construcción el 7 de noviembre de 2026. Hasta que `BITACORA.md` lo registre con evidencia, **no está desplegado ni probado con un cobro real de pey**. El negocio ("Taquería El Ejemplo"), el menú y los precios son de ejemplo. Sin llaves, la app corre en **SIMULACIÓN** y lo dice en pantalla.
+## Pantallas
+- **Caja** (`/`): el taquero ve las 5 mesas, captura productos por mesa (con promociones y descuento a la orden), consulta el inventario de ingredientes y el reporte del día, y copia la URL NFC de cada mesa.
+- **Mesa** (`/mesa?m=<id>&t=<token>`, la URL de la etiqueta NFC): cuenta, celular, "Pagar", espera de autorización y resultado.
 
-## Cómo se usa
-
-1. **Caja** (`/`, en el celular del cajero): arma el pedido con botones o dictándolo; la IA de OpenAI lo convierte en productos del menú y el código pone los precios. "Crear cobro" da una liga firmada: se graba en una tarjeta NFC (Chrome en Android) o se muestra como QR.
-2. **Cliente** (`/p?o=…`, en su celular): toca la tarjeta o escanea el QR, ve su pedido, escribe su número y recibe una solicitud de pago CoDi de pey en la app de su banco. La autoriza.
-3. **Pagado:** las dos pantallas cambian a "Pagado" solo cuando pey lo confirma. Si la solicitud no llega, la Caja muestra un QR CoDi de respaldo.
-
-Detalle: [PRD](docs/PRD.md) · [contrato de la API](docs/CONTRATO-API.md) · [pitch](docs/PITCH.md) · [entrega](docs/ENTREGA.md).
+Detalle: [PRD](docs/PRD.md) · [contrato de la API](docs/CONTRATO-API.md) · [entrega y despliegue](docs/ENTREGA.md).
 
 ## Cómo funciona
+- **Cobro:** `POST /codi/pn` de pey con el total recalculado en el servidor. El pago se confirma solo con pey: webhook `codi.pn.payment_received` con firma Standard Webhooks verificada, o `GET /transaction/{id}` con `status: PAID` y el mismo monto ([`pey/`](pey/README.md)).
+- **Inventario:** al confirmar, una función de Postgres marca la orden pagada, descuenta ingredientes según las recetas y guarda al cliente, todo en una transacción e idempotente (un webhook repetido no descuenta dos veces). Si pey rechaza o el cobro vence, no se descuenta nada.
+- **Base de datos:** Supabase (`supabase/migrations/`), con RLS activo y sin políticas: solo el servidor entra con su llave secreta. Sin Supabase, un almacén en memoria para probar en local.
+- **IA (OpenAI):** análisis de ventas e inventario con la Responses API y salida estructurada; listo para activarse con `OPENAI_API_KEY`. La IA solo sugiere: no toca cobros ni inventario.
+- **Stack:** HTML, CSS y JS sin build (`public/`); Vercel Functions en Node.js 22 (`api/`, `lib/`).
 
-- **Pantallas:** HTML, CSS y JavaScript sin framework ni build, en `public/`.
-- **Servidor:** Vercel Functions en Node.js 22 (`api/`); código compartido en `lib/`. Llama a OpenAI y a pey; el navegador solo habla con nuestra API.
-- **IA:** OpenAI Responses API con salida estructurada (`text.format` tipo `json_schema`); modelo por defecto `gpt-6-luna`, configurable con `OPENAI_MODEL`. Sin llave, una interpretación básica sin IA.
-- **Cobro:** `POST /codi/pn` (solicitud al celular) y `POST /codi/qr` (respaldo); confirmación con `GET /transaction/{id}`, `GET /transaction/codi/qr/{id}` y `GET /transaction/api-key`; webhook con firma Standard Webhooks verificada ([`pey/`](pey/README.md)).
-- **Sin base de datos:** el pedido viaja firmado (HMAC) dentro de la liga, válida 3 horas; la verdad del pago vive en pey.
-
-## Correrlo en tu computadora o en Codespaces
-
+## Correrlo
 ```bash
 npm install
-npm run dev      # http://localhost:3000 (Caja) — sin llaves corre en SIMULACIÓN
-npm test         # pruebas con node:test y fetch simulado; no llaman a servicios reales
+npm run dev      # http://localhost:3000 · sin llaves corre en SIMULACIÓN (mesas con token sim1…sim5)
+npm test         # node:test con fetch simulado + migraciones SQL reales en PGlite
 ```
-
-Variables de entorno (nombres en [`.env.example`](.env.example); los valores van como secretos en Vercel o Codespaces, nunca en el repo ni en el chat):
-
-| Variable | Para qué |
-|---|---|
-| `PEY_API_KEY` | Cobrar con pey; sin ella, SIMULACIÓN |
-| `PEY_WEBHOOK_SECRET` | Verificar los webhooks de pey |
-| `OPENAI_API_KEY` | La IA; sin ella, interpretación básica |
-| `OPENAI_MODEL` | Opcional; por defecto `gpt-6-luna` |
-| `MONTO_MAXIMO_MXN` | Tope de cada cobro en el servidor; por defecto `1` |
-| `CAJA_PIN` | Recomendado al desplegar: que nadie más cree cobros con tu URL |
-| `FIRMA_SECRETO` | Opcional; si falta, la llave para firmar ligas se deriva de `PEY_API_KEY` |
-
-Despliegue en Vercel, alta en pey, webhook y prueba real: [docs/ENTREGA.md](docs/ENTREGA.md).
+Variables: [`.env.example`](.env.example). Los valores van como secretos en Vercel o Codespaces, nunca en el repo ni en el chat.
 
 ## Dinero, datos y seguridad
-
-- **Dinero real con cuidado:** pey solo tiene producción. El servidor nunca cobra más de `MONTO_MAXIMO_MXN` (1 peso por defecto); si el pedido vale más, se cobra el tope y las pantallas dicen "Cobro de prueba". Ningún cobro sin confirmación de la persona (K03.3).
-- **Celular del cliente:** solo se usa para mandar la solicitud de pago; no se guarda ni se escribe en logs. "Recordar mi número" es opcional y vive solo en el teléfono del cliente.
-- **Llaves:** solo en el servidor como variables de entorno.
-- **Ley de pagos digitales:** Tócale es adopción voluntaria; la ley no obliga hoy a los comercios a aceptar pagos digitales (K00.4).
+- **MODO PRUEBA por defecto:** con llave de pey se cobran **$0.10 reales** en lugar del total (`MONTO_PRUEBA_MXN`), y la pantalla lo dice. `COBRO_PRUEBA=0` cobra el total con tope `MONTO_MAXIMO_MXN`. pey solo tiene producción y no devuelve pagos (K03.3).
+- **Celular:** se usa para la solicitud CoDi; si el cliente marca "Recordar", se guarda en su teléfono y en la tabla `clientes` (visitas y gasto). Nunca en logs.
+- **Caja:** con cobros reales exige `CAJA_PIN`.
+- **Ley de pagos digitales:** el proyecto es adopción voluntaria; la ley no obliga hoy a los comercios a aceptar pagos digitales (K00.4).
 - **Marca:** pey® y CoDi® son marcas de sus dueños; este proyecto no está patrocinado ni avalado por pey ni por Banxico.
 
 ## Cómo se construyó
-
-- **José:** definió el problema, trajo la idea de las tarjetas NFC y la solicitud de pago al celular, decidió el alcance y presenta.
-- **Claude Code** (con agentes en paralelo: servidor, pantallas y documentación): escribió el código, las pruebas y la documentación el sábado 7 de noviembre; el avance y la evidencia están en [`BITACORA.md`](BITACORA.md) y en los commits con hora.
-- **Qué existía antes del sábado:** la base de conocimiento del concurso, de pey y de CoDi (desde el 5 y 6 de noviembre). Una primera idea, «¿Ya cayó?», se construyó y se retiró el 7 de noviembre; su código sigue en el historial de git (commit `8f45d3d`).
+- **José:** definió el producto (NFC por mesa, solicitud de pago al celular, inventario por ingredientes, Supabase) y presenta.
+- **Claude Code** con un agente en paralelo para las pantallas: código, pruebas y documentación el 7 de noviembre; avance y evidencia en [`BITACORA.md`](BITACORA.md).
+- **Antes:** la base de conocimiento del concurso, pey y CoDi (5 y 6 de noviembre). Dos ideas previas se construyeron y retiraron el 7 de noviembre; su código sigue en el historial de git («¿Ya cayó?» `8f45d3d`, «Tócale» `b592bee`).
 
 ## Base de conocimiento (sigue en el repo)
 
 | Ruta | Qué es |
 |---|---|
-| [`docs/PROYECTO.md`](docs/PROYECTO.md) | Objetivo del hackatón y definición sistémica del proyecto (P1–P12, con las 8 preguntas respondidas). |
+| [`docs/PROYECTO.md`](docs/PROYECTO.md) | Objetivo del hackatón y definición sistémica del proyecto (P1–P12). |
 | [`docs/GUIA-CODESPACES.md`](docs/GUIA-CODESPACES.md) | Claude Code en Codespaces: secretos, inicio de sesión, despliegue y prompts. |
 | [`.claude/commands/`](.claude/commands/) | Prompts por fase: arrancar, PRD, construir, verificar, desplegar y entregar. |
 | [`conocimiento/00-bases-del-concurso.md`](conocimiento/00-bases-del-concurso.md) | K00: requisitos, calendario, entrega, criterios, premios y pendientes. |

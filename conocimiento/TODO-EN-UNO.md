@@ -371,18 +371,16 @@ Sirve para cualquier servicio; el PRD la ajusta.
 
 ## P12 · El problema (lo define José)
 
-Estado: **respondido** (7-nov, 14:19). La respuesta 2 es de José, palabra por palabra; las demás son los borradores que José mandó construir ("Hazlo ya"). El producto que sale de aquí, **Tócale** (nombre provisional), está en [`docs/PRD.md`](../docs/PRD.md) y su API en [`docs/CONTRATO-API.md`](../docs/CONTRATO-API.md).
+Estado: **respondido** (7-nov, 15:02 y 15:22). Producto: [`docs/PRD.md`](../docs/PRD.md); API: [`docs/CONTRATO-API.md`](../docs/CONTRATO-API.md). Las ideas anteriores («¿Ya cayó?» y «Tócale») se retiraron; su código sigue en el historial de git.
 
-1. **¿Quién lo vive?** El cajero de una taquería de la CDMX que vende mucho pero solo cobra en efectivo, y sus clientes que llegan queriendo pagar sin efectivo. José es cliente de esa taquería, sin otra relación: no se nombra, y la app usa un negocio ficticio ("Taquería El Ejemplo") con menú y precios de ejemplo.
-2. **¿Qué pasa hoy?** En palabras de José: "El cliente llega queriendo pagar con tarjeta, y el cajero de la taquería solamente les puede vender en efectivo. Se pierden ventas."
-3. **¿Qué cuesta hoy?** Ventas que se pierden cuando el cliente no trae efectivo (⚪ sin cifra: nadie lo ha medido), tiempo dando cambio en la hora de más gente y el riesgo de manejar efectivo. Si aceptaran transferencias, el cajero tendría que revisar los comprobantes uno por uno.
-4. **¿Qué haría la app, en una frase?** Tocas la tarjeta (o escaneas el QR), escribes tu celular y pagas tus tacos con CoDi desde la app de tu banco; el cajero ve "pagado" sin terminal y sin comprobantes que revisar.
-5. **¿Dónde entra el cobro con pey y CoDi?** La taquería le cobra al cliente lo que consumió. El servidor pide a pey una solicitud de pago al celular del cliente (`POST /codi/pn`, con el número de pedido como `numRef` y un monto máximo en el servidor); el cliente la autoriza en su banco; el pago se confirma con pey (`GET /transaction/{id}`, y en la caja buscando el número de pedido en `GET /transaction/api-key`); el webhook `codi.pn.payment_received` trae el mismo `transactionId` ([`pey/04`](../pey/04-api-codi-qr-y-push.md), [`pey/07`](../pey/07-api-transacciones.md), [`pey/09`](../pey/09-webhooks.md)). Respaldo: un QR CoDi (`POST /codi/qr`) en la pantalla del cajero. CoDi no cobra comisión a quien paga ni a quien cobra ([`codi/01`](../codi/01-que-es-codi.md)) y la API de pey es gratuita "por el momento" ([`pey/01`](../pey/01-que-es-pey-y-codi.md)).
-6. **¿Qué hace la IA de OpenAI que un formulario no podría?** El cajero dicta o escribe el pedido como lo diría en voz alta ("cuatro de pastor con todo y una horchata") y la IA lo convierte en productos del menú. Los precios y la suma los pone el código; la IA nunca decide montos. Un formulario lo obligaría a picar botones con las manos ocupadas en plena hora de más gente.
-7. **¿Cómo aprovecha la ley de pagos digitales?** Como adopción voluntaria: la ley dice que los comercios "podrán implementar" pagos digitales (art. 11) y solo los sectores que designe la SHCP tendrán obligación (art. 13). La app prepara a un negocio de puro efectivo antes de que existan esas reglas, sin prometer que cumple con la ley (K00.4).
-8. **¿Qué tiene de creativo?** Una tarjeta NFC reprogramable que lleva tu pedido: la tocas y pagas con CoDi, sin terminal y sin efectivo.
-
-**Bien público (R3):** el reto escrito pide "bien público" (K00.2). Tócale se presenta como pagos digitales sin comisión para cualquier puesto que hoy solo acepta efectivo; la taquería es el primer caso, no el único.
+1. **¿Quién lo vive?** Tacos El Gran Abanico, una taquería con mesas, y sus clientes. Menú, precios y existencias de ejemplo.
+2. **¿Qué pasa hoy?** Cobrar exige efectivo o terminal, y el inventario y las ventas se llevan a mano.
+3. **¿Qué cuesta hoy?** Comisiones de terminal, tiempo dando cambio y no saber qué ingredientes se gastaron (⚪ sin cifra medida).
+4. **¿Qué haría la app?** Un punto de venta: el cliente toca la etiqueta NFC de su mesa, ve su cuenta, escribe su celular y paga con CoDi; al confirmarse el pago se descuentan ingredientes y se registra la venta.
+5. **¿Dónde entra pey y CoDi?** La taquería le cobra al cliente con `POST /codi/pn`; el pago se confirma con el webhook `codi.pn.payment_received` o `GET /transaction/{id}` ([`pey/04`](../pey/04-api-codi-qr-y-push.md), [`pey/07`](../pey/07-api-transacciones.md), [`pey/09`](../pey/09-webhooks.md)).
+6. **¿Qué hace la IA de OpenAI?** Analiza ventas e inventario después de los pagos y sugiere qué reabastecer y cuáles son las horas pico (código listo; se activa con la llave).
+7. **¿Cómo aprovecha la ley?** Adopción voluntaria de pagos digitales sin comisión, antes de que la SHCP defina sectores (K00.4).
+8. **¿Qué tiene de creativo?** La mesa es la terminal: una etiqueta NFC de pocos pesos reemplaza a la terminal y al ticket, y el pago confirmado mueve el inventario solo.
 
 <!-- ===== FIN: docs/PROYECTO.md ===== -->
 

@@ -83,6 +83,6 @@ http
     }
   })
   .listen(PORT, () => {
-    const modo = process.env.PEY_API_KEY ? "REAL (cobra dinero real, máximo MONTO_MAXIMO_MXN)" : "SIMULACIÓN";
-    console.log(`Tócale en http://localhost:${PORT} · modo ${modo}`);
+    const modo = process.env.PEY_API_KEY && process.env.MODO_SIMULACION !== "1" ? (process.env.COBRO_PRUEBA === "0" ? "REAL" : "MODO PRUEBA (cobra MONTO_PRUEBA_MXN real)") : "SIMULACIÓN";
+    console.log(`Tacos El Gran Abanico · POS en http://localhost:${PORT} · modo ${modo}`);
   });

@@ -1,167 +1,68 @@
-# Contrato de la API · Tócale
+# Contrato de API · Punto de venta de Tacos El Gran Abanico
 
-> Acuerdo entre el servidor (`api/`, `lib/`) y las pantallas (`public/`), escrito el 7-nov para repartir el trabajo entre agentes en paralelo (P10). **Si el código y este documento no coinciden, manda el código** y se corrige este archivo. Producto y reglas: [`docs/PRD.md`](PRD.md). API de pey: [`pey/`](../pey/README.md).
+> Contrato entre las pantallas (`public/`) y el servidor (`api/` + `lib/`). Si cambia, se cambia aquí primero. Producto: [`PRD.md`](PRD.md). pey: [`pey/04`](../pey/04-api-codi-qr-y-push.md), [`pey/07`](../pey/07-api-transacciones.md), [`pey/09`](../pey/09-webhooks.md).
 
 ## Convenciones
+- JSON en UTF-8. **Todo el dinero va en centavos enteros** (`2500` = $25.00). La pantalla da el formato `$25.00`.
+- Errores: estado HTTP 4xx/5xx y cuerpo `{ "error": { "codigo": "TEXTO_EN_MAYUSCULAS", "mensaje": "Texto para mostrar tal cual, en español de México" } }`.
+- Rutas de **caja** exigen el encabezado `x-caja-pin` cuando el servidor tiene `CAJA_PIN`. Sin PIN correcto: 401 `PIN_REQUERIDO`. `GET /api/salud` dice si hace falta (`cajaConPin`).
+- Fechas en ISO 8601 (UTC). La pantalla las muestra en hora de la CDMX.
 
-- Todo es JSON (`Content-Type: application/json`), salvo `qrSvg`, que es texto SVG dentro del JSON.
-- **Errores:** `{"error": {"codigo": "TEXTO_VACIO", "mensaje": "Texto para mostrar en español de México"}}` con el código HTTP de la tabla de abajo. La interfaz muestra `mensaje` tal cual.
-- **Montos:** pesos MXN con hasta 2 decimales (`130`, `1`, `0.5`), igual que pey ([`pey/03`](../pey/03-referencia-api-convenciones.md)).
-- **Tiempos:** marca Unix en segundos, igual que pey.
-- **Llaves:** solo en el servidor. Ninguna respuesta las incluye ni dice su valor.
-- **Polling:** la interfaz consulta el estado cada 3 a 5 segundos y se detiene al vencer el cobro; pey no publica un límite de peticiones (⚪, [`pey/07`](../pey/07-api-transacciones.md)).
-
-## La liga del pedido
-
-Sin base de datos, el pedido viaja **firmado** dentro de una liga corta que se graba en la tarjeta NFC o se muestra como QR:
-
-```
-https://<dominio>/p?o=<id7>.<productos>.<tiempo36>.<firma16>
-```
-
-| Parte | Qué es |
-|---|---|
-| `id7` | Número de pedido de 7 dígitos. Es también el `numRef` del cobro en pey (1 a 7 dígitos, [`pey/04`](../pey/04-api-codi-qr-y-push.md)). |
-| `productos` | Código de producto + cantidad, pegados (por ejemplo `pa4ho1` = 4 del producto `pa` y 1 del producto `ho`). Los códigos y precios están en `lib/menu.js`. |
-| `tiempo36` | Hora de creación en base 36. La liga vale **3 horas**. |
-| `firma16` | Primeros 16 caracteres (base64url) de un HMAC-SHA256 de las tres partes anteriores, con `FIRMA_SECRETO` (o una llave derivada de `PEY_API_KEY` si falta). Si alguien cambia un carácter, el servidor la rechaza. |
-
-El servidor **siempre** recalcula productos, precios y total desde el menú: el navegador nunca manda montos.
-
-## Rutas
-
-### `GET /api/salud`
-Para saber en qué modo está la app, sin revelar llaves.
+## Objeto `Orden`
 ```json
-{ "ok": true, "modo": "real", "ia": true, "montoMaximo": 1, "negocio": "Taquería El Ejemplo", "pinRequerido": true }
+{
+  "id": "uuid",
+  "mesaId": 3,
+  "estado": "abierta | cobrando | pagada",
+  "renglones": [
+    { "productoId": "taco_pastor", "nombre": "Taco al pastor", "cantidad": 4,
+      "precioUnitario": 2500, "descuentoPct": 10, "importeBruto": 10000, "descuento": 1000, "importe": 9000 }
+  ],
+  "descuentoOrdenPct": 0,
+  "totales": { "subtotal": 8621, "descuento": 862, "iva": 1241, "total": 9000 },
+  "cobro": { "montoCobrado": 10, "expiraEn": "2026-11-07T22:10:00.000Z", "telefonoOculto": "******5678", "modoPrueba": true },
+  "pagadaEn": null,
+  "aviso": { "codigo": "VENCIDO", "mensaje": "No recibimos el pago. Si no te llegó la notificación, tu número puede no estar registrado en CoDi." },
+  "actualizadaEn": "ISO"
+}
 ```
-- `modo`: `"real"` si hay `PEY_API_KEY`; si no, `"simulacion"` y la interfaz muestra **SIMULACIÓN**.
-- `ia`: `true` si hay `OPENAI_API_KEY`; si no, la interpretación de texto es básica (sin IA).
-- `pinRequerido`: `true` si está definido `CAJA_PIN`.
+- Precios con IVA incluido. `subtotal` y `descuento` van **sin IVA**; `subtotal − descuento + iva = total` al centavo.
+- `cobro` es `null` mientras no se ha pedido el pago. En `pagada` conserva el monto cobrado.
+- `aviso` es el último problema del cobro (vencido o rechazado por pey); se borra al iniciar otro cobro. Con `aviso`, la orden vuelve a `abierta` y **no** se descontó inventario.
+- `modoPrueba: true` = se cobra `montoCobrado` (por defecto $0.10) en lugar del total: hay que decirlo en pantalla.
 
-### `GET /api/menu`
-El menú de ejemplo.
-```json
-{ "negocio": "Taquería El Ejemplo", "ejemplo": true, "productos": [ { "id": "pa", "nombre": "Taco al pastor", "precio": 25 } ] }
-```
+## Rutas públicas (landing de la mesa, abierta desde la etiqueta NFC)
 
-### `POST /api/interpretar`
-Convierte lo que el cajero dicta o escribe en productos del menú. No crea el pedido: la Caja muestra el resultado para que el cajero lo corrija y confirme.
-```json
-// Petición
-{ "texto": "cuatro de pastor con todo y una horchata" }
-// Respuesta 200
-{ "items": [ { "id": "pa", "nombre": "Taco al pastor", "precio": 25, "cantidad": 4 } ],
-  "noEntendido": ["con todo"], "fuente": "ia" }
-```
-- `fuente`: `"ia"` (OpenAI, Responses API con `text.format` tipo `json_schema`) o `"basica"` (reglas sin IA, cuando falta la llave).
-- La IA solo elige productos del menú y cantidades; los precios vienen del código.
-- Errores: `TEXTO_VACIO`, `TEXTO_LARGO`, `IA_ERROR`.
+La etiqueta NFC de cada mesa guarda una URL fija: `https://<dominio>/mesa?m=<id>&t=<token>`.
 
-### `POST /api/pedido`
-Crea el pedido firmado. Header `x-caja-pin` obligatorio si está definido `CAJA_PIN`.
-```json
-// Petición
-{ "items": [ { "id": "pa", "cantidad": 4 }, { "id": "ho", "cantidad": 1 } ] }
-// Respuesta 200
-{ "pedido": { "id": "4829135",
-              "items": [ { "id": "pa", "nombre": "Taco al pastor", "precio": 25, "cantidad": 4, "subtotal": 100 } ],
-              "total": 130, "creado": 1794000000, "vence": 1794010800 },
-  "cobro": { "monto": 1, "montoPrueba": true },
-  "codigo": "4829135.pa4ho1.<tiempo36>.<firma16>",
-  "url": "https://<dominio>/p?o=4829135.pa4ho1.<tiempo36>.<firma16>",
-  "qrSvg": "<svg …>" }
-```
-- `cobro.monto` = el total, pero nunca más que `MONTO_MAXIMO_MXN` (1 peso por defecto). Si el total es mayor, `montoPrueba` es `true` y las pantallas dicen **"Cobro de prueba"** con ambos montos.
-- `qrSvg`: QR de `url`, para que el cliente lo escanee con la cámara mientras no haya tarjeta.
-- Errores: `PIN_INCORRECTO`, `PEDIDO_VACIO`, `PRODUCTO_INVALIDO`, `CANTIDAD_INVALIDA`.
+| Ruta | Entrada | Respuesta 200 | Errores |
+|---|---|---|---|
+| `GET /api/salud` | — | `{ ok, modo: "simulacion"\|"real", cobroPrueba: bool, montoPrueba: centavos, baseDatos: "memoria"\|"supabase", ia: bool, cajaConPin: bool, avisos: [texto] }` | — |
+| `GET /api/mesa?m=&t=` | mesa y token | `{ negocio: { nombre }, mesa: { id, nombre }, orden: Orden \| null, modo, cobroPrueba, montoPrueba }` · Si la orden está `cobrando`, el servidor consulta a pey y la puede pasar a `pagada` o regresar a `abierta` con `aviso`. La orden `pagada` se sigue mostrando 30 min o hasta que la caja abra otra. | 404 `MESA_INVALIDA` |
+| `POST /api/pagar` | `{ m, t, telefono: "10 dígitos", recordar: bool }` | `{ orden }` en `cobrando` (se mandó la solicitud de pago al banco) | 400 `TELEFONO_INVALIDO` · 404 `MESA_INVALIDA` · 409 `SIN_ORDEN`, `ORDEN_VACIA`, `ORDEN_EN_COBRO`, `YA_PAGADA` · 502 `PEY_RECHAZO` (mensaje con el motivo de pey) · 503 `PEY_NO_DISPONIBLE` |
+| `POST /api/simular-pago` | `{ m, t }` | `{ orden }` en `pagada` · **solo SIMULACIÓN** | 403 `SOLO_SIMULACION` · 409 `SIN_COBRO` |
+| `POST /api/webhook-pey` | evento firmado de pey (Standard Webhooks) | `{ ok: true }` | 400 `FIRMA_INVALIDA` |
 
-### `GET /api/pedido?o=<codigo>`
-La pantalla del cliente lo usa para mostrar el pedido validado por el servidor. Respuesta: `{ pedido, cobro }` con la misma forma de arriba.
-- Errores: `PEDIDO_INVALIDO` (firma o formato mal), `PEDIDO_VENCIDO` (más de 3 horas).
+Reglas del cobro:
+1. La pantalla pide confirmación explícita: el botón "Pagar" muestra el monto y la persona lo oprime.
+2. El servidor recalcula el total con el menú; nunca usa montos del navegador.
+3. `POST /codi/pn` a pey con `amount` (pesos), `phoneNumber`, `concept` ("Tacos El Gran Abanico · Mesa 3"), `expiration: 360`, `numRef` y `metadata.orden`.
+4. El pago se confirma **solo** con pey: webhook `codi.pn.payment_received` con firma válida, o `GET /transaction/{transactionId}` con `status: "PAID"`; en ambos casos el monto debe ser igual a `montoCobrado`. Al confirmar, en una sola transacción de base de datos: orden `pagada`, se descuentan ingredientes según las recetas, se registran los productos vendidos y, si `recordar`, se guarda el cliente.
+5. Si pey rechaza la solicitud (400/500/503) la orden vuelve a `abierta` con el mensaje de error y no se descuenta nada.
+6. Si pasa la vigencia (360 s) sin pago, el servidor consulta a pey una última vez; si no está pagada, la orden vuelve a `abierta` con el `aviso` VENCIDO. pey no documenta qué pasa con un celular sin CoDi ([`pey/04`](../pey/04-api-codi-qr-y-push.md) ⚪), por eso el mensaje lo menciona como posibilidad.
+7. Un pago que llega tarde (después del aviso) igual se confirma: el dinero ya entró.
 
-### `POST /api/cobros`
-Crea el cobro en pey. Exige `confirmo: true`: la persona tocó el botón después de ver el monto (`AGENTS.md` §3).
-```json
-// Solicitud de pago al celular (pantalla del cliente)
-{ "o": "<codigo>", "metodo": "push", "telefono": "5500000000", "confirmo": true }
-// Respuesta 200
-{ "metodo": "push", "id": "<transactionId>", "monto": 1, "montoPrueba": true, "vence": 1794000600, "simulacion": false }
+## Rutas de caja (punto de venta)
 
-// QR CoDi de respaldo (pantalla de la Caja)
-{ "o": "<codigo>", "metodo": "qr", "confirmo": true }
-// Respuesta 200
-{ "metodo": "qr", "id": "<IDC del QR>", "monto": 1, "montoPrueba": true, "vence": 1794000600, "qrSvg": "<svg …>", "simulacion": false }
-```
-- `push` llama a `POST /codi/pn` con `phoneNumber` (10 dígitos), `amount`, `concept`, `expiration: 600`, `numRef` = número de pedido y `metadata.pedido` ([`pey/04`](../pey/04-api-codi-qr-y-push.md)).
-- `qr` llama a `POST /codi/qr` con los mismos datos, sin celular; `qrSvg` se dibuja desde el `qrString` de pey.
-- El celular solo se usa para esta llamada: no se guarda ni se escribe en logs.
-- Errores: `FALTA_CONFIRMACION`, `TELEFONO_INVALIDO`, `METODO_INVALIDO`, `PEDIDO_INVALIDO`, `PEDIDO_VENCIDO`, `PEY_ERROR`, `PEY_NO_DISPONIBLE`.
-
-### `GET /api/estado?o=<codigo>&metodo=<push|qr>&id=<id>`
-Pregunta a pey si ya pagaron. Nunca dice "pagado" sin confirmación de pey.
-```json
-{ "estado": "pagado", "monto": 1, "pagadoEn": 1794000042, "simulacion": false }
-```
-| Con… | Consulta en pey | "pagado" si… |
+| Ruta | Entrada | Respuesta 200 |
 |---|---|---|
-| `metodo=push&id=<transactionId>` | `GET /transaction/{id}` | `status: "PAID"` y el mismo monto |
-| `metodo=qr&id=<IDC>` | `GET /transaction/codi/qr/{id}` | algún pago `PAID` con el mismo monto |
-| solo `o` (la Caja no conoce el `transactionId` del cliente) | `GET /transaction/api-key` (80 por página, de la más reciente) | un pago `PAID` con `metadata.externalMetadata.pedido` = número de pedido y el mismo monto |
+| `GET /api/caja-estado` | — | `{ negocio, salud, catalogo: [{ id, nombre, categoria, precio, descuentoPct, promo }], mesas: [{ id, nombre, urlNfc, orden: Orden \| null }] }` |
+| `POST /api/caja-orden` | `{ mesaId, items: [{ productoId, cantidad }], descuentoOrdenPct }` | `{ orden }` · Crea la orden abierta de la mesa o reemplaza sus productos. Con `items` vacío cancela la orden abierta (`orden: null`). Errores: 409 `ORDEN_EN_COBRO`, 400 `PRODUCTO_INVALIDO`, `CANTIDAD_INVALIDA`, `DESCUENTO_INVALIDO` |
+| `GET /api/caja-inventario` | — | `{ ingredientes: [{ id, nombre, unidad, existencia, minimo, bajo: bool }] }` |
+| `GET /api/caja-reporte?fecha=AAAA-MM-DD` | fecha CDMX (por defecto hoy) | `{ fecha, ordenes, totalVendido, totalCobrado, ticketPromedio, productos: [{ productoId, nombre, cantidad, importe }], porHora: [{ hora: 0-23, ordenes, total }], clientes: { conCelular, recurrentes }, consumo: [{ id, nombre, unidad, cantidad }] }` |
+| `POST /api/caja-analisis` | — | `{ disponible: false, mensaje }` sin `OPENAI_API_KEY`, o `{ disponible: true, analisis: { resumen, reabastecer: [{ ingrediente, motivo }], observaciones: [texto] } }` |
 
-- `estado`: `"pendiente"`, `"pagado"` o `"no_verificable"` (pey no responde o no reconoce el id con esta llave; un 404 no prueba que no pagaron, [`pey/07`](../pey/07-api-transacciones.md)).
-- "Vencido" no lo dice pey: pey no manda aviso de rechazo ni de vencimiento ([`pey/04`](../pey/04-api-codi-qr-y-push.md)). La interfaz lo muestra cuando pasa `vence` sin pago y ofrece intentar de nuevo. Un pago que llega tarde gana (P5).
-
-### `POST /api/webhook-pey`
-Recibe los avisos de pey (`codi.pn.payment_received`, `codi.qr.payment_received`).
-- Verifica la firma **Standard Webhooks** con `PEY_WEBHOOK_SECRET` sobre el cuerpo crudo, con los headers `webhook-id`, `webhook-timestamp` y `webhook-signature` ([`pey/09`](../pey/09-webhooks.md)).
-- Firma inválida o ausente: `FIRMA_INVALIDA`. Firma válida: 200.
-- Sin base de datos solo registra el tipo de evento y el `transactionId`; nunca CLABE, clave de rastreo ni celulares. Queda listo para guardar eventos cuando haya base de datos.
-
-## Códigos de error
-
-| Código | HTTP sugerido | Cuándo |
-|---|---|---|
-| `TEXTO_VACIO` | 400 | `POST /api/interpretar` sin texto |
-| `TEXTO_LARGO` | 400 | Texto más largo de lo permitido |
-| `PIN_INCORRECTO` | 401 | Falta `x-caja-pin` o no coincide con `CAJA_PIN` |
-| `IA_ERROR` | 502 | OpenAI falló y no hubo respaldo |
-| `PEDIDO_VACIO` | 400 | Pedido sin productos |
-| `PRODUCTO_INVALIDO` | 400 | Un `id` que no está en el menú |
-| `CANTIDAD_INVALIDA` | 400 | Cantidad que no es entero positivo o pasa del límite |
-| `PEDIDO_INVALIDO` | 400 | Liga con formato o firma incorrectos |
-| `PEDIDO_VENCIDO` | 410 | Liga de más de 3 horas |
-| `FALTA_CONFIRMACION` | 400 | `confirmo` no es `true` |
-| `TELEFONO_INVALIDO` | 400 | Celular que no son exactamente 10 dígitos |
-| `METODO_INVALIDO` | 400 | `metodo` distinto de `push` o `qr` |
-| `PEY_ERROR` | 502 | pey rechazó el cobro; `mensaje` dice el `error.type` de pey |
-| `PEY_NO_DISPONIBLE` | 503 | pey en mantenimiento o sin respuesta |
-| `FIRMA_INVALIDA` | 401 | Webhook con firma que no verifica |
-
-Los códigos HTTP son la sugerencia de este contrato; el valor final está en el código.
-
-## Variables de entorno
-
-| Variable | Obligatoria | Para qué |
-|---|---|---|
-| `PEY_API_KEY` | Para cobrar de verdad | Sin ella, `modo: "simulacion"` |
-| `PEY_WEBHOOK_SECRET` | Para el webhook | Secreto `whsec_…` del portal de pey |
-| `OPENAI_API_KEY` | Para la IA | Sin ella, interpretación básica |
-| `OPENAI_MODEL` | No | Modelo de OpenAI; por defecto `gpt-6-luna` |
-| `MONTO_MAXIMO_MXN` | No | Tope de cada cobro en el servidor; por defecto `1` |
-| `CAJA_PIN` | Recomendada al desplegar | Para que nadie más cree pedidos con tu URL pública |
-| `FIRMA_SECRETO` | No | Llave para firmar ligas; si falta, se deriva de `PEY_API_KEY` |
-
-Los valores van solo en Vercel, Codespaces o tu `.env` local, nunca en el repo ni en el chat (`AGENTS.md` §4).
-
-## Modo SIMULACIÓN
-
-Sin `PEY_API_KEY` no se llama a pey: los cobros llevan `simulacion: true` y las dos pantallas muestran **SIMULACIÓN** de forma visible. En SIMULACIÓN ningún texto dice que pey confirmó algo (P10).
-
-## Fuentes
-
-| Dato | Fuente | Consultado |
-|---|---|---|
-| Rutas, campos, estados y webhooks de pey | [`pey/`](../pey/README.md) (OpenAPI 2026-10-20) | 2026-11-07 |
-| Modelo `gpt-6-luna`: "Our most efficient model for focused, high-volume tasks" | [OpenAI: Models](https://developers.openai.com/api/docs/models) | 2026-11-07 |
-| Salida estructurada con `text.format` en la Responses API | [OpenAI: Structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs) | 2026-11-07 |
+## Modos (siempre visibles en pantalla)
+- **SIMULACIÓN**: no hay `PEY_API_KEY` (o `MODO_SIMULACION=1`). No se llama a pey; aparece el botón "Simular pago (SIMULACIÓN)". Un celular que empieza con `00` simula un número sin CoDi: nunca se paga y vence a los 20 s.
+- **MODO PRUEBA**: hay llave de pey y `COBRO_PRUEBA` no es `0`. Se cobra dinero real, pero solo `MONTO_PRUEBA_MXN` (por defecto $0.10) o el total, lo que sea menor.
+- **REAL**: `COBRO_PRUEBA=0`. Se cobra el total, con tope `MONTO_MAXIMO_MXN` (por defecto $2,000).

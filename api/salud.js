@@ -1,5 +1,4 @@
 import { crearApp } from "../lib/app.js";
 
-export function GET(request) {
-  return crearApp().salud(request);
-}
+const app = crearApp();
+export const GET = (request) => app.salud(request);

@@ -1,5 +1,5 @@
 // Utilidades de prueba: fetch simulado (ninguna prueba llama servicios reales) y peticiones.
-export const ORIGEN = "https://tocale.test";
+export const ORIGEN = "https://abanico.test";
 
 export function fetchFalso(rutas = {}) {
   const llamadas = [];

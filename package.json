@@ -1,17 +1,18 @@
 {
-  "name": "tocale",
+  "name": "pos-gran-abanico",
   "version": "0.1.0",
   "private": true,
-  "description": "Tócale: toca la tarjeta NFC (o escanea el QR) y paga con CoDi® vía pey®.",
+  "description": "Punto de venta de Tacos El Gran Abanico: etiqueta NFC en la mesa y cobro CoDi® con la API de pey®.",
   "type": "module",
   "engines": {
     "node": "22.x"
   },
   "scripts": {
     "test": "node --test",
-    "dev": "node scripts/servidor_local.mjs"
+    "dev": "node scripts/servidor_local.mjs",
+    "semilla": "node scripts/generar_semilla_sql.mjs"
   },
-  "dependencies": {
-    "qrcode": "^1.5.4"
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.15"
   }
 }

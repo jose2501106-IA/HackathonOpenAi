@@ -1,152 +1,92 @@
-// Tócale · utilidades compartidas entre la Caja y la página del cliente.
+// Utilidades compartidas por la Caja y la Mesa. Dinero siempre en centavos enteros.
 
-const formatoPesos = new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN" });
-const formatoHora = new Intl.DateTimeFormat("es-MX", { hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+const fmtDinero = new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN" });
+const fmtHora = new Intl.DateTimeFormat("es-MX", { timeZone: "America/Mexico_City", hour: "2-digit", minute: "2-digit" });
+const fmtFecha = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Mexico_City", year: "numeric", month: "2-digit", day: "2-digit" });
 
-/** $1,234.50 */
-export function pesos(valor) {
-  const n = Number(valor);
-  return Number.isFinite(n) ? formatoPesos.format(n) : "—";
-}
-
-/** 14:52 a partir de una marca Unix en segundos (o la hora actual). */
-export function hora(unixSegundos) {
-  const n = Number(unixSegundos);
-  const fecha = Number.isFinite(n) && n > 0 ? new Date(n * 1000) : new Date();
-  return formatoHora.format(fecha);
-}
-
-/** Hora actual en segundos Unix. */
-export function ahora() {
-  return Math.floor(Date.now() / 1000);
-}
+export const dinero = (centavos) => fmtDinero.format((Number(centavos) || 0) / 100);
+export const horaCDMX = (iso) => (iso ? fmtHora.format(new Date(iso)) : "");
+export const hoyCDMX = () => fmtFecha.format(new Date()); // AAAA-MM-DD
 
 export class ErrorApi extends Error {
-  constructor(mensaje, { codigo = "ERROR", status = 0 } = {}) {
+  constructor(codigo, mensaje, status) {
     super(mensaje);
-    this.name = "ErrorApi";
     this.codigo = codigo;
     this.status = status;
   }
 }
 
-/**
- * Llama a nuestra propia API (mismo origen). Regresa el JSON o lanza ErrorApi con el
- * mensaje que manda el servidor en {"error":{"codigo","mensaje"}}.
- */
-export async function api(ruta, { metodo = "GET", cuerpo, encabezados = {} } = {}) {
-  const opciones = {
-    method: metodo,
-    headers: { Accept: "application/json", ...encabezados },
-    cache: "no-store",
-  };
-  if (cuerpo !== undefined) {
-    opciones.headers["Content-Type"] = "application/json";
-    opciones.body = JSON.stringify(cuerpo);
-  }
-
-  let respuesta;
+// Llama a nuestra API. Regresa el JSON o lanza ErrorApi con el mensaje del servidor tal cual.
+export async function api(ruta, { metodo = "GET", cuerpo, headers = {} } = {}) {
+  let resp;
   try {
-    respuesta = await fetch(ruta, opciones);
+    resp = await fetch(ruta, {
+      method: metodo,
+      headers: { accept: "application/json", ...(cuerpo !== undefined ? { "content-type": "application/json" } : {}), ...headers },
+      body: cuerpo !== undefined ? JSON.stringify(cuerpo) : undefined,
+      cache: "no-store",
+    });
   } catch {
-    throw new ErrorApi("No hay conexión. Revisa tu internet e inténtalo de nuevo.", { codigo: "SIN_CONEXION" });
+    throw new ErrorApi("SIN_CONEXION", "No hay conexión. Revisa tu internet e intenta de nuevo.", 0);
   }
-
   let datos = null;
   try {
-    datos = await respuesta.json();
+    datos = await resp.json();
   } catch {
     datos = null;
   }
-
-  if (!respuesta.ok) {
-    const error = datos && typeof datos === "object" ? datos.error : null;
-    throw new ErrorApi(
-      (error && error.mensaje) || `El servidor respondió con un error (${respuesta.status}). Inténtalo de nuevo.`,
-      { codigo: (error && error.codigo) || "ERROR_HTTP", status: respuesta.status },
-    );
-  }
-  if (datos === null || typeof datos !== "object") {
-    throw new ErrorApi("Respuesta inesperada del servidor. Inténtalo de nuevo.", {
-      codigo: "RESPUESTA_INVALIDA",
-      status: respuesta.status,
-    });
+  if (!resp.ok) {
+    const e = datos?.error;
+    throw new ErrorApi(e?.codigo || `HTTP_${resp.status}`, e?.mensaje || "Algo falló. Intenta de nuevo.", resp.status);
   }
   return datos;
 }
 
-/** Inserta un SVG que generó nuestro servidor (QR) sin scripts ni atributos on*. */
-export function insertarSvg(contenedor, svgTexto, etiqueta) {
+// Crea un elemento con clase y texto (nunca HTML de datos).
+export function el(etiqueta, { clase, texto, attrs } = {}, ...hijos) {
+  const n = document.createElement(etiqueta);
+  if (clase) n.className = clase;
+  if (texto !== undefined && texto !== null) n.textContent = String(texto);
+  if (attrs) for (const [k, v] of Object.entries(attrs)) if (v !== undefined && v !== null && v !== false) n.setAttribute(k, v === true ? "" : String(v));
+  for (const h of hijos) if (h) n.append(h);
+  return n;
+}
+
+// Franja de modo, siempre visible. salud: { modo, cobroPrueba, montoPrueba }
+export function pintarFranja(contenedor, { modo, cobroPrueba, montoPrueba }) {
   contenedor.replaceChildren();
-  if (typeof svgTexto !== "string" || !svgTexto.trim()) return false;
-  const documento = new DOMParser().parseFromString(svgTexto, "image/svg+xml");
-  const raiz = documento.documentElement;
-  if (!raiz || raiz.nodeName.toLowerCase() !== "svg" || documento.querySelector("parsererror")) return false;
-  raiz.querySelectorAll("script, foreignObject").forEach((nodo) => nodo.remove());
-  for (const elemento of [raiz, ...raiz.querySelectorAll("*")]) {
-    for (const atributo of [...elemento.attributes]) {
-      if (/^on/i.test(atributo.name) || /^\s*javascript:/i.test(atributo.value)) elemento.removeAttribute(atributo.name);
-    }
+  contenedor.hidden = false;
+  if (modo === "simulacion") {
+    contenedor.className = "franja franja-sim";
+    contenedor.textContent = "SIMULACIÓN · no se cobra dinero";
+  } else if (cobroPrueba) {
+    contenedor.className = "franja franja-prueba";
+    contenedor.textContent = `MODO PRUEBA · se cobran ${dinero(montoPrueba ?? 10)} reales (no el total)`;
+  } else {
+    contenedor.className = "franja franja-real";
+    contenedor.textContent = "Cobro real con CoDi®";
   }
-  const svg = document.importNode(raiz, true);
-  svg.setAttribute("role", "img");
-  svg.setAttribute("aria-label", etiqueta);
-  svg.setAttribute("focusable", "false");
-  if (svg.getAttribute("viewBox")) {
-    svg.removeAttribute("width");
-    svg.removeAttribute("height");
-  }
-  contenedor.append(svg);
-  return true;
 }
 
-/** Cambia el texto solo si es distinto, para no repetir anuncios en lectores de pantalla. */
-export function ponerTexto(elemento, texto) {
-  if (elemento.textContent !== texto) elemento.textContent = texto;
-}
-
-export function mostrarMensaje(elemento, texto, tipo = "error") {
-  elemento.classList.toggle("ok", tipo === "ok");
-  elemento.textContent = texto;
-}
-
-export function limpiarMensaje(elemento) {
-  elemento.textContent = "";
-  elemento.classList.remove("ok");
-}
-
-/** Muestra u oculta el aviso de SIMULACIÓN. */
-export function mostrarSimulacion(activa) {
-  const banner = document.getElementById("banner-simulacion");
-  if (banner) banner.hidden = !activa;
-}
-
-function almacen(tipo) {
-  return {
-    leer(clave) {
-      try {
-        return window[tipo].getItem(clave);
-      } catch {
-        return null;
-      }
-    },
-    guardar(clave, valor) {
-      try {
-        window[tipo].setItem(clave, valor);
-        return true;
-      } catch {
-        return false;
-      }
-    },
-    borrar(clave) {
-      try {
-        window[tipo].removeItem(clave);
-      } catch {
-        // Sin almacenamiento disponible: no pasa nada.
-      }
-    },
+// Lista de totales: Subtotal, Descuento (si > 0), IVA 16 %, Total.
+export function pintarTotales(totales, { grande = false } = {}) {
+  const dl = el("dl", { clase: `totales${grande ? " totales-grande" : ""}` });
+  const fila = (nombre, valor, clase) => {
+    const d = el("div", { clase: `totales-fila${clase ? ` ${clase}` : ""}` }, el("dt", { texto: nombre }), el("dd", { texto: valor }));
+    dl.append(d);
   };
+  fila("Subtotal", dinero(totales.subtotal));
+  if (totales.descuento > 0) fila("Descuento", `− ${dinero(totales.descuento)}`, "totales-desc");
+  fila("IVA (16 %)", dinero(totales.iva));
+  fila("Total", dinero(totales.total), "totales-total");
+  return dl;
 }
 
-export const almacenLocal = almacen("localStorage");
-export const almacenSesion = almacen("sessionStorage");
+// Unidad legible: pz, g→kg si ≥ 1000, ml→L si ≥ 1000.
+export function cantidadLegible(cantidad, unidad) {
+  const n = Number(cantidad) || 0;
+  const f = (x, dec) => x.toLocaleString("es-MX", { maximumFractionDigits: dec });
+  if (unidad === "g" && Math.abs(n) >= 1000) return `${f(n / 1000, 2)} kg`;
+  if (unidad === "ml" && Math.abs(n) >= 1000) return `${f(n / 1000, 2)} L`;
+  return `${f(n, 0)} ${unidad}`;
+}

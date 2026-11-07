@@ -1,632 +1,556 @@
-// Tócale · Caja: el cajero arma el pedido, crea el cobro y ve cuando se paga.
-import {
-  api,
-  pesos,
-  hora,
-  ahora,
-  insertarSvg,
-  ponerTexto,
-  mostrarMensaje,
-  limpiarMensaje,
-  mostrarSimulacion,
-  almacenSesion,
-} from "./comun.js";
+// Punto de venta del taquero: mesas y órdenes, inventario y reporte.
+import { api, dinero, horaCDMX, hoyCDMX, el, pintarFranja, pintarTotales, cantidadLegible } from "./comun.js";
 
+const LLAVE_PIN = "abanico.pin";
 const $ = (id) => document.getElementById(id);
 
-const MAX_CANTIDAD = 50;
-const CADA_MS = 4000;
-const VIGILAR_MS = 8000; // después de pagado, revisa pagos de más
-const VIGILAR_SEG = 600;
-const CLAVE_PIN = "tocale.pin";
+let salud = null;
+let datos = null; // respuesta de /api/caja-estado
+let mesaSel = null; // id de la mesa elegida
+// Borrador de la orden que se está capturando (para no perder clics entre refrescos).
+let borrador = null; // { mesaId, cantidades: Map, descuentoOrdenPct, sucio, nueva }
+let guardando = false;
+let mensajeGuardado = "";
+let temporizadorGuardar = null;
+let temporizadorRefresco = null;
+let pestana = "mesas";
 
-const st = {
-  salud: null,
-  productos: [],
-  porId: new Map(),
-  carrito: new Map(), // id -> cantidad
-  cobro: null, // respuesta de POST /api/pedido
-  qr: null, // respuesta de POST /api/cobros (metodo qr)
-  temporizador: null,
-  pagado: false,
-  ocupado: false,
-  nfc: null, // AbortController mientras se graba una tarjeta
-  maxPagos: 0, // pagos recibidos para el pedido según /api/estado
-  vigilarHasta: 0,
+const leerPin = () => {
+  try {
+    return sessionStorage.getItem(LLAVE_PIN) || "";
+  } catch {
+    return "";
+  }
+};
+const guardarPin = (p) => {
+  try {
+    if (p) sessionStorage.setItem(LLAVE_PIN, p);
+    else sessionStorage.removeItem(LLAVE_PIN);
+  } catch {
+    /* sin almacenamiento */
+  }
 };
 
-// ---------- PIN ----------
-function encabezadosCaja() {
-  const pin = almacenSesion.leer(CLAVE_PIN);
-  return pin ? { "x-caja-pin": pin } : {};
-}
-
-function revisarErrorPin(error) {
-  if (error && (error.codigo === "PIN_INCORRECTO" || error.status === 401)) {
-    $("seccion-pin").hidden = false;
-    $("pin").setAttribute("aria-invalid", "true");
-    $("pin").focus();
-  }
-}
-
-// ---------- Carga inicial ----------
-async function cargar() {
-  limpiarMensaje($("mensajes-caja"));
-  $("btn-reintentar").hidden = true;
+// Llamada a rutas de caja con el PIN. Un 401 regresa a la pantalla de PIN.
+async function apiCaja(ruta, opciones = {}) {
+  const pin = leerPin();
   try {
-    const [salud, menu] = await Promise.all([api("/api/salud"), api("/api/menu")]);
-    st.salud = salud;
-    st.productos = Array.isArray(menu.productos) ? menu.productos : [];
-    st.porId = new Map(st.productos.map((p) => [p.id, p]));
-    $("negocio").textContent = menu.negocio || salud.negocio || "";
-    $("nota-ejemplo").hidden = !menu.ejemplo;
-    mostrarSimulacion(salud.modo === "simulacion");
-    $("seccion-pin").hidden = !salud.pinRequerido;
-    $("pin").value = almacenSesion.leer(CLAVE_PIN) || "";
-    $("aviso-ia").textContent = salud.ia
-      ? ""
-      : "La IA no está configurada en el servidor: se usará una interpretación básica.";
-    renderProductos();
-    renderCarrito();
-  } catch (error) {
-    $("negocio").textContent = "";
-    mostrarMensaje($("mensajes-caja"), `No pude cargar el menú. ${error.message}`);
-    $("btn-reintentar").hidden = false;
+    return await api(ruta, { ...opciones, headers: pin ? { "x-caja-pin": pin } : {} });
+  } catch (e) {
+    if (e.status === 401) {
+      guardarPin("");
+      mostrarPin(e.message);
+    }
+    throw e;
   }
 }
 
-// ---------- Productos y carrito ----------
-function renderProductos() {
-  const botones = st.productos.map((p) => {
-    const boton = document.createElement("button");
-    boton.type = "button";
-    boton.className = "producto";
-    boton.dataset.id = p.id;
-    boton.setAttribute("aria-label", `Agregar ${p.nombre}, ${pesos(p.precio)}`);
-    const nombre = document.createElement("span");
-    nombre.className = "nombre";
-    nombre.textContent = p.nombre;
-    const precio = document.createElement("span");
-    precio.className = "precio";
-    precio.textContent = pesos(p.precio);
-    boton.append(nombre, precio);
-    return boton;
-  });
-  $("productos").replaceChildren(...botones);
+function mostrarError(texto) {
+  const n = $("error-global");
+  n.textContent = texto || "";
+  n.hidden = !texto;
 }
 
-function crearBotonCantidad(texto, etiqueta, id, accion) {
-  const boton = document.createElement("button");
-  boton.type = "button";
-  boton.textContent = texto;
-  boton.dataset.id = id;
-  boton.dataset.accion = accion;
-  boton.setAttribute("aria-label", etiqueta);
-  return boton;
+function mostrarPin(mensaje) {
+  clearTimeout(temporizadorRefresco);
+  $("vista-caja").hidden = true;
+  $("vista-pin").hidden = false;
+  $("error-pin").textContent = mensaje && !/PIN/i.test(mensaje) ? mensaje : mensaje ? "PIN incorrecto. Intenta de nuevo." : "";
+  $("pin").value = "";
+  $("pin").focus();
 }
 
-function totalCarrito() {
-  let total = 0;
-  for (const [id, cantidad] of st.carrito) {
-    const p = st.porId.get(id);
-    if (p) total += p.precio * cantidad;
+function mostrarCaja() {
+  $("vista-pin").hidden = true;
+  $("vista-caja").hidden = false;
+}
+
+// ---------- Estado general ----------
+async function refrescar() {
+  clearTimeout(temporizadorRefresco);
+  try {
+    datos = await apiCaja("/api/caja-estado");
+    salud = datos.salud || salud;
+    mostrarError("");
+    mostrarCaja();
+    pintarFranja($("franja"), { modo: salud?.modo, cobroPrueba: salud?.cobroPrueba, montoPrueba: salud?.montoPrueba });
+    if (pestana === "mesas") pintarMesas();
+  } catch (e) {
+    if (e.status === 401) return;
+    mostrarError(e.message);
   }
-  return Math.round(total * 100) / 100;
+  temporizadorRefresco = setTimeout(refrescar, 4000);
 }
 
-function renderCarrito() {
-  const filas = [];
-  for (const [id, cantidad] of st.carrito) {
-    const p = st.porId.get(id);
-    if (!p) continue;
-    const li = document.createElement("li");
-    const info = document.createElement("div");
-    info.className = "linea-info";
-    const nombre = document.createElement("span");
-    nombre.className = "linea-nombre";
-    nombre.textContent = p.nombre;
-    const subtotal = document.createElement("span");
-    subtotal.className = "linea-subtotal";
-    subtotal.textContent = `${cantidad} × ${pesos(p.precio)} = ${pesos(p.precio * cantidad)}`;
-    info.append(nombre, subtotal);
-
-    const controles = document.createElement("div");
-    controles.className = "cantidad";
-    const menos = crearBotonCantidad("−", `Quitar un ${p.nombre}`, id, "menos");
-    const salida = document.createElement("output");
-    salida.textContent = String(cantidad);
-    salida.setAttribute("aria-label", `Cantidad de ${p.nombre}: ${cantidad}`);
-    const mas = crearBotonCantidad("+", `Agregar un ${p.nombre}`, id, "mas");
-    mas.disabled = cantidad >= MAX_CANTIDAD;
-    controles.append(menos, salida, mas);
-
-    li.append(info, controles);
-    filas.push(li);
-  }
-  $("lista-pedido").replaceChildren(...filas);
-  $("pedido-vacio").hidden = filas.length > 0;
-  $("total").textContent = pesos(totalCarrito());
-  $("btn-crear").disabled = filas.length === 0 || st.ocupado;
+function estadoMesa(orden) {
+  if (!orden) return { texto: "Libre", clase: "estado-libre" };
+  if (orden.estado === "abierta") return { texto: `Abierta · ${dinero(orden.totales.total)}`, clase: "estado-abierta" };
+  if (orden.estado === "cobrando") return { texto: "Cobrando…", clase: "estado-cobrando" };
+  if (orden.estado === "pagada") return { texto: "Pagada ✓", clase: "estado-pagada" };
+  return { texto: orden.estado, clase: "estado-libre" };
 }
 
-function cambiar(id, delta) {
-  if (!st.porId.has(id)) return;
-  const nueva = (st.carrito.get(id) || 0) + delta;
-  if (nueva <= 0) st.carrito.delete(id);
-  else st.carrito.set(id, Math.min(MAX_CANTIDAD, nueva));
+function pintarMesas() {
+  if (!datos) return;
+  const cont = $("mesas");
+  const enfocado = document.activeElement?.dataset?.mesa;
+  cont.replaceChildren(
+    ...datos.mesas.map((mesa) => {
+      const est = estadoMesa(mesa.orden);
+      const b = el("button", {
+        clase: "mesa-btn",
+        attrs: { type: "button", "aria-pressed": String(mesa.id === mesaSel), "data-mesa": mesa.id },
+      },
+        el("span", { clase: "mesa-nombre", texto: mesa.nombre }),
+        el("span", { clase: `estado ${est.clase}`, texto: est.texto }),
+      );
+      b.addEventListener("click", () => elegirMesa(mesa.id));
+      return b;
+    }),
+  );
+  if (enfocado) cont.querySelector(`[data-mesa="${enfocado}"]`)?.focus();
+  pintarDetalle();
 }
 
-// ---------- Interpretar con IA ----------
-async function interpretar() {
-  const texto = $("texto-pedido").value.trim();
-  const resultado = $("resultado-interpretacion");
-  limpiarMensaje($("mensajes-caja"));
-  if (!texto) {
-    resultado.textContent = "Escribe o dicta el pedido primero.";
-    $("texto-pedido").focus();
+function mesaActual() {
+  return datos?.mesas.find((x) => x.id === mesaSel) || null;
+}
+
+function borradorDesde(mesa, { nueva = false } = {}) {
+  const cantidades = new Map();
+  const o = mesa.orden;
+  if (o && o.estado !== "pagada" && !nueva) for (const r of o.renglones) cantidades.set(r.productoId, r.cantidad);
+  return {
+    mesaId: mesa.id,
+    cantidades,
+    descuentoOrdenPct: o && o.estado !== "pagada" && !nueva ? o.descuentoOrdenPct || 0 : 0,
+    sucio: false,
+    nueva,
+  };
+}
+
+function elegirMesa(id) {
+  if (borrador?.sucio) guardarAhora();
+  mesaSel = id;
+  const mesa = mesaActual();
+  borrador = mesa ? borradorDesde(mesa) : null;
+  mensajeGuardado = "";
+  pintarMesas();
+  $("detalle-mesa").querySelector("h2")?.focus();
+}
+
+// ---------- Detalle de la mesa ----------
+function pintarDetalle() {
+  const cont = $("detalle-mesa");
+  const mesa = mesaActual();
+  if (!mesa) {
+    cont.replaceChildren(el("p", { clase: "vacio", texto: "Elige una mesa para capturar su orden." }));
     return;
   }
-  const boton = $("btn-interpretar");
-  const original = boton.textContent;
-  boton.disabled = true;
-  boton.textContent = "Entendiendo el pedido…";
-  resultado.textContent = "";
-  try {
-    const r = await api("/api/interpretar", {
-      metodo: "POST",
-      cuerpo: { texto },
-      encabezados: encabezadosCaja(),
+  const o = mesa.orden;
+  // Sincroniza el borrador con el servidor si no hay cambios pendientes.
+  if (!borrador || borrador.mesaId !== mesa.id) borrador = borradorDesde(mesa);
+  else if (!borrador.sucio && !guardando && !borrador.nueva) borrador = borradorDesde(mesa);
+  if (borrador.nueva && o && o.estado !== "pagada") borrador.nueva = false; // ya se creó la orden nueva
+
+  const enfocadoId = document.activeElement?.id;
+  const titulo = el("h2", { texto: mesa.nombre, attrs: { tabindex: "-1" } });
+  const nodos = [];
+
+  const cobrando = o?.estado === "cobrando";
+  const pagada = o?.estado === "pagada" && !borrador.nueva;
+
+  if (cobrando) {
+    nodos.push(el("div", { clase: "aviso aviso-info", attrs: { role: "status" } },
+      el("p", { texto: "El cliente está pagando. No se puede editar la orden." }),
+      o.cobro ? el("p", { clase: "nota", texto: `Solicitud de ${dinero(o.cobro.montoCobrado)} a ${o.cobro.telefonoOculto} · vence ${horaCDMX(o.cobro.expiraEn)}` }) : null,
+    ));
+  }
+  if (o?.aviso?.mensaje && o.estado === "abierta") {
+    nodos.push(el("div", { clase: "aviso aviso-error", texto: `Último intento de cobro: ${o.aviso.mensaje}` }));
+  }
+
+  const izquierda = el("div");
+  const derecha = el("div");
+
+  if (pagada) {
+    const nuevo = el("button", { texto: "Nueva orden", attrs: { type: "button", id: "btn-nueva" } });
+    nuevo.addEventListener("click", () => {
+      borrador = borradorDesde(mesa, { nueva: true });
+      pintarDetalle();
+      $("detalle-mesa").querySelector(".contador button")?.focus();
     });
-    const items = Array.isArray(r.items) ? r.items : [];
-    st.carrito = new Map();
-    const entendidos = [];
-    for (const item of items) {
-      if (!st.porId.has(item.id)) continue;
-      const cantidad = Math.floor(Number(item.cantidad));
-      if (!(cantidad >= 1)) continue;
-      st.carrito.set(item.id, Math.min(MAX_CANTIDAD, (st.carrito.get(item.id) || 0) + cantidad));
-      entendidos.push(`${cantidad} ${st.porId.get(item.id).nombre}`);
-    }
-    renderCarrito();
-    const fuente = r.fuente === "ia" ? "Interpretado con IA" : "Interpretación básica (sin IA)";
-    const partes = [];
-    if (typeof r.aviso === "string" && r.aviso.trim()) partes.push(r.aviso.trim());
-    partes.push(
-      entendidos.length ? `${fuente}: ${entendidos.join(", ")}.` : `${fuente}: no encontré productos del menú.`,
-    );
-    if (Array.isArray(r.noEntendido) && r.noEntendido.length) {
-      partes.push(`No entendí: ${r.noEntendido.map((t) => `«${t}»`).join(", ")}.`);
-    }
-    if (entendidos.length) partes.push("Revisa la lista antes de crear el cobro.");
-    resultado.textContent = partes.join(" ");
-  } catch (error) {
-    mostrarMensaje($("mensajes-caja"), error.message);
-    revisarErrorPin(error);
-  } finally {
-    boton.disabled = false;
-    boton.textContent = original;
-  }
-}
-
-// ---------- Crear cobro ----------
-async function crearCobro() {
-  if (st.carrito.size === 0 || st.ocupado) return;
-  st.ocupado = true;
-  const boton = $("btn-crear");
-  boton.disabled = true;
-  boton.textContent = "Creando cobro…";
-  limpiarMensaje($("mensajes-caja"));
-  try {
-    const items = [...st.carrito].map(([id, cantidad]) => ({ id, cantidad }));
-    const r = await api("/api/pedido", {
-      metodo: "POST",
-      cuerpo: { items },
-      encabezados: encabezadosCaja(),
-    });
-    mostrarCobro(r);
-  } catch (error) {
-    mostrarMensaje($("mensajes-caja"), error.message);
-    revisarErrorPin(error);
-  } finally {
-    st.ocupado = false;
-    boton.textContent = "Crear cobro";
-    renderCarrito();
-  }
-}
-
-function ponerEstado(tipo, texto) {
-  const caja = $("estado-caja");
-  caja.className = `estado ${tipo}`;
-  let etiqueta = caja.querySelector(".texto-estado");
-  const quiereNodoPunto = tipo === "esperando";
-  const tienePunto = Boolean(caja.querySelector(".punto"));
-  if (!etiqueta || quiereNodoPunto !== tienePunto) {
-    const nodos = [];
-    if (quiereNodoPunto) {
-      const punto = document.createElement("span");
-      punto.className = "punto";
-      punto.setAttribute("aria-hidden", "true");
-      nodos.push(punto);
-    }
-    etiqueta = document.createElement("span");
-    etiqueta.className = "texto-estado";
-    nodos.push(etiqueta);
-    caja.replaceChildren(...nodos);
-  }
-  ponerTexto(etiqueta, texto);
-}
-
-function mostrarCobro(r) {
-  st.cobro = r;
-  st.qr = null;
-  st.pagado = false;
-  st.maxPagos = 0;
-  st.vigilarHasta = 0;
-
-  $("seccion-armar").hidden = true;
-  $("seccion-cobro").hidden = false;
-
-  $("cobro-id").textContent = r.pedido.id;
-  $("cobro-total").textContent = pesos(r.pedido.total);
-  const prueba = $("cobro-prueba");
-  if (r.cobro && r.cobro.montoPrueba) {
-    prueba.hidden = false;
-    prueba.textContent = `Cobro de prueba: ${pesos(r.cobro.monto)} (pedido real: ${pesos(r.pedido.total)})`;
+    izquierda.append(el("div", { clase: "aviso aviso-ok", attrs: { role: "status" } },
+      el("p", { texto: `Pagada ✓ ${dinero(o.totales.total)}${o.pagadaEn ? ` a las ${horaCDMX(o.pagadaEn)}` : ""}` }),
+      o.cobro && o.cobro.montoCobrado !== o.totales.total ? el("p", { clase: "nota", texto: `Cobrado: ${dinero(o.cobro.montoCobrado)} (MODO PRUEBA)` }) : null,
+    ), nuevo);
+    derecha.append(resumenServidor(o));
   } else {
-    prueba.hidden = true;
-    prueba.textContent = "";
+    izquierda.append(catalogo(cobrando));
+    derecha.append(resumen(o, cobrando));
   }
-  const lineas = (r.pedido.items || []).map((item) => {
-    const li = document.createElement("li");
-    const nombre = document.createElement("span");
-    nombre.textContent = `${item.cantidad} × ${item.nombre}`;
-    const subtotal = document.createElement("span");
-    subtotal.textContent = pesos(item.subtotal);
-    li.append(nombre, subtotal);
-    return li;
-  });
-  $("cobro-productos").replaceChildren(...lineas);
 
-  const qrOk = insertarSvg($("qr-liga"), r.qrSvg, `Código QR para abrir el pedido ${r.pedido.id} en el celular del cliente`);
-  if (!qrOk) $("qr-liga").textContent = "No se pudo mostrar el QR. Comparte la liga.";
-  const liga = $("liga");
-  liga.href = r.url;
-  liga.textContent = r.url;
+  derecha.append(bloqueNfc(mesa));
 
-  $("btn-nfc").disabled = false;
-  $("estado-acciones").textContent =
-    "NDEFReader" in window ? "" : "Para grabar tarjetas NFC usa Chrome en Android.";
-
-  $("btn-qr-codi").hidden = false;
-  $("btn-qr-codi").disabled = false;
-  $("confirmar-qr").hidden = true;
-  $("qr-codi-bloque").hidden = true;
-  $("qr-codi").replaceChildren();
-  $("qr-codi-nota").textContent = "";
-  limpiarMensaje($("mensajes-cobro"));
-
-  $("btn-simular").hidden = !(st.salud && st.salud.modo === "simulacion");
-
-  ponerEstado("esperando", "Esperando pago…");
-  window.scrollTo(0, 0);
-  $("titulo-cobro").focus();
-  programarSondeo(1500);
+  cont.replaceChildren(el("div", { clase: "tarjeta" }, titulo, ...nodos, el("div", { clase: "pos" }, izquierda, derecha)));
+  if (enfocadoId) document.getElementById(enfocadoId)?.focus();
 }
 
-// ---------- Sondeo del estado ----------
-function detenerSondeo() {
-  clearTimeout(st.temporizador);
-  st.temporizador = null;
-}
-
-function programarSondeo(ms = CADA_MS) {
-  detenerSondeo();
-  st.temporizador = setTimeout(sondear, ms);
-}
-
-function vencerQr() {
-  st.qr = null;
-  $("qr-codi-bloque").hidden = true;
-  $("qr-codi").replaceChildren();
-  $("btn-qr-codi").hidden = false;
-  $("btn-qr-codi").disabled = false;
-  $("qr-codi-nota").textContent = "El QR CoDi® venció. Si hace falta, muestra otro.";
-}
-
-/** Si pey reporta más de un pago para el pedido, avisa para devolver el excedente. */
-function revisarDuplicados(r) {
-  const n = Math.floor(Number(r && r.pagosRecibidos));
-  if (!(n > st.maxPagos)) return;
-  st.maxPagos = n;
-  if (n > 1) {
-    mostrarMensaje(
-      $("mensajes-cobro"),
-      `Se recibieron ${n} pagos para este pedido: devuelve el excedente en efectivo.`,
-    );
+function catalogo(bloqueado) {
+  const frag = el("div");
+  const porCategoria = new Map();
+  for (const p of datos.catalogo) {
+    if (!porCategoria.has(p.categoria)) porCategoria.set(p.categoria, []);
+    porCategoria.get(p.categoria).push(p);
   }
-}
-
-function programarVigilancia() {
-  detenerSondeo();
-  st.temporizador = setTimeout(vigilar, VIGILAR_MS);
-}
-
-async function vigilar() {
-  const cobro = st.cobro;
-  if (!cobro || !st.pagado || !st.vigilarHasta || ahora() > st.vigilarHasta) return;
-  const o = encodeURIComponent(cobro.codigo);
-  try {
-    if (st.qr) {
-      const rq = await api(`/api/estado?o=${o}&metodo=qr&id=${encodeURIComponent(st.qr.id)}`);
-      if (st.cobro !== cobro) return;
-      revisarDuplicados(rq);
-    }
-    const r = await api(`/api/estado?o=${o}`);
-    if (st.cobro !== cobro) return;
-    revisarDuplicados(r);
-  } catch {
-    // Sin conexión: se vuelve a intentar en la siguiente vuelta.
-  }
-  if (st.cobro === cobro) programarVigilancia();
-}
-
-async function sondear() {
-  const cobro = st.cobro;
-  if (!cobro || st.pagado) return;
-  const o = encodeURIComponent(cobro.codigo);
-  try {
-    if (st.qr) {
-      if (ahora() > st.qr.vence) {
-        vencerQr();
+  for (const [cat, productos] of porCategoria) {
+    frag.append(el("h3", { clase: "categoria", texto: cat }));
+    for (const p of productos) {
+      const cant = borrador.cantidades.get(p.id) || 0;
+      const menos = el("button", { clase: "boton-sec", texto: "−", attrs: { type: "button", id: `menos-${p.id}`, "aria-label": `Quitar un ${p.nombre}` } });
+      const mas = el("button", { texto: "+", attrs: { type: "button", id: `mas-${p.id}`, "aria-label": `Agregar un ${p.nombre}` } });
+      const salida = el("output", { texto: cant, attrs: { "aria-live": "polite", "aria-label": `Cantidad de ${p.nombre}` } });
+      if (bloqueado) {
+        menos.disabled = true;
+        mas.disabled = true;
       } else {
-        const qrActual = st.qr;
-        const rq = await api(`/api/estado?o=${o}&metodo=qr&id=${encodeURIComponent(qrActual.id)}`);
-        if (st.cobro !== cobro || st.pagado) return;
-        revisarDuplicados(rq);
-        if (rq.estado === "pagado") {
-          marcarPagado(rq, Boolean(rq.simulacion));
-          return;
-        }
+        menos.disabled = cant === 0;
+        menos.addEventListener("click", () => cambiar(p.id, -1));
+        mas.addEventListener("click", () => cambiar(p.id, +1));
       }
+      frag.append(el("div", { clase: "producto" },
+        el("div", { clase: "producto-info" },
+          el("div", { clase: "producto-nombre", texto: p.nombre }),
+          el("div", { clase: "producto-precio", texto: dinero(p.precio) }),
+          p.descuentoPct > 0 ? el("span", { clase: "promo", texto: `−${p.descuentoPct} %${p.promo ? ` ${p.promo}` : ""}` }) : null,
+        ),
+        el("div", { clase: "contador" }, menos, salida, mas),
+      ));
     }
-    const r = await api(`/api/estado?o=${o}`);
-    if (st.cobro !== cobro || st.pagado) return;
-    revisarDuplicados(r);
-    if (r.estado === "pagado") {
-      marcarPagado(r, Boolean(r.simulacion));
-      return;
-    }
-    ponerEstado(
-      "esperando",
-      r.estado === "no_verificable" ? "Esperando pago… (no pude confirmar con pey; sigo revisando)" : "Esperando pago…",
-    );
-  } catch {
-    if (st.cobro !== cobro || st.pagado) return;
-    ponerEstado("esperando", "Esperando pago… (sin conexión; sigo intentando)");
   }
-  if (cobro.pedido && ahora() > cobro.pedido.vence) {
-    ponerEstado("vencido", "El pedido venció. Crea uno nuevo.");
-    detenerSondeo();
+  // Descuento a la orden
+  const lbl = el("label", { texto: "Descuento a la orden (%)", attrs: { for: "descuento-orden" } });
+  const inp = el("input", { attrs: { id: "descuento-orden", type: "number", min: "0", max: "100", step: "1", inputmode: "numeric" } });
+  inp.value = String(borrador.descuentoOrdenPct || 0);
+  inp.disabled = bloqueado;
+  inp.addEventListener("input", () => {
+    let v = Number.parseInt(inp.value, 10);
+    if (!Number.isFinite(v) || v < 0) v = 0;
+    if (v > 100) v = 100;
+    borrador.descuentoOrdenPct = v;
+    programarGuardado();
+  });
+  frag.append(el("div", { clase: "tarjeta mt" }, lbl, inp));
+  return frag;
+}
+
+function cambiar(productoId, delta) {
+  const actual = borrador.cantidades.get(productoId) || 0;
+  const nueva = Math.max(0, Math.min(99, actual + delta));
+  if (nueva === 0) borrador.cantidades.delete(productoId);
+  else borrador.cantidades.set(productoId, nueva);
+  programarGuardado();
+  pintarDetalle();
+}
+
+function programarGuardado() {
+  borrador.sucio = true;
+  mensajeGuardado = "Guardando…";
+  actualizarIndicador();
+  clearTimeout(temporizadorGuardar);
+  temporizadorGuardar = setTimeout(guardarAhora, 400);
+}
+
+async function guardarAhora() {
+  clearTimeout(temporizadorGuardar);
+  if (!borrador?.sucio) return;
+  if (guardando) {
+    temporizadorGuardar = setTimeout(guardarAhora, 200);
     return;
   }
-  programarSondeo();
-}
-
-function marcarPagado(r, simulado) {
-  if (!st.cobro) return;
-  st.pagado = true;
-  detenerSondeo();
-  const monto = r && r.monto != null ? r.monto : st.cobro.cobro.monto;
-  const cuando = hora(r && r.pagadoEn ? r.pagadoEn : ahora());
-  ponerEstado("pagado", `Pagado ✓ ${pesos(monto)} · ${cuando}${simulado ? " (SIMULACIÓN)" : ""}`);
-  $("btn-qr-codi").hidden = true;
-  $("confirmar-qr").hidden = true;
-  $("qr-codi-bloque").hidden = true;
-  $("btn-simular").hidden = true;
-  revisarDuplicados(r);
-  if (!simulado) {
-    // Sigue revisando un rato por si llega un segundo pago (push y QR del mismo pedido).
-    st.vigilarHasta = ahora() + VIGILAR_SEG;
-    programarVigilancia();
-  }
-}
-
-// ---------- QR CoDi de respaldo ----------
-function pedirConfirmacionQr() {
-  $("confirmar-qr").hidden = false;
-  $("btn-qr-codi").setAttribute("aria-expanded", "true");
-  $("btn-qr-si").focus();
-}
-
-function cancelarQr() {
-  $("confirmar-qr").hidden = true;
-  $("btn-qr-codi").setAttribute("aria-expanded", "false");
-  $("btn-qr-codi").focus();
-}
-
-async function mostrarQrCodi() {
-  const cobro = st.cobro;
-  if (!cobro || st.pagado) return;
-  const si = $("btn-qr-si");
-  si.disabled = true;
-  si.textContent = "Creando QR CoDi®…";
-  limpiarMensaje($("mensajes-cobro"));
-  $("qr-codi-nota").textContent = "";
+  const b = borrador;
+  const cuerpo = {
+    mesaId: b.mesaId,
+    items: [...b.cantidades].map(([productoId, cantidad]) => ({ productoId, cantidad })),
+    descuentoOrdenPct: b.descuentoOrdenPct || 0,
+  };
+  b.sucio = false;
+  guardando = true;
   try {
-    const r = await api("/api/cobros", {
-      metodo: "POST",
-      cuerpo: { o: cobro.codigo, metodo: "qr", confirmo: true },
-      encabezados: encabezadosCaja(),
+    const r = await apiCaja("/api/caja-orden", { metodo: "POST", cuerpo });
+    const mesa = datos.mesas.find((x) => x.id === b.mesaId);
+    if (mesa) mesa.orden = r.orden;
+    if (b.nueva && r.orden) b.nueva = false;
+    mensajeGuardado = cuerpo.items.length ? "Guardado ✓" : "Orden cancelada";
+    mostrarError("");
+  } catch (e) {
+    mensajeGuardado = "";
+    mostrarError(e.message);
+    // Si el cliente ya está pagando, recargamos la verdad del servidor.
+    if (e.codigo === "ORDEN_EN_COBRO") borrador = null;
+  } finally {
+    guardando = false;
+  }
+  if (b.sucio) return guardarAhora();
+  if (b.mesaId === mesaSel) pintarMesas();
+}
+
+function actualizarIndicador() {
+  const n = $("estado-guardado");
+  if (n) n.textContent = mensajeGuardado;
+}
+
+// Resumen con lo que capturó el taquero; totales del servidor (fuente de verdad).
+function resumen(o, bloqueado) {
+  const sec = el("section", { attrs: { "aria-labelledby": "titulo-resumen" } });
+  sec.append(el("h3", { texto: "Orden", attrs: { id: "titulo-resumen" } }));
+  const lista = el("ul", { clase: "renglones" });
+  const porId = new Map(datos.catalogo.map((p) => [p.id, p]));
+  for (const [id, cant] of borrador.cantidades) {
+    const p = porId.get(id);
+    if (!p) continue;
+    lista.append(el("li", { clase: "renglon" },
+      el("div", { clase: "renglon-info" }, el("div", { clase: "renglon-nombre", texto: `${cant} × ${p.nombre}` })),
+      el("div", { clase: "renglon-importe", texto: dinero(p.precio * cant) }),
+    ));
+  }
+  if (!borrador.cantidades.size) lista.append(el("li", { clase: "vacio", texto: "Sin productos todavía." }));
+  sec.append(lista);
+  const orden = o && o.estado !== "pagada" ? o : null;
+  if (orden && borrador.cantidades.size) sec.append(pintarTotales(orden.totales));
+  sec.append(el("p", { clase: "estado-guardado", texto: mensajeGuardado, attrs: { id: "estado-guardado", "aria-live": "polite" } }));
+  if (!bloqueado && (borrador.cantidades.size || orden)) {
+    const cancelar = el("button", { clase: "boton-sec", texto: "Cancelar orden", attrs: { type: "button", id: "btn-cancelar" } });
+    cancelar.addEventListener("click", () => {
+      borrador.cantidades.clear();
+      borrador.descuentoOrdenPct = 0;
+      programarGuardado();
+      pintarDetalle();
     });
-    if (st.cobro !== cobro || st.pagado) return;
-    st.qr = r;
-    const ok = insertarSvg($("qr-codi"), r.qrSvg, `QR CoDi para pagar ${pesos(r.monto)} con la app del banco`);
-    if (!ok) $("qr-codi").textContent = "No se pudo dibujar el QR CoDi®.";
-    $("qr-codi-vence").textContent = `Monto: ${pesos(r.monto)}. Vence a las ${hora(r.vence)}.`;
-    $("confirmar-qr").hidden = true;
-    $("btn-qr-codi").hidden = true;
-    $("btn-qr-codi").setAttribute("aria-expanded", "false");
-    $("qr-codi-bloque").hidden = false;
-    $("qr-codi-nota").textContent = "QR CoDi® listo.";
-    programarSondeo(1500);
-  } catch (error) {
-    mostrarMensaje($("mensajes-cobro"), error.message);
-    revisarErrorPin(error);
-  } finally {
-    si.disabled = false;
-    si.textContent = "Sí, mostrar el QR CoDi®";
+    sec.append(cancelar);
   }
+  return sec;
 }
 
-// ---------- Liga y NFC ----------
-async function copiarLiga() {
-  const url = st.cobro && st.cobro.url;
-  if (!url) return;
-  const nota = $("estado-acciones");
-  try {
-    await navigator.clipboard.writeText(url);
-    nota.textContent = "Liga copiada.";
-  } catch {
-    const area = document.createElement("textarea");
-    area.value = url;
-    area.setAttribute("readonly", "");
-    area.style.position = "fixed";
-    area.style.opacity = "0";
-    document.body.append(area);
-    area.select();
-    let ok = false;
+function resumenServidor(o) {
+  const sec = el("section");
+  sec.append(el("h3", { texto: "Orden pagada" }));
+  const lista = el("ul", { clase: "renglones" });
+  for (const r of o.renglones) {
+    lista.append(el("li", { clase: "renglon" },
+      el("div", { clase: "renglon-info" }, el("div", { clase: "renglon-nombre", texto: `${r.cantidad} × ${r.nombre}` })),
+      el("div", { clase: "renglon-importe", texto: dinero(r.importe) }),
+    ));
+  }
+  sec.append(lista, pintarTotales(o.totales));
+  return sec;
+}
+
+function bloqueNfc(mesa) {
+  const url = el("p", { clase: "url-nfc", texto: mesa.urlNfc || "" });
+  const copiar = el("button", { clase: "boton-sec", texto: "Copiar", attrs: { type: "button", id: `copiar-${mesa.id}` } });
+  const estadoCopia = el("span", { clase: "nota", attrs: { "aria-live": "polite" } });
+  copiar.addEventListener("click", async () => {
     try {
-      ok = document.execCommand("copy");
+      await navigator.clipboard.writeText(mesa.urlNfc);
+      estadoCopia.textContent = " Copiada ✓";
     } catch {
-      ok = false;
+      estadoCopia.textContent = " No se pudo copiar; selecciónala a mano.";
     }
-    area.remove();
-    nota.textContent = ok ? "Liga copiada." : "No pude copiar. Mantén presionada la liga para copiarla.";
-  }
+  });
+  const abrir = el("a", { texto: "Abrir", attrs: { href: mesa.urlNfc, target: "_blank", rel: "noopener", class: "boton boton-sec boton-enlace" } });
+  return el("div", { clase: "tarjeta mt" },
+    el("h3", { texto: "Etiqueta NFC de la mesa" }),
+    el("p", { clase: "nota", texto: "Graba esta URL en la etiqueta NFC de la mesa." }),
+    url,
+    el("div", { clase: "fila" }, copiar, abrir),
+    estadoCopia,
+  );
 }
 
-function mensajeNfc(error) {
-  switch (error && error.name) {
-    case "NotAllowedError":
-      return "No hay permiso para usar NFC. Permítelo para este sitio en Chrome y vuelve a intentarlo.";
-    case "NotSupportedError":
-      return "Este celular o esta tarjeta no son compatibles. Usa el QR.";
-    case "NotReadableError":
-      return "El NFC está apagado o no disponible. Actívalo en los ajustes del celular.";
-    case "AbortError":
-      return "Se acabó el tiempo o se canceló. Vuelve a intentarlo y acerca la tarjeta.";
-    case "NetworkError":
-      return "No se pudo grabar. Mantén la tarjeta quieta y vuelve a intentarlo.";
-    default:
-      return "No se pudo grabar la tarjeta. Vuelve a intentarlo o usa el QR.";
-  }
-}
-
-async function grabarNfc() {
-  const url = st.cobro && st.cobro.url;
-  const nota = $("estado-acciones");
-  if (!url) return;
-  if (!("NDEFReader" in window)) {
-    nota.textContent = "Este navegador no puede grabar tarjetas NFC. Usa Chrome en Android o comparte el QR.";
-    return;
-  }
-  const boton = $("btn-nfc");
-  boton.disabled = true;
-  nota.textContent = "Acerca la tarjeta a la parte trasera del celular…";
-  const control = new AbortController();
-  st.nfc = control;
-  const limite = setTimeout(() => control.abort(), 30000);
+// ---------- Inventario ----------
+async function cargarInventario() {
+  const cont = $("inventario");
+  cont.replaceChildren(el("p", { clase: "vacio", texto: "Cargando…" }));
   try {
-    // eslint-disable-next-line no-undef
-    const ndef = new NDEFReader();
-    await ndef.write({ records: [{ recordType: "url", data: url }] }, { overwrite: true, signal: control.signal });
-    if (st.nfc === control) nota.textContent = "Tarjeta lista: el cliente solo la toca.";
-  } catch (error) {
-    if (st.nfc === control) nota.textContent = mensajeNfc(error);
-  } finally {
-    clearTimeout(limite);
-    if (st.nfc === control) st.nfc = null;
-    boton.disabled = false;
+    const r = await apiCaja("/api/caja-inventario");
+    const tabla = el("table");
+    tabla.append(el("thead", {}, el("tr", {},
+      el("th", { texto: "Ingrediente", attrs: { scope: "col" } }),
+      el("th", { clase: "num", texto: "Existencia", attrs: { scope: "col" } }),
+      el("th", { clase: "num", texto: "Mínimo", attrs: { scope: "col" } }),
+    )));
+    const cuerpo = el("tbody");
+    for (const i of r.ingredientes) {
+      cuerpo.append(el("tr", {},
+        el("th", { attrs: { scope: "row" } }, document.createTextNode(i.nombre), i.bajo ? el("span", { clase: "bajo", texto: " Bajo" }) : null),
+        el("td", { clase: "num", texto: cantidadLegible(i.existencia, i.unidad) }),
+        el("td", { clase: "num", texto: cantidadLegible(i.minimo, i.unidad) }),
+      ));
+    }
+    tabla.append(cuerpo);
+    cont.replaceChildren(tabla);
+  } catch (e) {
+    cont.replaceChildren(el("div", { clase: "aviso aviso-error", texto: e.message }));
   }
 }
 
-// ---------- Simulación y nuevo pedido ----------
-function simularPago() {
-  if (!st.cobro || st.pagado) return;
-  marcarPagado({ monto: st.cobro.cobro.monto, pagadoEn: ahora() }, true);
-}
+// ---------- Reporte ----------
+async function cargarReporte() {
+  const cont = $("reporte");
+  const fecha = $("fecha").value || hoyCDMX();
+  cont.replaceChildren(el("p", { clase: "vacio", texto: "Cargando…" }));
+  try {
+    const r = await apiCaja(`/api/caja-reporte?fecha=${encodeURIComponent(fecha)}`);
+    const cifra = (n, v) => el("div", { clase: "cifra" }, el("span", { texto: n }), el("strong", { texto: v }));
+    const nodos = [
+      el("div", { clase: "cifras" },
+        cifra("Vendido", dinero(r.totalVendido)),
+        cifra("Cobrado", dinero(r.totalCobrado)),
+        cifra("Órdenes", String(r.ordenes)),
+        cifra("Ticket promedio", dinero(r.ticketPromedio)),
+      ),
+    ];
+    if (r.totalCobrado !== r.totalVendido && r.ordenes) {
+      nodos.push(el("p", { clase: "nota", texto: "Cobrado puede ser menor que Vendido en MODO PRUEBA o SIMULACIÓN." }));
+    }
 
-function nuevoPedido() {
-  detenerSondeo();
-  if (st.nfc) {
-    st.nfc.abort();
-    st.nfc = null;
+    // Productos vendidos
+    const tp = el("div", { clase: "tarjeta" }, el("h3", { texto: "Productos vendidos" }));
+    if (r.productos?.length) {
+      const t = el("table");
+      t.append(el("thead", {}, el("tr", {},
+        el("th", { texto: "Producto", attrs: { scope: "col" } }),
+        el("th", { clase: "num", texto: "Cantidad", attrs: { scope: "col" } }),
+        el("th", { clase: "num", texto: "Importe", attrs: { scope: "col" } }),
+      )));
+      const b = el("tbody");
+      for (const p of r.productos) b.append(el("tr", {}, el("th", { texto: p.nombre, attrs: { scope: "row" } }), el("td", { clase: "num", texto: p.cantidad }), el("td", { clase: "num", texto: dinero(p.importe) })));
+      t.append(b);
+      tp.append(el("div", { clase: "tabla-env" }, t));
+    } else tp.append(el("p", { clase: "vacio", texto: "Sin ventas este día." }));
+    nodos.push(tp);
+
+    // Por hora
+    const th = el("div", { clase: "tarjeta" }, el("h3", { texto: "Ventas por hora" }));
+    const horas = (r.porHora || []).filter((h) => h.ordenes > 0);
+    if (horas.length) {
+      const max = Math.max(...horas.map((h) => h.total), 1);
+      const lista = el("ul", { clase: "barras" });
+      for (const h of horas) {
+        const relleno = el("div", { clase: "barra-relleno" });
+        relleno.style.width = `${Math.round((h.total / max) * 100)}%`;
+        lista.append(el("li", { clase: "barra" },
+          el("span", { texto: `${String(h.hora).padStart(2, "0")}:00` }),
+          el("div", { clase: "barra-fondo", attrs: { "aria-hidden": "true" } }, relleno),
+          el("span", { texto: `${dinero(h.total)} · ${h.ordenes}` }),
+        ));
+      }
+      th.append(lista);
+    } else th.append(el("p", { clase: "vacio", texto: "Sin ventas este día." }));
+    nodos.push(th);
+
+    // Clientes
+    nodos.push(el("div", { clase: "tarjeta" },
+      el("h3", { texto: "Clientes" }),
+      el("p", { texto: `Con celular registrado: ${r.clientes?.conCelular ?? 0}` }),
+      el("p", { texto: `Recurrentes: ${r.clientes?.recurrentes ?? 0}` }),
+    ));
+
+    // Consumo
+    const tc = el("div", { clase: "tarjeta" }, el("h3", { texto: "Consumo de ingredientes" }));
+    if (r.consumo?.length) {
+      const t = el("table");
+      const b = el("tbody");
+      for (const c of r.consumo) b.append(el("tr", {}, el("th", { texto: c.nombre, attrs: { scope: "row" } }), el("td", { clase: "num", texto: cantidadLegible(c.cantidad, c.unidad) })));
+      t.append(b);
+      tc.append(el("div", { clase: "tabla-env" }, t));
+    } else tc.append(el("p", { clase: "vacio", texto: "Sin consumo este día." }));
+    nodos.push(tc);
+
+    cont.replaceChildren(...nodos);
+  } catch (e) {
+    cont.replaceChildren(el("div", { clase: "aviso aviso-error", texto: e.message }));
   }
-  st.cobro = null;
-  st.qr = null;
-  st.pagado = false;
-  st.carrito = new Map();
-  $("texto-pedido").value = "";
-  $("resultado-interpretacion").textContent = "";
-  limpiarMensaje($("mensajes-caja"));
-  $("seccion-cobro").hidden = true;
-  $("seccion-armar").hidden = false;
-  renderCarrito();
-  window.scrollTo(0, 0);
-  $("titulo-pedido").focus();
 }
 
-// ---------- Eventos ----------
-function enlazarEventos() {
-  $("productos").addEventListener("click", (evento) => {
-    const boton = evento.target.closest(".producto");
-    if (!boton) return;
-    cambiar(boton.dataset.id, +1);
-    renderCarrito();
-  });
-
-  $("lista-pedido").addEventListener("click", (evento) => {
-    const boton = evento.target.closest("button[data-accion]");
-    if (!boton) return;
-    const { id, accion } = boton.dataset;
-    cambiar(id, accion === "mas" ? +1 : -1);
-    renderCarrito();
-    // Conserva el foco en el mismo control después de redibujar.
-    const mismo = $("lista-pedido").querySelector(`button[data-id="${CSS.escape(id)}"][data-accion="${accion}"]`);
-    if (mismo && !mismo.disabled) {
-      mismo.focus();
-    } else if (mismo) {
-      mismo.parentElement.querySelector('button[data-accion="menos"]').focus();
+async function pedirAnalisis() {
+  const cont = $("analisis");
+  const btn = $("btn-analisis");
+  btn.disabled = true;
+  cont.replaceChildren(el("p", { clase: "nota", texto: "Analizando…" }));
+  try {
+    const r = await apiCaja("/api/caja-analisis", { metodo: "POST", cuerpo: {} });
+    if (!r.disponible) {
+      cont.replaceChildren(el("div", { clase: "aviso aviso-info", texto: r.mensaje || "El análisis con IA no está disponible." }));
     } else {
-      $("titulo-lista").focus();
+      const a = r.analisis || {};
+      const nodos = [el("p", { texto: a.resumen || "" })];
+      if (a.reabastecer?.length) {
+        nodos.push(el("h3", { texto: "Reabastecer" }));
+        const ul = el("ul");
+        for (const x of a.reabastecer) ul.append(el("li", { texto: `${x.ingrediente}: ${x.motivo}` }));
+        nodos.push(ul);
+      }
+      if (a.observaciones?.length) {
+        nodos.push(el("h3", { texto: "Observaciones" }));
+        const ul = el("ul");
+        for (const x of a.observaciones) ul.append(el("li", { texto: x }));
+        nodos.push(ul);
+      }
+      nodos.push(el("p", { clase: "nota", texto: "Generado con IA: revísalo antes de decidir." }));
+      cont.replaceChildren(...nodos);
     }
-  });
-
-  $("pin").addEventListener("input", (evento) => {
-    const valor = evento.target.value.trim();
-    evento.target.removeAttribute("aria-invalid");
-    if (valor) almacenSesion.guardar(CLAVE_PIN, valor);
-    else almacenSesion.borrar(CLAVE_PIN);
-  });
-
-  $("btn-interpretar").addEventListener("click", interpretar);
-  $("texto-pedido").addEventListener("keydown", (evento) => {
-    if (evento.key === "Enter" && (evento.ctrlKey || evento.metaKey)) {
-      evento.preventDefault();
-      interpretar();
-    }
-  });
-  $("btn-crear").addEventListener("click", crearCobro);
-  $("btn-reintentar").addEventListener("click", cargar);
-  $("btn-copiar").addEventListener("click", copiarLiga);
-  $("btn-nfc").addEventListener("click", grabarNfc);
-  $("btn-qr-codi").addEventListener("click", pedirConfirmacionQr);
-  $("btn-qr-si").addEventListener("click", mostrarQrCodi);
-  $("btn-qr-no").addEventListener("click", cancelarQr);
-  $("btn-simular").addEventListener("click", simularPago);
-  $("btn-nuevo").addEventListener("click", nuevoPedido);
+  } catch (e) {
+    cont.replaceChildren(el("div", { clase: "aviso aviso-error", texto: e.message }));
+  } finally {
+    btn.disabled = false;
+  }
 }
 
-$("btn-qr-codi").setAttribute("aria-expanded", "false");
-enlazarEventos();
-cargar();
+// ---------- Pestañas ----------
+const PESTANAS = ["mesas", "inventario", "reporte"];
+function cambiarPestana(nombre, enfocar = false) {
+  pestana = nombre;
+  for (const p of PESTANAS) {
+    const tab = $(`tab-${p}`);
+    const activa = p === nombre;
+    tab.setAttribute("aria-selected", String(activa));
+    tab.tabIndex = activa ? 0 : -1;
+    $(`panel-${p}`).hidden = !activa;
+    if (activa && enfocar) tab.focus();
+  }
+  if (nombre === "mesas") pintarMesas();
+  if (nombre === "inventario") cargarInventario();
+  if (nombre === "reporte") cargarReporte();
+}
+for (const p of PESTANAS) {
+  $(`tab-${p}`).addEventListener("click", () => cambiarPestana(p));
+  $(`tab-${p}`).addEventListener("keydown", (ev) => {
+    const i = PESTANAS.indexOf(p);
+    if (ev.key === "ArrowRight") cambiarPestana(PESTANAS[(i + 1) % PESTANAS.length], true);
+    if (ev.key === "ArrowLeft") cambiarPestana(PESTANAS[(i + PESTANAS.length - 1) % PESTANAS.length], true);
+  });
+}
+$("fecha").value = hoyCDMX();
+$("fecha").addEventListener("change", cargarReporte);
+$("btn-analisis").addEventListener("click", pedirAnalisis);
+
+$("form-pin").addEventListener("submit", (ev) => {
+  ev.preventDefault();
+  guardarPin($("pin").value.trim());
+  refrescar();
+});
+
+// ---------- Arranque ----------
+(async () => {
+  try {
+    salud = await api("/api/salud");
+    pintarFranja($("franja"), { modo: salud.modo, cobroPrueba: salud.cobroPrueba, montoPrueba: salud.montoPrueba });
+  } catch (e) {
+    mostrarCaja();
+    mostrarError(e.message);
+  }
+  if (salud?.cajaConPin && !leerPin()) mostrarPin();
+  else refrescar();
+})();

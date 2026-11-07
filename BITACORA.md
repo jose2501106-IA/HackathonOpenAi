@@ -6,47 +6,38 @@ Reglas: fechas `AAAA-MM-DD`; una línea por hecho; cada hecho con **evidencia** 
 
 ## Estado actual
 - Fecha: 2026-11-07 (CDMX)
-- Fase: **Tócale listo para desplegar** (nombre provisional): servidor, pantallas, pruebas y documentación terminados y verificados en SIMULACIÓN; falta que José despliegue y haga el cobro real.
-- Publicado en: GitHub `main` (todavía sin el código de Tócale). Vercel: sin proyecto.
+- Fase: **Punto de venta de Tacos El Gran Abanico construido y verificado en SIMULACIÓN**; falta que José configure Supabase, Vercel y el webhook, y haga el cobro real de $0.10.
+- Publicado en: GitHub `main`. Vercel: sin proyecto. Supabase: sin proyecto.
 - Cobro real con pey: **ninguno todavía**.
-- Última verificación (2026-11-07, docs de Tócale): `python3 scripts/verificar_conocimiento.py` ✓ (ver Historial).
 
 ## Tarea en curso
-**Contrato: Tócale, demo funcional para la entrega (7-nov, 14:19)**
-- Objetivo: una demo de Tócale que funcione de punta a punta en el celular (Caja → liga firmada en tarjeta NFC o QR → Cliente → solicitud de pago CoDi con pey → "Pagado"), con SIMULACIÓN rotulada sin llaves y lista para desplegar en Vercel.
-- Entradas: mensaje de José (14:19: es solo cliente de la taquería; ejemplo real; menú ficticio; Android con Chrome; sin tarjetas todavía; "Hazlo ya"); P12 y `docs/PRD.md`; `docs/CONTRATO-API.md`; `pey/` (OpenAPI 2026-10-20); página de modelos de OpenAI (consultada el 7-nov).
-- Herramientas: agente principal (servidor, pruebas e integración), un subagente para las pantallas (`public/`) y otro para la documentación; servidor local y Playwright para probar.
-- NO TOCAR: llaves (nunca en el repo, el navegador, los logs ni el chat); historial de git (sin reescribirlo ni forzar push); `conocimiento/`, `pey/`, `codi/` y `fuentes/` salvo que la tarea lo pida; ningún cobro real sin José.
-- Aprobaciones: José pidió construir ya (14:19). Push a `main`, despliegue y cobros reales: con el sí de José; las llaves y el cobro real los hace él.
+**Contrato: POS con NFC por mesa y cobro CoDi (7-nov, 15:02 y 15:22)**
+- Objetivo: punto de venta para Tacos El Gran Abanico. Caja por mesa (5 mesas) y una landing por etiqueta NFC con cuenta, IVA incluido, descuentos antes del IVA, celular y "Pagar" → `POST /codi/pn`. Con pago confirmado por pey se descuentan ingredientes y se registra lo vendido; con error o vencimiento no se descuenta nada.
+- Entradas: mensajes de José de las 15:02 y 15:22 (9 respuestas, en `docs/PRD.md`); documentación de pey (docs.pey.mx y OpenAPI, consultados 15:05; `pey/`).
+- Herramientas: agente principal (servidor, SQL, pruebas y documentación) y un subagente para las pantallas (`public/`); PGlite para probar el SQL; Playwright con Chrome.
+- NO TOCAR: llaves; historial de git; `conocimiento/`, `pey/`, `codi/`, `fuentes/`.
+- Aprobaciones: José pidió borrar Tócale y empezar en el repo (15:22). Cobro real y llaves: José.
 - TERMINADO CUANDO:
-  1. `npm test` pasa sin fallas.
-  2. En el servidor local (`npm run dev`), sin llaves, el flujo completo llega a "Pagado" rotulado SIMULACIÓN.
-  3. Una liga alterada da `PEDIDO_INVALIDO` y un pedido de más del tope cobra el tope con "Cobro de prueba".
-  4. Capturas a 360 px de Caja y Cliente sin desplazamiento horizontal.
-  5. `python3 scripts/verificar_conocimiento.py` con 0 errores y sin secretos.
-  6. 🧑 Desplegado en Vercel; `GET /api/salud` dice `modo: "real"`.
-  7. 🧑 Un cobro real de $0.01 a $1 confirmado por pey, con `transactionId`, hora y banco anotados aquí (sin el celular).
-  8. 🧑 Tarjeta NFC grabada desde la Caja y leída por otro celular (⚪ si José compra tarjetas hoy).
-- Evidencia esperada: salida de `npm test`, capturas, salida del verificador, URL de producción, `transactionId` y commits.
-- Resultado parcial (14:45): criterios 1 a 5 ✓; 6 a 8 pendientes de José.
-  1. ✓ `node --test`: 23 pruebas, 23 pasan, 0 fallas (fetch simulado; no llaman servicios reales).
-  2. ✓ Servidor local sin llaves + Playwright (Chromium móvil): Caja → "Entender pedido" (interpretación básica) → "Crear cobro" → liga y QR → Cliente → celular de prueba → "¡Pagado! Gracias · $1.00 · SIMULACIÓN"; QR CoDi de respaldo con confirmación previa; liga inválida muestra el error. Resultado del script: "SIN FALLAS".
-  3. ✓ Liga alterada → `PEDIDO_INVALIDO` (`test/pedido.test.js`); pedido de $180 → cobra $1.00 con "Cobro de prueba" (`test/pey.test.js` y captura 1).
-  4. ✓ A 360 y 390 px: sin desplazamiento horizontal y ningún botón ni casilla de menos de 44 px. Capturas en `docs/capturas/`.
-  5. ✓ `python3 scripts/verificar_conocimiento.py`: "Todo en orden".
-  - ⚪ Web NFC sin probar con tarjeta real (no hay tarjetas; solo Chrome en Android).
+  1. ✓ `npm test`: 20 pruebas, 20 pasan (cálculo, flujo en SIMULACIÓN y en modo real con pey simulado, SQL real en PGlite, adaptador de Supabase).
+  2. ✓ Recorrido en Chrome a 360 px en SIMULACIÓN: caja → 3 tacos al pastor + refresco ($97.50) → URL NFC → celular → Pagar → Simular pago → "¡Pago aprobado!"; tortilla de maíz 500 → 494 después del pago; reporte con la venta; celular `00…` → aviso "…puede no estar registrado en CoDi" sin descontar; token malo → "Esta etiqueta no es válida"; sin scroll horizontal, botones ≥ 44 px, sin errores de consola (23/23, subagente de pantallas).
+  3. ✓ Con llave falsa y `CAJA_PIN`: la caja pide PIN y rechaza el incorrecto; franjas "MODO PRUEBA"; botón "Pagar $0.10"; ninguna llamada a `/api/pagar` (script `pin_prueba.py`, 15:5x).
+  4. 🧑 Supabase con `001_esquema.sql` y `002_semilla.sql`; Vercel con variables; `GET /api/salud` → `modo: real`, `baseDatos: supabase`.
+  5. 🧑 Webhook de pey registrado en `https://<dominio>/api/webhook-pey`.
+  6. 🧑 Cobro real de $0.10 confirmado por pey (`transactionId` y hora aquí, sin el celular).
+  7. 🧑 Etiquetas NFC grabadas con las URL de la caja (⚪ sin etiquetas probadas).
+  8. 🧑 `OPENAI_API_KEY` al final para el análisis con IA.
 
 ## Contratos anteriores (cumplidos)
+- **Tócale (7-nov, 14:19):** criterios 1–5 ✓ en SIMULACIÓN; retirado por José a las 15:22 antes de desplegarse. Código en el commit `b592bee`.
 - **Proyecto definido y entorno de Claude Code en Codespaces (7-nov, 13:05):** CoDi y pey completos, `docs/PROYECTO.md` (P1–P12), `.devcontainer/`, `.claude/` y guía. Resultado 13:28: 6 de 6 criterios ✓. **Cumplido.**
 - **Base limpia del concurso y de pey (7-nov):** solo bases del concurso y documentación de pey en Markdown, sin «¿Ya cayó?» salvo su nota. Resultado 13:02: cumplido salvo la etiqueta `ya-cayo-v1` (403 al subirla).
 
 ## Siguientes pasos
-1. 🧑 Aprobar el push a `main`.
-2. 🧑 Confirmar en la sede dónde está el portal (Luma: cierre domingo 8, 13:00).
-4. 🧑 Vercel, llave de pey con la cuenta de prueba, variables de entorno y webhook ([`docs/ENTREGA.md`](docs/ENTREGA.md)).
-5. 🧑 Cobro real de $0.01 a $1 y anotarlo aquí.
-6. 🧑 Tarjetas NFC (si da tiempo), video de respaldo y ensayo del [pitch](docs/PITCH.md).
-7. 🧑 Entregar en el portal y guardar captura.
+1. 🧑 Supabase, Vercel, variables y webhook: [`docs/ENTREGA.md`](docs/ENTREGA.md) §1–3.
+2. 🧑 Cobro real de $0.10 en una mesa y anotarlo aquí (§5).
+3. 🧑 Grabar las 5 etiquetas NFC (§4).
+4. 🧑 `OPENAI_API_KEY` y probar "Análisis con IA".
+5. 🧑 Video, pitch y entrega en el portal antes del domingo 12:00.
 
 ## Decisiones
 | Fecha | Decisión | Por qué | Alternativas descartadas |
@@ -67,11 +58,18 @@ Reglas: fechas `AAAA-MM-DD`; una línea por hecho; cada hecho con **evidencia** 
 | 2026-11-07 | OpenAI: modelo `gpt-6-luna` por defecto, configurable con `OPENAI_MODEL`; Responses API con `json_schema`; interpretación básica sin llave | La página oficial lo describe como el modelo para tareas enfocadas y de alto volumen (consultada el 7-nov) | El modelo insignia, más lento y caro |
 | 2026-11-07 | PIN de caja opcional (`CAJA_PIN`) | Que nadie más mande solicitudes de pago con la URL pública | Cuentas de usuario |
 | 2026-11-07 | Trabajar con las 16:00 de hoy como límite interno | José cree que se entrega hoy a las 16:00; K00 dice domingo a las 13:00 (⚪ por confirmar en la sede) | — |
+| 2026-11-07 15:22 | Retirar Tócale y construir el POS de Tacos El Gran Abanico: NFC fija por mesa (5), `POST /codi/pn`, inventario por ingredientes, Supabase, solo CoDi + reporte, recordar celular | Decisión de José | Liga firmada por pedido (Tócale) |
+| 2026-11-07 15:22 | Celular sin CoDi: pey no documenta el error; al vencer (360 s + 15 s) sin pago se muestra "…puede no estar registrado en CoDi" | Respuesta 1 de José; `pey/04` ⚪ | Inventar un código de error |
+| 2026-11-07 15:22 | MODO PRUEBA por defecto: se cobran $0.10 reales en lugar del total (`MONTO_PRUEBA_MXN`) | José escribió "0.1 centavos"; CoDi maneja centavos, se tomó como 10 centavos (⚪ confirmar con José) | $0.01 |
+| 2026-11-07 15:3x | Confirmación e inventario en una función de Postgres (`confirmar_pago`), idempotente por `transactionId` | Un webhook repetido no debe descontar dos veces | Varias llamadas REST desde el servidor |
+| 2026-11-07 15:3x | Supabase con RLS sin políticas y solo la llave del servidor; almacén en memoria para SIMULACIÓN local | Datos del negocio y celulares fuera del navegador | Llave anon en el navegador |
+| 2026-11-07 15:3x | OpenAI: análisis de ventas e inventario (Responses API, `json_schema`), apagado sin llave | Respuesta 5 de José | Dictar la orden con IA |
 
 ## Bloqueos y preguntas abiertas
 - BLOQUEADO: la etiqueta `ya-cayo-v1` existe solo en la copia local; el push de la etiqueta respondió HTTP 403 desde esta sesión. El commit `8f45d3d` sí está en GitHub. José puede crearla desde GitHub (Releases).
 - Hora de la entrega: Luma (reconsultada el 7-nov 14:37) confirma el cierre el domingo 8 a las 13:00 en el portal del evento; las 16:00 de hoy son el fin de la sesión de construcción. ⚪ URL y formato del portal.
-- ⚪ No sabemos si José ya tiene llaves de pey y de OpenAI.
+- José ya tiene llave de pey y cuenta CoDi activa (15:22); OpenAI y Vercel al final.
+- ⚪ Confirmar con José que "0.1 centavos" significa $0.10.
 - ⚪ Qué bancos reciben la solicitud de pago de CoDi y qué pasa si el celular no tiene CoDi (`codi/03`, `pey/04`).
 - ⚪ Tarjetas NFC: José no las tiene; las quiere comprar hoy si da tiempo.
 - ⚪ Lo que el concurso no ha publicado: ver los pendientes de K00.
@@ -94,3 +92,4 @@ Reglas: fechas `AAAA-MM-DD`; una línea por hecho; cada hecho con **evidencia** 
 | 2026-11-07 13:44 | José plantea el problema (taquería de puro efectivo) y la idea: tarjetas NFC reprogramables + solicitud de pago al celular con pey | Mensaje de José en el chat | — |
 | 2026-11-07 14:19 | José responde: solo es cliente de la taquería; ejemplo real; menú ficticio; Android con Chrome; sin tarjetas aún; "Hazlo ya" | Mensaje de José en el chat | — |
 | 2026-11-07 14:2x | Documentación de Tócale: P12 respondido, `docs/PRD.md`, `docs/CONTRATO-API.md`, `docs/PITCH.md`, `docs/ENTREGA.md`, README nuevo y esta bitácora | `verificar_conocimiento.py` ✓ (subagente de documentación) | pendiente |
+| 2026-11-07 15:22–16:0x | Tócale retirado; POS de Tacos El Gran Abanico: servidor, SQL de Supabase, pantallas (subagente), pruebas y documentación | `npm test` 20/20; Playwright 23/23 + PIN/MODO PRUEBA | ver git log |
