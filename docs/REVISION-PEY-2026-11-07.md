@@ -32,7 +32,7 @@ Fecha: 2026-11-07. Alcance: documentación y decisiones para construir; no acred
 
 ## Marco normativo y preguntas al mentor
 
-El detalle legal actualizado está en [K06.5](../conocimiento/06-contexto-pagos-y-comercios-mx.md). No basar el pitch en una fecha obligatoria de QR aún no demostrada. Doce días desde hoy sería 19-nov-2026; falta la fuente de ese anuncio específico.
+El detalle legal actualizado está en [K00.4](../conocimiento/00-bases-del-concurso.md). No basar el pitch en una fecha obligatoria de QR aún no demostrada. Doce días desde hoy sería 19-nov-2026; falta la fuente de ese anuncio específico.
 
 Preguntar a pey: sandbox del evento; disponibilidad de cuenta; límites de consultas; reintentos y orden de webhooks; idempotencia de creación; alcance de consulta de pagos; plazo y requisitos para incorporar comercios reales.
 

@@ -4,17 +4,17 @@ Fuentes de los archivos K01, K02 y K08 (prefijo SA). Generado el 2026-11-06.
 
 | ID | Título | URL | Consultado | Usado en |
 |---|---|---|---|---|
-| SA01 | DevDay Exchange Community Hackathon: Mexico City (página oficial en Luma; coincide con el boleto del participante) | https://luma.com/f755f0k6 | 2026-11-06 | K01, K02, K08 |
+| SA01 | DevDay Exchange Community Hackathon: Mexico City (página oficial en Luma; coincide con el boleto del participante) | https://luma.com/f755f0k6 | 2026-11-07 | K00, K01, K02, K08 |
 | SA02 | Newsletter The Build Log, AI Builders, 26 oct y 2 nov 2026 | (correo; sin URL pública) | 2026-11-06 (previo) | K01, K02 |
-| SA03 | Newsletter de AI Builders, 31 oct 2026 | (correo; sin URL pública) | 2026-11-06 (previo) | K01, K02, K08 |
-| SA04 | OpenAI DevDay Exchange 2026 | https://events.openai.com/devdayexchange2026/ | 2026-11-06 | K01, K02 |
-| SA05 | DevDay Exchange Community: Bangkok | https://luma.com/6m83xldb | 2026-11-06 | K01, K02, K08 |
+| SA03 | Newsletter de AI Builders, 31 oct 2026 | (correo; sin URL pública) | 2026-11-06 (previo) | K00, K01, K02, K08 |
+| SA04 | OpenAI DevDay Exchange 2026 | https://events.openai.com/devdayexchange2026/ | 2026-11-06 | K00, K01, K02 |
+| SA05 | DevDay Exchange Community: Bangkok | https://luma.com/6m83xldb | 2026-11-06 | K00, K01, K02, K08 |
 | SA06 | DevDay Exchange Community: Paris | https://luma.com/6nccj7gu | 2026-11-06 | K01, K02, K08 |
 | SA07 | DevDay Exchange Community Meetup & Hackathon: Bengaluru | https://luma.com/0bdmf0sw | 2026-11-06 | K01, K02, K08 |
 | SA08 | DevDay Exchange Community Guadalajara (REU) | https://reu.mx/eventos/devday-exchange-community | 2026-11-06 (previo) | K08 |
 | SA09 | DevDay Exchange Community Hackathon: New Delhi | https://luma.com/6t5uk4lo | 2026-11-06 | K08 |
 | SA10 | OpenAI Build Week Community Hackathon – London | https://luma.com/codex-hack-ldn | 2026-11-06 | K08 |
-| SA11 | pey: API CoDi | https://pey.mx/api-codi | 2026-11-06 | K01, K02, K08 |
+| SA11 | pey: API CoDi | https://pey.mx/api-codi | 2026-11-06 | K00, K01, K02, K08 |
 | SA12 | mipey.mx | https://mipey.mx | 2026-11-06 (previo) | K02 |
 | SA13 | merca20.com: nota sobre el hackatón de pagos digitales de Pey, AI Builders México y SpaceXAI | merca20.com (URL exacta no registrada) | 2026-11-06 (previo) | K02 |
 | SA14 | informabtl.com: nota sobre la API CoDi de Pey y el cambio del 14 de diciembre | informabtl.com (URL exacta no registrada) | 2026-11-06 (previo) | K02 |
@@ -35,7 +35,7 @@ Fuentes de los archivos K01, K02 y K08 (prefijo SA). Generado el 2026-11-06.
 | SA29 | InfoQ: OpenAI DevDay 2026 | https://infoq.com/news/2026/10/openai-devday-2026 | 2026-11-06 | K02, K08 |
 | SA30 | BGR: Everything OpenAI announced at DevDay 2026 | https://www.bgr.com/2272332/openai-devday-2026-announcements/ | 2026-11-06 | K02 |
 | SA31 | The Neuron: OpenAI DevDay 2026, ChatGPT is becoming an AI operating system | https://www.theneuron.ai/news/openai-devday-2026-chatgpt-is-becoming-an-ai-operating-system/ | 2026-11-06 | K02 |
-| SA32 | AI Builders México (sitio oficial) | https://aibuilders.mx/ | 2026-11-06 | K02 |
+| SA32 | AI Builders México (sitio oficial) | https://aibuilders.mx/ | 2026-11-07 | K00, K02 |
 | SA33 | OpenAI Codex: Mexico City (AI Builders Mexico, T1) | https://luma.com/suipk589 | 2026-11-06 | K01, K02 |
 | SA34 | Zero to Agent: Mexico City | https://luma.com/wp947zvj | 2026-11-06 | K01, K02 |
 | SA35 | v0 Prompt to Production, Mexico City | https://luma.com/fdg8riz2 | 2026-11-06 | K01, K02 |
@@ -46,18 +46,18 @@ Fuentes de los archivos K01, K02 y K08 (prefijo SA). Generado el 2026-11-06.
 | SA40 | El Imparcial: Negocios pueden evitar pagar hasta 1.91% por cobrar con tarjeta (CoDi) | https://www.elimparcial.com/dinero/2026/04/11/negocios-en-mexico-pueden-evitar-el-pago-de-hasta-191-por-cobrar-con-tarjeta-con-esta-solucion-del-banco-de-mexico-que-elimina-cargos-y-entrega-el-dinero-en-segundos/ | 2026-11-06 | K02, K08 |
 | SA41 | El Cronista: La guerra contra el efectivo, más pagos digitales en 2026 | https://www.cronista.com/mexico/finanzas-economia/la-guerra-en-contra-del-efectivo-autoridades-en-mexico-van-por-mas-pagos-digitales-en-2026 | 2026-11-06 | K02 |
 | SA42 | DPL News: México, desestiman a CoDi población y comercios (2022) | https://dplnews.com/?p=173032 | 2026-11-06 | K02 |
-| SA43 | ADN40: Nuevas reglas para transferencias bancarias; fecha límite 14 de diciembre | https://www.adn40.mx/mexico/2026-09-12/nuevas-reglas-para-hacer-transferencias-bancarias-en-mexico-la-fecha-limite-es-el-14-de-diciembre/ | 2026-11-06 | K01, K02 |
+| SA43 | ADN40: Nuevas reglas para transferencias bancarias; fecha límite 14 de diciembre | https://www.adn40.mx/mexico/2026-09-12/nuevas-reglas-para-hacer-transferencias-bancarias-en-mexico-la-fecha-limite-es-el-14-de-diciembre/ | 2026-11-06 | K00, K01, K02 |
 | SA44 | ADN40: Construirán 100 Utopías en CDMX: qué son | https://www.adn40.mx/ciudad/2024-10-05/construiran-100-utopias-en-cdmx-que-son-y-en-donde-estaran/ | 2026-11-06 | K01, K02 |
-| SA45 | OpenAI Developers Blog: Build Week winners | https://developers.openai.com/blog/build-week-winners | 2026-11-06 | K02, K08 |
+| SA45 | OpenAI Developers Blog: Build Week winners | https://developers.openai.com/blog/build-week-winners | 2026-11-06 | K00, K02, K08 |
 | SA46 | remio: OpenAI Build Week winners show what Codex can build beyond demos | https://www.remio.ai/post/openai-build-week-winners-show-what-codex-can-build-beyond-demos | 2026-11-06 | K08 |
 | SA47 | JetBrains AI Blog: Building the future of IDEs inside the first JetBrains Codex hackathon | https://blog.jetbrains.com/ai/2026/04/building-the-future-of-ides-inside-the-first-jetbrains-codex-hackathon/ | 2026-11-06 | K08 |
 | SA48 | Createwith: OpenAI hackathon winners create Yolodex | https://www.createwith.com/tool/chatgpt/updates/openai-hackathon-winners-create-yolodex | 2026-11-06 | K08 |
 | SA49 | MOR Software: Codex Community Hackathon Hanoi 2026 | https://morsoftware.com/news/codex-community-hackathon-hanoi-2026 | 2026-11-06 | K08 |
-| SA50 | Codex Community Mini-Hackathon, San Francisco #5 | https://luma.com/7025i1j5 | 2026-11-06 | K02, K08 |
+| SA50 | Codex Community Mini-Hackathon, San Francisco #5 | https://luma.com/7025i1j5 | 2026-11-06 | K00, K02, K08 |
 | SA51 | Daniel Vaughan: The Codex CLI Hackathon Playbook | https://codex.danielvaughan.com/2026/05/15/codex-cli-hackathon-sprint-playbook-rapid-prototyping-time-constrained-development/ | 2026-11-06 | K08 |
 | SA52 | OpenAI: Codex Cloud environment (guía legacy) | https://learn.chatgpt.com/docs/environments/cloud-environment | 2026-11-06 | K08 |
-| SA53 | GitHub Blog: Keeping secrets out of public repositories (29 feb 2024) | https://github.blog/2024-02-29-keeping-secrets-out-of-public-repositories | 2026-11-06 | K02, K08 |
-| SA54 | GitHub Changelog: RubyGems, Adobe and OpenAI are now secret scanning integrators (8 jun 2021) | https://github.blog/changelog/2021-06-08-rubygems-adobe-and-openai-are-now-github-secret-scanning-integrators | 2026-11-06 | K02, K08 |
+| SA53 | GitHub Blog: Keeping secrets out of public repositories (29 feb 2024) | https://github.blog/2024-02-29-keeping-secrets-out-of-public-repositories | 2026-11-06 | K00, K02, K08 |
+| SA54 | GitHub Changelog: RubyGems, Adobe and OpenAI are now secret scanning integrators (8 jun 2021) | https://github.blog/changelog/2021-06-08-rubygems-adobe-and-openai-are-now-github-secret-scanning-integrators | 2026-11-06 | K00, K02, K08 |
 | SA55 | Foundercal: Startup & Tech Events in Mexico City (nov 2026) | https://foundercal.com/cities/mexico-city | 2026-11-06 | K01 |
 | SA56 | Luma: Popular events in Mexico City (listado) | https://luma.com/mexico-city | 2026-11-06 | K01 |
 | SA57 | Codex Community Events (calendario de Luma) | https://luma.com/codex-community | 2026-11-06 | K01 |

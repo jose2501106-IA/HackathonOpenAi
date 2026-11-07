@@ -14,7 +14,7 @@ responde:
   - "¿Cómo expongo la API de Pey como herramientas de un agente de IA sin riesgos?"
 actualizado: 2026-11-07
 confianza: media
-fuentes: [SB01, SB02, SB03, SB04, SB05, SB06, SB07, SB08, SB09, SB10, SB11, SB12, SB13, SB14, SB15, SB16, SB17, SB18, SB19, SB20, SB21, SB22, SB23, SB24, SB25, SB26, SB27, SB28, SB29, SB30, SB31, SB32, SB33, SB34, SB35, SB36, SB37, SB38, SB39, SB40, SB41, SB42, SB43, SB44, SB45, SB46]
+fuentes: [SB01, SB02, SB03, SB04, SB05, SB06, SB07, SB08, SB09, SB10, SB11, SB12, SB13, SB14, SB15, SB16, SB17, SB18, SB19, SB20, SB21, SB22, SB23, SB24, SB25, SB26, SB27, SB28, SB29, SB30, SB31, SB32, SB33, SB34, SB35, SB36, SB37, SB38, SB39, SB40, SB41, SB42, SB43, SB44, SB45, SB46, SB47, SB48, SB49, SB50, SB51, SB52, SB53, SB54, SB55, SB56, SB57]
 ---
 
 # K03 · CoDi y API de Pey
@@ -23,10 +23,11 @@ fuentes: [SB01, SB02, SB03, SB04, SB05, SB06, SB07, SB08, SB09, SB10, SB11, SB12
 
 - **CoDi** (Banxico) cobra con QR o con notificación al celular sobre SPEI, 24/7, sin comisión para quien paga ni para quien cobra; el cliente autoriza en la app de su banco [SB29][SB31].
 - **API de Pey**: REST en `https://api.pey.mx`, el único entorno documentado (producción), con `Authorization: Bearer <API key>`; gratuita por ahora, self-service, y el dinero llega directo a la cuenta bancaria del comercio [SB01][SB10][SB38].
-- **Alta**: portal.mipey.mx → Finanzas (cuenta `codi`) → Desarrollador → "Crear API Key". Tu CLABE tarda 5 días hábiles con Banxico; para mañana registra la cuenta de prueba publicada en la guía: se activa al instante, pero lo que le pagues NO se devuelve (usa $0.01 a $1) [SB07].
+- **Alta**: portal.mipey.mx → Finanzas (cuenta `codi`) → Desarrollador → "Crear API Key". Tu CLABE tarda 5 días hábiles con Banxico; para probar ya, registra la cuenta de prueba publicada en la guía: se activa al instante, pero lo que le pagues NO se devuelve (usa $0.01 a $1) [SB07].
 - **Flujo de demo**: `POST /codi/qr` (monto en pesos) con `generateImage: true` → muestras `qrImage` (PNG en base64) → confirmas con `GET /transaction/codi/qr/{id}` (`PAID`) o con el webhook `codi.qr.payment_received` [SB10][SB17].
 - **Webhooks**: firmados con Standard Webhooks (HMAC-SHA256 sobre `id.timestamp.cuerpo`), uno por API key; regístralo como `<dominio de producción>/api/webhook-pey`, nunca con un preview [SB08][SB39][SB43].
 - **Seguridad**: el repo es público, así que la llave y el secreto viven solo en variables de entorno del servidor; el agente propone, la persona confirma y el servidor impone `MAX_MONTO_MXN`.
+- **Documentación completa de pey en Markdown** (11 endpoints, 4 webhooks, tipos, errores y marca; consultada el 2026-11-07): [pey/README.md](../pey/README.md) [SB47]. Ver K03.10.
 
 ## K03.1 · Qué es CoDi y cómo paga un cliente
 
@@ -60,19 +61,19 @@ Pey (pey®) es una empresa de tecnología enfocada en integrar CoDi a negocios [
 
 **Recomendación:** ángulo multi-comercio: registra la CLABE de cada puesto (`POST /bank-account`, `entity: "PERSON"`) y cobra con su `bankAccountId`: sin comisión y con dinero directo. Pey lo resume: «ahora falta facilitar la experiencia de quien recibe el dinero» [SB37].
 
-## K03.3 · Alta y llaves (esta noche)
+## K03.3 · Alta y llaves
 
 Todo pasa en `portal.mipey.mx` [SB07][SB08]:
 
 1. **Perfil.** Qué datos pide (correo, RFC, INE…): ⚪ no verificado. Ten tu CLABE a la mano.
-2. **Finanzas → cuenta de pago `codi`** (solo cuentas mexicanas). Tu CLABE tarda 5 días hábiles en registrarse ante Banxico: no estará lista mañana. Mientras, registra la **cuenta de prueba** que publica la guía (sección "Prueba en producción"): se activa de inmediato, pero lo que se le pague no se devuelve; usa montos como $0.01 MXN [SB07]. También hay registro por API: `POST /bank-account` [SB13].
+2. **Finanzas → cuenta de pago `codi`** (solo cuentas mexicanas). Tu CLABE tarda 5 días hábiles en registrarse ante Banxico: no estará lista para el concurso. Mientras, registra la **cuenta de prueba** que publica la guía (sección "Prueba en producción"): se activa de inmediato, pero lo que se le pague no se devuelve; usa montos como $0.01 MXN [SB07]. También hay registro por API: `POST /bank-account` [SB13].
 3. **Desarrollador → "Crear API Key"**: nombre y cuenta vinculada (una `codi`; una `stripe` si quieres tarjetas) [SB07]. Si la llave se muestra una sola vez: ⚪ no verificado; cópiala de inmediato.
 4. **Webhook**: engrane de la llave → URL → crear; guarda el secreto de firma (rotable). Un webhook por llave [SB08].
 5. **Secretos** en Vercel y Codespaces: `PEY_API_KEY` y `PEY_WEBHOOK_SECRET`. Nunca en el repo.
 
 **Entornos.** Pey solo documenta producción (`https://api.pey.mx`); el entorno de pruebas está "próximamente" [SB09][SB10]. La landing menciona llaves de prueba y de producción [SB01], pero la referencia técnica no (⚪ pregúntalo a Pey en el evento). Por eso el repo no usa `PEY_ENV`: la URL base es siempre la de producción, y lo que se muestra en pantalla es `MODO_PAGO` (`simulacion`, `prueba` o `comercio`; ver `.env.example`).
 
-**Recomendación:** esta noche activa CoDi en la app bancaria con la que pagarás (algunos bancos validan con un depósito de un centavo y un SMS) [SB34], paga $0.01 de punta a punta con el `curl` de abajo y graba la pantalla. Con la cuenta de prueba, baja `MAX_MONTO_MXN` (p. ej. a 20).
+**Recomendación:** antes de la demo, activa CoDi en la app bancaria con la que pagarás (algunos bancos validan con un depósito de un centavo y un SMS) [SB34], paga $0.01 de punta a punta con el `curl` de abajo y graba la pantalla. Con la cuenta de prueba, pon en el servidor un tope de monto bajo (en pruebas, $0.01 a $1).
 
 ```bash
 # Prueba de humo: crea un QR de 1 centavo. La llave sale de tu variable de entorno, nunca del repo.
@@ -86,7 +87,7 @@ curl -sS https://api.pey.mx/codi/qr \
 
 ## K03.4 · Endpoints, formato del QR y estados
 
-Base `https://api.pey.mx`; headers `Authorization: Bearer <PEY_API_KEY>`, `Content-Type: application/json` y `Accept: application/json` [SB10][SB23]. Los esquemas completos están en el OpenAPI (`docs.pey.mx/openapi.json`, versión 2026-10-20), no en las páginas de referencia [SB10][SB11][SB12].
+Base `https://api.pey.mx`; headers `Authorization: Bearer <PEY_API_KEY>`, `Content-Type: application/json` y `Accept: application/json` [SB10][SB23]. Los esquemas completos están en el OpenAPI (`docs.pey.mx/openapi.json`, versión 2026-10-20), no en las páginas de referencia [SB10][SB11][SB12]. El 2026-11-07 seguía la misma versión, con 11 rutas en 5 grupos [SB10][SB57]; campo por campo en [pey/03](../pey/03-referencia-api-convenciones.md).
 
 | Método y ruta | Uso | Éxito |
 |---|---|---|
@@ -95,10 +96,13 @@ Base `https://api.pey.mx`; headers `Authorization: Bearer <PEY_API_KEY>`, `Conte
 | `GET /transaction/codi/qr/{id}` | Pagos de un QR (20/página) | 200 |
 | `GET /transaction/{id}` | Una transacción | 200 |
 | `GET /transaction/api-key` | Todo lo cobrado (80/página) | 200 |
+| `GET /transaction/bank-account/{id}` | Pagos `PAID` de una cuenta registrada (80/página) | 200 |
 | `POST /bank-account`, `GET /bank-account/{id}` | CLABEs | 200 |
 | `POST /payment-link/create`, `/update`, `GET /payment-link/{id}` | Links de pago | 200 |
 
 **Monto:** pesos como número con decimales (150.00, 0.01), no centavos [SB07][SB10].
+
+**Revisión 2026-11-07:** `GET /transaction/bank-account/{id}` regresa solo pagos `PAID` de QR y push creados con ese `bankAccountId`, de la más reciente a la más antigua; cuenta ajena o inexistente → 404 `BANK_ACCOUNT_NOT_FOUND` [SB10][SB48]. `GET /bank-account/{id}` también da 404 con cuentas de otra llave [SB50]; `codiStatus` va de `PENDING` a `PROCESSING` y a `ACTIVE` (o `ERROR`, con `errorMessage`) [SB51]. `GET /transaction/api-key` toma la llave del header `Authorization` [SB49]. En transacciones, `amountBreakdown.fee` lo paga quien paga y `payableType` vale `PAYMENT_LINK`, `API_CODI_QR` o `API_CODI_PN` [SB10]; `applicationFee` es la comisión que retiene pey y puede ser `null` [SB52].
 
 **QR:** la respuesta trae `id` (IDC de Banxico), `qrString` y, con `generateImage: true`, `qrImage` (PNG base64; puede tardar o venir `null`). Muéstralo como `data:image/png;base64,…`; si es `null`, convierte `qrString` en QR con una librería [SB10][SB23]. Pey no regresa el vencimiento: calcúlalo con `expiration` [SB10].
 
@@ -147,12 +151,12 @@ Base `https://api.pey.mx`; headers `Authorization: Bearer <PEY_API_KEY>`, `Conte
 **Eventos** (payload plano con `type`; no hay eventos documentados de pago rechazado o vencido) [SB17][SB18][SB19][SB20]:
 - `codi.qr.payment_received`: `amount`, `apiKeyId`, `bankAccountId` (si lo mandaste), `codiQrId` (el `id` del QR), `concept`, `datePaid` (Unix en segundos), `metadata`, `numRef`, `transactionId` y `type`.
 - `codi.pn.payment_received`: igual, sin `codiQrId`.
-- `bank.account.updated`: solo al pasar a `ACTIVE`.
-- `payment_link.status_updated`: `paymentLinkId`, `status`, `clientReferenceId` y `transactions`.
+- `bank.account.updated`: solo al pasar a `ACTIVE`; trae `bankAccountId`, `name`, `ownerType` (`API_KEY`), `ownerId`, `taxId` (opcional), `codiStatus`, `clabe` y `entity`, sin `alias` ni `dateCreated` [SB19].
+- `payment_link.status_updated`: `apiKeyId`, `paymentLinkId`, `status`, `clientReferenceId` y `transactions`. El webhook documenta `status` `paid`, `pending` o `processing`; `GET /payment-link/{id}` además admite `partial` (⚪ significado no documentado) [SB20][SB55].
 
 **Firma.** Standard Webhooks [SB08][SB16]: headers `webhook-id`, `webhook-timestamp` y `webhook-signature` (`v1,<base64>`, quizá varias separadas por espacio) [SB06][SB39]. Se firma `id.timestamp.cuerpo` con HMAC-SHA256; la llave es el secreto sin `whsec_`, decodificado de base64 [SB39][SB40]. Compara en tiempo constante y rechaza timestamps viejos (la especificación no fija tolerancia; **Recomendación:** 5 minutos) [SB39]. Lee el cuerpo crudo con `await request.text()` [SB42].
 
-**Respuesta.** Cualquier 2xx es entrega exitosa [SB39]; el ejemplo de Pey responde 200 [SB16]. Reintentos y timeout de Pey: ⚪ no verificado. Deduplica por `webhook-id`; depura en Desarrollador → engrane → "Webhook Logs" [SB16].
+**Respuesta.** Cualquier 2xx es entrega exitosa [SB39]; el ejemplo de Pey responde 200 [SB16]. pey llama a `webhook-id` llave de idempotencia y su ejemplo responde 500 ante firma inválida (aquí se usa 401; ambos cuentan como entrega fallida) [SB16][SB39]. Reintentos y timeout de Pey: ⚪ no verificado. Deduplica por `webhook-id`; depura en Desarrollador → engrane → "Webhook Logs" [SB16].
 
 **URL pública.**
 - Vercel: `https://<proyecto>.vercel.app/api/webhook-pey` [SB41], siempre con el dominio de producción: la protección estándar bloquea previews y URLs de deployment [SB43].
@@ -166,7 +170,7 @@ Código del handler: K03.7.
 **No hay sandbox:** Pey recomienda probar en producción, con bancos y webhooks reales, montos como $0.01 MXN [SB07][SB09]; no documenta simulador de pagos (⚪ no verificado).
 
 **Guion de pago real (Recomendación):**
-1. Esta noche: CoDi activo en tu app bancaria [SB33], un pago de $0.01 de punta a punta y video de la pantalla.
+1. Antes de la demo: CoDi activo en tu app bancaria [SB33], un pago de $0.01 de punta a punta y video de la pantalla.
 2. Demo: QR de $1 con `expiration: 600`, en grande; pagas desde tu celular; la UI pasa a "Pagado" por polling o webhook.
 3. Con la cuenta de prueba ese dinero no regresa [SB07]; di en el pitch que en producción cae directo en la CLABE del comercio [SB38].
 4. Prefiere QR: la push depende de que el celular del pagador esté ligado a CoDi [SB28][SB30] (⚪ no verificado en detalle).
@@ -174,14 +178,14 @@ Código del handler: K03.7.
 
 **Plan B escalonado:**
 - **B1, no llega el webhook:** polling a `GET /transaction/codi/qr/{id}` cada 2 a 5 s mientras el QR siga vigente (límite de peticiones: ⚪ no verificado) [SB10][SB15].
-- **B2, Pey da 503 (`SERVICE_UNAVAILABLE`, `FLAGS_UNAVAILABLE`) o falla la red:** QR de respaldo creado esta noche con `expiration: 0` (no vence) y el video [SB10]; no subas ese QR al repo.
+- **B2, Pey da 503 (`SERVICE_UNAVAILABLE`, `FLAGS_UNAVAILABLE`) o falla la red:** QR de respaldo creado antes de la demo con `expiration: 0` (no vence) y el video [SB10]; no subas ese QR al repo.
 - **B3, todo falla:** modo SIMULACIÓN con la etiqueta visible que exige AGENTS.md, nunca presentado como pago real. El script firmado de K03.7 prueba tu webhook sin pagar.
 
-**Recomendación:** mañana temprano pregunta a los mentores de Pey si hay llaves o entorno especial para el hackatón (⚪ no verificado).
+**Recomendación:** pregunta a los mentores de Pey si hay llaves o entorno especial para el hackatón (⚪ no verificado). La documentación del 2026-11-07 tampoco resuelve límite de peticiones, idempotencia de creación, reintentos y orden de webhooks ni requisitos para dar de alta comercios reales: pregúntalos también [SB10][SB16].
 
 ## K03.7 · Ejemplos mínimos en Node.js 20+ (probados)
 
-> Revisión 2026-11-07: los ejemplos históricos no son un checkout completo. Antes de producción, asociar el QR a un pedido del servidor y validar monto, moneda y destinatario; no basta encontrar cualquier PAID. La corrección de 404 a no_verificable es documental y no se ha ejecutado como aplicación. Ver [plan de integración](../docs/REVISION-PEY-2026-11-07.md).
+> Revisión 2026-11-07: los ejemplos históricos no son un checkout completo. Antes de producción, asociar el QR a un pedido del servidor y validar monto, moneda y destinatario; no basta encontrar cualquier PAID. La corrección de 404 a no_verificable es documental y no se ha ejecutado como aplicación. Si hay efectos de negocio, deduplica `webhook-id` y `transactionId` en almacenamiento persistente (la memoria de una función serverless no dura) y no repitas una creación tras un timeout sin reconciliar: pey no documenta idempotencia (⚪).
 
 Node 20+ ya trae `fetch`. Vercel crea una función por archivo dentro de `api/`; exportas `GET` o `POST`, que reciben un `Request` web. Para módulos ES usa `.mjs` o `"type": "module"` en el `package.json` más cercano [SB41]. No encontré un SDK oficial de Pey (⚪ no verificado). Pey sugiere los SDK de Standard Webhooks [SB16]; aquí se usa `node:crypto` para no depender de nada [SB40].
 
@@ -440,11 +444,11 @@ test("webhook: válido 200, repetido 200, firma ajena 401, sin firma 401, vacío
 ## K03.8 · Errores comunes y límites
 
 **Formato de error:** `{ "error": { "message", "type", "requestId" } }` [SB10]. Tipos:
-- **400:** `INVALID_REQUEST`, `INCOMPLETE_PARAMETERS`, `INVALID_PARAMETER` (o `INVALID_PARAMETERS` en transacciones), `INVALID_AMOUNT`, `INVALID_STATE` (p. ej. CoDi no habilitado), `PEY_CONSISTENCY_ERROR`, `BAD_REQUEST`, `INVALID_CLABE`.
-- **404:** `NOT_FOUND`, `BANK_ACCOUNT_NOT_FOUND`. **409** (links): `PAYMENT_LINK_NOT_PENDING`, `CONCURRENT_UPDATE`. **500:** `INTERNAL_SERVER_ERROR`. **503:** `SERVICE_UNAVAILABLE`, `FLAGS_UNAVAILABLE`.
-- Llave ausente o inválida: código ⚪ no verificado (un ejemplo da 400 "apiKeyId not included in request"; los links listan 403). **Recomendación:** trata 401, 403 e `INVALID_STATE` como "Tu cuenta de Pey todavía no está habilitada para cobrar."
+- **400:** `INVALID_REQUEST`, `INCOMPLETE_PARAMETERS`, `INVALID_PARAMETER` (o `INVALID_PARAMETERS` en transacciones), `INVALID_AMOUNT`, `INVALID_STATE` (p. ej. CoDi no habilitado), `PEY_CONSISTENCY_ERROR`, `BAD_REQUEST`, `INVALID_CLABE`; en links de pago además `AUTH_ERROR`, `REQUEST_PARSING_ERROR`, `INVALID_URL`, `INVALID_HAS_TIP` e `INVALID_CLIENT_REFERENCE_ID` [SB10][SB53].
+- **403** (links): `FORBIDDEN`, link de otra llave [SB54][SB55]. **404:** `NOT_FOUND`, `BANK_ACCOUNT_NOT_FOUND`. **409** (links): `PAYMENT_LINK_NOT_PENDING`, `CONCURRENT_UPDATE` [SB54]. **500:** `INTERNAL_SERVER_ERROR`. **503:** `SERVICE_UNAVAILABLE`, `FLAGS_UNAVAILABLE`. Tabla por endpoint: [pey/11](../pey/11-errores-y-limites.md).
+- Llave ausente o inválida: código ⚪ no verificado. Los ejemplos `authError` del OpenAPI dan 400 (`INVALID_REQUEST` en transacciones, "apiKeyId not included in request"; `AUTH_ERROR` en links); el 403 de los links es por un link ajeno, no por llave inválida [SB10][SB55]. **Recomendación:** trata 401, 403 e `INVALID_STATE` como "Tu cuenta de Pey todavía no está habilitada para cobrar." (así lo hace `respuestaDeError` de K03.7).
 
-**Límites documentados** [SB10][SB08]: QR `amount` >= 0 sin máximo publicado; push `amount` > 0 y <= 1,000,000; `phoneNumber` de 10 dígitos; `expiration` 0 o >= 360 s (push: >= 360, default 360); `numRef` de 1 a 7 dígitos; `metadata` hasta 50 claves (40/500 caracteres); páginas de 80, o 20 en QR; un webhook por llave; `bankAccountId` solo `ACTIVE`.
+**Límites documentados** [SB10][SB08]: QR `amount` >= 0 sin máximo publicado; push `amount` > 0 y <= 1,000,000; `phoneNumber` de 10 dígitos; `expiration` 0 o >= 360 s (push: >= 360, default 360); `numRef` de 1 a 7 dígitos; `metadata` hasta 50 claves (40/500 caracteres); páginas de 80, o 20 en QR; un webhook por llave; `bankAccountId` solo `ACTIVE`. Links: `amount` > 0, `successUrl` y `backUrl` HTTPS, `clientReferenceId` <= 255 y monto editable solo en `pending` [SB10][SB54]. Cuentas: `alias` y `name` de 1 a 255 caracteres, `clabe` de 18 dígitos con dígito verificador válido y banco con CoDi habilitado [SB10][SB13]; una cuenta `codi` y una `stripe` por llave [SB07].
 
 **No documentado (⚪ no verificado):** límite de peticiones, idempotencia, largo de `concept`, máximo por banco, qué ve el cliente con un QR vencido y reintentos de webhooks.
 
@@ -456,7 +460,7 @@ test("webhook: válido 200, repetido 200, firma ajena 401, sin firma 401, vacío
 
 ## K03.9 · La API como herramienta de un agente de IA
 
-En la Responses API cada herramienta lleva `type: "function"`, `name`, `description`, `parameters` (JSON Schema) y `strict` [SB45]. El modelo responde con items `function_call` (`call_id`, `name` y `arguments` como texto JSON) y tú devuelves un `function_call_output` con el mismo `call_id` [SB45]. Los ejemplos con `strict: true` listan todo en `required`, usan `additionalProperties: false` y modelan lo opcional con `["string", "null"]` [SB46]. Qué palabras clave se respetan en modo estricto: ⚪ no verificado; valida otra vez en el servidor. `crear_cobro` usa los mismos campos que K04.15 (`monto`, `concepto`); el flujo completo con OpenAI está en K04.6. La herramienta solo propone: el servidor crea el QR hasta que la persona confirma.
+En la Responses API cada herramienta lleva `type: "function"`, `name`, `description`, `parameters` (JSON Schema) y `strict` [SB45]. El modelo responde con items `function_call` (`call_id`, `name` y `arguments` como texto JSON) y tú devuelves un `function_call_output` con el mismo `call_id` [SB45]. Los ejemplos con `strict: true` listan todo en `required`, usan `additionalProperties: false` y modelan lo opcional con `["string", "null"]` [SB46]. Qué palabras clave se respetan en modo estricto: ⚪ no verificado; valida otra vez en el servidor. `crear_cobro` usa dos campos (`monto`, `concepto`). La herramienta solo propone: el servidor crea el QR hasta que la persona confirma.
 
 **Reglas de seguridad (Recomendación):**
 1. **Confirmación humana:** `crear_cobro` no cobra; devuelve una propuesta. Solo el botón "Confirmar" de la UI llama `POST /api/cobros`, fuera del control del modelo.
@@ -567,6 +571,24 @@ export async function ejecutarHerramienta(nombre, args) {
 // Devuelve cada resultado al modelo como {type: "function_call_output", call_id, output: JSON.stringify(resultado)}.
 ```
 
+## K03.10 · Documentación completa de pey (carpeta `pey/`)
+
+Toda la documentación pública de pey quedó en Markdown, con redacción propia, en [pey/README.md](../pey/README.md): las 37 URL del mapa del sitio [SB47], el OpenAPI completo (11 rutas) [SB10] y la página comercial [SB01], consultados el 2026-11-07. Úsala para campos, tipos, errores y ejemplos endpoint por endpoint; este archivo sigue siendo la síntesis con decisiones y código probado.
+
+| Necesitas… | Archivo |
+|---|---|
+| Alta, llaves, cuenta de prueba y entornos | [pey/02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md) |
+| QR y push | [pey/04](../pey/04-api-codi-qr-y-push.md) |
+| Cuentas bancarias (multi-cuenta) | [pey/05](../pey/05-api-cuentas-bancarias.md) |
+| Links de pago | [pey/06](../pey/06-api-ligas-de-pago.md) |
+| Consultar pagos | [pey/07](../pey/07-api-transacciones.md) |
+| Tipos y enumeraciones | [pey/08](../pey/08-tipos-de-datos.md) |
+| Webhooks y sus campos | [pey/09](../pey/09-webhooks.md) |
+| Errores y límites | [pey/11](../pey/11-errores-y-limites.md) |
+| Logos y changelog | [pey/12](../pey/12-recursos-de-marca.md), [pey/13](../pey/13-registro-de-cambios.md) |
+
+Fuentes revisadas por primera vez hoy: [SB48] a [SB57]. El changelog no tiene entradas generales ni política de versiones [SB56]; los tipos de transacción y de cuenta bancaria están en [SB51] y [SB52].
+
 ## Fuentes
 
 | ID | Título | URL | Consultado |
@@ -617,3 +639,14 @@ export async function ejecutarHerramienta(nombre, args) {
 | SB44 | GitHub Docs: Forwarding ports in your codespace | https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace | 2026-11-06 |
 | SB45 | OpenAI: Function calling | https://developers.openai.com/api/docs/guides/function-calling | 2026-11-06 |
 | SB46 | OpenAI: Structured model outputs | https://developers.openai.com/api/docs/guides/structured-outputs | 2026-11-06 |
+| SB47 | Documentación de pey: mapa del sitio (37 URL) | https://docs.pey.mx/sitemap.xml | 2026-11-07 |
+| SB48 | Documentación de pey: Get Bank Account Transactions | https://docs.pey.mx/docs/api/get-bank-account-transactions | 2026-11-07 |
+| SB49 | Documentación de pey: Get API Key Transactions | https://docs.pey.mx/docs/api/get-api-key-transactions | 2026-11-07 |
+| SB50 | Documentación de pey: Get Bank Account | https://docs.pey.mx/docs/api/get-bank-account | 2026-11-07 |
+| SB51 | Documentación de pey: tipo Cuenta bancaria | https://docs.pey.mx/docs/types/bank-account | 2026-11-07 |
+| SB52 | Documentación de pey: tipo Objeto de transacción | https://docs.pey.mx/docs/types/transaction-object | 2026-11-07 |
+| SB53 | Documentación de pey: Create Payment Link | https://docs.pey.mx/docs/api/create-payment-link | 2026-11-07 |
+| SB54 | Documentación de pey: Update Payment Link | https://docs.pey.mx/docs/api/update-payment-link | 2026-11-07 |
+| SB55 | Documentación de pey: Get Payment Link | https://docs.pey.mx/docs/api/get-payment-link | 2026-11-07 |
+| SB56 | Documentación de pey: registro de cambios, introducción | https://docs.pey.mx/docs/changelog/introduction | 2026-11-07 |
+| SB57 | Documentación de pey: Referencia de la API (categoría) | https://docs.pey.mx/docs/category/api-reference | 2026-11-07 |

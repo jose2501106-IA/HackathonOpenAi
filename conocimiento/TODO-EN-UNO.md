@@ -1,21 +1,29 @@
 # Base de conocimiento completa — HackathonOpenAi
 
-> Archivo generado por `scripts/construir_todo_en_uno.py` el 2026-11-07. No lo edites a mano: edita los archivos de `conocimiento/` y vuelve a correr el script.
+> Archivo generado por `scripts/construir_todo_en_uno.py` el 2026-11-07. No lo edites a mano: edita los archivos de `conocimiento/` o `pey/` y vuelve a correr el script.
 > Úsalo cuando un asistente (por ejemplo ChatGPT) necesite leer todo de una vez. Cada sección conserva su ID (K03.4, etc.) para citarla.
 
 ## Contenido
 - `conocimiento/INDICE.md` — Índice de la base de conocimiento
-- `conocimiento/00-resumen-ejecutivo.md` — Resumen ejecutivo: cómo ganar el DevDay Exchange Community Hackathon CDMX
+- `conocimiento/00-bases-del-concurso.md` — Bases del concurso: qué pide el DevDay Exchange Community Hackathon CDMX y cómo se evalúa
 - `conocimiento/01-evento-verificado.md` — Ficha verificada del evento: DevDay Exchange Community Hackathon CDMX (7 nov 2026)
 - `conocimiento/02-organizadores-y-que-buscan.md` — Organizadores y qué buscan: OpenAI/Codex, AI Builders México, pey, SpaceXAI y Gobierno CDMX
 - `conocimiento/03-codi-y-api-pey.md` — CoDi y API de Pey
-- `conocimiento/04-openai-api-nov-2026.md` — API de OpenAI vigente (6 nov 2026): DevDay 2026, modelos, Responses, Realtime, Agents, plugins y costos
-- `conocimiento/05-codex-chatgpt-y-codespaces.md` — Trabajar 100% en la nube: Codex (web y CLI), ChatGPT + GitHub, Codespaces y Vercel
-- `conocimiento/06-contexto-pagos-y-comercios-mx.md` — Contexto: pagos, comercios y personas en México
-- `conocimiento/07-ideas-puntuadas.md` — Ideas puntuadas y top 3 con PRD
 - `conocimiento/08-criterios-y-jueces.md` — Criterios, jueces y cómo ganar: rúbrica, preguntas, errores y ganadores previos
-- `conocimiento/09-pitch-y-preguntas.md` — Pitch, demo y preguntas difíciles
-- `conocimiento/10-perfil-y-mitigaciones.md` — Perfil de José: fortalezas, riesgos y cómo cubrirlos
+- `pey/README.md` — Documentación de pey (API CoDi) en Markdown
+- `pey/01-que-es-pey-y-codi.md` — Qué es pey y su API CoDi
+- `pey/02-primeros-pasos-cuenta-llaves-y-prueba.md` — Primeros pasos: perfil, cuenta de pago, API key y prueba en producción
+- `pey/03-referencia-api-convenciones.md` — Referencia de la API: convenciones generales
+- `pey/04-api-codi-qr-y-push.md` — API CoDi: crear QR y notificación push
+- `pey/05-api-cuentas-bancarias.md` — API de cuentas bancarias: registrar y consultar CLABEs
+- `pey/06-api-ligas-de-pago.md` — API de links de pago: crear, actualizar monto y consultar
+- `pey/07-api-transacciones.md` — API de transacciones: consultar pagos
+- `pey/08-tipos-de-datos.md` — Tipos de datos de pey
+- `pey/09-webhooks.md` — Webhooks de pey: configuración, firma y eventos
+- `pey/10-tutorial-mostrar-qr-codi.md` — Tutorial: mostrar un QR CoDi
+- `pey/11-errores-y-limites.md` — Errores y límites de la API de pey
+- `pey/12-recursos-de-marca.md` — Recursos de marca de pey y CoDi
+- `pey/13-registro-de-cambios.md` — Registro de cambios de la API de pey
 - `AGENTS.md` — AGENTS.md
 
 <!-- ===== INICIO: conocimiento/INDICE.md ===== -->
@@ -34,25 +42,24 @@
 ## Archivos
 | ID | Archivo | Qué cubre | Confianza | Marcas ⚪ |
 |---|---|---|---|---|
-| **K00** | [Resumen ejecutivo: cómo ganar el DevDay Exchange Community Hackathon CDMX](00-resumen-ejecutivo.md) | Lo indispensable en una página: evento, reto, qué buscan los jueces, idea recomendada, datos para el pitch, plan del sábado, pendientes de esta noche y riesgos. | media | 1 |
-| **K01** | [Ficha verificada del evento: DevDay Exchange Community Hackathon CDMX (7 nov 2026)](01-evento-verificado.md) | Fecha, horario, sede, agenda, reto, premios, cómo llegar, qué llevar y pendientes del hackatón; léelo la noche anterior y al llegar. | alta | 19 |
-| **K02** | [Organizadores y qué buscan: OpenAI/Codex, AI Builders México, pey, SpaceXAI y Gobierno CDMX](02-organizadores-y-que-buscan.md) | Quién es cada organizador o aliado, qué quiere ver en los proyectos y qué los aleja; léelo para elegir la idea y armar el pitch. | media | 9 |
-| **K03** | [CoDi y API de Pey](03-codi-y-api-pey.md) | Qué es CoDi y cómo se usa la API CoDi de Pey (alta, llaves, endpoints, estados, webhooks, pagos reales de prueba, errores), con ejemplos probados en Node/Vercel y reglas para usarla desde un agente. Léelo completo antes de escribir código de cobro. | media | 20 |
-| **K04** | [API de OpenAI vigente (6 nov 2026): DevDay 2026, modelos, Responses, Realtime, Agents, plugins y costos](04-openai-api-nov-2026.md) | Qué anunció el DevDay 2026, qué modelos y precios usar hoy y ejemplos mínimos (Node.js y Python) de salida estructurada, function calling y voz Realtime; léelo antes de escribir cualquier código contra la API de OpenAI. | media | 18 |
-| **K05** | [Trabajar 100% en la nube: Codex (web y CLI), ChatGPT + GitHub, Codespaces y Vercel](05-codex-chatgpt-y-codespaces.md) | Cómo se usa hoy Codex en la nube (entorno, secretos, internet, AGENTS.md, tareas en paralelo, PRs y límites de Plus), Codex CLI en Codespaces, ChatGPT leyendo el repo, previews de Vercel y el flujo recomendado para el sábado; léelo antes de lanzar la primera tarea. | media | 23 |
-| **K06** | [Contexto: pagos, comercios y personas en México](06-contexto-pagos-y-comercios-mx.md) | Cifras verificadas (INEGI, Banxico, DOF, Condusef y prensa seria) sobre efectivo, informalidad, costo de cobrar con tarjeta, uso real de CoDi, lo que cambia el 14-dic-2026, fraude, brecha digital y Coyoacán; léelo al definir problema, 'por qué ahora', personas y datos del pitch. | media | 18 |
-| **K07** | [Ideas puntuadas y top 3 con PRD](07-ideas-puntuadas.md) | Banco de ideas calificadas contra los criterios del evento, top 3 con PRD listo para Codex y la recomendación final. | media | 42 |
-| **K08** | [Criterios, jueces y cómo ganar: rúbrica, preguntas, errores y ganadores previos](08-criterios-y-jueces.md) | Criterios probables con pesos (inferencia), rúbrica 1–5, preguntas de jueces, errores que restan, ganadores previos y cómo demostrar Codex; léelo al elegir la idea y antes del pitch. | media | 10 |
-| **K09** | [Pitch, demo y preguntas difíciles](09-pitch-y-preguntas.md) | Guion de 3 minutos, demo de 3 pasos, plan B y banco de 20 preguntas con respuesta modelo. | media | 8 |
-| **K10** | [Perfil de José: fortalezas, riesgos y cómo cubrirlos](10-perfil-y-mitigaciones.md) | Cómo aprovechar la experiencia de José y cubrir los riesgos de ir solo, 100% en la nube y en un evento de Codex. | media | 0 |
+| **K00** | [Bases del concurso: qué pide el DevDay Exchange Community Hackathon CDMX y cómo se evalúa](00-bases-del-concurso.md) | Resumen único y verificado del reto, lo dicho en el arranque, la ley de pagos digitales, el calendario, la entrega, la evaluación, los premios, las reglas y los pendientes; léelo primero para arrancar un proyecto sin leer lo demás. | media | 14 |
+| **K01** | [Ficha verificada del evento: DevDay Exchange Community Hackathon CDMX (7 nov 2026)](01-evento-verificado.md) | Fecha, horario, sede, agenda, reto, premios, cómo llegar, qué llevar y pendientes del hackatón; léelo la noche anterior y al llegar. | alta | 21 |
+| **K02** | [Organizadores y qué buscan: OpenAI/Codex, AI Builders México, pey, SpaceXAI y Gobierno CDMX](02-organizadores-y-que-buscan.md) | Quién es cada organizador o aliado, qué quiere ver en los proyectos y qué los aleja; léelo para elegir la idea y armar el pitch. | media | 10 |
+| **K03** | [CoDi y API de Pey](03-codi-y-api-pey.md) | Qué es CoDi y cómo se usa la API CoDi de Pey (alta, llaves, endpoints, estados, webhooks, pagos reales de prueba, errores), con ejemplos probados en Node/Vercel y reglas para usarla desde un agente. Léelo completo antes de escribir código de cobro. | media | 22 |
+| **K08** | [Criterios, jueces y cómo ganar: rúbrica, preguntas, errores y ganadores previos](08-criterios-y-jueces.md) | Criterios probables con pesos (inferencia), rúbrica 1–5, preguntas de jueces, errores que restan, ganadores previos y cómo demostrar Codex; léelo al elegir la idea y antes del pitch. | media | 11 |
 
 ## Preguntas → archivo
 | Pregunta | Abre |
 |---|---|
-| ¿Qué tengo que saber en dos minutos? | K00 |
-| ¿Qué construyo, con qué y cómo lo presento? | K00 |
-| ¿Qué hago esta noche y qué hago el sábado? | K00 |
-| ¿Cuáles son los riesgos principales y su plan B? | K00 |
+| ¿Qué pide el reto y qué es obligatorio? | K00 |
+| ¿Qué dijeron los organizadores en el arranque del 7 de noviembre? | K00 |
+| ¿Qué es la Ley de Economía Digital para Pagos Digitales y Electrónicos y qué no se puede afirmar de ella? | K00 |
+| ¿Cuándo se entrega, cuándo decide el jurado y cuándo es el voto de la comunidad? | K00 |
+| ¿Qué se entrega y dónde? | K00 |
+| ¿Qué criterios son oficiales y cuáles son inferidos? | K00 |
+| ¿Qué premios hay? | K00 |
+| ¿Qué puede descalificar o restar puntos? | K00 |
+| ¿Qué falta confirmar con los organizadores? | K00 |
 | ¿Cuándo, dónde y a qué hora es el hackatón? | K01 |
 | ¿Por qué hay dos horarios distintos y a qué hora conviene llegar? | K01 |
 | ¿Cuál es el reto oficial y qué tecnologías se esperan? | K01 |
@@ -60,6 +67,7 @@
 | ¿Qué premio hay y quién organiza? | K01 |
 | ¿Cómo llego en transporte público a UTOPÍA Coyoacán? | K01 |
 | ¿Qué falta confirmar con los organizadores al llegar? | K01 |
+| ¿Qué dijeron los organizadores en el arranque? | K01 |
 | ¿Quién organiza el hackatón y qué quiere cada actor? | K02 |
 | ¿Qué es el programa de Embajadores de Codex y qué valora? | K02 |
 | ¿Qué novedades de OpenAI (DevDay 2026) conviene mostrar? | K02 |
@@ -68,6 +76,7 @@
 | ¿Qué es SpaceXAI y por qué aparece en el ecosistema del evento? | K02 |
 | ¿Qué papel tienen UTOPÍAS y SEDECO? | K02 |
 | ¿Qué conquista a los organizadores y qué los aleja? | K02 |
+| ¿Qué pidieron los organizadores en el arranque del 7 de noviembre? | K02 |
 | ¿Qué es CoDi y cómo paga un cliente con QR o con notificación? | K03 |
 | ¿Qué es Pey, cuánto cuesta su API CoDi y a dónde llega el dinero? | K03 |
 | ¿Cómo saco hoy una API key de Pey y cuánto tarda en activarse? | K03 |
@@ -77,38 +86,6 @@
 | ¿Hay sandbox? ¿Cómo hago un pago real en la demo y cuál es el plan B? | K03 |
 | ¿Qué errores y límites debo manejar? | K03 |
 | ¿Cómo expongo la API de Pey como herramientas de un agente de IA sin riesgos? | K03 |
-| ¿Qué se anunció en el DevDay 2026 y qué conviene presumir ante los jueces? | K04 |
-| ¿Qué modelo uso para texto, voz en español, visión e imágenes, y cuánto cuesta? | K04 |
-| ¿Cómo hago llamada básica, streaming, salidas estructuradas y function calling con la Responses API? | K04 |
-| ¿Cómo conecto voz en tiempo real desde el navegador con una llave efímera creada en el servidor? | K04 |
-| ¿Siguen vigentes Agents SDK, Agents API, AgentKit, Agent Builder y ChatKit? | K04 |
-| ¿Qué necesito para probar mi propia app (plugin MCP) dentro de ChatGPT con Plus y cuánto trabajo es? | K04 |
-| ¿Cómo funciona el prompt caching de 12 horas y cuánto cuesta? | K04 |
-| ¿Cómo creo la API key, cargo saldo y qué límites tiene una cuenta nueva? | K04 |
-| ¿Qué funciones dan efecto wow en 4 horas? | K04 |
-| ¿Dónde está hoy Codex web y cómo conecto GitHub y creo el entorno? | K05 |
-| ¿Qué ve el agente de Codex: variables, secretos e internet, y en qué fase? | K05 |
-| ¿Cómo lee Codex AGENTS.md (anidados, precedencia, tamaño máximo)? | K05 |
-| ¿Cómo pregunto sin cambiar código, lanzo tareas en paralelo, pido varias versiones y creo el PR? | K05 |
-| ¿Cuánto puedo usar Codex con ChatGPT Plus? | K05 |
-| ¿Cómo instalo y autentico Codex CLI en GitHub Codespaces y uso codex exec? | K05 |
-| ¿Funciona la extensión de Codex para VS Code dentro de Codespaces? | K05 |
-| ¿Cómo hago que ChatGPT web lea mi repo de GitHub y cuándo conviene un MCP propio? | K05 |
-| ¿Cómo funcionan los previews de Vercel por PR y el puerto público de Codespaces para webhooks? | K05 |
-| ¿Cómo escribo buenas tareas para Codex y cuál es el flujo del sábado? | K05 |
-| ¿Qué tan dominante es el efectivo en México y hacia dónde va? | K06 |
-| ¿Qué tan grande es la informalidad y cuántos negocios son micro? | K06 |
-| ¿Cuánto le cuesta a un comercio pequeño cobrar con tarjeta frente a CoDi? | K06 |
-| ¿Cuánto se usa CoDi realmente y por qué no despegó? | K06 |
-| ¿Qué cambia exactamente el 14 de diciembre de 2026 y qué es la Ley de Economía Digital? | K06 |
-| ¿Qué fraudes frenan los pagos digitales y cómo diseñar confianza en un producto? | K06 |
-| ¿Qué barreras digitales tienen las personas mayores y qué canal conviene usar? | K06 |
-| ¿Qué hay en la Utopía Elena Poniatowska, Coyoacán y la CDMX que sirva al producto? | K06 |
-| ¿Qué personas, datos y oportunidades de IA + CoDi usar en el pitch? | K06 |
-| ¿Qué construyo para ganar? | K07 |
-| ¿Cuál es la idea recomendada y por qué? | K07 |
-| ¿Cuál es la demo de 3 pasos y la arquitectura de cada idea finalista? | K07 |
-| ¿Cómo adapto la idea si el reto oficial cambia? | K07 |
 | ¿Cómo se evaluará el proyecto y qué pesa más? | K08 |
 | ¿Cómo me autoevalúo antes de entregar? | K08 |
 | ¿Cómo funciona el voto de la comunidad y cómo me preparo? | K08 |
@@ -116,25 +93,24 @@
 | ¿Qué errores restan puntos o descalifican? | K08 |
 | ¿Qué tipo de proyectos han ganado en hackatones de Codex y OpenAI, y por qué? | K08 |
 | ¿Cómo demuestro en el pitch que usé Codex? | K08 |
-| ¿Qué digo en el pitch y en qué orden? | K09 |
-| ¿Cómo respondo las preguntas difíciles de los jueces? | K09 |
-| ¿En qué es fuerte José y cómo se aprovecha en el producto y el pitch? | K10 |
-| ¿Qué riesgos tiene y cómo se cubren? | K10 |
-| ¿Qué debe poder explicar José sin ayuda frente a los jueces? | K10 |
-| ¿Cómo deben trabajar Codex y ChatGPT con José? | K10 |
+| ¿Qué pidieron en el arranque y cómo cambia la evaluación? | K08 |
 
 ## Secciones de cada archivo
 
-### K00 · Resumen ejecutivo: cómo ganar el DevDay Exchange Community Hackathon CDMX
-Archivo: [`00-resumen-ejecutivo.md`](00-resumen-ejecutivo.md)
+### K00 · Bases del concurso: qué pide el DevDay Exchange Community Hackathon CDMX y cómo se evalúa
+Archivo: [`00-bases-del-concurso.md`](00-bases-del-concurso.md)
 
-- `K00.1` El evento en seis datos
-- `K00.2` Qué buscan los jueces y cómo se gana
-- `K00.3` Idea recomendada y demo de 3 pasos
-- `K00.4` Datos para el pitch (con fuente)
-- `K00.5` El sábado en ocho líneas
-- `K00.6` Esta noche (solo José)
-- `K00.7` Riesgos principales y plan B
+- `K00.1` Qué hay de nuevo al 7 de noviembre
+- `K00.2` Reto oficial y requisitos
+- `K00.3` Lo que dijeron en el arranque (7 de noviembre)
+- `K00.4` La ley de pagos digitales, en lo esencial
+- `K00.5` Calendario
+- `K00.6` Qué entregar y cómo
+- `K00.7` Cómo se evalúa: oficial, dicho e inferido
+- `K00.8` Premios
+- `K00.9` Reglas que descalifican o restan
+- `K00.10` Pendientes ⚪
+- `K00.11` Dónde está el detalle
 
 ### K01 · Ficha verificada del evento: DevDay Exchange Community Hackathon CDMX (7 nov 2026)
 Archivo: [`01-evento-verificado.md`](01-evento-verificado.md)
@@ -167,89 +143,21 @@ Archivo: [`02-organizadores-y-que-buscan.md`](02-organizadores-y-que-buscan.md)
 - `K02.11` Gobierno CDMX: UTOPÍAS y SEDECO
 - `K02.12` Lo que los conquista
 - `K02.13` Lo que los aleja
+- `K02.14` Lo que pidieron en el arranque (7 de noviembre)
 
 ### K03 · CoDi y API de Pey
 Archivo: [`03-codi-y-api-pey.md`](03-codi-y-api-pey.md)
 
 - `K03.1` Qué es CoDi y cómo paga un cliente
 - `K03.2` Qué es Pey y su API CoDi
-- `K03.3` Alta y llaves (esta noche)
+- `K03.3` Alta y llaves
 - `K03.4` Endpoints, formato del QR y estados
 - `K03.5` Webhooks
 - `K03.6` Desarrollo vs producción: demo con pago real y plan B
 - `K03.7` Ejemplos mínimos en Node.js 20+ (probados)
 - `K03.8` Errores comunes y límites
 - `K03.9` La API como herramienta de un agente de IA
-
-### K04 · API de OpenAI vigente (6 nov 2026): DevDay 2026, modelos, Responses, Realtime, Agents, plugins y costos
-Archivo: [`04-openai-api-nov-2026.md`](04-openai-api-nov-2026.md)
-
-- `K04.1` DevDay 2026: fecha y lanzamientos
-- `K04.2` Modelos de texto y visión recomendados hoy
-- `K04.3` Voz, imagen y transcripción: nombres y precios
-- `K04.4` Responses API: llamada básica y streaming
-- `K04.5` Salidas estructuradas (JSON Schema)
-- `K04.6` Function calling (herramientas)
-- `K04.7` Realtime API (voz): llave efímera + WebRTC
-- `K04.8` GPT-Live-1 (opcional, voz full-duplex)
-- `K04.9` Agents SDK (JS y Python) y Agents API
-- `K04.10` AgentKit, Agent Builder y ChatKit: estado al 6 nov 2026
-- `K04.11` Plugins (antes "Apps SDK"): tu app dentro de ChatGPT con Plus
-- `K04.12` Prompt caching (30 min y 12 h)
-- `K04.13` Cuenta de API: llave, saldo y límites de una cuenta nueva
-- `K04.14` Ejemplo (a): salida estructurada (Node.js y Python)
-- `K04.15` Ejemplo (b): function calling con `crear_cobro` (Node.js y Python)
-- `K04.16` Ejemplo (c): voz Realtime en el navegador con llave efímera
-- `K04.17` Qué funciones dan efecto wow en 4 horas
-
-### K05 · Trabajar 100% en la nube: Codex (web y CLI), ChatGPT + GitHub, Codespaces y Vercel
-Archivo: [`05-codex-chatgpt-y-codespaces.md`](05-codex-chatgpt-y-codespaces.md)
-
-- `K05.1` Qué es hoy "Codex web": experiencia nueva vs. Legacy
-- `K05.2` Conectar GitHub y crear el entorno
-- `K05.3` Install script, variables y secretos: qué ve el agente y cuándo
-- `K05.4` Internet del agente y dominios permitidos
-- `K05.5` AGENTS.md: cómo lo lee Codex
-- `K05.6` Preguntar vs. codificar, tareas en paralelo y varias versiones
-- `K05.7` Revisar, dar seguimiento y crear el PR
-- `K05.8` Code Review de Codex en PRs
-- `K05.9` Límites de uso con ChatGPT Plus
-- `K05.10` Codex CLI en GitHub Codespaces: instalar y entrar
-- `K05.11` `codex exec` y tareas cloud desde la terminal
-- `K05.12` Extensión de Codex para VS Code en Codespaces (issue #6403)
-- `K05.13` ChatGPT web + GitHub: plugin de GitHub
-- `K05.14` Servidores MCP propios y modo desarrollador en Plus
-- `K05.15` Servidor MCP remoto oficial de GitHub
-- `K05.16` Vercel + GitHub: previews por PR y variables
-- `K05.17` Codespaces: puerto público para webhooks
-- `K05.18` Cómo escribir tareas para Codex
-- `K05.19` Flujo recomendado para el sábado
-
-### K06 · Contexto: pagos, comercios y personas en México
-Archivo: [`06-contexto-pagos-y-comercios-mx.md`](06-contexto-pagos-y-comercios-mx.md)
-
-- `K06.1` Efectivo vs. pagos digitales en México
-- `K06.2` Economía informal y micronegocios
-- `K06.3` Costo de cobrar con tarjeta para un comercio pequeño
-- `K06.4` CoDi: adopción real y por qué no despegó
-- `K06.5` Qué cambia el 14 de diciembre de 2026
-- `K06.6` Fraude y desconfianza
-- `K06.7` Brecha digital: personas mayores, voz y WhatsApp
-- `K06.8` Contexto local: Coyoacán, Barrio de San Lucas y la Utopía
-- `K06.9` Personas (situaciones típicas; personas ficticias)
-- `K06.10` Diez datos para el pitch
-- `K06.11` Oportunidades donde IA + CoDi resuelven algo real
-
-### K07 · Ideas puntuadas y top 3 con PRD
-Archivo: [`07-ideas-puntuadas.md`](07-ideas-puntuadas.md)
-
-- `K07.1` Rúbrica de puntuación
-- `K07.2` Banco de ideas puntuadas
-- `K07.3` Finalista 1: ¿Ya cayó?, la captura no es dinero (94)
-- `K07.4` Finalista 2: Cóbrale, caja por voz con cobro CoDi (90)
-- `K07.5` Finalista 3: Mesa Dividida, cada quien paga lo suyo (78)
-- `K07.6` Recomendación final
-- `K07.7` Ideas descartadas y antipatrones
+- `K03.10` Documentación completa de pey (carpeta `pey/`)
 
 ### K08 · Criterios, jueces y cómo ganar: rúbrica, preguntas, errores y ganadores previos
 Archivo: [`08-criterios-y-jueces.md`](08-criterios-y-jueces.md)
@@ -268,129 +176,210 @@ Archivo: [`08-criterios-y-jueces.md`](08-criterios-y-jueces.md)
 - `K08.12` Cómo demostrar el uso de Codex en el pitch
 - `K08.13` Checklist de autoevaluación antes de entregar
 
-### K09 · Pitch, demo y preguntas difíciles
-Archivo: [`09-pitch-y-preguntas.md`](09-pitch-y-preguntas.md)
-
-- `K09.1` Guion de 3 minutos (con marcadores)
-- `K09.2` Reglas del pitch
-- `K09.3` Demo de 3 pasos y cómo hacerla a prueba de fallas
-- `K09.4` Cómo contar el uso de Codex y de la API de OpenAI (con evidencia)
-- `K09.5` Cierre: siguiente paso hacia el Hackatón México (el nacional)
-- `K09.6` Banco de 20 preguntas difíciles con respuesta modelo
-- `K09.7` Plan B de la demo
-- `K09.8` Versión de 1 minuto
-- `K09.9` Versión en video y material para la votación
-
-### K10 · Perfil de José: fortalezas, riesgos y cómo cubrirlos
-Archivo: [`10-perfil-y-mitigaciones.md`](10-perfil-y-mitigaciones.md)
-
-- `K10.1` Fortalezas y cómo usarlas
-- `K10.2` Riesgos y cómo se cubren
-- `K10.3` Lo que José debe poder explicar sin ayuda
-- `K10.4` Cómo deben trabajar Codex y ChatGPT con José
-
 <!-- ===== FIN: conocimiento/INDICE.md ===== -->
 
-<!-- ===== INICIO: conocimiento/00-resumen-ejecutivo.md ===== -->
+<!-- ===== INICIO: conocimiento/00-bases-del-concurso.md ===== -->
 
 ---
 id: K00
-titulo: "Resumen ejecutivo: cómo ganar el DevDay Exchange Community Hackathon CDMX"
-resumen: "Lo indispensable en una página: evento, reto, qué buscan los jueces, idea recomendada, datos para el pitch, plan del sábado, pendientes de esta noche y riesgos."
+titulo: "Bases del concurso: qué pide el DevDay Exchange Community Hackathon CDMX y cómo se evalúa"
+resumen: "Resumen único y verificado del reto, lo dicho en el arranque, la ley de pagos digitales, el calendario, la entrega, la evaluación, los premios, las reglas y los pendientes; léelo primero para arrancar un proyecto sin leer lo demás."
 responde:
-  - "¿Qué tengo que saber en dos minutos?"
-  - "¿Qué construyo, con qué y cómo lo presento?"
-  - "¿Qué hago esta noche y qué hago el sábado?"
-  - "¿Cuáles son los riesgos principales y su plan B?"
-actualizado: 2026-11-06
+  - "¿Qué pide el reto y qué es obligatorio?"
+  - "¿Qué dijeron los organizadores en el arranque del 7 de noviembre?"
+  - "¿Qué es la Ley de Economía Digital para Pagos Digitales y Electrónicos y qué no se puede afirmar de ella?"
+  - "¿Cuándo se entrega, cuándo decide el jurado y cuándo es el voto de la comunidad?"
+  - "¿Qué se entrega y dónde?"
+  - "¿Qué criterios son oficiales y cuáles son inferidos?"
+  - "¿Qué premios hay?"
+  - "¿Qué puede descalificar o restar puntos?"
+  - "¿Qué falta confirmar con los organizadores?"
+actualizado: 2026-11-07
 confianza: media
-fuentes: [SA01, SA03, SA04, SB07, SB10, SB15, SC06, SC26, SC34, SD01, SD10, SD20, SD21, SD24, SD33, SD38]
+fuentes: [SA01, SA03, SA04, SA05, SA11, SA32, SA43, SA45, SA50, SA53, SA54, SA62, SB02, SD01, SD02, SD64, SF01]
 ---
-# K00 · Resumen ejecutivo
+
+# K00 · Bases del concurso
 
 ## TL;DR
-- **Cuándo:** sábado 7 de noviembre, 10:00–16:00 (llega a las 9:00), UTOPÍA Elena Poniatowska Amor, Coyoacán. **Entrega: domingo 8 a las 13:00** en el portal del evento. Ganadores: lunes 9 (jurado y después voto comunitario). Premio: 10 boletos al DevDay Exchange oficial de OpenAI (martes 10, 14:00) [SA01][SA04].
-- **Reto oficial:** prototipar herramientas de **bien público** con OpenAI y CoDi, usando la API gratuita de pey [SA01].
-- **Idea recomendada: "¿Ya cayó?"**, una caja de cobro CoDi para puestos de barrio que nunca acepta una captura como pago: la IA lee el comprobante y pey dice si el dinero llegó de verdad (K00.3, K07).
-- **Cómo se construye:** Codex web construye en paralelo, ChatGPT redacta, Vercel despliega; José decide y presenta. Stack por defecto en `AGENTS.md`.
-- **Esta noche:** API de OpenAI con saldo, llave de pey ligada a la cuenta de prueba, Vercel con Root Directory `app` y entorno de Codex publicado (`dia-del-evento/CHECKLIST.md`).
-- **Regla:** nada inventado; lo simulado dice SIMULACIÓN en pantalla.
 
-## K00.1 · El evento en seis datos
-| Dato | Valor | Detalle |
+- **Reto oficial:** prototipar herramientas de bien público con OpenAI y CoDi, cobrando a través de la API gratuita de pey; se participa solo o en equipo [SA01].
+- **Arranque (7 de noviembre, en persona):** pidieron una solución creativa que vaya de la mano con la nueva ley de pagos digitales y la aproveche: una aplicación de un servicio, del que sea, que integre la API de pey (funciona con CoDi). También dijeron que se puede usar Claude además de las herramientas de OpenAI [SF01].
+- **Ley:** la Ley de Economía Digital para Pagos Digitales y Electrónicos promueve los pagos digitales. El decreto se expidió el 4 de noviembre de 2026 y entra en vigor al día siguiente de su publicación en el DOF (⚪ fecha no verificada). Hoy no obliga a ningún comercio a aceptar QR ni pagos digitales: los sectores los definirá la SHCP [SD64].
+- **Calendario:** construcción el sábado 7 (10:00–16:00), entrega en el portal del evento el domingo 8 a las 13:00, jurado el lunes 9 por la mañana y luego voto de la comunidad (de 1 a 3 ganadores más). Premio: bolsa de 10 boletos al DevDay Exchange oficial de OpenAI, el martes 10 a las 14:00 [SA01][SA04].
+- **Sin publicar al 7 de noviembre:** criterios, jueces, URL y formato del portal, regla de código previo, elegibilidad y reparto de boletos (⚪) [SA01].
+- **Resta o descalifica (inferido; no hay reglas escritas):** salirse del reto, exponer llaves, inventar datos, cobrar sin confirmación, entregar tarde y afirmar obligaciones legales que la ley no impone (K00.9).
+
+## K00.1 · Qué hay de nuevo al 7 de noviembre
+
+| Qué se revisó | Resultado | Fuente |
 |---|---|---|
-| Fecha y sede | Sáb 7 nov, 10:00–16:00, UTOPÍA Elena Poniatowska Amor, Av. Miguel Hidalgo 128, Barrio de San Lucas, Coyoacán [SA01] | K01.1, K01.8 |
-| Reto | Herramientas de bien público con OpenAI y CoDi vía la API de pey; ejemplos: cobro para comercios de barrio, comercio comunitario, QR y solicitudes de pago, flujos empresariales [SA01] | K01.4 |
-| Entrega | Domingo 8, 13:00, en el portal del evento (URL aún no publicada) [SA01] | K01.3 |
-| Ganadores | Jurado el lunes 9 por la mañana; después, voto comunitario por 1 a 3 ganadores más [SA01] | K01.6 |
-| Premio | Bolsa de 10 boletos al DevDay Exchange oficial de OpenAI en CDMX [SA01][SA04] | K01.6 |
-| Organizan | AI Builders México con el Embajador de Codex local, UTOPÍAS, SEDECO y pey [SA01] | K02 |
+| Página oficial en Luma | Sin cambios de fondo respecto al 6 de noviembre: mismo reto, agenda, entrega, premio y voto. Criterios, elegibilidad y boletos siguen "por confirmar"; no hay jueces nombrados, URL del portal ni avisos con fecha. Confirmados: 265 (264 el día anterior) | [SA01] |
+| Sitio y página de eventos de AI Builders México | No mencionan este hackatón ni su portal, jurado o criterios | [SA32][SA62] |
+| Página de inicio de pey | No menciona el hackatón | [SB02] |
+| Búsquedas web del 7 de noviembre (hackatón, UTOPÍAS, SEDECO, pey) | No encontré publicaciones nuevas desde el 6 de noviembre | — |
+| Arranque del evento | Lo único nuevo de hoy viene de lo que se dijo en persona (K00.3) | [SF01] |
+| Ley de pagos digitales | Revisé el texto del decreto en el SIDOF; no muestra la fecha de publicación en el DOF (K00.4) | [SD64] |
 
-⚪ Sin publicar: criterios, si se permite código previo, formato de entrega y si hay pitch en vivo el sábado. Se preguntan al llegar (K01.11).
+## K00.2 · Reto oficial y requisitos
 
-## K00.2 · Qué buscan los jueces y cómo se gana
-- El jurado decide hasta el lunes: lo entregado (README, demo con URL y video) tiene que convencer sin José presente (K08.1).
-- Criterios probables (inferencia de eventos hermanos, K08.3): impacto y utilidad para comercios, que funcione de verdad, uso visible de Codex y de la API de OpenAI, originalidad y claridad del pitch.
-- Lo que conquista a todos los organizadores (K02): un comercio concreto cobrando sin comisión con CoDi, una IA que resuelve algo real y no decorativo, Codex usado de forma visible y honestidad sobre qué es real y qué es simulación.
-- Lo que resta: demo que falla, datos inventados, llaves expuestas, IA de adorno (K08).
+- **El reto, resumido:** prototipar herramientas de bien público con OpenAI y CoDi. La página describe CoDi como la red de pagos instantáneos y gratuitos de Banco de México, y dice que se usa a través de la API de pey, a la que llama gratuita y de código abierto [SA01]. ⚪ La página de la API de pey no menciona que sea de código abierto [SA11].
+- **Ejemplos oficiales:** cobro para comercios de barrio, comercio comunitario, flujos con QR y solicitudes de pago, y flujos empresariales sobre pagos instantáneos [SA01].
 
-## K00.3 · Idea recomendada y demo de 3 pasos
-**¿Ya cayó?** Una caja de cobro CoDi para puestos de barrio: la IA arma el cobro y **nunca acepta una captura como pago**. Si el cliente enseña un "ya te transferí", OpenAI lee la imagen y el sistema la contrasta con los pagos reales de pey. Obtuvo 94/100 en la rúbrica de K07.1; el PRD completo está en K07.3.
+| Requisito | Estado | Fuente |
+|---|---|---|
+| Usar OpenAI | Obligatorio: está en el reto escrito | [SA01] |
+| Cobros CoDi con la API de pey | Obligatorio: está en el reto escrito y se repitió en el arranque | [SA01][SF01] |
+| Bien público | Enfoque del reto escrito | [SA01] |
+| Solución creativa | Se pidió en el arranque | [SF01] |
+| Aprovechar la nueva ley de pagos digitales | Se pidió en el arranque (K00.4) | [SF01] |
+| Codex | No se exige por escrito; el evento es de la comunidad Codex y el anfitrión es el Codex Ambassador local | [SA01] |
+| Claude | Permitido además de las herramientas de OpenAI, según el arranque (⚪ no está por escrito) | [SF01] |
+| Participación | Solo o en equipo; llevar laptop | [SA01] |
 
-**Demo (80 s o menos):**
-1. "Cóbrale un dulce de tamarindo" → $1 → Confirmar → aparece el QR CoDi.
-2. La clienta enseña una captura → la IA lee monto, hora y clave → "Todavía no cae: no entregues".
-3. La clienta paga de verdad desde la app de su banco → "¡Ya cayó! $1.00, confirmado por pey", en pantalla y en voz alta.
+- **API de pey:** autoservicio, gratuita por ahora, funciona con cualquier banco y avisa con webhooks firmados (Standard Webhooks); documentación en docs.pey.mx [SA11]. Detalle técnico: K03 y la [documentación de pey](../pey/README.md).
+- **Quién organiza:** AI Builders México, con UTOPÍAS, SEDECO y pey; anfitriones Ben Kim (Codex Ambassador local) y Esteban Constante. Es un hackatón comunitario, separado del DevDay Exchange oficial [SA01]. AI Builders describe su misión como que cobrar no cueste un porcentaje de la venta [SA03].
 
-**Por qué gana:** ataca la desconfianza que frenó a CoDi y el fraude con comprobantes falsos (2.48 millones de reclamaciones por posible fraude en un semestre, Condusef [SD38]). El modelo lee y propone, el código decide, pey confirma y la persona aprueba (K07.6).
+## K00.3 · Lo que dijeron en el arranque (7 de noviembre)
 
-**Alternativas finalistas:** Cóbrale, caja por voz (K07.4), y Mesa Dividida, un QR por comensal (K07.5). Si el reto oficial pide otra cosa, las adaptaciones rápidas están en K07.6.
+Fuente: notas de José, tomadas en persona [SF01]. No hay versión escrita pública.
 
-## K00.4 · Datos para el pitch (con fuente)
-- Cerca de 85 % de los adultos paga sobre todo en efectivo las compras de hasta $500 (ENIF 2024) [SD10].
-- CoDi tiene 21.8 millones de cuentas validadas, pero solo 2.5 millones han pagado alguna vez (Banxico, sep 2025) [SD33].
-- Una miscelánea paga hasta 3.95 % por cobro con tarjeta de débito (Banxico, jul 2026) [SD24]; con CoDi paga 0 %.
-- 54.3 % de las personas ocupadas trabaja en la informalidad (ENOE, sep 2026) [SD20] y 95.4 % de los negocios son micro (Censos Económicos 2024) [SD21].
-- **Por qué ahora:** el 14 de diciembre de 2026 vence el plazo para que las apps bancarias homologuen las transferencias y procesen los cobros CoDi con el mismo estándar (Banxico, Circular 9/2026) [SD01].
+1. La solución debe ser **creativa**.
+2. Hay que ir **de la mano con la nueva ley de pagos digitales** y aprovecharla (qué dice la ley: K00.4).
+3. El objetivo es desarrollar **una aplicación de un servicio, del que sea**, que **integre la API de pey**, que funciona con CoDi.
+4. Se puede usar **Claude** además de las herramientas de OpenAI.
 
-Más datos y personas: K06.10 y K06.9.
+Cómo leerlo (inferencia, ⚪):
+- "Un servicio, del que sea" amplía los ejemplos oficiales: no tiene que ser una tienda; sirve cualquier servicio que cobre, siempre que el cobro con pey esté en el flujo principal y OpenAI tenga un papel real [SA01][SF01].
+- Claude se suma; no sustituye a OpenAI, que sigue en el reto escrito [SA01].
+- Si los organizadores publican reglas escritas, esas mandan sobre estas notas.
 
-## K00.5 · El sábado en ocho líneas
-1. 9:00 llegada, Wi-Fi, enchufe y preguntas clave a organizadores y a pey (K01.11).
-2. ~10:30 inicio: Codex lanza el esqueleto en SIMULACIÓN mientras ChatGPT escribe `docs/PRD.md` con la idea de K07.
-3. Antes de una hora: primer deploy en producción en Vercel.
-4. Oleada de 3–4 tareas de Codex en paralelo, cada una en su carpeta (`dia-del-evento/PROMPTS-CODEX.md`).
-5. ~13:00: los 3 pasos de la demo funcionan en producción desde el celular.
-6. 14:45: congelar funciones; solo se arreglan errores del camino de la demo.
-7. 15:30: entrega interna completa (README, demo, video corto y video para el voto).
-8. Domingo antes de las 12:00: entrega final en el portal.
+## K00.4 · La ley de pagos digitales, en lo esencial
 
-Minuto a minuto y planes B: `dia-del-evento/RUNBOOK.md`.
+- **Qué es:** la Ley de Economía Digital para Pagos Digitales y Electrónicos. Es de orden público, aplica en todo el país y su objeto es promover que se adopten y usen los medios de pago digitales y electrónicos [SD64].
+- **Fechas:** las mesas directivas del Congreso firmaron el decreto el 20 de octubre de 2026 y la presidenta lo expidió el 4 de noviembre de 2026 [SD64]. Entra en vigor al día siguiente de su publicación en el DOF. ⚪ La versión del SIDOF consultada el 7 de noviembre no muestra la fecha de publicación y tampoco la encontré en prensa [SD64].
+- **Lo que sigue (transitorios):** desde que entre en vigor, la SHCP tiene 15 días hábiles para determinar los sectores estratégicos y las actividades donde el pago digital podrá ser la única forma aceptada. Cuando publique esa determinación, las autoridades tienen otros 15 días hábiles para emitir reglas generales con condiciones y plazos de transición gradual. La ley no trae presupuesto adicional [SD64].
+- **Comercios y servicios:** el artículo 11 dice que los proveedores "podrán implementar" medios de pago digitales, así que no hay una obligación general. La obligación de aceptar solo pagos digitales aplicará únicamente en los sectores que designe la SHCP (artículo 13), y la ley no nombra ninguno [SD64].
+- **Gobierno:** los tres órdenes de gobierno deben tomar medidas para aceptar pagos digitales en trámites y servicios (artículo 10) [SD64].
+- **QR:** el artículo 19, fracción IV, faculta a Banxico, con la CNBV como supervisora, para emitir reglas que obliguen a quien ofrece terminales punto de venta a aceptar pagos con QR conforme a sus especificaciones. Es una facultad, no una regla ya emitida [SD64].
+- **Contingencias:** se permite efectivo o cheque durante una contingencia (artículo 15), pero eso no exime para siempre (artículo 16) [SD64].
+- **No menciona** CoDi ni DiMo por nombre [SD64].
 
-## K00.6 · Esta noche (solo José)
-1. **OpenAI:** saldo en platform.openai.com (se paga aparte de ChatGPT Plus; con US$5 entras al tier Build) y una API key de proyecto [SC26]. Modelo por defecto: K04.2 [SC06].
-2. **pey:** cuenta en portal.mipey.mx, la **cuenta de prueba** de la guía y una API key ligada a ella. Tu propia CLABE tarda 5 días hábiles; pey no tiene sandbox, así que en pruebas cobras de $0.01 a $1 [SB07][SB10].
-3. **Vercel:** importa el repo con Root Directory = `app` y carga las variables de `.env.example` (tabla por entorno en la CHECKLIST).
-4. **Codex web:** GitHub conectado y entorno creado y publicado [SC34].
-5. **ChatGPT:** conectado al repo (K05) o, como respaldo, con `conocimiento/TODO-EN-UNO.md`.
-6. Prueba de punta a punta: un cobro real de $0.01 pagado desde tu app bancaria, grabado en video.
+**Lo que NO se puede afirmar:**
+- Que aceptar QR o pagos digitales ya es obligatorio para los comercios, o que lo será en una fecha concreta: depende de la SHCP y de reglas que todavía no existen [SD64].
+- Que la ley rige desde una fecha concreta, mientras no se confirme su publicación en el DOF (⚪).
+- Que exista una obligación general de QR en la CDMX el 19 de noviembre: esa fecha no aparece en el texto [SD64].
 
-Lista completa: `dia-del-evento/CHECKLIST.md`.
+**Otro plazo, que no es esta ley:** el 14 de diciembre de 2026 vence el plazo para que los participantes del SPEI cumplan las Circulares 9/2026 y 10/2026 de Banxico, que homologan las transferencias desde el celular; la 9/2026 incluye procesar los mensajes de cobro de CoDi [SD01][SD02]. Según la prensa, antes de esa fecha los bancos deben permitir recibir transferencias con el número de celular, y la CLABE sigue funcionando [SA43].
 
-## K00.7 · Riesgos principales y plan B
-| Riesgo | Plan B |
-|---|---|
-| pey no tiene sandbox | Cuenta de prueba con montos de $0.01; modo SIMULACIÓN etiquetado si algo falla (K03.6) |
-| Un QR de otra llave responde 404 y nunca cambia de estado | Crear todo QR (incluido el de respaldo) con la misma llave de Production [SB15] |
-| El webhook no llega a los previews de Vercel | Registrar el webhook en el dominio de producción; confirmar el pago consultando a pey cada 2 s (K03.5) |
-| Internet de la sede | Hotspot del celular y video de respaldo (RUNBOOK) |
-| Límites de Codex con Plus | Tareas pequeñas; Codex CLI en Codespaces como respaldo (K05) |
-| Preguntas de "¿qué hizo la IA?" | Decisiones anotadas en cada PR y las 5 de K10.3 |
+**Recomendación:** presenta el proyecto como una ayuda para adoptar pagos digitales de forma voluntaria y prepararse antes de que se definan sectores y reglas. Cita la ley por su nombre, apóyate en este archivo y no prometas cumplimiento legal.
+
+## K00.5 · Calendario
+
+| Cuándo | Qué | Fuente |
+|---|---|---|
+| Sáb 7 nov, 10:00–16:00 | Arranque y construcción presencial en UTOPÍA Elena Poniatowska Amor (Av. Miguel Hidalgo 128, San Lucas, Coyoacán), con mentores de AI Builders México | [SA01][SF01] |
+| Dom 8 nov, 13:00 | Cierre de entregas en el portal del evento; se puede seguir construyendo después del sábado | [SA01] |
+| Lun 9 nov, mañana | El jurado anuncia ganadores; después, la comunidad vota por 1 a 3 ganadores más | [SA01] |
+| Mar 10 nov, 14:00 | DevDay Exchange oficial de OpenAI en la CDMX (el premio); la sede se comparte al aprobar la solicitud | [SA04] |
+| 14 dic | Plazo de las Circulares 9/2026 y 10/2026 de Banxico (K00.4) | [SD01] |
+
+- El encabezado en inglés de la página muestra 9:00–15:00; el encabezado en español y la agenda escrita dicen 10:00–16:00 (detalle: K01) [SA01].
+- ⚪ La página no dice la zona horaria del cierre del domingo; se asume la hora del centro de México.
+- ⚪ No se ha publicado la mecánica del voto: quién vota, dónde y hasta cuándo.
+
+## K00.6 · Qué entregar y cómo
+
+- **Oficial:** el proyecto se entrega en "el portal del evento" antes del domingo 8 a las 13:00 [SA01]. Al 7 de noviembre no hay URL del portal ni formato publicado (repo, video, demo o formulario) (⚪) [SA01].
+- **Paquete recomendado (inferencia a partir de eventos hermanos):**
+  1. Demo desplegada con URL pública que funcione en celular y siga en línea para el voto; en Bangkok se pidió mantener los enlaces accesibles para evaluar [SA05].
+  2. Repo público con README: problema, usuario, papel de OpenAI, cobro CoDi con pey, qué es real y qué es SIMULACIÓN, limitaciones, herramientas de IA usadas y qué existía antes del sábado.
+  3. Video de menos de 3 minutos, como en Build Week de OpenAI [SA45].
+  4. Pitch corto con una diapositiva; en San Francisco fueron 2 minutos de pitch y 2 de preguntas [SA50].
+- Como el jurado anuncia el lunes, el paquete tiene que convencer aunque no estés presente (inferencia; K08).
+
+**Recomendación:** entrega antes de las 12:00 del domingo y guarda una captura de la confirmación.
+
+## K00.7 · Cómo se evalúa: oficial, dicho e inferido
+
+| Nivel | Qué se sabe | Fuente |
+|---|---|---|
+| Oficial (por escrito) | Habrá demos de proyectos y evaluación; el jurado anuncia el lunes 9 por la mañana; luego, el voto comunitario elige de 1 a 3 ganadores más; criterios, elegibilidad y boletos "se confirmarán"; no hay jueces nombrados | [SA01] |
+| Dicho en el arranque | Creatividad; aprovechar la nueva ley de pagos digitales; aplicación de un servicio que integre la API de pey con CoDi | [SF01] |
+| Inferido (no oficial) | Impacto y alineación con el reto 25%; ejecución con cobro CoDi 25%; uso de OpenAI 20%; creatividad y originalidad 20%; pitch 10% | K08 |
+
+La rúbrica de 1 a 5, las preguntas típicas del jurado y la lista de autoevaluación están en K08.
+
+## K00.8 · Premios
+
+- Bolsa de 10 boletos al DevDay Exchange oficial de OpenAI en la CDMX, el martes 10 de noviembre a las 14:00 [SA01][SA04].
+- Hay ganadores del jurado (lunes por la mañana) y de 1 a 3 más por voto de la comunidad [SA01].
+- No se anuncian efectivo, créditos ni lugares (1.º, 2.º, 3.º); la asignación, la elegibilidad y las condiciones de los boletos se confirmarán más adelante (⚪) [SA01].
+- El DevDay Exchange incluye sesiones técnicas con los equipos de producto e ingeniería de OpenAI y conversación abierta con el equipo [SA04].
+
+## K00.9 · Reglas que descalifican o restan
+
+No hay reglas de descalificación publicadas (⚪) [SA01]. Esta tabla junta lo que se deduce del reto, los riesgos verificados y las reglas de este repo (`AGENTS.md`).
+
+| Regla | Por qué | Fuente |
+|---|---|---|
+| El flujo principal usa OpenAI y cobra con CoDi a través de pey | Es el reto; sin eso el proyecto queda fuera de tema | [SA01][SF01] |
+| Cero llaves en el repo, en el navegador y en los logs | GitHub detecta llaves de OpenAI en repos públicos y OpenAI las desactiva, así que la demo se rompe; GitHub bloquea por defecto los push con secretos en repos públicos | [SA54][SA53] |
+| Nada inventado: sin testimonios, cifras ni comercios sin fuente; todo lo simulado dice "SIMULACIÓN" | Credibilidad | `AGENTS.md` |
+| Ningún cobro sin confirmación explícita de la persona, y con monto máximo | Se cobra dinero real (K03) | `AGENTS.md` |
+| Entregar antes del domingo a las 13:00 | Es el cierre publicado | [SA01] |
+| Declarar qué existía antes del sábado | ⚪ La regla de código previo no está publicada | [SA01] |
+| No afirmar obligaciones ni fechas que la ley no tiene | Cualquier juez puede comprobarlo (K00.4) | [SD64] |
+| No presumir alianzas con gobierno, bancos o pey, ni exponer datos personales (CLABE, teléfonos) | Riesgo ético y legal | Inferencia |
+
+## K00.10 · Pendientes ⚪
+
+Nada de esto está publicado; pregúntalo a los organizadores y anota la respuesta en `BITACORA.md`:
+
+1. URL del portal y formato de entrega: repo, video (¿duración?), demo o formulario.
+2. Criterios, pesos y nombres de los jueces.
+3. ¿Se permite código previo o plantillas? ¿Cómo se declara?
+4. Elegibilidad y reparto de los 10 boletos; ¿hay primer lugar?
+5. Mecánica del voto comunitario.
+6. Confirmación por escrito de que se permite Claude y de si hay que declararlo.
+7. ¿Codex es obligatorio o solo recomendado?
+8. Fecha de publicación de la ley en el DOF y, después, los sectores que defina la SHCP.
+9. API de pey: ¿hay entorno de prueba o solo producción? (K03).
+10. Zona horaria del cierre del domingo y hora real de salida del sábado (15:00 o 16:00).
+
+## K00.11 · Dónde está el detalle
+
+- [K01 · Ficha del evento](01-evento-verificado.md): horario, sede, cómo llegar y calendario.
+- [K02 · Organizadores y qué buscan](02-organizadores-y-que-buscan.md).
+- [K03 · CoDi y API de pey](03-codi-y-api-pey.md).
+- [K08 · Criterios, jueces y cómo ganar](08-criterios-y-jueces.md).
+- [Documentación de pey en Markdown](../pey/README.md): guías, referencia de la API, webhooks y errores.
 
 ## Fuentes
-Los IDs citados están en [`../fuentes/REGISTRO.md`](../fuentes/REGISTRO.md): SA01, SA03, SA04 (evento), SB07, SB10, SB15 (pey), SC06, SC26, SC34 (OpenAI y Codex), SD01, SD10, SD20, SD21, SD24, SD33, SD38 (contexto).
 
-<!-- ===== FIN: conocimiento/00-resumen-ejecutivo.md ===== -->
+| ID | Título | URL | Consultado |
+|---|---|---|---|
+| SA01 | DevDay Exchange Community Hackathon: Mexico City (página oficial en Luma) | https://luma.com/f755f0k6 | 2026-11-07 |
+| SA03 | Newsletter de AI Builders, 31 oct 2026 | (correo; sin URL pública) | 2026-11-06 (previo) |
+| SA04 | OpenAI DevDay Exchange 2026 | https://events.openai.com/devdayexchange2026/ | 2026-11-06 |
+| SA05 | DevDay Exchange Community: Bangkok | https://luma.com/6m83xldb | 2026-11-06 |
+| SA11 | pey: API CoDi | https://pey.mx/api-codi | 2026-11-06 |
+| SA32 | AI Builders México (sitio oficial) | https://aibuilders.mx/ | 2026-11-07 |
+| SA43 | ADN40: Nuevas reglas para transferencias bancarias; fecha límite 14 de diciembre | https://www.adn40.mx/mexico/2026-09-12/nuevas-reglas-para-hacer-transferencias-bancarias-en-mexico-la-fecha-limite-es-el-14-de-diciembre/ | 2026-11-06 |
+| SA45 | OpenAI Developers Blog: Build Week winners | https://developers.openai.com/blog/build-week-winners | 2026-11-06 |
+| SA50 | Codex Community Mini-Hackathon, San Francisco #5 | https://luma.com/7025i1j5 | 2026-11-06 |
+| SA53 | GitHub Blog: Keeping secrets out of public repositories (29 feb 2024) | https://github.blog/2024-02-29-keeping-secrets-out-of-public-repositories | 2026-11-06 |
+| SA54 | GitHub Changelog: RubyGems, Adobe and OpenAI are now secret scanning integrators (8 jun 2021) | https://github.blog/changelog/2021-06-08-rubygems-adobe-and-openai-are-now-github-secret-scanning-integrators | 2026-11-06 |
+| SA62 | AI Builders México: página de eventos | https://aibuilders.mx/eventos | 2026-11-07 |
+| SB02 | pey®: página de inicio | https://pey.mx/ | 2026-11-07 |
+| SD01 | DOF · Circular 9/2026 de Banxico (modifica la 14/2017; homologación de transferencias móviles) | https://dof.gob.mx/nota_detalle_popup.php?codigo=5790862 | 2026-11-07 |
+| SD02 | SIDOF · Circular 10/2026 de Banxico (modifica la 3/2012), DOF 17-jun-2026 | https://sidof.segob.gob.mx/notas/5790863 | 2026-11-06 (previo) |
+| SD64 | DOF · Ley de Economía Digital: texto y transitorios | https://sidof.segob.gob.mx/notas/docFuente/5803017 | 2026-11-07 |
+| SF01 | Arranque del evento, notas de José (en persona, no público) | (sin URL; no público) | 2026-11-07 |
+
+(previo) = dato verificado por el equipo antes de esta sesión y no reconsultado aquí.
+
+<!-- ===== FIN: conocimiento/00-bases-del-concurso.md ===== -->
 
 <!-- ===== INICIO: conocimiento/01-evento-verificado.md ===== -->
 
@@ -406,9 +395,10 @@ responde:
   - "¿Qué premio hay y quién organiza?"
   - "¿Cómo llego en transporte público a UTOPÍA Coyoacán?"
   - "¿Qué falta confirmar con los organizadores al llegar?"
-actualizado: 2026-11-06
+  - "¿Qué dijeron los organizadores en el arranque?"
+actualizado: 2026-11-07
 confianza: alta
-fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA15, SA16, SA17, SA18, SA19, SA20, SA21, SA22, SA23, SA24, SA25, SA26, SA33, SA34, SA35, SA43, SA44, SA55, SA56, SA57, SA61]
+fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA15, SA16, SA17, SA18, SA19, SA20, SA21, SA22, SA23, SA24, SA25, SA26, SA33, SA34, SA35, SA43, SA44, SA55, SA56, SA57, SA61, SD01, SD64, SF01]
 ---
 
 # K01 · Ficha verificada del evento
@@ -416,11 +406,11 @@ fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA15, SA16, SA17, SA18
 ## TL;DR
 
 - **Cuándo y dónde:** sábado 7 de noviembre de 2026 en UTOPÍA Elena Poniatowska Amor, Av. Miguel Hidalgo 128, Barrio de San Lucas, Coyoacán, CP 04100. La agenda oficial marca 10:00–16:00 (GMT-6); **llega a las 9:00** [SA01].
-- **Reto:** herramientas de bien público con OpenAI y CoDi usando la API gratuita de pey; ejemplos oficiales: cobro para comercios de barrio, comercio comunitario, QR y solicitudes de pago, flujos empresariales [SA01].
+- **Reto:** herramientas de bien público con OpenAI y CoDi usando la API gratuita de pey; ejemplos oficiales: cobro para comercios de barrio, comercio comunitario, QR y solicitudes de pago, flujos empresariales [SA01]. En el arranque pidieron una solución creativa que aproveche la nueva ley de pagos digitales: la app de un servicio, del que sea, que integre la API de pey; Claude se permite además de OpenAI [SF01].
 - **Entrega:** domingo 8 de noviembre a las 13:00 en el portal del evento; se vale seguir construyendo después del sábado [SA01].
 - **Ganadores:** el jurado los anuncia el lunes 9 por la mañana; después un voto de la comunidad elige de 1 a 3 ganadores más [SA01].
 - **Premio:** bolsa de 10 boletos al DevDay Exchange oficial de OpenAI en CDMX (martes 10 de noviembre, 14:00); no se anuncian efectivo ni créditos [SA01][SA04].
-- **Sin publicar:** criterios, elegibilidad, reglas de código previo, formato de entrega y reparto de boletos (⚪ no verificado); pregúntalo en la primera hora (K01.11).
+- **Sin publicar al 7 de noviembre** (página revisada de nuevo): criterios, jueces, elegibilidad, reglas de código previo, URL y formato de entrega y reparto de boletos (⚪) [SA01]; pregúntalo (K01.11). Resumen de todo el concurso: [K00](00-bases-del-concurso.md).
 
 ## K01.1 · Datos clave verificados
 
@@ -434,7 +424,7 @@ fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA15, SA16, SA17, SA18
 | Anfitriones | Ben Kim (presentado como el Codex Ambassador local) y Esteban Constante | [SA01] |
 | Organizan | AI Builders México, con UTOPÍAS, SEDECO y pey | [SA01] |
 | Carácter | Hackatón comunitario, separado del DevDay Exchange oficial | [SA01] |
-| Cupo | Limitado y con aprobación del anfitrión; la página mostraba 264 personas confirmadas | [SA01] |
+| Cupo | Limitado y con aprobación del anfitrión; la página mostraba 265 personas confirmadas el 7 de noviembre (264 el 6) | [SA01] |
 | Participación | Solo o en equipo; llevar laptop | [SA01] |
 | Idioma | Página bilingüe (español e inglés) | [SA01] |
 
@@ -453,7 +443,7 @@ No confundir con "OpenAI DevDay Exchange Community: Mexico City", otro evento de
 
 | Cuándo | Qué pasa | Fuente |
 |---|---|---|
-| Sáb 7 nov, 10:00–16:00 | Construcción presencial en UTOPÍA Coyoacán con mentores de AI Builders México | [SA01] |
+| Sáb 7 nov, 10:00–16:00 | Construcción presencial en UTOPÍA Coyoacán con mentores de AI Builders México; en el arranque se dieron indicaciones de palabra (K01.4) | [SA01][SF01] |
 | Sáb 7 nov (sin hora) | La página menciona demos de proyectos y evaluación; ⚪ no dice si hay demo en vivo el sábado | [SA01] |
 | Dom 8 nov, 13:00 | Fecha límite de entrega en el portal del evento (sin URL publicada) | [SA01] |
 | Lun 9 nov, mañana | Anuncio de ganadores del jurado; después, voto comunitario por 1–3 ganadores más | [SA01] |
@@ -468,11 +458,12 @@ No confundir con "OpenAI DevDay Exchange Community: Mexico City", otro evento de
 - El reto, en palabras de la página: "Prototipa herramientas de bien público con OpenAI y CoDi" [SA01].
 - Ahí CoDi se describe como la red de pagos instantáneos y gratuitos de Banco de México, a la que se accede con la API gratuita de pey, que la página llama de código abierto [SA01]. ⚪ La página de la API de pey no menciona código abierto ni repositorio [SA11].
 - Ideas de ejemplo oficiales: cobro para comercios de barrio, comercio comunitario, códigos QR y flujos de solicitud de pago, y flujos empresariales sobre pagos instantáneos [SA01].
-- Tecnologías: OpenAI y Codex; el anfitrión es Codex Ambassador y la página enlaza a Codex [SA01]; los newsletters confirman OpenAI, CoDi y la API de Pey [SA02].
+- Tecnologías: OpenAI y Codex; el anfitrión es Codex Ambassador y la página enlaza a Codex, aunque no exige Codex por escrito [SA01]; los newsletters confirman OpenAI, CoDi y la API de Pey [SA02].
+- **Arranque (7 de noviembre, en persona):** la solución debe ser creativa; hay que ir de la mano con la nueva ley de pagos digitales y aprovecharla; el objetivo es desarrollar la aplicación de un servicio, del que sea, que integre la API de pey, que funciona con CoDi. También dijeron que se puede usar Claude además de las herramientas de OpenAI [SF01]. ⚪ No está por escrito. Qué dice la ley y qué no: [K00](00-bases-del-concurso.md) (K00.4).
 - API de pey: autoservicio, gratuita por ahora, funciona con cualquier banco, webhooks firmados con Standard Webhooks y documentación en docs.pey.mx; su página habla de llaves de prueba y de producción [SA11], pero K03 reporta que la referencia técnica solo documenta producción (⚪). Detalle: K03.
 - En Bengaluru, hackatón hermano, se sugirió explorar lo nuevo del DevDay 2026: agentes persistentes, plugins de ChatGPT, Agents API, MCP events y Codex en la nube [SA07].
 
-**Recomendación:** que un solo flujo muestre las tres piezas: (1) IA de OpenAI resolviendo algo real para un comercio, (2) un cobro CoDi con pey de punta a punta (monto chico en producción o, como plan B, SIMULACIÓN etiquetada; ver K03) y (3) evidencia de que se construyó con Codex.
+**Recomendación:** que un solo flujo muestre las tres piezas: (1) IA de OpenAI resolviendo algo real para un comercio o servicio, (2) un cobro CoDi con pey de punta a punta (monto chico en producción o, como plan B, SIMULACIÓN etiquetada; ver K03) y (3) evidencia de cómo se construyó (Codex, y Claude si se usa [SF01]). Súmale el ángulo creativo y la conexión con la ley que se pidieron en el arranque, sin afirmar obligaciones que la ley no tiene.
 
 ## K01.5 · Organizadores y aliados (resumen)
 
@@ -491,7 +482,7 @@ Detalle de cada actor y de lo que busca: K02.
 - Premio publicado: bolsa de 10 boletos al DevDay Exchange oficial en la Ciudad de México [SA01].
 - No hay lugares (1.º, 2.º, 3.º) publicados ni premios en efectivo o créditos. ⚪ No se sabe si habrá "primer lugar" ni cuántos boletos recibe cada ganador o equipo.
 - Mecánica: el jurado anuncia ganadores el lunes 9 por la mañana y después la comunidad vota por 1–3 ganadores más [SA01].
-- La propia página dice que la asignación de boletos, la elegibilidad y las condiciones se confirmarán más adelante [SA01] (⚪).
+- La propia página dice que la asignación de boletos, la elegibilidad y las condiciones se confirmarán más adelante; seguía igual el 7 de noviembre [SA01] (⚪).
 - Precedentes: París y Bengaluru también repartieron 10 boletos a su DevDay Exchange; en Bengaluru se aclaró que participar o presentar no garantizaba boleto [SA06][SA07].
 - Valor del premio: el DevDay Exchange oficial incluye sesiones técnicas con equipos de producto e ingeniería de OpenAI, proyectos reales y flujos de Codex, orientación práctica para proyectos propios y conversación con el equipo; empieza a las 14:00 [SA04].
 
@@ -543,19 +534,20 @@ Detalle de cada actor y de lo que busca: K02.
 | Sáb 14 nov | Arranque presencial del Cursor Hackatón México en 7 ciudades | [SA03] |
 | 14 nov–12 dic | Hackatón México (hackatonmexico.com): CoDi y API de Pey; individual o en equipo; más de 1 millón de pesos en premios, créditos y recursos; con SpaceXAI y Pey | [SA03] |
 | 12 dic / 14 dic | Entregas / resultados del Hackatón México | [SA03] |
-| 14 dic | Fecha límite para que los bancos permitan recibir transferencias con el número de celular (circulares 9/2026 y 10/2026 de Banxico) | [SA43] |
+| 14 dic | Fecha límite para que los bancos permitan recibir transferencias con el número de celular (circulares 9/2026 y 10/2026 de Banxico); la 9/2026 fija ese plazo en su segundo transitorio | [SA43][SD01] |
+| Por definir (⚪) | Ley de Economía Digital para Pagos Digitales y Electrónicos (decreto expedido el 4 nov): entra en vigor al día siguiente de su publicación en el DOF; desde ahí, la SHCP tiene 15 días hábiles para definir sectores y luego hay 15 más para reglas (K00.4) | [SD64] |
 
-**Recomendación:** diseña el proyecto de mañana para que pueda crecer en el Hackatón México; ⚪ confirma si allá se permite continuar un proyecto iniciado el 7 de noviembre.
+**Recomendación:** diseña el proyecto de hoy para que pueda crecer en el Hackatón México; ⚪ confirma si allá se permite continuar un proyecto iniciado el 7 de noviembre.
 
 ## K01.11 · Pendiente de confirmar al llegar (⚪)
 
-Nada de esto está publicado o verificado; pregúntalo a Ben Kim o a los mentores de AI Builders en la primera hora:
+Al 7 de noviembre nada de esto estaba publicado [SA01]; pregúntalo a Ben Kim o a los mentores de AI Builders:
 
 1. Criterios de evaluación, pesos y quiénes son los jueces (la página dice que se confirmarán) [SA01].
 2. ¿Habrá demo en vivo el sábado? ¿Cuánto dura el pitch? ¿Hay preguntas del jurado?
 3. URL del portal del evento y qué se entrega: repo, demo desplegada, video (¿duración?), presentación o formulario.
 4. ¿Se permite código previo, plantillas o librerías propias? ¿La base de conocimiento preparada antes cuenta como código previo?
-5. ¿Es obligatorio usar Codex u OpenAI? ¿Cómo quieren la evidencia?
+5. OpenAI es parte del reto [SA01] y en el arranque dijeron que Claude también se permite [SF01]: ¿se puede confirmar por escrito? ¿Codex es obligatorio? ¿Cómo quieren la evidencia?
 6. Elegibilidad y condiciones de los boletos: ¿cuántos por ganador o equipo? ¿Existe "primer lugar"?
 7. Mecánica del voto comunitario: dónde, quién vota y hasta cuándo.
 8. ¿Hay créditos de OpenAI o de pey para participantes?
@@ -563,14 +555,15 @@ Nada de esto está publicado o verificado; pregúntalo a Ben Kim o a los mentore
 10. Hora real de cierre presencial (15:00 o 16:00), Wi-Fi, enchufes, comida y acceso.
 11. ¿El proyecto puede continuar en el Hackatón México?
 12. Política de fotos y video, y uso de datos de comercios reales.
+13. ¿Cómo pesará en la evaluación aprovechar la nueva ley de pagos digitales, que se mencionó en el arranque [SF01]?
 
-**Recomendación:** anota las respuestas en `BITACORA.md` y actualiza K08 si se publican criterios.
+**Recomendación:** anota las respuestas en `BITACORA.md` y actualiza K00 y K08 si se publican criterios.
 
 ## Fuentes
 
 | ID | Título | URL | Consultado |
 |---|---|---|---|
-| SA01 | DevDay Exchange Community Hackathon: Mexico City (página oficial en Luma; coincide con el boleto del participante) | https://luma.com/f755f0k6 | 2026-11-06 |
+| SA01 | DevDay Exchange Community Hackathon: Mexico City (página oficial en Luma; coincide con el boleto del participante) | https://luma.com/f755f0k6 | 2026-11-07 |
 | SA02 | Newsletter The Build Log, AI Builders, 26 oct y 2 nov 2026 | (correo; sin URL pública) | 2026-11-06 (previo) |
 | SA03 | Newsletter de AI Builders, 31 oct 2026 | (correo; sin URL pública) | 2026-11-06 (previo) |
 | SA04 | OpenAI DevDay Exchange 2026 | https://events.openai.com/devdayexchange2026/ | 2026-11-06 |
@@ -599,6 +592,9 @@ Nada de esto está publicado o verificado; pregúntalo a Ben Kim o a los mentore
 | SA56 | Luma: Popular events in Mexico City (listado) | https://luma.com/mexico-city | 2026-11-06 |
 | SA57 | Codex Community Events (calendario de Luma) | https://luma.com/codex-community | 2026-11-06 |
 | SA61 | Crónica: Digitalizarán trámites para locatarios de mercados públicos en la CDMX | https://www.cronica.com.mx/metropoli/2025/01/11/digitalizaran-tramites-para-locatarios-de-mercados-publicos-en-la-cdmx/ | 2026-11-06 |
+| SD01 | DOF · Circular 9/2026 de Banxico (modifica la 14/2017; homologación de transferencias móviles) | https://dof.gob.mx/nota_detalle_popup.php?codigo=5790862 | 2026-11-07 |
+| SD64 | DOF · Ley de Economía Digital: texto y transitorios | https://sidof.segob.gob.mx/notas/docFuente/5803017 | 2026-11-07 |
+| SF01 | Arranque del evento, notas de José (en persona, no público) | (sin URL; no público) | 2026-11-07 |
 
 (previo) = dato verificado por el equipo antes de esta sesión y no reconsultado aquí.
 
@@ -619,9 +615,10 @@ responde:
   - "¿Qué es SpaceXAI y por qué aparece en el ecosistema del evento?"
   - "¿Qué papel tienen UTOPÍAS y SEDECO?"
   - "¿Qué conquista a los organizadores y qué los aleja?"
-actualizado: 2026-11-06
+  - "¿Qué pidieron los organizadores en el arranque del 7 de noviembre?"
+actualizado: 2026-11-07
 confianza: media
-fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA12, SA13, SA14, SA15, SA27, SA28, SA29, SA30, SA31, SA32, SA33, SA34, SA35, SA36, SA37, SA38, SA39, SA40, SA41, SA42, SA43, SA44, SA45, SA50, SA53, SA54, SA59, SA60, SA61]
+fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA12, SA13, SA14, SA15, SA27, SA28, SA29, SA30, SA31, SA32, SA33, SA34, SA35, SA36, SA37, SA38, SA39, SA40, SA41, SA42, SA43, SA44, SA45, SA50, SA53, SA54, SA59, SA60, SA61, SD64, SF01]
 ---
 
 # K02 · Organizadores y qué buscan
@@ -633,7 +630,8 @@ fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA12, SA13, SA14, SA15
 - La comunidad Codex quiere ver Codex usado de forma visible, práctica e interesante, y lo nuevo del DevDay 2026 (Agents API, plugins con MCP Events, Codex en la nube) [SA07][SA29][SA50].
 - AI Builders quiere que cobrar no cueste un porcentaje y que builders mexicanos hagan herramientas que acerquen CoDi a comercios y personas [SA03].
 - pey quiere comercios cobrando con CoDi a través de su API gratuita (cualquier banco, webhooks firmados) [SA11][SA12].
-- Los aleja: demo sin cobro real, IA decorativa, datos inventados, llaves expuestas y proyectos sin un comercio concreto (K02.13).
+- En el arranque (7 de noviembre) pidieron una solución creativa, ir de la mano con la nueva ley de pagos digitales y una app de un servicio, del que sea, que integre la API de pey; Claude se permite además de OpenAI [SF01] (K02.14).
+- Los aleja: demo sin cobro real, IA decorativa, datos inventados, llaves expuestas, proyectos sin un comercio o servicio concreto y afirmaciones falsas sobre la ley (K02.13).
 
 ## K02.1 · Mapa de actores y qué quiere cada uno
 
@@ -678,7 +676,7 @@ fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA12, SA13, SA14, SA15
 - **Plugins de ChatGPT y MCP Events:** paneles, barra lateral y visores dentro de ChatGPT; las apps conectadas pueden avisar a ChatGPT cuando algo ocurre [SA29][SA31].
 - **Decisions API** (vista previa limitada, modelo Luna) para clasificar y enrutar [SA29]; **Dots** (agentes persistentes) y **ChatGPT Space** [SA29][SA30]; **Sign in with ChatGPT** [SA30][SA31].
 - El hackatón hermano de Bengaluru invitaba a explorar varias de estas piezas [SA07].
-- ⚪ No verificado: qué está disponible para un participante individual con ChatGPT Plus y API de pago (ver K04).
+- ⚪ No verificado: qué está disponible para un participante individual con ChatGPT Plus y API de pago.
 
 **Recomendación:** idea natural para el reto: el webhook de pey (pago recibido) dispara una acción del agente o un aviso en ChatGPT. Úsalo solo si la pieza está disponible y probada; si no, la API estándar de OpenAI bien acotada gana más que una novedad rota.
 
@@ -708,7 +706,7 @@ Inferencia: comunidad multiherramienta (OpenAI, Vercel, Cursor, SpaceXAI) que pr
 - **API CoDi:** permite a negocios y desarrolladores aceptar cobros CoDi desde su propio software sin construir la conexión desde cero; autoservicio; gratuita por ahora; funciona con cualquier banco; menciona llaves de prueba y de producción; webhooks REST firmados con Standard Webhooks y secreto para verificar la firma; documentación en docs.pey.mx [SA11]. ⚪ K03 reporta que la referencia técnica solo documenta producción.
 - **Código abierto:** la página del hackatón describe la API como gratuita y de código abierto [SA01]; ⚪ la página de la API no lo menciona.
 - **Prensa:** merca20 informó que Pey, AI Builders México y SpaceXAI harían un hackatón de pagos digitales [SA13]; informabtl destacó que la API genera QR con importe y concepto, y que el 14 de diciembre cambian las transferencias en México [SA14].
-- **Contexto regulatorio:** antes del 14 de diciembre de 2026 los bancos deben permitir recibir transferencias con el número de celular, según las circulares 9/2026 y 10/2026 de Banxico; la CLABE sigue funcionando [SA43].
+- **Contexto regulatorio:** antes del 14 de diciembre de 2026 los bancos deben permitir recibir transferencias con el número de celular, según las circulares 9/2026 y 10/2026 de Banxico; la CLABE sigue funcionando [SA43]. Aparte, el 4 de noviembre de 2026 se expidió el decreto de la Ley de Economía Digital para Pagos Digitales y Electrónicos: promueve los pagos digitales, no obliga hoy a los comercios y deja a la SHCP definir los sectores donde el pago digital podrá ser la única forma aceptada [SD64]. Lo esencial y lo que no se puede afirmar: [K00](00-bases-del-concurso.md) (K00.4).
 
 Detalle técnico de endpoints y webhooks: K03.
 
@@ -739,7 +737,7 @@ Inferencia (⚪, pey no lo declara así): abrir la API convierte a cada builder 
 - En México: SpaceXAI coorganiza con AI Builders y Pey el Hackatón México nacional [SA03] y aparece entre los logos aliados de AI Builders [SA32]. Un hackatón de Cursor en Mérida (13–14 de noviembre) se registra en Luma con una dirección que incluye "spacexai" (inferencia de vínculo) [SA39].
 - No aparece como organizador del hackatón del 7 de noviembre [SA01].
 
-**Recomendación:** mañana es un evento de la comunidad Codex: construye y presenta con OpenAI y Codex. No hables mal de herramientas de la competencia; si preguntan, explica por qué OpenAI por sus méritos. Para el Hackatón México ⚪ revisa qué herramientas exige o permite.
+**Recomendación:** es un evento de la comunidad Codex: construye y presenta con OpenAI y Codex. En el arranque dijeron que también se puede usar Claude [SF01]; si lo usas, que se sume sin quitarle a OpenAI su papel en el reto. No hables mal de herramientas de la competencia; si preguntan, explica por qué OpenAI por sus méritos. Para el Hackatón México ⚪ revisa qué herramientas exige o permite.
 
 ## K02.11 · Gobierno CDMX: UTOPÍAS y SEDECO
 
@@ -753,7 +751,9 @@ Inferencia: al gobierno le interesan herramientas de bien público para comercio
 ## K02.12 · Lo que los conquista
 
 Síntesis de este archivo; las fuentes van en cada punto:
-- Un problema real de un comercio mexicano dicho en una frase (tiendita, puesto de mercado, fonda, servicio a domicilio), alineado con el reto de bien público [SA01].
+- Un problema real de un comercio o servicio mexicano, del que sea, dicho en una frase y alineado con el reto de bien público [SA01][SF01].
+- Una solución creativa, como se pidió en el arranque [SF01].
+- Que aproveche la nueva ley de pagos digitales con datos correctos: adopción voluntaria y preparación, no obligaciones inventadas [SF01][SD64].
 - Cobro CoDi de punta a punta con pey, confirmado por webhook verificado [SA11].
 - IA con un papel necesario y acotado: el código determinista maneja montos y estados, el modelo interpreta y explica, y la persona confirma (patrón de los ganadores de Build Week) [SA45].
 - Uso visible de Codex y, si funciona, de una novedad de OpenAI [SA07][SA50].
@@ -773,14 +773,30 @@ Síntesis de riesgos; las fuentes van en cada punto:
 - Demo sin respaldo cuando falla el internet.
 - Hablar mal de otras herramientas u organizadores, o presumir alianzas con gobierno, bancos o pey que no existen.
 - Exponer datos personales (CLABE, teléfonos) de personas reales.
+- Afirmar que la ley ya obliga a aceptar QR o pagos digitales, o dar fechas que la ley no tiene: los sectores los definirá la SHCP [SD64].
 
 **Recomendación:** antes de entregar, revisa esta lista contra el repo y la demo; corrige cualquier punto en rojo antes de pulir lo visual.
+
+## K02.14 · Lo que pidieron en el arranque (7 de noviembre)
+
+Según las notas de José, tomadas en persona (no hay versión escrita) [SF01]:
+- La solución debe ser creativa.
+- Hay que ir de la mano con la nueva ley de pagos digitales y aprovecharla.
+- El objetivo es desarrollar la aplicación de un servicio, del que sea, que integre la API de pey, que funciona con CoDi.
+- Se puede usar Claude además de las herramientas de OpenAI.
+
+Lectura por actor (inferencia, ⚪):
+- **pey y AI Builders:** confirman que su prioridad es la integración real de la API de pey; "un servicio, del que sea" abre el reto más allá de las tiendas [SF01].
+- **Gobierno (UTOPÍAS y SEDECO):** la ley es política pública reciente; un proyecto que ayude a adoptar pagos digitales encaja con su agenda, siempre que no se presente como obligación [SD64].
+- **OpenAI y la comunidad Codex:** OpenAI sigue en el reto escrito [SA01]; Claude se permite como herramienta adicional [SF01].
+
+**Recomendación:** que el pitch diga en una frase qué tiene de creativo y cómo ayuda a aprovechar la ley, con lo que la ley sí dice (K00.4).
 
 ## Fuentes
 
 | ID | Título | URL | Consultado |
 |---|---|---|---|
-| SA01 | DevDay Exchange Community Hackathon: Mexico City (página oficial en Luma) | https://luma.com/f755f0k6 | 2026-11-06 |
+| SA01 | DevDay Exchange Community Hackathon: Mexico City (página oficial en Luma) | https://luma.com/f755f0k6 | 2026-11-07 |
 | SA02 | Newsletter The Build Log, AI Builders, 26 oct y 2 nov 2026 | (correo; sin URL pública) | 2026-11-06 (previo) |
 | SA03 | Newsletter de AI Builders, 31 oct 2026 | (correo; sin URL pública) | 2026-11-06 (previo) |
 | SA04 | OpenAI DevDay Exchange 2026 | https://events.openai.com/devdayexchange2026/ | 2026-11-06 |
@@ -817,6 +833,8 @@ Síntesis de riesgos; las fuentes van en cada punto:
 | SA59 | Get on Board: OpenAI Codex – Mexico City (8 abr 2026) | https://www.getonbrd.com/events/2026/openai-codex-mexico-city-valdivia-chile | 2026-11-06 |
 | SA60 | Expansión Política: Las 14 acciones que emprenderá la CDMX para mejorar los mercados | https://politica.expansion.mx/cdmx/2025/02/12/las-14-acciones-que-emprendera-la-cdmx-para-mejorar-los-mercados | 2026-11-06 |
 | SA61 | Crónica: Digitalizarán trámites para locatarios de mercados públicos en la CDMX | https://www.cronica.com.mx/metropoli/2025/01/11/digitalizaran-tramites-para-locatarios-de-mercados-publicos-en-la-cdmx/ | 2026-11-06 |
+| SD64 | DOF · Ley de Economía Digital: texto y transitorios | https://sidof.segob.gob.mx/notas/docFuente/5803017 | 2026-11-07 |
+| SF01 | Arranque del evento, notas de José (en persona, no público) | (sin URL; no público) | 2026-11-07 |
 
 (previo) = dato verificado por el equipo antes de esta sesión y no reconsultado aquí.
 
@@ -840,7 +858,7 @@ responde:
   - "¿Cómo expongo la API de Pey como herramientas de un agente de IA sin riesgos?"
 actualizado: 2026-11-07
 confianza: media
-fuentes: [SB01, SB02, SB03, SB04, SB05, SB06, SB07, SB08, SB09, SB10, SB11, SB12, SB13, SB14, SB15, SB16, SB17, SB18, SB19, SB20, SB21, SB22, SB23, SB24, SB25, SB26, SB27, SB28, SB29, SB30, SB31, SB32, SB33, SB34, SB35, SB36, SB37, SB38, SB39, SB40, SB41, SB42, SB43, SB44, SB45, SB46]
+fuentes: [SB01, SB02, SB03, SB04, SB05, SB06, SB07, SB08, SB09, SB10, SB11, SB12, SB13, SB14, SB15, SB16, SB17, SB18, SB19, SB20, SB21, SB22, SB23, SB24, SB25, SB26, SB27, SB28, SB29, SB30, SB31, SB32, SB33, SB34, SB35, SB36, SB37, SB38, SB39, SB40, SB41, SB42, SB43, SB44, SB45, SB46, SB47, SB48, SB49, SB50, SB51, SB52, SB53, SB54, SB55, SB56, SB57]
 ---
 
 # K03 · CoDi y API de Pey
@@ -849,10 +867,11 @@ fuentes: [SB01, SB02, SB03, SB04, SB05, SB06, SB07, SB08, SB09, SB10, SB11, SB12
 
 - **CoDi** (Banxico) cobra con QR o con notificación al celular sobre SPEI, 24/7, sin comisión para quien paga ni para quien cobra; el cliente autoriza en la app de su banco [SB29][SB31].
 - **API de Pey**: REST en `https://api.pey.mx`, el único entorno documentado (producción), con `Authorization: Bearer <API key>`; gratuita por ahora, self-service, y el dinero llega directo a la cuenta bancaria del comercio [SB01][SB10][SB38].
-- **Alta**: portal.mipey.mx → Finanzas (cuenta `codi`) → Desarrollador → "Crear API Key". Tu CLABE tarda 5 días hábiles con Banxico; para mañana registra la cuenta de prueba publicada en la guía: se activa al instante, pero lo que le pagues NO se devuelve (usa $0.01 a $1) [SB07].
+- **Alta**: portal.mipey.mx → Finanzas (cuenta `codi`) → Desarrollador → "Crear API Key". Tu CLABE tarda 5 días hábiles con Banxico; para probar ya, registra la cuenta de prueba publicada en la guía: se activa al instante, pero lo que le pagues NO se devuelve (usa $0.01 a $1) [SB07].
 - **Flujo de demo**: `POST /codi/qr` (monto en pesos) con `generateImage: true` → muestras `qrImage` (PNG en base64) → confirmas con `GET /transaction/codi/qr/{id}` (`PAID`) o con el webhook `codi.qr.payment_received` [SB10][SB17].
 - **Webhooks**: firmados con Standard Webhooks (HMAC-SHA256 sobre `id.timestamp.cuerpo`), uno por API key; regístralo como `<dominio de producción>/api/webhook-pey`, nunca con un preview [SB08][SB39][SB43].
 - **Seguridad**: el repo es público, así que la llave y el secreto viven solo en variables de entorno del servidor; el agente propone, la persona confirma y el servidor impone `MAX_MONTO_MXN`.
+- **Documentación completa de pey en Markdown** (11 endpoints, 4 webhooks, tipos, errores y marca; consultada el 2026-11-07): [pey/README.md](../pey/README.md) [SB47]. Ver K03.10.
 
 ## K03.1 · Qué es CoDi y cómo paga un cliente
 
@@ -886,19 +905,19 @@ Pey (pey®) es una empresa de tecnología enfocada en integrar CoDi a negocios [
 
 **Recomendación:** ángulo multi-comercio: registra la CLABE de cada puesto (`POST /bank-account`, `entity: "PERSON"`) y cobra con su `bankAccountId`: sin comisión y con dinero directo. Pey lo resume: «ahora falta facilitar la experiencia de quien recibe el dinero» [SB37].
 
-## K03.3 · Alta y llaves (esta noche)
+## K03.3 · Alta y llaves
 
 Todo pasa en `portal.mipey.mx` [SB07][SB08]:
 
 1. **Perfil.** Qué datos pide (correo, RFC, INE…): ⚪ no verificado. Ten tu CLABE a la mano.
-2. **Finanzas → cuenta de pago `codi`** (solo cuentas mexicanas). Tu CLABE tarda 5 días hábiles en registrarse ante Banxico: no estará lista mañana. Mientras, registra la **cuenta de prueba** que publica la guía (sección "Prueba en producción"): se activa de inmediato, pero lo que se le pague no se devuelve; usa montos como $0.01 MXN [SB07]. También hay registro por API: `POST /bank-account` [SB13].
+2. **Finanzas → cuenta de pago `codi`** (solo cuentas mexicanas). Tu CLABE tarda 5 días hábiles en registrarse ante Banxico: no estará lista para el concurso. Mientras, registra la **cuenta de prueba** que publica la guía (sección "Prueba en producción"): se activa de inmediato, pero lo que se le pague no se devuelve; usa montos como $0.01 MXN [SB07]. También hay registro por API: `POST /bank-account` [SB13].
 3. **Desarrollador → "Crear API Key"**: nombre y cuenta vinculada (una `codi`; una `stripe` si quieres tarjetas) [SB07]. Si la llave se muestra una sola vez: ⚪ no verificado; cópiala de inmediato.
 4. **Webhook**: engrane de la llave → URL → crear; guarda el secreto de firma (rotable). Un webhook por llave [SB08].
 5. **Secretos** en Vercel y Codespaces: `PEY_API_KEY` y `PEY_WEBHOOK_SECRET`. Nunca en el repo.
 
 **Entornos.** Pey solo documenta producción (`https://api.pey.mx`); el entorno de pruebas está "próximamente" [SB09][SB10]. La landing menciona llaves de prueba y de producción [SB01], pero la referencia técnica no (⚪ pregúntalo a Pey en el evento). Por eso el repo no usa `PEY_ENV`: la URL base es siempre la de producción, y lo que se muestra en pantalla es `MODO_PAGO` (`simulacion`, `prueba` o `comercio`; ver `.env.example`).
 
-**Recomendación:** esta noche activa CoDi en la app bancaria con la que pagarás (algunos bancos validan con un depósito de un centavo y un SMS) [SB34], paga $0.01 de punta a punta con el `curl` de abajo y graba la pantalla. Con la cuenta de prueba, baja `MAX_MONTO_MXN` (p. ej. a 20).
+**Recomendación:** antes de la demo, activa CoDi en la app bancaria con la que pagarás (algunos bancos validan con un depósito de un centavo y un SMS) [SB34], paga $0.01 de punta a punta con el `curl` de abajo y graba la pantalla. Con la cuenta de prueba, pon en el servidor un tope de monto bajo (en pruebas, $0.01 a $1).
 
 ```bash
 # Prueba de humo: crea un QR de 1 centavo. La llave sale de tu variable de entorno, nunca del repo.
@@ -912,7 +931,7 @@ curl -sS https://api.pey.mx/codi/qr \
 
 ## K03.4 · Endpoints, formato del QR y estados
 
-Base `https://api.pey.mx`; headers `Authorization: Bearer <PEY_API_KEY>`, `Content-Type: application/json` y `Accept: application/json` [SB10][SB23]. Los esquemas completos están en el OpenAPI (`docs.pey.mx/openapi.json`, versión 2026-10-20), no en las páginas de referencia [SB10][SB11][SB12].
+Base `https://api.pey.mx`; headers `Authorization: Bearer <PEY_API_KEY>`, `Content-Type: application/json` y `Accept: application/json` [SB10][SB23]. Los esquemas completos están en el OpenAPI (`docs.pey.mx/openapi.json`, versión 2026-10-20), no en las páginas de referencia [SB10][SB11][SB12]. El 2026-11-07 seguía la misma versión, con 11 rutas en 5 grupos [SB10][SB57]; campo por campo en [pey/03](../pey/03-referencia-api-convenciones.md).
 
 | Método y ruta | Uso | Éxito |
 |---|---|---|
@@ -921,10 +940,13 @@ Base `https://api.pey.mx`; headers `Authorization: Bearer <PEY_API_KEY>`, `Conte
 | `GET /transaction/codi/qr/{id}` | Pagos de un QR (20/página) | 200 |
 | `GET /transaction/{id}` | Una transacción | 200 |
 | `GET /transaction/api-key` | Todo lo cobrado (80/página) | 200 |
+| `GET /transaction/bank-account/{id}` | Pagos `PAID` de una cuenta registrada (80/página) | 200 |
 | `POST /bank-account`, `GET /bank-account/{id}` | CLABEs | 200 |
 | `POST /payment-link/create`, `/update`, `GET /payment-link/{id}` | Links de pago | 200 |
 
 **Monto:** pesos como número con decimales (150.00, 0.01), no centavos [SB07][SB10].
+
+**Revisión 2026-11-07:** `GET /transaction/bank-account/{id}` regresa solo pagos `PAID` de QR y push creados con ese `bankAccountId`, de la más reciente a la más antigua; cuenta ajena o inexistente → 404 `BANK_ACCOUNT_NOT_FOUND` [SB10][SB48]. `GET /bank-account/{id}` también da 404 con cuentas de otra llave [SB50]; `codiStatus` va de `PENDING` a `PROCESSING` y a `ACTIVE` (o `ERROR`, con `errorMessage`) [SB51]. `GET /transaction/api-key` toma la llave del header `Authorization` [SB49]. En transacciones, `amountBreakdown.fee` lo paga quien paga y `payableType` vale `PAYMENT_LINK`, `API_CODI_QR` o `API_CODI_PN` [SB10]; `applicationFee` es la comisión que retiene pey y puede ser `null` [SB52].
 
 **QR:** la respuesta trae `id` (IDC de Banxico), `qrString` y, con `generateImage: true`, `qrImage` (PNG base64; puede tardar o venir `null`). Muéstralo como `data:image/png;base64,…`; si es `null`, convierte `qrString` en QR con una librería [SB10][SB23]. Pey no regresa el vencimiento: calcúlalo con `expiration` [SB10].
 
@@ -973,12 +995,12 @@ Base `https://api.pey.mx`; headers `Authorization: Bearer <PEY_API_KEY>`, `Conte
 **Eventos** (payload plano con `type`; no hay eventos documentados de pago rechazado o vencido) [SB17][SB18][SB19][SB20]:
 - `codi.qr.payment_received`: `amount`, `apiKeyId`, `bankAccountId` (si lo mandaste), `codiQrId` (el `id` del QR), `concept`, `datePaid` (Unix en segundos), `metadata`, `numRef`, `transactionId` y `type`.
 - `codi.pn.payment_received`: igual, sin `codiQrId`.
-- `bank.account.updated`: solo al pasar a `ACTIVE`.
-- `payment_link.status_updated`: `paymentLinkId`, `status`, `clientReferenceId` y `transactions`.
+- `bank.account.updated`: solo al pasar a `ACTIVE`; trae `bankAccountId`, `name`, `ownerType` (`API_KEY`), `ownerId`, `taxId` (opcional), `codiStatus`, `clabe` y `entity`, sin `alias` ni `dateCreated` [SB19].
+- `payment_link.status_updated`: `apiKeyId`, `paymentLinkId`, `status`, `clientReferenceId` y `transactions`. El webhook documenta `status` `paid`, `pending` o `processing`; `GET /payment-link/{id}` además admite `partial` (⚪ significado no documentado) [SB20][SB55].
 
 **Firma.** Standard Webhooks [SB08][SB16]: headers `webhook-id`, `webhook-timestamp` y `webhook-signature` (`v1,<base64>`, quizá varias separadas por espacio) [SB06][SB39]. Se firma `id.timestamp.cuerpo` con HMAC-SHA256; la llave es el secreto sin `whsec_`, decodificado de base64 [SB39][SB40]. Compara en tiempo constante y rechaza timestamps viejos (la especificación no fija tolerancia; **Recomendación:** 5 minutos) [SB39]. Lee el cuerpo crudo con `await request.text()` [SB42].
 
-**Respuesta.** Cualquier 2xx es entrega exitosa [SB39]; el ejemplo de Pey responde 200 [SB16]. Reintentos y timeout de Pey: ⚪ no verificado. Deduplica por `webhook-id`; depura en Desarrollador → engrane → "Webhook Logs" [SB16].
+**Respuesta.** Cualquier 2xx es entrega exitosa [SB39]; el ejemplo de Pey responde 200 [SB16]. pey llama a `webhook-id` llave de idempotencia y su ejemplo responde 500 ante firma inválida (aquí se usa 401; ambos cuentan como entrega fallida) [SB16][SB39]. Reintentos y timeout de Pey: ⚪ no verificado. Deduplica por `webhook-id`; depura en Desarrollador → engrane → "Webhook Logs" [SB16].
 
 **URL pública.**
 - Vercel: `https://<proyecto>.vercel.app/api/webhook-pey` [SB41], siempre con el dominio de producción: la protección estándar bloquea previews y URLs de deployment [SB43].
@@ -992,7 +1014,7 @@ Código del handler: K03.7.
 **No hay sandbox:** Pey recomienda probar en producción, con bancos y webhooks reales, montos como $0.01 MXN [SB07][SB09]; no documenta simulador de pagos (⚪ no verificado).
 
 **Guion de pago real (Recomendación):**
-1. Esta noche: CoDi activo en tu app bancaria [SB33], un pago de $0.01 de punta a punta y video de la pantalla.
+1. Antes de la demo: CoDi activo en tu app bancaria [SB33], un pago de $0.01 de punta a punta y video de la pantalla.
 2. Demo: QR de $1 con `expiration: 600`, en grande; pagas desde tu celular; la UI pasa a "Pagado" por polling o webhook.
 3. Con la cuenta de prueba ese dinero no regresa [SB07]; di en el pitch que en producción cae directo en la CLABE del comercio [SB38].
 4. Prefiere QR: la push depende de que el celular del pagador esté ligado a CoDi [SB28][SB30] (⚪ no verificado en detalle).
@@ -1000,14 +1022,14 @@ Código del handler: K03.7.
 
 **Plan B escalonado:**
 - **B1, no llega el webhook:** polling a `GET /transaction/codi/qr/{id}` cada 2 a 5 s mientras el QR siga vigente (límite de peticiones: ⚪ no verificado) [SB10][SB15].
-- **B2, Pey da 503 (`SERVICE_UNAVAILABLE`, `FLAGS_UNAVAILABLE`) o falla la red:** QR de respaldo creado esta noche con `expiration: 0` (no vence) y el video [SB10]; no subas ese QR al repo.
+- **B2, Pey da 503 (`SERVICE_UNAVAILABLE`, `FLAGS_UNAVAILABLE`) o falla la red:** QR de respaldo creado antes de la demo con `expiration: 0` (no vence) y el video [SB10]; no subas ese QR al repo.
 - **B3, todo falla:** modo SIMULACIÓN con la etiqueta visible que exige AGENTS.md, nunca presentado como pago real. El script firmado de K03.7 prueba tu webhook sin pagar.
 
-**Recomendación:** mañana temprano pregunta a los mentores de Pey si hay llaves o entorno especial para el hackatón (⚪ no verificado).
+**Recomendación:** pregunta a los mentores de Pey si hay llaves o entorno especial para el hackatón (⚪ no verificado). La documentación del 2026-11-07 tampoco resuelve límite de peticiones, idempotencia de creación, reintentos y orden de webhooks ni requisitos para dar de alta comercios reales: pregúntalos también [SB10][SB16].
 
 ## K03.7 · Ejemplos mínimos en Node.js 20+ (probados)
 
-> Revisión 2026-11-07: los ejemplos históricos no son un checkout completo. Antes de producción, asociar el QR a un pedido del servidor y validar monto, moneda y destinatario; no basta encontrar cualquier PAID. La corrección de 404 a no_verificable es documental y no se ha ejecutado como aplicación. Ver [plan de integración](../docs/REVISION-PEY-2026-11-07.md).
+> Revisión 2026-11-07: los ejemplos históricos no son un checkout completo. Antes de producción, asociar el QR a un pedido del servidor y validar monto, moneda y destinatario; no basta encontrar cualquier PAID. La corrección de 404 a no_verificable es documental y no se ha ejecutado como aplicación. Si hay efectos de negocio, deduplica `webhook-id` y `transactionId` en almacenamiento persistente (la memoria de una función serverless no dura) y no repitas una creación tras un timeout sin reconciliar: pey no documenta idempotencia (⚪).
 
 Node 20+ ya trae `fetch`. Vercel crea una función por archivo dentro de `api/`; exportas `GET` o `POST`, que reciben un `Request` web. Para módulos ES usa `.mjs` o `"type": "module"` en el `package.json` más cercano [SB41]. No encontré un SDK oficial de Pey (⚪ no verificado). Pey sugiere los SDK de Standard Webhooks [SB16]; aquí se usa `node:crypto` para no depender de nada [SB40].
 
@@ -1266,11 +1288,11 @@ test("webhook: válido 200, repetido 200, firma ajena 401, sin firma 401, vacío
 ## K03.8 · Errores comunes y límites
 
 **Formato de error:** `{ "error": { "message", "type", "requestId" } }` [SB10]. Tipos:
-- **400:** `INVALID_REQUEST`, `INCOMPLETE_PARAMETERS`, `INVALID_PARAMETER` (o `INVALID_PARAMETERS` en transacciones), `INVALID_AMOUNT`, `INVALID_STATE` (p. ej. CoDi no habilitado), `PEY_CONSISTENCY_ERROR`, `BAD_REQUEST`, `INVALID_CLABE`.
-- **404:** `NOT_FOUND`, `BANK_ACCOUNT_NOT_FOUND`. **409** (links): `PAYMENT_LINK_NOT_PENDING`, `CONCURRENT_UPDATE`. **500:** `INTERNAL_SERVER_ERROR`. **503:** `SERVICE_UNAVAILABLE`, `FLAGS_UNAVAILABLE`.
-- Llave ausente o inválida: código ⚪ no verificado (un ejemplo da 400 "apiKeyId not included in request"; los links listan 403). **Recomendación:** trata 401, 403 e `INVALID_STATE` como "Tu cuenta de Pey todavía no está habilitada para cobrar."
+- **400:** `INVALID_REQUEST`, `INCOMPLETE_PARAMETERS`, `INVALID_PARAMETER` (o `INVALID_PARAMETERS` en transacciones), `INVALID_AMOUNT`, `INVALID_STATE` (p. ej. CoDi no habilitado), `PEY_CONSISTENCY_ERROR`, `BAD_REQUEST`, `INVALID_CLABE`; en links de pago además `AUTH_ERROR`, `REQUEST_PARSING_ERROR`, `INVALID_URL`, `INVALID_HAS_TIP` e `INVALID_CLIENT_REFERENCE_ID` [SB10][SB53].
+- **403** (links): `FORBIDDEN`, link de otra llave [SB54][SB55]. **404:** `NOT_FOUND`, `BANK_ACCOUNT_NOT_FOUND`. **409** (links): `PAYMENT_LINK_NOT_PENDING`, `CONCURRENT_UPDATE` [SB54]. **500:** `INTERNAL_SERVER_ERROR`. **503:** `SERVICE_UNAVAILABLE`, `FLAGS_UNAVAILABLE`. Tabla por endpoint: [pey/11](../pey/11-errores-y-limites.md).
+- Llave ausente o inválida: código ⚪ no verificado. Los ejemplos `authError` del OpenAPI dan 400 (`INVALID_REQUEST` en transacciones, "apiKeyId not included in request"; `AUTH_ERROR` en links); el 403 de los links es por un link ajeno, no por llave inválida [SB10][SB55]. **Recomendación:** trata 401, 403 e `INVALID_STATE` como "Tu cuenta de Pey todavía no está habilitada para cobrar." (así lo hace `respuestaDeError` de K03.7).
 
-**Límites documentados** [SB10][SB08]: QR `amount` >= 0 sin máximo publicado; push `amount` > 0 y <= 1,000,000; `phoneNumber` de 10 dígitos; `expiration` 0 o >= 360 s (push: >= 360, default 360); `numRef` de 1 a 7 dígitos; `metadata` hasta 50 claves (40/500 caracteres); páginas de 80, o 20 en QR; un webhook por llave; `bankAccountId` solo `ACTIVE`.
+**Límites documentados** [SB10][SB08]: QR `amount` >= 0 sin máximo publicado; push `amount` > 0 y <= 1,000,000; `phoneNumber` de 10 dígitos; `expiration` 0 o >= 360 s (push: >= 360, default 360); `numRef` de 1 a 7 dígitos; `metadata` hasta 50 claves (40/500 caracteres); páginas de 80, o 20 en QR; un webhook por llave; `bankAccountId` solo `ACTIVE`. Links: `amount` > 0, `successUrl` y `backUrl` HTTPS, `clientReferenceId` <= 255 y monto editable solo en `pending` [SB10][SB54]. Cuentas: `alias` y `name` de 1 a 255 caracteres, `clabe` de 18 dígitos con dígito verificador válido y banco con CoDi habilitado [SB10][SB13]; una cuenta `codi` y una `stripe` por llave [SB07].
 
 **No documentado (⚪ no verificado):** límite de peticiones, idempotencia, largo de `concept`, máximo por banco, qué ve el cliente con un QR vencido y reintentos de webhooks.
 
@@ -1282,7 +1304,7 @@ test("webhook: válido 200, repetido 200, firma ajena 401, sin firma 401, vacío
 
 ## K03.9 · La API como herramienta de un agente de IA
 
-En la Responses API cada herramienta lleva `type: "function"`, `name`, `description`, `parameters` (JSON Schema) y `strict` [SB45]. El modelo responde con items `function_call` (`call_id`, `name` y `arguments` como texto JSON) y tú devuelves un `function_call_output` con el mismo `call_id` [SB45]. Los ejemplos con `strict: true` listan todo en `required`, usan `additionalProperties: false` y modelan lo opcional con `["string", "null"]` [SB46]. Qué palabras clave se respetan en modo estricto: ⚪ no verificado; valida otra vez en el servidor. `crear_cobro` usa los mismos campos que K04.15 (`monto`, `concepto`); el flujo completo con OpenAI está en K04.6. La herramienta solo propone: el servidor crea el QR hasta que la persona confirma.
+En la Responses API cada herramienta lleva `type: "function"`, `name`, `description`, `parameters` (JSON Schema) y `strict` [SB45]. El modelo responde con items `function_call` (`call_id`, `name` y `arguments` como texto JSON) y tú devuelves un `function_call_output` con el mismo `call_id` [SB45]. Los ejemplos con `strict: true` listan todo en `required`, usan `additionalProperties: false` y modelan lo opcional con `["string", "null"]` [SB46]. Qué palabras clave se respetan en modo estricto: ⚪ no verificado; valida otra vez en el servidor. `crear_cobro` usa dos campos (`monto`, `concepto`). La herramienta solo propone: el servidor crea el QR hasta que la persona confirma.
 
 **Reglas de seguridad (Recomendación):**
 1. **Confirmación humana:** `crear_cobro` no cobra; devuelve una propuesta. Solo el botón "Confirmar" de la UI llama `POST /api/cobros`, fuera del control del modelo.
@@ -1393,6 +1415,24 @@ export async function ejecutarHerramienta(nombre, args) {
 // Devuelve cada resultado al modelo como {type: "function_call_output", call_id, output: JSON.stringify(resultado)}.
 ```
 
+## K03.10 · Documentación completa de pey (carpeta `pey/`)
+
+Toda la documentación pública de pey quedó en Markdown, con redacción propia, en [pey/README.md](../pey/README.md): las 37 URL del mapa del sitio [SB47], el OpenAPI completo (11 rutas) [SB10] y la página comercial [SB01], consultados el 2026-11-07. Úsala para campos, tipos, errores y ejemplos endpoint por endpoint; este archivo sigue siendo la síntesis con decisiones y código probado.
+
+| Necesitas… | Archivo |
+|---|---|
+| Alta, llaves, cuenta de prueba y entornos | [pey/02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md) |
+| QR y push | [pey/04](../pey/04-api-codi-qr-y-push.md) |
+| Cuentas bancarias (multi-cuenta) | [pey/05](../pey/05-api-cuentas-bancarias.md) |
+| Links de pago | [pey/06](../pey/06-api-ligas-de-pago.md) |
+| Consultar pagos | [pey/07](../pey/07-api-transacciones.md) |
+| Tipos y enumeraciones | [pey/08](../pey/08-tipos-de-datos.md) |
+| Webhooks y sus campos | [pey/09](../pey/09-webhooks.md) |
+| Errores y límites | [pey/11](../pey/11-errores-y-limites.md) |
+| Logos y changelog | [pey/12](../pey/12-recursos-de-marca.md), [pey/13](../pey/13-registro-de-cambios.md) |
+
+Fuentes revisadas por primera vez hoy: [SB48] a [SB57]. El changelog no tiene entradas generales ni política de versiones [SB56]; los tipos de transacción y de cuenta bancaria están en [SB51] y [SB52].
+
 ## Fuentes
 
 | ID | Título | URL | Consultado |
@@ -1443,2040 +1483,19 @@ export async function ejecutarHerramienta(nombre, args) {
 | SB44 | GitHub Docs: Forwarding ports in your codespace | https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace | 2026-11-06 |
 | SB45 | OpenAI: Function calling | https://developers.openai.com/api/docs/guides/function-calling | 2026-11-06 |
 | SB46 | OpenAI: Structured model outputs | https://developers.openai.com/api/docs/guides/structured-outputs | 2026-11-06 |
+| SB47 | Documentación de pey: mapa del sitio (37 URL) | https://docs.pey.mx/sitemap.xml | 2026-11-07 |
+| SB48 | Documentación de pey: Get Bank Account Transactions | https://docs.pey.mx/docs/api/get-bank-account-transactions | 2026-11-07 |
+| SB49 | Documentación de pey: Get API Key Transactions | https://docs.pey.mx/docs/api/get-api-key-transactions | 2026-11-07 |
+| SB50 | Documentación de pey: Get Bank Account | https://docs.pey.mx/docs/api/get-bank-account | 2026-11-07 |
+| SB51 | Documentación de pey: tipo Cuenta bancaria | https://docs.pey.mx/docs/types/bank-account | 2026-11-07 |
+| SB52 | Documentación de pey: tipo Objeto de transacción | https://docs.pey.mx/docs/types/transaction-object | 2026-11-07 |
+| SB53 | Documentación de pey: Create Payment Link | https://docs.pey.mx/docs/api/create-payment-link | 2026-11-07 |
+| SB54 | Documentación de pey: Update Payment Link | https://docs.pey.mx/docs/api/update-payment-link | 2026-11-07 |
+| SB55 | Documentación de pey: Get Payment Link | https://docs.pey.mx/docs/api/get-payment-link | 2026-11-07 |
+| SB56 | Documentación de pey: registro de cambios, introducción | https://docs.pey.mx/docs/changelog/introduction | 2026-11-07 |
+| SB57 | Documentación de pey: Referencia de la API (categoría) | https://docs.pey.mx/docs/category/api-reference | 2026-11-07 |
 
 <!-- ===== FIN: conocimiento/03-codi-y-api-pey.md ===== -->
-
-<!-- ===== INICIO: conocimiento/04-openai-api-nov-2026.md ===== -->
-
----
-id: K04
-titulo: "API de OpenAI vigente (6 nov 2026): DevDay 2026, modelos, Responses, Realtime, Agents, plugins y costos"
-resumen: "Qué anunció el DevDay 2026, qué modelos y precios usar hoy y ejemplos mínimos (Node.js y Python) de salida estructurada, function calling y voz Realtime; léelo antes de escribir cualquier código contra la API de OpenAI."
-responde:
-  - "¿Qué se anunció en el DevDay 2026 y qué conviene presumir ante los jueces?"
-  - "¿Qué modelo uso para texto, voz en español, visión e imágenes, y cuánto cuesta?"
-  - "¿Cómo hago llamada básica, streaming, salidas estructuradas y function calling con la Responses API?"
-  - "¿Cómo conecto voz en tiempo real desde el navegador con una llave efímera creada en el servidor?"
-  - "¿Siguen vigentes Agents SDK, Agents API, AgentKit, Agent Builder y ChatKit?"
-  - "¿Qué necesito para probar mi propia app (plugin MCP) dentro de ChatGPT con Plus y cuánto trabajo es?"
-  - "¿Cómo funciona el prompt caching de 12 horas y cuánto cuesta?"
-  - "¿Cómo creo la API key, cargo saldo y qué límites tiene una cuenta nueva?"
-  - "¿Qué funciones dan efecto wow en 4 horas?"
-actualizado: 2026-11-06
-confianza: media
-fuentes: [SC01, SC02, SC03, SC04, SC05, SC06, SC07, SC08, SC09, SC10, SC11, SC12, SC13, SC14, SC15, SC16, SC17, SC18, SC19, SC20, SC21, SC22, SC23, SC24, SC25, SC26, SC27, SC28, SC29, SC30, SC31, SC32, SC44, SC48, SC57, SC59, SC64]
----
-
-# K04 · API de OpenAI vigente (noviembre 2026)
-
-## TL;DR
-
-- El DevDay 2026 fue el 29 sep 2026 en San Francisco: GPT-6.1 Sol, Agents API con *computer use*, velocidad Ultrafast, Decisions API, extensiones de plugins y Codex Cloud que sigue trabajando con la laptop cerrada [SC01, SC02, SC03].
-- Texto: `gpt-6.1-sol` (US$2 / US$10 por 1M tokens) como default de hackatón; `gpt-6-astra` (US$10 / US$50) para máxima calidad; `gpt-6-luna` (US$0.10 / US$0.50) para clasificar barato [SC06, SC07].
-- Voz: `gpt-realtime-2.1` por WebRTC con llave efímera de `POST /v1/realtime/client_secrets`. Imagen: `gpt-image-2.6-flare` / `-sunburst`, lanzados el 4 nov [SC10, SC30].
-- Con GPT-6 Astra y GPT-6.1 Sol las herramientas sólo funcionan en la Responses API (la fuente no lo dice de Terra ni de Luna); salidas estructuradas con `text.format` o `responses.parse` [SC13, SC12].
-- La API se paga aparte de ChatGPT Plus: compra al menos US$5 de crédito para entrar al tier Build (Sol: 5,000 RPM y 1M TPM) [SC26, SC44].
-- No uses Agent Builder (se apaga el 30 nov 2026), Assistants API (ya apagada) ni `gpt-image-1` (ya apagado) [SC20, SC21].
-
-## K04.1 · DevDay 2026: fecha y lanzamientos
-
-- **Cuándo y dónde:** 29 sep 2026, San Francisco; keynote en vivo [SC03]. El DevDay Exchange de CDMX es el 10 nov a las 14:00 [SC04].
-- **Modelos y API** [SC01, SC02]:
-  - **GPT-6.1 Sol** (`gpt-6.1-sol`): según OpenAI, cerca de GPT-6 Astra en código y uso de computadora, a una quinta parte del precio.
-  - **Ultrafast:** velocidad pagada; OpenAI reporta hasta 8× más rápido en Codex y 6× en la API, a 6× el precio.
-  - **Agents API:** beta pública desde el 10 sep; en DevDay sumó *computer use*, multiagente, Tool Search y Context Compaction.
-  - **Decisions API:** defines una pregunta con respuestas fijas y te devuelve una; corre sobre GPT-6 Luna. Salió como preview limitada; la comunidad reporta beta pública desde el 22 oct [SC01].
-  - OpenAI reporta 45% menos tiempo al primer token y más de 30% de mejora en velocidad de tool calls.
-- **Codex** [SC01, SC02]: Codex Cloud (tareas que siguen con la laptop cerrada, lanzables desde el celular; entornos reutilizables; de Plus en adelante), CLI nueva (voz, vista `/agents`, worktrees), Code Review en la app de escritorio y Codex Security Cloud (de Pro en adelante).
-- **Plugins** [SC01]: extensiones (barra lateral, paneles, visores), *MCP events* que disparan automatizaciones y "Sign in with ChatGPT".
-- **ChatGPT** [SC01, SC02]: *Dots* (agentes persistentes con computadora propia en la nube), ChatGPT Space/Pages y plan Pro 500.
-- **Después del DevDay:** GPT-Image-2.6 Flare y Sunburst (4 nov) [SC30].
-
-## K04.2 · Modelos de texto y visión recomendados hoy
-
-| Uso | Modelo (ID de API) | Entrada / entrada en caché / salida (US$ por 1M tokens) | Esfuerzo de razonamiento |
-|---|---|---|---|
-| Default de hackatón (texto, razonamiento, herramientas) | `gpt-6.1-sol` | 2.00 / 0.10 / 10.00 | `low`…`max`, default `medium`; sin `none` [SC08] |
-| Máxima calidad | `gpt-6-astra` | 10.00 / 1.00 / 50.00 | `low`…`max` |
-| Intermedio barato | `gpt-6.1-terra` | 1.00 / 0.05 / 5.00 | `none`…`max` |
-| Clasificar / alto volumen | `gpt-6-luna` | 0.10 / 0.01 / 0.50 | `none`…`max` |
-
-Precios y esfuerzos: [SC06, SC07]. La página de modelos sugiere `gpt-6-astra` "si no estás seguro" [SC06]. Los cuatro tienen ventana de 1.05M tokens y hasta 128K de salida [SC06]. En Sol, un prompt de más de 272K tokens se cobra a 2× la entrada y 1.5× la salida [SC08]. Batch/Flex cuesta la mitad; *Fast* (antes "Priority", renombrado el 30 jul 2026) cuesta el doble [SC07].
-
-- **Herramientas:** con `gpt-6-astra` y `gpt-6.1-sol` el function calling requiere la Responses API [SC13].
-- **Visión:** no hay modelo de visión aparte; los modelos recientes aceptan texto e imagen [SC06]. Forma del mensaje (⚪ no verificado hoy; es la forma conocida de la Responses API):
-
-```js
-input: [{ role: "user", content: [
-  { type: "input_text", text: "Extrae comercio y total de este ticket." },
-  { type: "input_image", image_url: "https://ejemplo.com/ticket.jpg" } // o "data:image/jpeg;base64,..."
-]}]
-```
-
-**Recomendación:** usa `gpt-6.1-sol` con `reasoning: { effort: "low" }` en la demo (menos latencia) y sube a `medium` sólo donde la calidad se note; en Vercel pon `OPENAI_MODEL=gpt-6.1-sol` (nombre de `.env.example`) para cambiar de modelo sin tocar código. Para clasificar intenciones, `gpt-6-luna`.
-
-## K04.3 · Voz, imagen y transcripción: nombres y precios
-
-**Voz en tiempo real** (US$ por 1M tokens: entrada / caché / salida) [SC07]:
-- `gpt-realtime-2.1`: audio 32.00 / 0.40 / 64.00; texto 4.00 / 0.40 / 24.00; imagen de entrada 5.00.
-- `gpt-realtime-2.1-mini`: audio 10.00 / 0.30 / 20.00; texto 0.60 / 0.06 / 2.40.
-- La 2.1 mejora a `gpt-realtime-2` en silencio y ruido; razonamiento ajustable y contexto de 256K. Voces: alloy, ash, ballad, coral, cedar, echo, marin, sage, shimmer, verse [SC31]. La familia 2 llama herramientas en plena conversación [SC32].
-- `gpt-live-1`: full-duplex (escucha y habla a la vez); US$0.05/min por la capa de voz, más el modelo de backend; en la API desde el 10 sep 2026 [SC11, SC07].
-- **Español:** ninguna fuente lista los idiomas de `gpt-realtime-2.1` (⚪ no verificado); OpenAI ampliará idiomas de GPT-Live en los próximos meses [SC11]. `gpt-realtime-translate`: más de 70 idiomas de entrada y 13 de salida [SC32].
-
-**Imagen** [SC29, SC30, SC07]: `gpt-image-2.6-flare` (rápido; unos 6 s en calidad baja) y `gpt-image-2.6-sunburst` (más detalle y ediciones consistentes). Por tokens: imagen de entrada 8.00 (caché 2.00), imagen de salida 30.00, texto de entrada 5.00. Sólo en `/v1/images/generations` y `/v1/images/edits`; al 5 nov la herramienta de imagen de Responses no los soportaba [SC30]. Novedades: GIF animado y SVG.
-
-**Transcripción** [SC07]: `gpt-transcribe` US$0.0045/min; `gpt-realtime-whisper` y `gpt-live-transcribe` US$0.017/min; `gpt-realtime-translate` US$0.034/min.
-
-**Retiros** [SC21]: `gpt-image-1` (apagado el 23 oct); `gpt-image-1.5` y `gpt-image-1-mini` (1 dic 2026); `gpt-realtime` y `gpt-realtime-mini` (20 ene 2027).
-
-```js
-const img = await client.images.generate({
-  model: "gpt-image-2.6-flare",
-  prompt: "Ícono plano de una alcancía con papel picado, colores mexicanos",
-  size: "1024x1024",
-  quality: "low",
-});
-const base64 = img.data[0].b64_json; // imagen en base64
-```
-
-⚪ No verificado hoy el nombre del método del SDK; los parámetros y `data[0].b64_json` sí [SC29].
-
-## K04.4 · Responses API: llamada básica y streaming
-
-- Llamas `client.responses.create(...)` y el texto final está en `output_text` [SC14]; ese campo es un atajo de los SDK (⚪ no verificado hoy; con `fetch` crudo ver K04.15).
-- `instructions` define el comportamiento; `input` acepta texto o una lista de mensajes [SC13].
-- Para continuar una conversación, reenvía la lista completa (como los ejemplos oficiales de JS y Python) o pasa `previous_response_id` (como los de Go, Java y Ruby) [SC13].
-- Streaming: `stream: true` y recorres eventos. Los clave: `response.created`, `response.output_text.delta` (campo `delta`), `response.completed` y `error` [SC14].
-- En GPT-6.x, si usas caché, no cambies `reasoning.effort` a mitad de conversación; se agrega un item `configuration_update` [SC09].
-
-```js
-// Node.js — npm install openai ; exporta OPENAI_API_KEY
-import OpenAI from "openai";
-const client = new OpenAI();
-
-const r = await client.responses.create({
-  model: "gpt-6.1-sol",
-  reasoning: { effort: "low" },
-  instructions: "Responde en español de México, en máximo dos frases.",
-  input: "¿Qué ventaja tiene cobrar con un enlace en lugar de efectivo?",
-});
-console.log(r.output_text);
-
-const stream = await client.responses.create({
-  model: "gpt-6.1-sol",
-  input: "Propón 3 nombres para una app de cobros entre amigos.",
-  stream: true,
-});
-for await (const event of stream) {
-  if (event.type === "response.output_text.delta") process.stdout.write(event.delta);
-  else if (event.type === "error") console.error(event.message);
-}
-```
-
-```python
-# Python — pip install openai ; exporta OPENAI_API_KEY
-from openai import OpenAI
-client = OpenAI()
-
-r = client.responses.create(
-    model="gpt-6.1-sol",
-    reasoning={"effort": "low"},
-    instructions="Responde en español de México, en máximo dos frases.",
-    input="¿Qué ventaja tiene cobrar con un enlace en lugar de efectivo?",
-)
-print(r.output_text)
-
-stream = client.responses.create(
-    model="gpt-6.1-sol",
-    input="Propón 3 nombres para una app de cobros entre amigos.",
-    stream=True,
-)
-for event in stream:
-    if event.type == "response.output_text.delta":
-        print(event.delta, end="", flush=True)
-    elif event.type == "error":
-        print(event.message)
-```
-
-## K04.5 · Salidas estructuradas (JSON Schema)
-
-- Se piden con `text.format` = `{ type: "json_schema", name, schema, strict: true }` [SC12].
-- Atajos del SDK: en JS, `zodTextFormat(esquema, "nombre")` (de `openai/helpers/zod`) con `client.responses.parse`; en Python, `text_format=ModeloPydantic`. El objeto ya validado llega en `output_parsed` [SC12].
-- Los ejemplos oficiales ponen `additionalProperties: false` y todas las propiedades en `required` [SC12].
-- Una negativa no sigue el esquema: llega como item `refusal`. Revisa también `status: "incomplete"` por `max_output_tokens` [SC12].
-- La doc usa `gpt-6-astra` en sus ejemplos y lo recomienda para proyectos nuevos [SC12]; con `gpt-6.1-sol` la llamada es la misma.
-
-Forma cruda, útil desde cualquier lenguaje o `curl`:
-
-```json
-{
-  "model": "gpt-6.1-sol",
-  "input": "Cóbrale a Lupita 350 de los tacos",
-  "text": {
-    "format": {
-      "type": "json_schema",
-      "name": "cobro",
-      "strict": true,
-      "schema": {
-        "type": "object",
-        "properties": {
-          "monto": { "type": "number" },
-          "concepto": { "type": "string" }
-        },
-        "required": ["monto", "concepto"],
-        "additionalProperties": false
-      }
-    }
-  }
-}
-```
-
-Ejemplo completo en Node.js y Python: K04.14.
-
-## K04.6 · Function calling (herramientas)
-
-1. Defines herramientas "planas": `type: "function"`, `name`, `description`, `parameters` (JSON Schema) y `strict: true` [SC13].
-2. El modelo responde con items `function_call` que traen `call_id`, `name` y `arguments` (string JSON) [SC13].
-3. Tu código valida y ejecuta; luego agregas `{ type: "function_call_output", call_id, output }` con el mismo `call_id` [SC13].
-4. Segunda llamada con todo el `input` y las mismas `tools`; lees `output_text` [SC13].
-
-- Puede haber cero, una o varias llamadas en una respuesta: recórrelas todas [SC13].
-- En modelos de razonamiento debes devolver los items de razonamiento junto con las salidas; `input_list += response.output` (Python) o `toResponseInputItems` (JS) lo resuelven [SC13].
-- Si tienes muchas herramientas: `tool_search` con funciones `defer_loading: true` dentro de un `namespace` (desde `gpt-5.4`) [SC13].
-- Para no romper la caché, no quites herramientas entre turnos; usa `tool_choice: "none"` o `allowed_tools` [SC09].
-
-**Recomendación:** nunca ejecutes un cobro sólo porque el modelo lo pidió. Valida monto y concepto en el servidor y muestra una confirmación visible ("¿Cobrar $120 por 2 cafés?") antes de llamar al proveedor de pagos.
-
-Ejemplo completo con `crear_cobro`: K04.15.
-
-## K04.7 · Realtime API (voz): llave efímera + WebRTC
-
-Flujo con llave efímera [SC10]:
-1. El navegador pide `GET /api/realtime-token` a tu servidor.
-2. El servidor llama `POST https://api.openai.com/v1/realtime/client_secrets` con tu API key y el cuerpo `{ session: { type: "realtime", model: "gpt-realtime-2.1", audio: { output: { voice: "marin" } } } }`. Regresa `data.value` con `Cache-Control: no-store`.
-3. El navegador crea `RTCPeerConnection`, agrega el micrófono (`getUserMedia`), abre el canal de datos `oai-events` y genera la oferta (`createOffer`, `setLocalDescription`).
-4. El navegador manda el SDP a `POST https://api.openai.com/v1/realtime/calls` con `Authorization: Bearer <llave efímera>` y `Content-Type: application/sdp`, y aplica la respuesta con `setRemoteDescription`.
-
-- Mandar `OpenAI-Safety-Identifier` desde el servidor (valor estable y anónimo); queda ligado a la llave efímera [SC10].
-- Alternativa "unificada": el navegador manda el SDP a tu servidor y éste lo reenvía como `multipart/form-data` (`sdp` + `session`) a `/v1/realtime/calls` [SC10].
-- El encabezado beta `OpenAI-Beta: realtime=v1` dejó de funcionar el 12 may 2026: descarta tutoriales viejos [SC21].
-- El Agents SDK de JS (`RealtimeAgent` + `RealtimeSession`) arma este WebRTC por ti con la misma llave efímera [SC18].
-
-**Recomendación:** protege `/api/realtime-token` (sólo tu dominio, límite por IP) porque cada llave gasta tu saldo. Código en K04.16.
-
-## K04.8 · GPT-Live-1 (opcional, voz full-duplex)
-
-- **Qué es:** modelo de voz que escucha y habla al mismo tiempo, con detección de turnos nativa, y que delega razonamiento y herramientas a un modelo de texto de backend. OpenAI reporta +30 puntos en Full Duplex Bench frente a `gpt-realtime-2.1` [SC11].
-- **Precio:** US$0.05 por minuto por la capa de voz; el modelo de backend y las herramientas se cobran aparte [SC11, SC07].
-- **Flujo** [SC10]: el navegador crea canal de datos y oferta, espera a juntar candidatos ICE y manda `{ sdp }` a tu `/api/session`. Tu servidor llama `client.live.create({ session, transport: { type: "webrtc", sdp } })`, que equivale a `POST /v1/live/sessions`. En la sesión: `model: "gpt-live-1"` y `delegation: { type: "responses", responses: { model, tools, tool_choice } }` (el ejemplo oficial delega a `gpt-5.6-terra` con `web_search`). Responde 201 con `session.id` y `transport.sdp`.
-- **Reglas del canal:** no envíes `session.start`; espera `session.started`; para cerrar manda `session.close` y espera `session.closed` [SC10].
-- **Idiomas:** no se menciona español; OpenAI promete ampliar idiomas "en los próximos meses" [SC11] (⚪ no verificado en español).
-
-**Recomendación:** úsalo sólo si `gpt-realtime-2.1` ya funciona y te sobra una hora; prueba primero que entienda y hable español de México.
-
-## K04.9 · Agents SDK (JS y Python) y Agents API
-
-- **Agents SDK JS:** `npm install @openai/agents zod`; requiere Node.js 22 o superior (AGENTS.md pide Node 20+: si lo usas, fija Node 22 en el proyecto de Vercel; ⚪ no verifiqué dónde se cambia). Texto con `Agent` + `run`; voz con `RealtimeAgent` + `RealtimeSession` (de `@openai/agents/realtime`), que conecta micrófono y audio por WebRTC; también tiene *Sandbox Agents* [SC18].
-- **Agents SDK Python:** `pip install openai-agents`; `Agent` + `Runner.run_sync`; usa la Responses API por defecto, integra herramientas MCP remotas y hace voz con `gpt-realtime-2.1` [SC19]. Desde abril de 2026 trae harness y sandbox (`openai-agents>=0.14.0`) [SC17].
-- **Agents API** (beta pública desde el 10 sep 2026): sirve para "build and run cloud agents with the Codex harness, fully managed by OpenAI" [SC15]. Sin cargo extra: pagas tokens, herramientas y contenedores [SC15]. Se llama con `client.beta.agents.sessions.create({ agent: { model, instructions }, environment: { type: "openai_hosted" }, input, stream: true })` (`POST /v1/agents/sessions`, encabezado `OpenAI-Beta: agents=v1` que los SDK ponen solos). Pide una llave de aplicación con permisos `api.agents.read`, `api.agents.write` y `api.responses.write` [SC16].
-
-```js
-// npm install @openai/agents zod
-import { Agent, run, tool } from "@openai/agents";
-import { z } from "zod";
-
-const crearCobro = tool({ // ⚪ no verificado hoy: firma de tool()
-  name: "crear_cobro",
-  description: "Crea un cobro en MXN",
-  parameters: z.object({ monto: z.number(), concepto: z.string() }),
-  execute: async ({ monto, concepto }) => ({ id: "cobro_demo_001", monto, concepto }),
-});
-
-const agente = new Agent({
-  name: "Cobri",
-  model: "gpt-6.1-sol",
-  instructions: "Ayudas a cobrar. Responde en español de México.",
-  tools: [crearCobro],
-});
-const resultado = await run(agente, "Cóbrale 80 pesos a Ana por el pan");
-console.log(resultado.finalOutput);
-```
-
-```python
-# pip install openai-agents
-from agents import Agent, Runner, function_tool
-
-@function_tool  # ⚪ no verificado hoy: nombre del decorador
-def crear_cobro(monto: float, concepto: str) -> dict:
-    """Crea un cobro en MXN."""
-    return {"id": "cobro_demo_001", "monto": monto, "concepto": concepto}
-
-agente = Agent(name="Cobri", model="gpt-6.1-sol",
-               instructions="Ayudas a cobrar. Responde en español de México.",
-               tools=[crear_cobro])
-print(Runner.run_sync(agente, "Cóbrale 80 pesos a Ana por el pan").final_output)
-```
-
-## K04.10 · AgentKit, Agent Builder y ChatKit: estado al 6 nov 2026
-
-- **Agent Builder:** OpenAI lo está deprecando; los usuarios actuales lo pueden usar durante una transición y se apaga el 30 nov 2026 [SC20]. Reemplazo sugerido: Agents SDK o ChatGPT Workspace Agents [SC21].
-- **ChatKit** (UI de chat embebible): sigue disponible [SC20, SC21]. La guía de Agent Builder sugiere pasar el workflow a ChatKit o copiar su código y usar el Agents SDK [SC20].
-- El mismo 30 nov se apagan la plataforma de Evals y los *reusable prompts* [SC21].
-- **Assistants API:** se apagó el 26 ago 2026; los reemplazos son Responses API y Conversations API [SC21].
-- **AgentKit** fue el paquete anunciado en el DevDay 2025 (Agent Builder, Connector Registry, ChatKit y herramientas de evaluación) [SC64]; ninguna página actual consultada lo usa como marca vigente (⚪ no verificado).
-
-**Recomendación:** mañana no construyas nada en Agent Builder ni en Assistants. Usa la Responses API directo (más control y menos piezas) y, si necesitas varios agentes o voz con herramientas, el Agents SDK. ChatKit sólo si hoy ya probaste que te ahorra la UI.
-
-## K04.11 · Plugins (antes "Apps SDK"): tu app dentro de ChatGPT con Plus
-
-- **Nombres:** desde el 9 jul 2026 el App Directory es el Plugin Directory; los conectores son "apps" dentro de plugins [SC57]. La doc actual dice "Plugins" y "MCP Apps" (estándar de UI); "Apps SDK" sobrevive en nombres de repos de ejemplo [SC24].
-- **Qué necesitas:** un servidor MCP con endpoint HTTPS público (normalmente `/mcp`, streamable HTTP) o un Secure MCP Tunnel; herramientas con nombre, descripción, esquema y anotaciones [SC22].
-- **Paquetes:** `npm install @modelcontextprotocol/sdk @modelcontextprotocol/ext-apps zod`. UI opcional: un recurso `ui://...` ligado a la herramienta con `_meta: { ui: { resourceUri } }`. Para exponer local: `ngrok http 8787` [SC24].
-- **Probar antes:** `npx @modelcontextprotocol/inspector@latest` [SC22].
-- **Conectar:** chatgpt.com/plugins → "+" → "Add custom MCP server" → nombre y URL con `/mcp` → autenticación ("No authentication" para demo) → "I understand and want to continue" → "Create as a plugin" → instalar → pestaña "Work", chat nuevo, `@` y elegir el plugin. Tras cambios: "Refresh" [SC22, SC23].
-- **Plan y modo desarrollador:** la doc oficial no los menciona. Un tercero (1 oct) dice Plus, Pro, Business, Enterprise y Edu (no Free), con el interruptor "Developer mode" en Settings → Security and login, sólo en web [SC25]. Otro afirma "Developer mode is no longer needed." [SC59] (⚪ no verificado). Las herramientas que no son de sólo lectura piden confirmación [SC25].
-
-**Recomendación (esfuerzo):** sólo herramientas ≈ 45–60 min; con UI ≈ 2–3 h. Vale la pena sólo si "cobrar desde ChatGPT" es el centro del pitch.
-
-## K04.12 · Prompt caching (30 min y 12 h)
-
-- **Aplica a GPT-5.6 en adelante (incluye GPT-6.x):** la caché es implícita por defecto y el prefijo cacheable debe tener al menos 1,024 tokens visibles [SC09].
-- **Duración:** `prompt_cache_options.ttl` = `"30m"` (default) o `"12h"`; la de 12 h sólo existe en la Responses API. También puedes marcar bloques con `prompt_cache_breakpoint`, usar modo `"explicit"` o precalentar con `prewarm: true` [SC09].
-- **Costo:** escribir en caché de 30 min cuesta 1.25× la entrada; en caché de 12 h, 2.5×; leer cuesta 0.1× (0.05× en Sol y Terra). Ese precio de escritura reemplaza al normal, no se suma [SC09]. En Sol: escritura 12 h US$5.00/1M y lectura US$0.10/1M [SC07].
-- **Modelos anteriores:** usan `prompt_cache_retention` (`"in_memory"` o `"24h"`) y no cobran escritura [SC09].
-- **Medir:** `usage.input_tokens_details.cached_tokens` y `usage.input_tokens_details.cache_write_tokens` [SC09].
-- **Buenas prácticas:** lo estático primero (instrucciones, base de conocimiento, definición de tools) y lo variable al final; agrega mensajes, no reescribas el historial; no quites tools [SC09].
-
-```js
-const r = await client.responses.create({
-  model: "gpt-6.1-sol",
-  prompt_cache_options: { ttl: "12h" }, // "30m" es el default
-  input: [
-    { role: "developer", content: [{ type: "input_text", text: BASE_MARKDOWN }] }, // estable, >= 1,024 tokens
-    { role: "user", content: [{ type: "input_text", text: pregunta }] },          // variable, al final
-  ],
-});
-console.log(r.usage.input_tokens_details); // cached_tokens, cache_write_tokens
-```
-
-⚪ No verificado hoy: si tu versión del SDK de Python no acepta el parámetro, pásalo con `extra_body={"prompt_cache_options": {"ttl": "12h"}}`.
-
-**Recomendación:** si metes 20K tokens de la base Markdown como prefijo y habrá huecos de más de 30 min (ensayo → pitch), usa `"12h"`: escribir cuesta ≈ US$0.10 una vez y cada lectura ≈ US$0.002, contra ≈ US$0.04 sin caché.
-
-## K04.13 · Cuenta de API: llave, saldo y límites de una cuenta nueva
-
-- **Plus no incluye la API:** el uso con API key es por consumo y se cobra a tarifas de la API, aparte de la suscripción [SC48, SC44].
-- **Pasos (guía de terceros):** platform.openai.com → Settings → "API Keys" → "Create new secret key" (se muestra una sola vez). Saldo en platform.openai.com/settings/organization/billing/overview → "Add credit"; el mínimo típico es US$5 y puede aparecer un cargo temporal de autorización [SC28].
-- **Tiers (desde el 6 oct 2026):** Free (tope US$100/mes), Build (US$5 comprados → tope US$500/mes), Launch (US$100 → US$5,000), Grow (US$500 → US$200,000). Suben solos al alcanzar el monto comprado [SC26, SC27].
-- **Límites en Build:** Astra, Sol y Terra 5,000 RPM y 1M TPM; Luna 5,000 RPM y 2M TPM [SC26].
-- **Free y GPT-6:** según un tercero, las páginas de GPT-6 marcan Free como "Not supported" [SC27] (⚪ no verificado en fuente oficial).
-- **Ver límites:** Settings › Organization › Limits. Encabezados `x-ratelimit-*` y `Retry-After`; los SDK oficiales reintentan 429 y 503 solos [SC26].
-- **Créditos en eventos hermanos:** en Charlotte (3 oct 2026), la página ofrecía US$50 en créditos de API y US$100 en créditos de Codex a cada asistente elegible que hiciera check-in [SC05]; para CDMX (⚪ no verificado).
-
-**Recomendación:** hoy mismo carga US$10–20, crea una llave por proyecto, fija un tope de gasto y prueba una llamada a `gpt-6.1-sol` y una sesión de voz. El repo es público: la llave vive sólo en variables de Vercel (tipo Secret) y en secretos de Codespaces o de Codex, nunca en archivos.
-
-## K04.14 · Ejemplo (a): salida estructurada (Node.js y Python)
-
-Convierte lenguaje natural en un cobro validado. Basado en el patrón oficial [SC12].
-
-```js
-// Node.js — npm install openai zod
-import OpenAI from "openai";
-import { zodTextFormat } from "openai/helpers/zod";
-import { z } from "zod";
-
-const client = new OpenAI();
-
-const Cobro = z.object({
-  monto: z.number(),
-  moneda: z.enum(["MXN", "USD"]),
-  concepto: z.string(),
-  pagador: z.string(),
-});
-
-const response = await client.responses.parse({
-  model: "gpt-6.1-sol",
-  reasoning: { effort: "low" },
-  input: [
-    { role: "system", content: "Extrae el cobro que pide el usuario. Moneda MXN salvo que diga otra. Si falta un dato, usa cadena vacía." },
-    { role: "user", content: "Cóbrale a Lupita 350 de los tacos de ayer." },
-  ],
-  text: { format: zodTextFormat(Cobro, "cobro") },
-});
-
-console.log(response.output_parsed);
-// Esperado: { monto: 350, moneda: "MXN", concepto: "tacos de ayer", pagador: "Lupita" }
-```
-
-```python
-# Python — pip install openai pydantic
-from typing import Literal
-from openai import OpenAI
-from pydantic import BaseModel
-
-client = OpenAI()
-
-class Cobro(BaseModel):
-    monto: float
-    moneda: Literal["MXN", "USD"]
-    concepto: str
-    pagador: str
-
-response = client.responses.parse(
-    model="gpt-6.1-sol",
-    reasoning={"effort": "low"},
-    input=[
-        {"role": "system", "content": "Extrae el cobro que pide el usuario. Moneda MXN salvo que diga otra. Si falta un dato, usa cadena vacía."},
-        {"role": "user", "content": "Cóbrale a Lupita 350 de los tacos de ayer."},
-    ],
-    text_format=Cobro,
-)
-print(response.output_parsed)
-```
-
-Revisa negativas e incompletos antes de usar el resultado (K04.5).
-
-## K04.15 · Ejemplo (b): function calling con `crear_cobro` (Node.js y Python)
-
-Sigue el flujo oficial de dos llamadas [SC13]. `crearCobro` es simulada y sólo *prepara* el cobro: según AGENTS.md (§3) el cobro real ocurre hasta que la persona confirma en la interfaz; por eso la herramienta `crear_cobro` solo propone. La llamada a Pey va en el servidor (K03) y el tope sale de `MAX_MONTO_MXN` (aquí fijo en 10000 sólo como ejemplo).
-
-```js
-// Node.js — npm install openai
-import OpenAI from "openai";
-import { toResponseInputItems } from "openai/lib/responses/ResponseInputItems";
-
-const client = new OpenAI();
-
-const tools = [{
-  type: "function",
-  name: "crear_cobro",
-  description: "Crea una solicitud de cobro en pesos mexicanos (MXN).",
-  strict: true,
-  parameters: {
-    type: "object",
-    properties: {
-      monto: { type: "number", description: "Monto en MXN, mayor que 0." },
-      concepto: { type: "string", description: "Concepto corto que verá quien paga." },
-    },
-    required: ["monto", "concepto"],
-    additionalProperties: false,
-  },
-}];
-
-async function crearCobro({ monto, concepto }) {
-  if (!(monto > 0 && monto <= 10000)) return { error: "Monto fuera de rango" };
-  return { id: "cobro_demo_001", estado: "pendiente", monto, concepto }; // simulado
-}
-
-const input = [{ role: "user", content: "Cóbrale 120 pesos a Memo por dos cafés." }];
-
-let response = await client.responses.create({
-  model: "gpt-6.1-sol", reasoning: { effort: "low" }, tools, input,
-});
-input.push(...toResponseInputItems(response.output)); // conserva razonamiento y llamadas
-
-for (const item of response.output) {
-  if (item.type !== "function_call" || item.name !== "crear_cobro") continue;
-  const resultado = await crearCobro(JSON.parse(item.arguments));
-  input.push({ type: "function_call_output", call_id: item.call_id, output: JSON.stringify(resultado) });
-}
-
-response = await client.responses.create({
-  model: "gpt-6.1-sol",
-  reasoning: { effort: "low" },
-  instructions: "Confirma en español de México el cobro creado o explica el error.",
-  tools,
-  input,
-});
-console.log(response.output_text);
-```
-
-```python
-# Python — pip install openai
-import json
-from openai import OpenAI
-
-client = OpenAI()
-
-tools = [{
-    "type": "function",
-    "name": "crear_cobro",
-    "description": "Crea una solicitud de cobro en pesos mexicanos (MXN).",
-    "strict": True,
-    "parameters": {
-        "type": "object",
-        "properties": {
-            "monto": {"type": "number", "description": "Monto en MXN, mayor que 0."},
-            "concepto": {"type": "string", "description": "Concepto corto que verá quien paga."},
-        },
-        "required": ["monto", "concepto"],
-        "additionalProperties": False,
-    },
-}]
-
-def crear_cobro(monto: float, concepto: str) -> dict:
-    if not (0 < monto <= 10000):
-        return {"error": "Monto fuera de rango"}
-    return {"id": "cobro_demo_001", "estado": "pendiente", "monto": monto, "concepto": concepto}  # simulado
-
-input_list = [{"role": "user", "content": "Cóbrale 120 pesos a Memo por dos cafés."}]
-
-response = client.responses.create(
-    model="gpt-6.1-sol", reasoning={"effort": "low"}, tools=tools, input=input_list
-)
-input_list += response.output  # conserva razonamiento y llamadas
-
-for item in response.output:
-    if item.type == "function_call" and item.name == "crear_cobro":
-        resultado = crear_cobro(**json.loads(item.arguments))
-        input_list.append({
-            "type": "function_call_output",
-            "call_id": item.call_id,
-            "output": json.dumps(resultado, ensure_ascii=False),
-        })
-
-response = client.responses.create(
-    model="gpt-6.1-sol",
-    reasoning={"effort": "low"},
-    instructions="Confirma en español de México el cobro creado o explica el error.",
-    tools=tools,
-    input=input_list,
-)
-print(response.output_text)
-```
-
-**Con `fetch` nativo (stack de AGENTS.md, sin SDK).** Endpoint `POST https://api.openai.com/v1/responses`. La segunda llamada usa `previous_response_id` y manda sólo las salidas de las herramientas, como los ejemplos oficiales de Go, Java y Ruby [SC13]. Notas ⚪ (no verificado hoy): en el JSON crudo no viene `output_text` (es atajo de los SDK) y el texto se arma con los items `message`; `previous_response_id` depende de que la respuesta quede guardada (default), así que no pongas `store: false` con este patrón.
-
-```js
-// app/api/_lib/agente.js — Node 20+, fetch nativo. Reusa `tools` y `crearCobro` del bloque de Node.js.
-async function responses(cuerpo, signal) {
-  const r = await fetch("https://api.openai.com/v1/responses", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, "Content-Type": "application/json" },
-    body: JSON.stringify(cuerpo),
-    signal,
-  });
-  if (!r.ok) throw new Error(`OpenAI ${r.status}: ${await r.text()}`);
-  return r.json();
-}
-
-const textoDe = (resp) => resp.output
-  .filter((it) => it.type === "message")
-  .flatMap((it) => it.content ?? [])
-  .filter((c) => c.type === "output_text")
-  .map((c) => c.text)
-  .join("");
-
-export async function atender(mensaje) {
-  const model = process.env.OPENAI_MODEL || "gpt-6.1-sol";
-  const signal = AbortSignal.timeout(15000);
-  let resp = await responses({ model, reasoning: { effort: "low" }, tools, input: mensaje }, signal);
-
-  const salidas = [];
-  for (const item of resp.output) {
-    if (item.type !== "function_call" || item.name !== "crear_cobro") continue;
-    const resultado = await crearCobro(JSON.parse(item.arguments));
-    salidas.push({ type: "function_call_output", call_id: item.call_id, output: JSON.stringify(resultado) });
-  }
-  if (salidas.length) {
-    resp = await responses(
-      { model, reasoning: { effort: "low" }, tools, previous_response_id: resp.id, input: salidas },
-      signal,
-    );
-  }
-  return { texto: textoDe(resp), respuestaId: resp.id };
-}
-```
-
-## K04.16 · Ejemplo (c): voz Realtime en el navegador con llave efímera
-
-Endpoints, cuerpo y pasos según la guía WebRTC [SC10]. El servidor va como Vercel Function en `app/api/realtime-token.js` (stack de AGENTS.md: Node.js ESM, `fetch` nativo) o, si prefieres, en Python (FastAPI); el navegador es el mismo. Los campos `instructions` y `tools` de la sesión y los eventos de herramientas siguen la forma conocida del API GA (⚪ no verificado hoy).
-
-```js
-// app/api/realtime-token.js — Vercel Function (Node.js, ESM). URL: /api/realtime-token
-// ⚪ No verificado hoy: firma estilo Web (export GET -> Response). Si Vercel no la reconoce,
-// usa: export default async function handler(req, res) { ... res.status(200).json(...) }
-export async function GET() {
-  const r = await fetch("https://api.openai.com/v1/realtime/client_secrets", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-      "Content-Type": "application/json",
-      "OpenAI-Safety-Identifier": "demo-usuario-anonimo-1", // estable y anónimo
-    },
-    body: JSON.stringify({
-      session: {
-        type: "realtime",
-        model: "gpt-realtime-2.1",
-        instructions: "Eres Cobri. Habla siempre en español de México, breve y amable.",
-        audio: { output: { voice: "marin" } },
-        tools: [{
-          type: "function",
-          name: "crear_cobro",
-          description: "Crea un cobro en MXN",
-          parameters: {
-            type: "object",
-            properties: { monto: { type: "number" }, concepto: { type: "string" } },
-            required: ["monto", "concepto"],
-          },
-        }],
-      },
-    }),
-  });
-  if (!r.ok) return Response.json({ error: await r.text() }, { status: 500 });
-  const data = await r.json();
-  return Response.json({ value: data.value }, { headers: { "Cache-Control": "no-store" } });
-}
-```
-
-```python
-# main.py — pip install fastapi uvicorn httpx ; uvicorn main:app
-import os
-import httpx
-from fastapi import FastAPI
-from fastapi.responses import JSONResponse
-
-app = FastAPI()
-
-@app.get("/api/realtime-token")
-async def realtime_token():
-    async with httpx.AsyncClient(timeout=10) as http:
-        r = await http.post(
-            "https://api.openai.com/v1/realtime/client_secrets",
-            headers={"Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}"},
-            json={"session": {
-                "type": "realtime",
-                "model": "gpt-realtime-2.1",
-                "instructions": "Eres Cobri. Habla siempre en español de México, breve y amable.",
-                "audio": {"output": {"voice": "marin"}},
-            }},
-        )
-    r.raise_for_status()
-    return JSONResponse({"value": r.json()["value"]}, headers={"Cache-Control": "no-store"})
-```
-
-```js
-// app/js/voz.js — navegador (<script type="module">). Requiere HTTPS (o localhost) y permiso de micrófono.
-// /api/crear-cobro: otra función tuya (app/api/crear-cobro.js) que valida y sólo PREPARA el cobro;
-// el cobro real en Pey (K03) ocurre hasta que la persona confirma en pantalla (AGENTS.md §3).
-export async function iniciarVoz() {
-  const { value: llaveEfimera } = await (await fetch("/api/realtime-token")).json();
-
-  const pc = new RTCPeerConnection();
-  const audio = new Audio();
-  audio.autoplay = true;
-  pc.ontrack = (e) => { audio.srcObject = e.streams[0]; };
-
-  const mic = await navigator.mediaDevices.getUserMedia({ audio: true });
-  pc.addTrack(mic.getTracks()[0]);
-
-  const dc = pc.createDataChannel("oai-events");
-  dc.addEventListener("message", async (e) => {
-    const ev = JSON.parse(e.data);
-    if (ev.type !== "response.done") return; // ⚪ eventos de herramientas: no verificado hoy
-    for (const item of ev.response?.output ?? []) {
-      if (item.type !== "function_call" || item.name !== "crear_cobro") continue;
-      const resultado = await (await fetch("/api/crear-cobro", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: item.arguments, // tu servidor valida monto y concepto
-      })).json();
-      dc.send(JSON.stringify({
-        type: "conversation.item.create",
-        item: { type: "function_call_output", call_id: item.call_id, output: JSON.stringify(resultado) },
-      }));
-      dc.send(JSON.stringify({ type: "response.create" }));
-    }
-  });
-
-  const offer = await pc.createOffer();
-  await pc.setLocalDescription(offer);
-  const sdpResp = await fetch("https://api.openai.com/v1/realtime/calls", {
-    method: "POST",
-    body: offer.sdp,
-    headers: { Authorization: `Bearer ${llaveEfimera}`, "Content-Type": "application/sdp" },
-  });
-  await pc.setRemoteDescription({ type: "answer", sdp: await sdpResp.text() });
-  return { pc, dc, mic };
-}
-```
-
-**Recomendación:** prueba esto hoy en tu celular con la URL de Vercel (HTTPS). Si los eventos de herramienta no llegan como aquí, pasa a `RealtimeAgent` del Agents SDK (K04.9), que maneja las herramientas por ti.
-
-## K04.17 · Qué funciones dan efecto wow en 4 horas
-
-**Recomendación** (ordenadas por impacto entre riesgo):
-
-1. **Cobro por voz en español** (`gpt-realtime-2.1` + herramienta `crear_cobro` + confirmación en pantalla). Impacto alto; 60–90 min si hoy dejas funcionando el token y el WebRTC (K04.16). Ten un campo de texto de respaldo por si falla el audio.
-2. **Foto → cobro:** visión + salida estructurada (ticket o nota escrita a mano → `{monto, concepto}`) → tarjeta de cobro lista. 30–45 min y muy visual.
-3. **Lenguaje natural → JSON validado** (K04.14) como base de todo: "cóbrale 350 a Lupita por los tacos". 20 min.
-4. **Toque de "lo más nuevo":** comprobante ilustrado, sticker o GIF con `gpt-image-2.6-flare`, lanzado el 4 nov [SC30]. 20–30 min; sólo adorno.
-5. **Plugin MCP dentro de ChatGPT** ("cobra sin salir de ChatGPT"): wow alto, pero 1–3 h y depende del modo desarrollador (K04.11). Sólo si sobra tiempo.
-6. **Para el pitch:** nombra lo del DevDay 2026 que sí usaste (GPT-6.1 Sol, Realtime 2.1, GPT-Image-2.6 y Codex Cloud con tareas en paralelo) y muestra el costo por operación. Una extracción con Sol de 500 tokens de entrada y 100 de salida cuesta ≈ US$0.002 más los tokens de razonamiento (cuánto suman: ⚪ no verificado).
-
-Evita en la demo: Agent Builder, Assistants API, `gpt-image-1` y el encabezado beta de Realtime [SC21]. GPT-Live-1, Agents API y Decisions API, sólo si lo básico ya funciona.
-
-## Fuentes
-
-| ID | Título | URL | Consultado |
-|---|---|---|---|
-| SC01 | DevDay 2026 announcements and developer resources (OpenAI Developer Community) | https://community.openai.com/t/devday-2026-announcements-and-developer-resources/1402006 | 2026-11-06 |
-| SC02 | OpenAI DevDay 2026 Recap: Everything Announced and What Developers Should Do (nocode.mba) | https://www.nocode.mba/articles/openai-devday-2026-recap | 2026-11-06 |
-| SC03 | OpenAI DevDay 2026 applications are now open (OpenAI Developer Community) | https://community.openai.com/t/openai-devday-2026-applications-are-now-open/1384509 | 2026-11-06 |
-| SC04 | OpenAI DevDay Exchange 2026 | https://events.openai.com/devdayexchange2026 | 2026-11-06 |
-| SC05 | DevDay Exchange Community Hackathon: Charlotte | https://ushackathons.com/events/devday-exchange-community-hackathon-charlotte | 2026-11-06 |
-| SC06 | Models (OpenAI API docs) | https://developers.openai.com/api/docs/models | 2026-11-06 |
-| SC07 | Pricing (OpenAI API docs) | https://developers.openai.com/api/docs/pricing | 2026-11-06 |
-| SC08 | GPT-6.1 Sol: Features, Benchmarks, Pricing, and Access (DataCamp) | https://www.datacamp.com/blog/gpt-6-1-sol | 2026-11-06 |
-| SC09 | Prompt caching (OpenAI API docs) | https://developers.openai.com/api/docs/guides/prompt-caching | 2026-11-06 |
-| SC10 | WebRTC (OpenAI API docs) | https://developers.openai.com/api/docs/guides/voice-webrtc | 2026-11-06 |
-| SC11 | Build more natural voice experiences with GPT-Live-1 in the API (OpenAI) | https://openai.com/index/introducing-gpt-live-1-in-the-api/ | 2026-11-06 |
-| SC12 | Structured model outputs (OpenAI API docs) | https://developers.openai.com/api/docs/guides/structured-outputs.md | 2026-11-06 |
-| SC13 | Function calling (OpenAI API docs) | https://developers.openai.com/docs/guides/function-calling | 2026-11-06 |
-| SC14 | Streaming responses (OpenAI API docs) | https://developers.openai.com/api/docs/guides/streaming-responses?api-mode=responses | 2026-11-06 |
-| SC15 | Introducing the Agents API and hosted sandboxes (OpenAI Developer Community) | https://community.openai.com/t/introducing-the-agents-api-and-hosted-sandboxes/1396481 | 2026-11-06 |
-| SC16 | Agents API quickstart (OpenAI API docs) | https://developers.openai.com/api/docs/guides/agents-api/quickstart | 2026-11-06 |
-| SC17 | The next evolution of the Agents SDK (OpenAI) | https://openai.com/index/the-next-evolution-of-the-agents-sdk/ | 2026-11-06 |
-| SC18 | OpenAI Agents SDK (JavaScript/TypeScript) README | https://cdn.jsdelivr.net/gh/openai/openai-agents-js@main/README.md | 2026-11-06 |
-| SC19 | OpenAI Agents SDK (Python) docs | https://openai.github.io/openai-agents-python | 2026-11-06 |
-| SC20 | Agent Builder (OpenAI API docs) | https://developers.openai.com/api/docs/guides/agent-builder | 2026-11-06 |
-| SC21 | Deprecations (OpenAI API docs) | https://developers.openai.com/api/docs/deprecations | 2026-11-06 |
-| SC22 | Connect and test your plugin (OpenAI) | https://developers.openai.com/plugins/deploy/connect-chatgpt | 2026-11-06 |
-| SC23 | Plugins Quickstart (OpenAI) | https://developers.openai.com/plugins/quickstart | 2026-11-06 |
-| SC24 | MCP server and UI quickstart (OpenAI) | https://developers.openai.com/apps-sdk/quickstart | 2026-11-06 |
-| SC25 | ChatGPT Developer Mode: Where It Is and How to Turn It On (Carly) | https://www.usecarly.com/blog/chatgpt-developer-mode/ | 2026-11-06 |
-| SC26 | Rate limits (OpenAI API docs) | https://developers.openai.com/api/docs/guides/rate-limits.md | 2026-11-06 |
-| SC27 | OpenAI API Usage Tiers 2026: Free, Build, Launch & Grow (usagebox) | https://usagebox.com/articles/openai-api-usage-tiers-build-launch-grow-2026 | 2026-11-06 |
-| SC28 | OpenAI API Quick Start 2026: account, API key and billing setup (DEV Community) | https://dev.to/abdul_qadir/openai-api-quick-start-2026-account-api-key-and-billing-setup-9b8 | 2026-11-06 |
-| SC29 | Image prompting (OpenAI API docs) | https://developers.openai.com/api/docs/guides/image-prompting | 2026-11-06 |
-| SC30 | GPT Image 2.6: Flare vs Sunburst, Pricing and API Guide (Digital Applied) | https://www.digitalapplied.com/blog/gpt-image-2-6-flare-sunburst-api-guide | 2026-11-06 |
-| SC31 | GPT Realtime 2.1 overview (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/realtime-2 | 2026-11-06 |
-| SC32 | OpenAI rolls out GPT-Realtime-2, Translate and Whisper audio models (FoneArena) | https://www.fonearena.com/blog/482182/openai-gpt-realtime-2-translate-whisper-features.html/amp | 2026-11-06 |
-| SC44 | Codex Pricing (OpenAI; redirige a learn.chatgpt.com/docs/pricing.md) | https://developers.openai.com/codex/pricing.md | 2026-11-06 |
-| SC48 | Authentication (Codex docs; redirige a learn.chatgpt.com/docs/auth) | https://developers.openai.com/codex/auth | 2026-11-06 |
-| SC57 | ChatGPT Connectors (2026): Which Apps Connect and What Each Plan Gets (Justin McKelvey) | https://justinmckelvey.com/blog/chatgpt-connectors | 2026-11-06 |
-| SC59 | How to Connect GitHub to ChatGPT — via MCP (AnythingMCP) | https://anythingmcp.com/guides/connect-github-to-chatgpt | 2026-11-06 |
-| SC64 | OpenAI DevDay 2026: Everything Announced and What It All Means (God of Prompt; el contenido describe el DevDay 2025) | https://godofprompt.ai/blog/openai-devday-2026/ | 2026-11-06 |
-
-## Correcciones de la verificación independiente (2026-11-06)
-
-- TL;DR, viñeta de herramientas. Decía: "Con GPT-6.x las herramientas sólo funcionan en la Responses API". Dice ahora: "Con GPT-6 Astra y GPT-6.1 Sol las herramientas sólo funcionan en la Responses API (la fuente no lo dice de Terra ni de Luna)". Fuente: SC13, que dice textualmente "GPT-6 Astra and GPT-6.1 Sol require the Responses API for tool calling" y no menciona a GPT-6.1 Terra ni a GPT-6 Luna (K04.2 ya lo decía bien).
-- K04.13, créditos en eventos hermanos. Decía: "en Charlotte, cada asistente registrado recibió US$50 en créditos de API y US$100 en créditos de Codex". Dice ahora: "en Charlotte (3 oct 2026), la página ofrecía US$50 en créditos de API y US$100 en créditos de Codex a cada asistente elegible que hiciera check-in". Fuente: SC05 ("$100 in Codex credits and $50 in API credits for eligible checked-in attendees"); la página no confirma que se hayan entregado.
-
-<!-- ===== FIN: conocimiento/04-openai-api-nov-2026.md ===== -->
-
-<!-- ===== INICIO: conocimiento/05-codex-chatgpt-y-codespaces.md ===== -->
-
----
-id: K05
-titulo: "Trabajar 100% en la nube: Codex (web y CLI), ChatGPT + GitHub, Codespaces y Vercel"
-resumen: "Cómo se usa hoy Codex en la nube (entorno, secretos, internet, AGENTS.md, tareas en paralelo, PRs y límites de Plus), Codex CLI en Codespaces, ChatGPT leyendo el repo, previews de Vercel y el flujo recomendado para el sábado; léelo antes de lanzar la primera tarea."
-responde:
-  - "¿Dónde está hoy Codex web y cómo conecto GitHub y creo el entorno?"
-  - "¿Qué ve el agente de Codex: variables, secretos e internet, y en qué fase?"
-  - "¿Cómo lee Codex AGENTS.md (anidados, precedencia, tamaño máximo)?"
-  - "¿Cómo pregunto sin cambiar código, lanzo tareas en paralelo, pido varias versiones y creo el PR?"
-  - "¿Cuánto puedo usar Codex con ChatGPT Plus?"
-  - "¿Cómo instalo y autentico Codex CLI en GitHub Codespaces y uso codex exec?"
-  - "¿Funciona la extensión de Codex para VS Code dentro de Codespaces?"
-  - "¿Cómo hago que ChatGPT web lea mi repo de GitHub y cuándo conviene un MCP propio?"
-  - "¿Cómo funcionan los previews de Vercel por PR y el puerto público de Codespaces para webhooks?"
-  - "¿Cómo escribo buenas tareas para Codex y cuál es el flujo del sábado?"
-actualizado: 2026-11-07
-confianza: media
-fuentes: [SC01, SC02, SC22, SC25, SC33, SC34, SC35, SC36, SC37, SC38, SC39, SC40, SC41, SC42, SC43, SC44, SC45, SC46, SC47, SC48, SC49, SC50, SC51, SC52, SC53, SC54, SC55, SC56, SC57, SC58, SC59, SC60, SC61, SC62, SC63, SC65, SC66]
----
-
-# K05 · Codex, ChatGPT y Codespaces: flujo 100% en la nube
-
-## TL;DR
-
-- Codex en la nube vive dentro de ChatGPT: "Work in" › "Cloud" › "Select environment" › "Create environment"; el entorno debe estar publicado ("Environment published") antes de lanzar tareas [SC34, SC37].
-- Con Plus, mensajes locales y tareas cloud comparten la bolsa de 5 horas (GPT-6.1 Sol: 15–160 mensajes); una tarea cloud gasta más; cada tarea corre en una VM de 2 vCPU y 8 GiB. Tablero: chatgpt.com/codex/settings/usage [SC44, SC34].
-- En la experiencia nueva los secretos son "HTTP secrets": el programa ve un placeholder y el proxy pone el valor real sólo hacia dominios HTTPS permitidos; en Legacy, los secretos sólo existen durante el setup [SC34, SC35].
-- AGENTS.md: uno por carpeta, de la raíz a la carpeta de trabajo; el más cercano prevalece; tope combinado de 32 KiB [SC43].
-- Codespaces: `npm install -g @openai/codex` y `codex login --device-auth` (antes activa "Device code authorization" en Settings › Security de ChatGPT). La extensión de VS Code falla al iniciar sesión en Codespaces (issue #6403): usa la terminal [SC50, SC49, SC53].
-- Vercel comenta en cada PR su URL de preview; los cambios de variables sólo aplican tras un redeploy [SC60, SC61].
-
-## K05.1 · Qué es hoy "Codex web": experiencia nueva vs. Legacy
-
-- **9 jul 2026:** la app de escritorio de Codex se fusionó con la de ChatGPT, con pestañas Chat, Work y Codex [SC47, SC63].
-- **29 sep 2026 (DevDay):** relanzamiento de Codex Cloud: las tareas siguen con la laptop cerrada y se revisan desde web, celular o escritorio; cada tarea tiene su propio espacio de trabajo [SC33, SC02]. Está en Plus, Pro, Business, Enterprise, Edu y Healthcare [SC02]; no en Free ni Go [SC37].
-- **Cómo entrar (experiencia nueva):** en ChatGPT web o escritorio, "Work in" › "Cloud" › "Select environment"; o Settings › Codex Cloud › Environments [SC34]. Un tutorial del 11 oct entra por el menú de tres puntos de la barra lateral › "Codex" [SC39]; otro del 30 sep arranca en chatgpt.com/codex [SC40].
-- **Codex Cloud (Legacy):** entornos en chatgpt.com/codex/settings/environments; todavía da servicio a Code Review y a las integraciones con GitHub y Linear. OpenAI planea deprecarlo, sin fecha publicada [SC35, SC34].
-- **Uso y límites:** chatgpt.com/codex/settings/usage [SC44].
-- **Cambios en curso:** desde diciembre, Plus, Pro y Business comparten una sola bolsa entre ChatGPT y Codex; un grupo pequeño prueba la fusión de Chat y Work [SC46].
-- Las etiquetas de este archivo van en inglés; si tu ChatGPT está en español pueden verse traducidas (⚪ no verificado).
-
-**Recomendación:** hoy en la noche abre chatgpt.com/codex y anota qué interfaz ves (nueva o Legacy) y dónde se eligen entorno y rama. Si difiere de lo que dice `dia-del-evento/PROMPTS-CODEX.md`, corrígelo ahí antes de dormir.
-
-## K05.2 · Conectar GitHub y crear el entorno
-
-Experiencia nueva:
-1. "Work in" › "Cloud" › "Select environment" › "Create environment" [SC34].
-2. Elige los repos; si lo pide, conecta GitHub. Sólo github.com: ni GitLab ni GitHub Enterprise Server [SC37]. Según una guía de terceros, la GitHub App se llama "ChatGPT Codex Connector" [SC56].
-3. "Get started": Codex revisa el repo, instala dependencias y herramientas y prueba el flujo; te pregunta lo que falte [SC34].
-4. Revisa el reporte de setup, la configuración y los archivos; guarda y selecciona "Publish"; espera "Environment published" [SC34]. Con la etiqueta "Unpublished" no se pueden lanzar tareas [SC37].
-5. "Start a new task" [SC34]. Para cambiar el entorno: menú "..." › "Edit" › "Republish" [SC38].
-
-- **Privacidad:** "Privacy" › "Who can use" ("Only me" o tu workspace) [SC34].
-- **Recursos en Plus:** 2 vCPU, 8 GiB de RAM y 8 GiB de disco por tarea [SC34].
-- **Estado guardado:** archivos, cambios sin commit y herramientas de una tarea se recuperan hasta 7 días después del último turno; no sustituye a git [SC34].
-- **Legacy** [SC35]: entornos en chatgpt.com/codex/settings/environments; instala dependencias solo si usas npm, yarn, pnpm, pip, pipenv o poetry; imagen base `universal`; "Set package versions" fija versiones de runtime.
-
-**Recomendación:** crea y publica el entorno HOY, con el repo ya en GitHub, para que el sábado sólo lances tareas. Como `app/` estará vacío, díselo en el setup: "Node 22; las pruebas se correrán con `npm test --prefix app`".
-
-## K05.3 · Install script, variables y secretos: qué ve el agente y cuándo
-
-**Experiencia nueva** [SC34, SC38]:
-- "Install script": comandos que instalan dependencias; Codex puede grabar el setup que ya probó.
-- "Start skill": instrucciones para arrancar servicios y comprobar que están listos.
-- "Environment variables": se pasan directo a los programas; la doc no detalla por fase (⚪ no verificado).
-- "HTTP secrets" (o "network secret"): el programa ve un placeholder y el proxy pone el valor real sólo en peticiones HTTPS (puerto 443) a dominios permitidos, tanto en setup como en tareas. Guardar uno agrega su dominio a la lista permitida [SC34]. Campos "Key", "Value" y "Allowed domains"; el "Personal vault" está en Settings › Codex Cloud [SC38].
-
-**Legacy** [SC35]:
-- El setup script corre en otra sesión de Bash: un `export` no llega al agente (usa `~/.bashrc` o variables del entorno).
-- El "maintenance script" corre al reanudar un contenedor en caché; la caché dura hasta 12 horas.
-- Variables: viven en el setup y en la fase del agente. Secrets: sólo en el setup; se borran antes de la fase del agente.
-- Cambiar scripts, variables o secretos invalida la caché; existe "Reset cache".
-
-**Recomendación:** el repo es público: ninguna llave en archivos ni en AGENTS.md. Las pruebas usan `fetch` simulado (AGENTS.md), así que Codex no necesita llaves reales. Si una tarea de verdad debe llamar a OpenAI o a Pey, usa HTTP secrets con el dominio exacto (`api.openai.com`; el de Pey según K03).
-
-## K05.4 · Internet del agente y dominios permitidos
-
-**Experiencia nueva** [SC34]:
-- "Enable all public internet access": acceso total; desactiva los controles finos.
-- "Enable package manager domains": lista preestablecida (npm, PyPI, Rust, Go, Maven/Gradle, apt, GitHub y otros).
-- "Additional allowed domains": hosts específicos; cada subdominio va aparte (el dominio raíz incluye `www`).
-- La doc no dice los valores por defecto (⚪ no verificado). Tutoriales de terceros muestran otras etiquetas: "Allow Codex to access internet" y, en "Allow domains", "Package managers", "Custom domains only" o "All (unrestricted)" [SC37, SC38].
-- La VPN (Tailscale) es independiente del internet público [SC34].
-
-**Legacy** [SC36]: el agente no tiene internet por defecto (el setup sí); opciones "Off" y "On"; listas "None", "Common dependencies" y "All (unrestricted)"; se recomienda permitir sólo GET, HEAD y OPTIONS.
-
-**Riesgos** [SC36]: prompt injection desde contenido web, fuga de código o secretos, dependencias maliciosas y problemas de licencia. El ejemplo oficial es un issue de GitHub con instrucciones ocultas que mandan el último commit a un servidor externo.
-
-**Recomendación:** activa sólo package managers más los dominios exactos que la tarea necesite (por ejemplo, la documentación de OpenAI y la de Pey). Nunca "All". Como el repo es público, no le pidas a Codex leer issues ni PRs de desconocidos.
-
-## K05.5 · AGENTS.md: cómo lo lee Codex
-
-[SC43]
-- Codex lee los AGENTS.md antes de trabajar y arma la cadena una vez por ejecución.
-- **Global:** en `~/.codex` usa `AGENTS.override.md` o, si no existe, `AGENTS.md` (el primero que no esté vacío).
-- **Proyecto:** recorre de la raíz (normalmente la raíz de git) hasta la carpeta actual. En cada carpeta busca `AGENTS.override.md`, luego `AGENTS.md`, luego los nombres de `project_doc_fallback_filenames`, y toma como máximo uno.
-- **Precedencia:** se concatenan de la raíz hacia abajo; los más cercanos quedan al final y prevalecen. Los vacíos se ignoran.
-- **Tamaño:** tope combinado de 32 KiB (`project_doc_max_bytes`); al llegar, deja de agregar archivos. Se arregla subiendo el límite o repartiendo instrucciones en carpetas.
-- **Verificar (CLI):** `codex --ask-for-approval never "Summarize the current instructions."` desde la raíz.
-- Si las mismas reglas aplican en tareas cloud: la página no lo dice (⚪ no verificado).
-
-**Recomendación:** mantén el `AGENTS.md` raíz por debajo de 16 KB (lo revisa `scripts/verificar_conocimiento.py`) y que apunte a `conocimiento/INDICE.md` en lugar de copiar la base. Si `app/` necesita reglas propias, un `app/AGENTS.md` corto. En la primera tarea pide "resume las instrucciones que leíste" para confirmar que se cargó.
-
-## K05.6 · Preguntar vs. codificar, tareas en paralelo y varias versiones
-
-- **En paralelo:** varias tareas pueden partir del mismo entorno publicado, cada una con su propio estado; la doc no publica un tope [SC34] (⚪ no verificado).
-- **Preguntar vs. codificar:** la doc de la experiencia nueva no describe botones "Ask" y "Code"; su maqueta muestra un cuadro "Do anything" y la etiqueta "Approve for me", sin explicarlos [SC33]. Que la interfaz anterior tenga "Ask" y "Code": ⚪ no verificado hoy.
-- **Varias versiones:** en la CLI, `codex cloud exec --env ENV_ID --attempts 3 "…"` pide de 1 a 4 intentos (best-of-N); el subcomando se describe como experimental [SC41, SC40]. Según terceros, la web muestra los intentos lado a lado y no los califica: tú eliges [SC41]. Selector de versiones en la web: ⚪ no verificado.
-- **Costo:** una tarea cloud puede gastar más de la bolsa que un mensaje local [SC44]; pedir varias versiones probablemente multiplica el gasto (⚪ no verificado).
-
-**Recomendación:** para preguntar sin cambios, empieza el prompt con "Solo lee y responde; no modifiques archivos ni abras PR". En paralelo, sólo tareas que tocan archivos distintos (tabla de dueños en `dia-del-evento/PROMPTS-CODEX.md`). Una versión por tarea, salvo la de interfaz si te sobra límite.
-
-## K05.7 · Revisar, dar seguimiento y crear el PR
-
-- Al terminar una tarea revisas cambios y resultados de pruebas, pides ajustes en la misma tarea y haces commit o abres un PR desde ella [SC33]. El PR se puede crear sin bajar los cambios a tu máquina [SC42].
-- **Botón del PR:** nombre exacto ⚪ no verificado. Alternativa de un tutorial: escribir en la tarea "create a pr" y abrir el enlace que devuelve [SC39].
-- **Seguimiento:** la misma tarea conserva archivos, cambios sin commit y herramientas instaladas [SC34]. En una tarea nueva, vuelve a plantear el problema completo [SC39].
-- **Qué revisar:** que los archivos cambiados correspondan a lo pedido y que las pruebas cubran el problema [SC39].
-- **Merge:** es una acción aparte, en GitHub [SC39].
-- **Desde la terminal:** `codex apply TASK_ID` aplica el diff de una tarea cloud con `git apply` y falla si hay conflictos [SC42].
-- Si un seguimiento actualiza el mismo PR o abre otro: ⚪ no verificado.
-
-**Recomendación:** en cada prompt pide el título del PR y la plantilla de descripción de AGENTS.md (Qué cambió · Cómo probarlo · Variables nuevas · Pendientes ⚪ · IDs). Fusiona con "Squash and merge" sólo después de probar el preview.
-
-## K05.8 · Code Review de Codex en PRs
-
-- **DevDay 2026:** Code Review suma resúmenes, diffs y preguntas en la interfaz de revisión, y las revisiones automáticas pueden correr en la nube [SC01]; en la app de escritorio permite revisar antes de comentar en PRs de GitHub [SC02].
-- La revisión en GitHub todavía usa los entornos Legacy [SC35]. Sólo las revisiones hechas en GitHub cuentan como uso de Code Review; las locales cuentan contra tu límite general [SC44].
-- Según un tercero, la auto-revisión revisa PRs nuevos en los repos donde está habilitada [SC55].
-- Cómo se activa (pantalla, interruptor por repo) y si basta mencionar a Codex en un comentario del PR: ⚪ no verificado.
-
-**Recomendación:** no dependas de esto el sábado; la revisión de 3 minutos de `dia-del-evento/PROMPTS-CODEX.md` (sección 4) más el preview bastan. Si quieres presumirlo, pruébalo hoy en un PR de prueba y anota los pasos reales.
-
-## K05.9 · Límites de uso con ChatGPT Plus
-
-[SC44]
-- Plus incluye Codex en web (cloud), CLI, extensión del IDE, iOS y app de escritorio.
-- **Mensajes locales por 5 horas** (estimaciones, no límites fijos): GPT-6 Astra 5–45; GPT-6.1 Sol 15–160; GPT-6.1 Terra 35–285; GPT-6 Sol 15–150; GPT-6 Luna 350–3,000.
-- Las tareas cloud comparten esa bolsa y pueden gastar más; también puede haber límites semanales.
-- **Al llegar al límite:** el turno en curso puede terminar; después compras créditos o usas una API key a tarifa de API.
-- **Créditos en Plus:** GPT-6.1 Sol consume 50 créditos por 1M de tokens de entrada y 250 por 1M de salida.
-- La ventana de 5 horas aplica a Plus desde el 25 ago 2026 [SC45]. Desde diciembre la bolsa se comparte con ChatGPT [SC46].
-- **Tablero:** chatgpt.com/codex/settings/usage.
-
-**Recomendación:** en Codex usa GPT-6.1 Sol (o Terra para tareas mecánicas) y deja Astra para una o dos tareas difíciles. Revisa el tablero antes de cada oleada; si va bajo, sigue el orden de `dia-del-evento/PROMPTS-CODEX.md` (primero las tareas 2 y 3). Ten la API key lista como respaldo (K05.10).
-
-## K05.10 · Codex CLI en GitHub Codespaces: instalar y entrar
-
-- **Devcontainer del repo:** `.devcontainer/devcontainer.json` usa la imagen de Node 22, instala `@openai/codex` y `vercel` al crear el Codespace y declara los secretos `OPENAI_API_KEY` y `PEY_API_KEY` (dato del archivo del repo; ⚪ no lo probé en un Codespace).
-- **Instalar a mano:** `npm install -g @openai/codex` [SC50].
-- **Login sin navegador local:** `codex login --device-auth` muestra un enlace (auth.openai.com/codex/device) y un código de un solo uso que dura unos 15 minutos [SC49]. Antes activa en ChatGPT › Settings › Security el interruptor "Device code authorization"; en workspaces administrados lo activa el admin [SC49]. El issue #6403 confirma ese requisito [SC53].
-- **Alternativa:** API key con `CODEX_API_KEY` o `codex login --with-api-key`; se cobra a tu saldo de API, no a Plus [SC52, SC48].
-- **Credenciales:** quedan en `~/.codex/auth.json` (texto plano) o en el llavero del sistema, según `cli_auth_credentials_store` [SC48]. Están fuera del repo: no las copies a él.
-- **Probar:** `codex "list the files in the current directory"` [SC49].
-- **Versión:** el devcontainer anota `@openai/codex` 0.167.0 en npm el 6 nov; una guía de terceros documenta la 0.166.0 [SC52].
-
-```bash
-npm install -g @openai/codex    # el devcontainer de este repo ya lo hace
-codex --version
-codex login --device-auth       # abre el enlace en otra pestaña y escribe el código
-codex "Resume en 5 viñetas qué hay en conocimiento/INDICE.md"
-```
-
-## K05.11 · `codex exec` y tareas cloud desde la terminal
-
-- `codex exec "tarea"` corre sin interacción: "By default, `codex exec` runs in a read-only sandbox." [SC51]
-- **Para editar:** `--sandbox workspace-write`, o `--approve-for-me` (las aprobaciones pasan por revisión automática con ese sandbox). `--full-auto` ya no existe. `--sandbox danger-full-access` sólo en contenedores aislados [SC51].
-- **Salida:** el progreso va a stderr y el mensaje final a stdout. `--json` da eventos JSONL (`thread.started`, `turn.completed`, `turn.failed`, `item.*`, `error`); `-o archivo` guarda el mensaje final; `--output-schema schema.json` obliga a cumplir un JSON Schema [SC51].
-- **Retomar:** `codex exec resume --last "…"` [SC51].
-- **API key sólo para esa ejecución:** `CODEX_API_KEY=… codex exec --json "…"`; no la pongas como variable de todo el job en workflows que corren código del repo [SC51].
-- `--skip-git-repo-check` sólo si el entorno es seguro. En GitHub Actions se recomienda `openai/codex-action@v1` [SC51].
-- **Cloud desde la CLI (experimental):** `codex cloud exec --env ENV_ID --attempts 2 "…"`, `codex cloud list --env ENV_ID --json`, `codex cloud diff TASK_ID` y `codex apply TASK_ID` [SC41, SC42].
-
-```bash
-# Revisión de solo lectura del código ya bajado en el Codespace
-codex exec "Revisa app/api/ contra AGENTS.md y lista riesgos de seguridad" -o revision.md
-
-# Arreglo con permiso de escritura dentro del workspace
-codex exec --sandbox workspace-write "Haz que npm test --prefix app pase sin tocar app/js/contrato.js"
-```
-
-## K05.12 · Extensión de Codex para VS Code en Codespaces (issue #6403)
-
-- **Título del issue:** "Unable to complete OAuth login for Codex extension when using github.dev / Codespaces" [SC53].
-- **Síntoma:** tras iniciar sesión, el navegador redirige a `localhost:1455`, que el entorno remoto no alcanza. Con varios contenedores el puerto se remapea (por ejemplo, a 1456) y el callback falla. Hay reportes de que la versión 0.4.50 se queda cargando en Codespaces [SC53].
-- **Salidas reportadas:** `codex login --device-auth` en la terminal y recargar el workspace (a unos les funcionó al recargar, a otros hasta reiniciar); habilitar antes el código de dispositivo; reenviar el puerto 1455; usar API key [SC53].
-- En un issue parecido (#5673, Remote-SSH) un mantenedor remitió al login por código de dispositivo [SC54].
-- **Estado actual (abierto o cerrado):** ⚪ no verificado: la página no lo mostró y la API de GitHub no estaba disponible desde esta sesión.
-
-**Recomendación:** no dependas de la extensión. Usa la CLI en la terminal del Codespace; si quieres el panel, haz primero el device auth en la terminal y luego recarga la ventana.
-
-## K05.13 · ChatGPT web + GitHub: plugin de GitHub
-
-- **Nombres:** desde el 9 jul 2026 los conectores se llaman "apps" y viven dentro de plugins (Plugin Directory) [SC57]; por eso la ruta vieja Settings › Connectors ya no existe [SC25].
-- **Conectar** (guía de terceros, 1 nov): Settings › Plugins › GitHub → iniciar sesión → instalar la GitHub App "ChatGPT Codex Connector" en tu cuenta u organización y elegir repos. Los repos tardan unos 5 minutos en aparecer, más en el índice de búsqueda de GitHub [SC56].
-- **Qué hace:** busca y lee código, READMEs y docs de los repos permitidos con consultas a GitHub, sin copia sincronizada. No crea issues, ramas ni PRs: para eso está Codex [SC56, SC55].
-- **Modos:** chat, deep research o agente/Work, según plan y cuenta [SC56].
-- **Plan:** un tercero dice que el lector llegó primero a Plus, Pro y Team [SC55]; otro dice que OpenAI no publica la lista [SC56] (⚪ no verificado en fuente oficial).
-
-**Recomendación:** pruébalo hoy con una pregunta que sólo se responda leyendo `conocimiento/INDICE.md`. Como depende del índice de búsqueda de GitHub, lo recién subido puede tardar: si ChatGPT no encuentra un archivo, pega su texto o adjunta el `TODO-EN-UNO.md` que menciona el índice.
-
-## K05.14 · Servidores MCP propios y modo desarrollador en Plus
-
-- **Agregar un servidor (doc oficial):** chatgpt.com/plugins → "+" → "Add custom MCP server" → nombre y URL con `/mcp` (o "Tunnel") → autenticación → "I understand and want to continue" → "Create as a plugin" → revisar herramientas → instalar → chat nuevo → `@` [SC22].
-- **Requisito:** endpoint HTTPS público con streamable HTTP, o un Secure MCP Tunnel [SC22].
-- **Modo desarrollador:** según un tercero (1 oct), Settings › Security and login › "Developer mode"; si en Plugins › "Add" aparece "Create MCP App", ya está activo; sólo en web; Plus, Pro, Business, Enterprise y Edu, no Free [SC25]. Otro tercero dice que ya no hace falta [SC59]. La doc oficial no lo menciona (⚪ no verificado).
-- **Autenticación y escrituras:** OAuth, sin autenticación o mixta. Las herramientas que no estén marcadas como de sólo lectura piden confirmación; puedes aprobarlas para el resto de la conversación [SC25]. OpenAI lo describe como "powerful but dangerous" [SC25].
-
-**Recomendación:** para que ChatGPT lea el repo no necesitas MCP: basta el plugin de GitHub (K05.13). Un MCP propio sólo si el producto se demuestra dentro de ChatGPT (K04.11).
-
-## K05.15 · Servidor MCP remoto oficial de GitHub
-
-- **URL:** `https://api.githubcopilot.com/mcp/` (variante insiders: `/mcp/insiders`) [SC58].
-- **Autenticación:** OAuth (cada host debe configurar su GitHub App u OAuth App) o un PAT en el encabezado `Authorization: Bearer …` [SC58].
-- **Herramientas por defecto:** context, repos, issues, pull_requests y users [SC58].
-- **Hosts con guía de instalación:** VS Code, Copilot CLI, Claude, Codex, Cursor, Windsurf, Zed y otros; ChatGPT no aparece [SC58].
-- **Con ChatGPT:** ChatGPT ofrece OAuth, sin autenticación o mixta, sin un campo documentado para un encabezado Bearer [SC25], así que la conexión directa queda ⚪ no verificada. Un intermediario (AnythingMCP) la hace guardando un PAT y exponiendo OAuth; apaga por defecto cuatro herramientas de escritura: merge, push, crear o actualizar archivo y borrar archivo [SC59].
-
-**Recomendación:** mañana no lo uses en ChatGPT. Si necesitas que Codex CLI consulte issues o PRs, configúralo en Codex con un PAT fine-grained de sólo lectura (⚪ no verifiqué los pasos en Codex).
-
-## K05.16 · Vercel + GitHub: previews por PR y variables
-
-[SC60, SC61]
-- Vercel despliega cada push por defecto, incluidas las ramas de PR. El último push de cada PR recibe una URL de preview única que Vercel publica como comentario en el PR.
-- Push o merge a la rama de producción (normalmente `main`) actualiza los dominios de producción; revertir restaura al instante el deploy anterior.
-- Los PRs desde forks piden autorización (protege variables). Para importar un repo personal debes ser Owner.
-- **Variables por entorno:** Production, Preview (todas las ramas que no son de producción, o una rama específica que sobrescribe) y Development (`vercel env pull`). Tipos: Config o Secret; un Secret ya no se puede leer después de guardarlo.
-- **Los cambios a variables sólo aplican a deploys nuevos:** haz Redeploy.
-- Tope de 64 KB de variables por deploy. Variables de sistema útiles: `VERCEL_GIT_PULL_REQUEST_ID` y `VERCEL_GIT_COMMIT_REF`.
-- **Funciones sin framework (verificado el 7-nov):** cada archivo de `api/` es una función; se escribe `export function GET(request) { return new Response(...) }` y el `package.json` necesita `"type": "module"` (o archivos `.mjs`) [SC65]. Vercel no convierte en función los **archivos** de `api/` que empiezan con `_` o `.` o terminan en `.d.ts`, y recomienda poner el código compartido **fuera** de `api/` e importarlo desde la función [SC66]. Por eso el código compartido de la app vive en `app/lib/`.
-- ⚪ No verificado hoy: el ajuste "Root Directory = `app`"; que los previews pidan sesión de Vercel.
-
-**Recomendación:** antes del primer PR carga en Production y Preview las variables de `.env.example` (`OPENAI_API_KEY`, `OPENAI_MODEL`, `PEY_API_KEY`, `PEY_WEBHOOK_SECRET`, `MAX_MONTO_MXN`, `MODO_PAGO`; la tabla por entorno está en `dia-del-evento/CHECKLIST.md`), con las llaves como Secret. Abre un preview en incógnito para ver si pide sesión; la demo, en la URL de producción.
-
-## K05.17 · Codespaces: puerto público para webhooks
-
-[SC62]
-- Pestaña PORTS → "Add port" → número. El devcontainer de este repo ya reenvía el 3000.
-- **Hacerlo público:** clic derecho en el puerto → "Port Visibility" → "Public". "Private to Organization" requiere GitHub Team o Enterprise Cloud.
-- **URL:** `https://CODESPACENAME-PORT.app.github.dev`.
-- **Por defecto es privado:** para entrar a un puerto privado se necesita el `GITHUB_TOKEN` (encabezado `X-Github-Token`); los públicos no piden autenticación. El token cambia al reiniciar el Codespace.
-- **CLI:** `gh codespace ports visibility 3000:public` (acepta varios: `80:private 3000:public`).
-- Cambiar un puerto público a HTTPS lo vuelve privado.
-- **Riesgo:** "anyone who knows the URL and port number can view the running application".
-- Si la visibilidad se reinicia al detener el Codespace: ⚪ no verificado.
-
-**Recomendación:** úsalo sólo como plan B para webhooks de Pey (verifica la firma, K03) y regresa el puerto a privado al terminar. En la demo usa el dominio de producción de Vercel: si el Codespace se suspende, deja de recibir webhooks (⚪ no verificado).
-
-## K05.18 · Cómo escribir tareas para Codex
-
-**Recomendación** (práctica propia, apoyada en las fuentes citadas):
-- **Tamaño:** una tarea = un resultado verificable, pocos archivos y dueños claros (tabla de `dia-del-evento/PROMPTS-CODEX.md`). Si el PR no se revisa en 3 minutos, pártela.
-- **Contexto con rutas:** qué leer (`AGENTS.md`, `conocimiento/INDICE.md` y la sección exacta, como `K04.15`), qué crear o editar y qué no tocar.
-- **Criterios de aceptación verificables:** comandos y resultados esperados (`npm test --prefix app` pasa; monto 0 responde 400).
-- **Pruebas:** pide pruebas nuevas con `fetch` simulado y que el registro muestre su salida; Codex reporta resultados de pruebas al terminar [SC33]; revisa que cubran el problema [SC39].
-- **Escribe como si fuera local:** describe la tarea igual que en tu máquina [SC37]; en una tarea nueva da otra vez el contexto completo [SC39].
-- **Sin datos inventados:** si falta un dato, `TODO(⚪)` visible (AGENTS.md).
-- **Entrega:** título del PR y plantilla de descripción.
-
-```text
-Objetivo: [una frase con el resultado visible]
-Lee: AGENTS.md, conocimiento/INDICE.md y conocimiento/04-openai-api-nov-2026.md (K04.15).
-Crea o edita SOLO: app/api/agente.js, app/api/_lib/agente.js, app/tests/agente.test.js
-No toques: app/js/contrato.js, app/api/_lib/config.js, conocimiento/
-Criterios de aceptación:
-- [ ] POST /api/agente con {"mensaje":"cóbrale 20 a Ana por pan"} PROPONE {monto: 20, concepto: "pan"} sin cobrar
-- [ ] Monto <= 0 o > MAX_MONTO_MXN responde 400 con mensaje en español
-- [ ] npm test --prefix app pasa (fetch simulado; cero llamadas reales)
-Entrega: PR "[T3] Agente con Responses API" con Qué cambió · Cómo probarlo · Variables nuevas · Pendientes ⚪ · IDs usados.
-```
-
-## K05.19 · Flujo recomendado para el sábado
-
-**Recomendación** (alineado con `dia-del-evento/PROMPTS-CODEX.md`; los horarios finos van en el runbook del día):
-
-- **Hoy en la noche:** API key con saldo (K04.13); entorno de Codex creado y publicado (K05.2); plugin de GitHub conectado en ChatGPT (K05.13); "Device code authorization" activado (K05.10); Vercel ligado al repo con variables cargadas (K05.16); un Codespace creado una vez.
-
-1. **ChatGPT → PRD (T+0:00 a 0:20):** con el plugin de GitHub leyendo `conocimiento/`, pide un PRD de una página (problema, persona, demo de 3 pasos, fuera de alcance) con la plantilla de `plantillas/` y guárdalo como `docs/PRD.md`.
-2. **PRD → tareas:** pide a ChatGPT llenar los marcadores de los prompts de `dia-del-evento/PROMPTS-CODEX.md` con el PRD.
-3. **Codex:** Tarea 0 (sólo lectura) como prueba de humo; Tarea 1 sola (esqueleto, modo SIMULACIÓN y primer deploy); al fusionarla, tareas 2 a 5 en paralelo.
-4. **PR → preview:** en cada PR, Vercel comenta la URL; prueba en el celular con los pasos del PR; si falla, seguimiento en la misma tarea (K05.7).
-5. **Merge:** "Squash and merge"; espera el deploy de producción y prueba la demo completa.
-6. **Oleada 3:** tareas 6 a 8 (pruebas de punta a punta, pulido y deck).
-7. **Congelar:** la última hora sin funciones nuevas; ensaya en la URL de producción y graba un video de respaldo.
-
-- **Plan B:** si Codex web falla o se acaba el límite, Codespace + Codex CLI (`codex exec --sandbox workspace-write`, K05.11) o API key [SC44, SC51].
-
-## Fuentes
-
-| ID | Título | URL | Consultado |
-|---|---|---|---|
-| SC01 | DevDay 2026 announcements and developer resources (OpenAI Developer Community) | https://community.openai.com/t/devday-2026-announcements-and-developer-resources/1402006 | 2026-11-06 |
-| SC02 | OpenAI DevDay 2026 Recap: Everything Announced and What Developers Should Do (nocode.mba) | https://www.nocode.mba/articles/openai-devday-2026-recap | 2026-11-06 |
-| SC22 | Connect and test your plugin (OpenAI) | https://developers.openai.com/plugins/deploy/connect-chatgpt | 2026-11-06 |
-| SC25 | ChatGPT Developer Mode: Where It Is and How to Turn It On (Carly) | https://www.usecarly.com/blog/chatgpt-developer-mode/ | 2026-11-06 |
-| SC33 | Codex Cloud (learn.chatgpt.com) | https://learn.chatgpt.com/docs/cloud | 2026-11-06 |
-| SC34 | Cloud environments (learn.chatgpt.com) | https://learn.chatgpt.com/docs/environments/cloud-environments | 2026-11-06 |
-| SC35 | Codex Cloud (Legacy) (learn.chatgpt.com) | https://learn.chatgpt.com/docs/environments/cloud-environment | 2026-11-06 |
-| SC36 | Codex Cloud (Legacy): internet access (learn.chatgpt.com) | https://learn.chatgpt.com/docs/cloud/internet-access | 2026-11-06 |
-| SC37 | How to use Codex Cloud (Flavio Copes) | https://flaviocopes.com/codex-cloud/ | 2026-11-06 |
-| SC38 | How to Use Codex Cloud Reusable Environments (Developers Digest) | https://www.developersdigest.tech/blog/codex-cloud-reusable-environments | 2026-11-06 |
-| SC39 | Codex Cloud Tutorial: Setup, GitHub & Your First PR (proflead) | https://proflead.dev/posts/codex-cloud-tutorial/ | 2026-11-06 |
-| SC40 | Codex Cloud (2026): How It Works, Limits, Always-On Options (Agent37) | https://www.agent37.com/blog/codex-cloud | 2026-11-06 |
-| SC41 | Codex Cloud Exec Best-of-N: Running Multiple Solution Attempts (Daniel Vaughan) | https://codex.danielvaughan.com/2026/04/01/codex-cloud-exec-best-of-n-attempts/ | 2026-11-06 |
-| SC42 | Codex Cloud Task Application: From Slack Dispatch to Reviewed Diff Merge (Daniel Vaughan) | https://codex.danielvaughan.com/2026/04/08/codex-cloud-task-application/ | 2026-11-06 |
-| SC43 | Custom instructions with AGENTS.md (learn.chatgpt.com) | https://learn.chatgpt.com/docs/agent-configuration/agents-md | 2026-11-06 |
-| SC44 | Codex Pricing (OpenAI; redirige a learn.chatgpt.com/docs/pricing.md) | https://developers.openai.com/codex/pricing.md | 2026-11-06 |
-| SC45 | OpenAI Codex Pricing 2026 (Morph) | https://www.morphllm.com/codex-pricing | 2026-11-06 |
-| SC46 | ChatGPT Work Tab Merges Into Chat as Codex Shares Usage Limits (ShiftDelete) | https://shiftdelete.net/en/chatgpt-work | 2026-11-06 |
-| SC47 | Codex Is Now in ChatGPT: What Changed (Headroom) | https://extraheadroom.com/codex-in-chatgpt | 2026-11-06 |
-| SC48 | Authentication (Codex docs; redirige a learn.chatgpt.com/docs/auth) | https://developers.openai.com/codex/auth | 2026-11-06 |
-| SC49 | Codex device code auth and ChatGPT security (Luca Berton) | https://lucaberton.com/blog/codex-device-code-auth-chatgpt-security-2026/ | 2026-11-06 |
-| SC50 | openai/codex (README en GitHub) | https://github.com/openai/codex | 2026-11-06 |
-| SC51 | Non-interactive mode (Codex docs; redirige a learn.chatgpt.com/docs/non-interactive-mode) | https://developers.openai.com/codex/noninteractive | 2026-11-06 |
-| SC52 | Codex CLI Guide 2026: Setup, Sandbox, AGENTS.md & MCP (Blake Crosley) | https://blakecrosley.com/guides/codex | 2026-11-06 |
-| SC53 | Issue #6403: OAuth login de la extensión de Codex en github.dev / Codespaces | https://github.com/openai/codex/issues/6403 | 2026-11-06 |
-| SC54 | Issue #5673: cannot complete authentication with "sign in with chatgpt" | https://github.com/openai/codex/issues/5673 | 2026-11-06 |
-| SC55 | ChatGPT + GitHub: What the Integration Can (and Can't) Do in 2026 (Carly) | https://www.usecarly.com/blog/chatgpt-github-integration/ | 2026-11-06 |
-| SC56 | ChatGPT GitHub app: how to connect GitHub to ChatGPT (Upsy) | https://upsy.ai/guides/chatgpt/github | 2026-11-06 |
-| SC57 | ChatGPT Connectors (2026): Which Apps Connect and What Each Plan Gets (Justin McKelvey) | https://justinmckelvey.com/blog/chatgpt-connectors | 2026-11-06 |
-| SC58 | github/github-mcp-server (README) | https://github.com/github/github-mcp-server | 2026-11-06 |
-| SC59 | How to Connect GitHub to ChatGPT — via MCP (AnythingMCP) | https://anythingmcp.com/guides/connect-github-to-chatgpt | 2026-11-06 |
-| SC60 | Deploying GitHub Projects with Vercel | https://vercel.com/docs/git/vercel-for-github | 2026-11-06 |
-| SC61 | Environment variables (Vercel) | https://vercel.com/docs/environment-variables.md | 2026-11-06 |
-| SC62 | Forwarding ports in your codespace (GitHub Docs) | https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace?tool=webui | 2026-11-06 |
-| SC63 | OpenAI Codex (AI agent) (Wikipedia) | https://en.wikipedia.org/wiki/OpenAI_Codex_(AI_agent) | 2026-11-06 |
-| SC66 | Advanced Configuration: adding utility files to the /api directory (Vercel) | https://vercel.com/docs/functions/configuring-functions/advanced-configuration | 2026-11-07 |
-| SC65 | Functions API Reference (Vercel) | https://vercel.com/docs/functions/functions-api-reference | 2026-11-07 |
-
-<!-- ===== FIN: conocimiento/05-codex-chatgpt-y-codespaces.md ===== -->
-
-<!-- ===== INICIO: conocimiento/06-contexto-pagos-y-comercios-mx.md ===== -->
-
----
-id: K06
-titulo: "Contexto: pagos, comercios y personas en México"
-resumen: "Cifras verificadas (INEGI, Banxico, DOF, Condusef y prensa seria) sobre efectivo, informalidad, costo de cobrar con tarjeta, uso real de CoDi, lo que cambia el 14-dic-2026, fraude, brecha digital y Coyoacán; léelo al definir problema, 'por qué ahora', personas y datos del pitch."
-responde:
-  - "¿Qué tan dominante es el efectivo en México y hacia dónde va?"
-  - "¿Qué tan grande es la informalidad y cuántos negocios son micro?"
-  - "¿Cuánto le cuesta a un comercio pequeño cobrar con tarjeta frente a CoDi?"
-  - "¿Cuánto se usa CoDi realmente y por qué no despegó?"
-  - "¿Qué cambia exactamente el 14 de diciembre de 2026 y qué es la Ley de Economía Digital?"
-  - "¿Qué fraudes frenan los pagos digitales y cómo diseñar confianza en un producto?"
-  - "¿Qué barreras digitales tienen las personas mayores y qué canal conviene usar?"
-  - "¿Qué hay en la Utopía Elena Poniatowska, Coyoacán y la CDMX que sirva al producto?"
-  - "¿Qué personas, datos y oportunidades de IA + CoDi usar en el pitch?"
-actualizado: 2026-11-07
-confianza: media
-fuentes: [SD01, SD02, SD03, SD04, SD05, SD06, SD07, SD08, SD09, SD10, SD11, SD12, SD13, SD14, SD15, SD16, SD17, SD18, SD19, SD20, SD21, SD22, SD23, SD24, SD25, SD26, SD27, SD28, SD29, SD30, SD31, SD32, SD33, SD34, SD35, SD36, SD37, SD38, SD39, SD40, SD41, SD42, SD43, SD44, SD45, SD46, SD47, SD48, SD49, SD50, SD51, SD52, SD53, SD54, SD55, SD56, SD57, SD58, SD59, SD60, SD61, SD62, SD63]
----
-
-# K06 · Contexto: pagos, comercios y personas en México
-
-## TL;DR
-- **El efectivo manda en lo cotidiano:** ~85 % de los adultos usa sobre todo efectivo en compras de hasta $500 y solo 4.4 % usa transferencias o apps (2024) [SD10, SD18].
-- **El mercado es informal y micro:** 54.3 % de las personas ocupadas (32.6 millones) es informal (sep-2026) [SD20]; 95.4 % de los negocios tiene de 0 a 10 personas (2023) [SD21].
-- **Cobrar con tarjeta cuesta un porcentaje; CoDi no:** una miscelánea paga de 1.15 % a 3.95 % por cobro con débito, y con Clip 3.00–3.60 % (jul-2026) [SD24]; CoDi no cobra comisión y el dinero llega en segundos (2026) [SD31].
-- **CoDi existe, pero casi no se usa:** 21.8 M cuentas validadas y solo 2.5 M han pagado alguna vez (sep-2025) [SD33]; 21.5 M operaciones en casi 7 años contra 833.5 M de SPEI en un solo mes (2026) [SD32, SD12].
-- **Por qué ahora:** a más tardar el **14-dic-2026** todas las apps bancarias deben homologar sus transferencias (celular de 10 dígitos, resumen con nombre del beneficiario, comprobante con rastreo) y procesar los cobros CoDi con el mismo estándar [SD01, SD03, SD06]; además, el Congreso aprobó la Ley de Economía Digital (oct-2026) [SD10, SD11].
-- **La confianza es el cuello de botella:** 2.48 M reclamaciones por posible fraude en un semestre (2025) [SD38] y 39 % no cree que su dinero esté seguro en el banco (2024) [SD18]. Gana el producto que confirma el pago real, entrega recibo y habla por WhatsApp o voz.
-
-## K06.1 · Efectivo vs. pagos digitales en México
-**Cuánto se usa el efectivo (ENIF 2024, INEGI-CNBV, publicada en marzo de 2025)**
-- Compras de hasta $500: ~85 % de los adultos usa sobre todo efectivo (85.2 % según [SD10]; 85.3 % según [SD18]). Compras mayores a $500: 73.5 % [SD18].
-- Transferencias o apps en compras de hasta $500: de 1.6 % (2021) a 4.4 % (2024) [SD10]. En compras mayores a $500 subieron 4.8 puntos frente a 2021 [SD16].
-- 76.5 % de las personas de 18 a 70 años tiene algún producto financiero y 63.0 % una cuenta de ahorro formal; entre quienes tienen cuenta, el uso de app pasó de 54.3 % (2021) a 69.1 % (2024) [SD16].
-
-**Por qué se prefiere el efectivo (Banxico, estudio de efectivo 2024, localidades de 50 mil habitantes o más)** [SD17]
-- 91 % suele pagar sus gastos diarios en efectivo; solo 3 % usa pagos electrónicos o SPEI.
-- Razones: es práctico y rápido (52 %), es el único medio que tienen (16 %), lo sienten más seguro (13 %).
-
-**Tendencia**
-- SPEI registró 833.5 millones de operaciones en septiembre de 2026, por ~21.6 billones de pesos (Banxico, citado por la prensa) [SD12].
-- Una proyección de Banxico citada por la prensa indica que SPEI podría superar en volumen a los pagos con tarjeta a finales de 2026 [SD19].
-- Meta de la política de inclusión financiera: pagos digitales en 50 % del gasto de consumo privado en 2030 [SD61].
-
-**Recomendación (lectura para el pitch):** la gente ya se transfiere dinero entre personas; el "último metro" (pagar en el puesto, la fonda o al prestador de servicios) sigue en efectivo.
-
-## K06.2 · Economía informal y micronegocios
-**Informalidad laboral (ENOE, INEGI, septiembre de 2026; publicada el 22-oct-2026)** [SD20]
-- Tasa de informalidad laboral (TIL1): **54.3 %** de la población ocupada, es decir, **32.6 millones** de personas.
-- Ocupación en el sector informal (negocios de los hogares sin registro): 17.6 millones (29.4 %).
-- Población ocupada: 60.0 millones; desocupación: 2.8 %.
-
-**Micronegocios (Censos Económicos 2024, INEGI; dato 2023)**
-- País: 7,093,631 establecimientos y 36.6 millones de personas ocupadas. Los micro (0 a 10 personas) son **95.4 %** de las unidades y 41.4 % del empleo del sector privado [SD21].
-- Solo 1.44 millones de unidades usaron internet en su actividad (≈26 % si la base son 5.47 millones de unidades; cálculo propio, ⚪ INEGI no indica la base) [SD21].
-- CDMX: 456,102 establecimientos; los micro son 93.4 % de las unidades y 26.1 % del empleo [SD22]. El comercio al por menor es 48.4 % de las unidades (205,511) [SD23]. Coyoacán concentra 5.3 % de las unidades de la ciudad (≈22,500, cálculo propio) [SD23].
-- La Asociación de Bancos de México (ABM) ubica a los micronegocios en 95.5 % de las empresas y 41.5 % del empleo (2026) [SD37].
-
-**Implicaciones**
-- Para quien no está inscrito en el SAT, la nueva cuenta Nivel 2 Bis (sin RFC; ver K06.5) baja la barrera para recibir pagos digitales [SD09].
-- El segmento coincide con la visión de Pey de procesar pagos de negocios informales (contexto del evento; ⚪ no verificado de forma externa).
-
-**Recomendación:** frente a usuarios y jueces, hablar de "negocios de barrio" o "changarros" en lugar de "informales", porque "informal" puede sonar a ilegal.
-
-## K06.3 · Costo de cobrar con tarjeta para un comercio pequeño
-**Tasa de descuento** (lo que paga el comercio por cada venta; Banxico la publica por giro)
-- Miscelánea con **débito**, julio de 2026: de **1.15 %** a **3.95 %** según el adquirente; Clip 3.00–3.60 %; varios agregadores 3.50 % [SD24, SD25]. ⚪ No verifiqué si incluyen IVA.
-- Con **crédito** (tabla por giro; ⚪ periodo no indicado, archivo de 2025; confianza media): restaurantes 2.55–5.84 %; misceláneas 2.29–3.60 % [SD63].
-- Ejemplo comercial: Clip anuncia 3.6 % + IVA por cobro, dinero disponible a partir de 24 horas y sin renta mensual (jul-2026) [SD26]. Cálculo propio: vender $1,000 diarios con tarjeta cuesta ≈$41.76 al día, ≈$1,250 en 30 días.
-
-**Por qué es caro**
-- Cuotas de intercambio ponderadas: 0.45 % en débito y 1.30 % en crédito, arriba de economías comparables (Unión Europea: 0.2 % y 0.3 %) (jun-2024 a jun-2025) [SD27].
-- Banxico y la CNBV proponen topes a esas cuotas (2ª versión, 27-ago-2026): 1.30 % en crédito y $10.80 por operación en débito, con transición de 3 años; **en consulta, no vigente** [SD28, SD09].
-
-**Señales del mercado**
-- Tiendas 3B suspendió tarjetas en algunas sucursales al perder la cuota de intercambio cero y probó CoDi (sep-2026) [SD29].
-- Quien traslada la comisión suele cobrar 3 % a 5 % extra; Profeco lo considera ilegal (2025) [SD30].
-- Analistas advierten un "golpe de flujo de caja" para negocios de márgenes estrechos al migrar a digital (2026) [SD61].
-
-**Alternativa:** CoDi no cobra comisión por operación, funciona 24/7 y el dinero llega en segundos (2026) [SD31]; el Gobierno lo reiteró al presentar la Ley de Economía Digital [SD15].
-
-**Recomendación:** en el pitch, traducir porcentajes a pesos del día ("$40 diarios que se quedan en tu bolsa").
-
-## K06.4 · CoDi: adopción real y por qué no despegó
-CoDi (Cobro Digital) es la plataforma de Banxico, lanzada el 30-sep-2019, para cobrar con QR o NFC sobre SPEI y sin comisión; su meta era 18.1 M usuarios en 2020 [SD33, SD31, SD01].
-
-**Números**
-- Sep-2025: 21.79 M cuentas validadas (a la baja); solo **2.47 M** han pagado alguna vez y **1.08 M** han cobrado (Banxico) [SD33]: ≈11 % pagó y ≈5 % cobró (cálculo propio).
-- Oct-2019 a jul-2026: 21.5 M operaciones acumuladas; 34.8 M apps habilitadas; DiMo sin datos actualizados (Banxico) [SD32]. Como SPEI hizo 833.5 M operaciones solo en sep-2026 [SD12], todo CoDi equivale a ≈2.6 % de un mes de SPEI (cálculo propio).
-- ENIF 2024: 38.0 % conoce CoDi y 12.8 % de ellos lo ha usado (≈4.9 % de los adultos); DiMo: 18.5 % y 6.8 % (≈1.3 %) (cálculos propios) [SD16].
-
-**Por qué no despegó**
-- Incentivos: los bancos ganan con las comisiones de tarjeta y CoDi no cobra; la Presidenta dijo "la banca no quiere que se use" (2025) [SD33].
-- Poca promoción del sector (2026) [SD32] y verificación de identidad engorrosa [SD36].
-- Experiencia: en una prueba de lanzamiento solo 2 de 8 asociaciones de cuenta se validaron y las apps probadas no avisaban del pago (2019) [SD35].
-- Uso concentrado en altos ingresos; Pix (Brasil) y SINPE Móvil (Costa Rica) ganaron con bajo costo de adopción, efectos de red, integración coordinada y difusión temprana (2025) [SD34]. Mercado Pago dejó su pago con QR en 2023 [SD14].
-- Gobierno y ABM acordaron relanzar CoDi y DiMo; su fusión es un rumor no confirmado (abr-2026) [SD62].
-
-**Recomendación:** no vender "CoDi", sino el beneficio: "cobra sin comisión y sabe al instante que ya te pagaron".
-
-## K06.5 · Qué cambia el 14 de diciembre de 2026
-**Qué es:** la **fecha límite** para que bancos y participantes del SPEI cumplan las Circulares 9/2026 y 10/2026 de Banxico (DOF, 17-jun-2026) y sus Guías de homologación de transferencias móviles [SD01, SD02, SD09]. La 9/2026 ya rige; el 14-dic es su plazo de cumplimiento (segundo transitorio) [SD01], no la entrada en vigor de una ley.
-
-**Qué deberán tener todas las apps**
-1. Máximo cuatro etapas: botón visible de "Transferencias"; captura (cuenta, destinatario, monto, concepto); resumen con nombre del beneficiario, importe y banco; resultado con comprobante, clave de rastreo y liga al CEP [SD04, SD05, SD06].
-2. Celular de 10 dígitos como identificador: obligatorio en cuentas de nivel 2 a 4 si el titular lo pide, gratuito, con aviso en un día hábil; la CLABE sigue [SD03].
-3. **CoDi:** procesar los mensajes de cobro conforme a las Guías y mantener apps que permitan atenderlos [SD01].
-4. Sanciones a quien incumpla [SD06]; alcance: más de 80 M personas que transfieren [SD07].
-
-**En paralelo**
-- Circular 11/2026: cuenta Nivel 2 Bis de hasta 15,000 UDIs al mes (≈$130–132 mil; hasta 3,000 UDIs en efectivo), sin RFC y con apertura remota [SD09, SD08, SD37]. ⚪ Fecha de oferta en cada banco: no verificada.
-- Ley de Economía Digital para Pagos Digitales y Electrónicos: el Ejecutivo firmó el decreto el 4-nov-2026 y su texto ya aparece en el SIDOF; entra en vigor al día siguiente de su publicación en el DOF (⚪ la copia consultada no muestra la fecha de publicación) [SD64]. Transitorios tercero y cuarto: 15 días hábiles para la determinación de sectores por SHCP y otros 15 tras publicarla para reglas sectoriales. No acredita una obligación general de QR en CDMX el 19-nov. Artículo 19-IV: disposiciones Banxico/CNBV sobre QR en terminales [SD64]. ⚪ Sectores y calendarios concretos: pendientes de verificar.
-
-**Recomendación (por qué ahora):** ayudar al comercio a adoptar cobros digitales; distinguir el plazo bancario del 14-dic de las reglas sectoriales pendientes. El plazo normativo no demuestra implementación efectiva en todas las apps.
-
-## K06.6 · Fraude y desconfianza
-**Datos (Condusef y ENIF)**
-- Ene–jun 2025: 2.48 M reclamaciones por posible fraude (+5.2 % anual): $10,714 millones reclamados y $2,556 millones devueltos (≈24 %, cálculo propio); el fraude digital supera 60 % de las quejas [SD38].
-- Ene–sep 2025: 3.82 M reclamaciones (~14 mil diarias); las personas de 60 años o más suman 32 % de las quejas por posible fraude (⚪ año del dato no indicado) [SD39].
-- CDMX 2025: 40,688 quejas, 31.6 % ligadas a fraude [SD40].
-- ENIF 2024: 39 % no cree que su dinero esté seguro en bancos y 46.7 % dice que no resuelven sus quejas [SD18].
-
-**Modalidades que golpean al comercio**
-- Comprobante falso: imagen o PDF de una transferencia que nunca llegó o que se revierte; circulan plantillas. Se verifica con el CEP de Banxico (clave de rastreo) o revisando el saldo real (2026) [SD41].
-- QR falso: la SSC-CDMX alertó por códigos en espacios públicos que llevan a sitios falsos (2025) [SD42].
-
-**Protecciones recientes**
-- MTU: límite de monto que fija el usuario, obligatorio desde el 1-oct-2025; arriba de él se pide autenticación extra [SD43].
-- DiMo muestra el nombre del destinatario antes de autorizar [SD03]; las Guías exigen resumen con nombre del beneficiario y comprobante con rastreo [SD06].
-
-**Recomendación (diseño de confianza)**
-1. Nunca validar con captura: solo cuenta el pago confirmado por webhook o consulta de estado de Pey (según K03.4 y K03.5).
-2. Recibo automático (WhatsApp o voz): monto, comercio, hora y clave de rastreo.
-3. QR dinámico por venta, no un QR estático pegado.
-4. Anunciar en voz alta: "Cobro de $85 para Frutas Lupita".
-5. Botón "¿Ya me pagaron?" que consulte el estado real.
-
-## K06.7 · Brecha digital: personas mayores, voz y WhatsApp
-**Conectividad (ENDUTIH 2025, INEGI, publicada el 16-jun-2026)**
-- 86.1 % de las personas de 6 años o más usa internet (104.9 M); urbano 88.9 % y rural 75.2 %; 84.6 % usa celular [SD44]. 97.3 % de los usuarios se conecta con smartphone [SD45].
-- Por edad: 55–64 años, 78.8 %; 65–74 años, 57.8 %; 75 o más, 30.3 % [SD45].
-- 17.0 M no usan internet; la razón principal es no saber usarlo (7.5 % de la población, más de la mitad de los no usuarios, cálculo propio) [SD45].
-- Usos: comunicarse 93.0 %, operaciones bancarias 32.9 %, pagos 35.6 % (lectura de gráfica; confianza media) [SD45].
-
-**Personas mayores**
-- Solo 21 % de los hombres y 15 % de las mujeres de 60 años o más hacen pagos digitales; ~10 % usa apps bancarias y ~47 % opera en sucursal o cajero (ENIF 2024, citada por la prensa) [SD47].
-- Suelen depender de familiares para operar [SD48] y son 32 % de las quejas por posible fraude [SD39].
-- Pensión del Bienestar (65 años o más): $6,400 por bimestre en 2026, depositada en tarjeta del Banco del Bienestar [SD49].
-
-**WhatsApp y voz**
-- WhatsApp es la plataforma más usada: 95.3 % de los usuarios (reporte Digital 2024 citado por la prensa; ⚪ base exacta no verificada) [SD46].
-- ⚪ No encontré un dato verificado sobre preferencia por notas de voz en México; conviene validarlo observando a usuarios en el evento.
-
-**Recomendación:** canal WhatsApp + voz; una sola acción por pantalla; letra grande; confirmación hablada ("ya llegó tu dinero"); opción de mandar copia del recibo a un familiar.
-
-## K06.8 · Contexto local: Coyoacán, Barrio de San Lucas y la Utopía
-**Utopía Elena Poniatowska Amor**
-- Av. Miguel Hidalgo 128, Barrio de San Lucas, Coyoacán [SD50]. Abrió en agosto de 2026 con 242 MDP de inversión en ~20,000 m² del predio "El Parián", abandonado más de 20 años [SD50, SD51, SD52]. San Lucas es un barrio originario [SD52].
-- Servicios: comedor, lavandería, CADI, Casa de Día para personas mayores, consultorios gratuitos, centro comunitario para Parkinson, alberca semiolímpica, gimnasio, Museo Coyote, centro de transformación digital (150 computadoras e impresoras 3D), tortillería de maíz nativo y agencia de empleo [SD50, SD51].
-- Alcance estimado: ~130 mil habitantes de al menos 17 colonias [SD50, SD52].
-
-**Coyoacán**
-- 22 mercados públicos (2025) [SD53].
-- 14.7 % de sus habitantes tiene 65 años o más, la proporción más alta entre alcaldías (nota de 2024; ⚪ fuente primaria no indicada) [SD54].
-
-**CDMX**
-- 339 mercados públicos donde trabajan ~300 mil personas (2025) [SD55]; 1,367 tianguis (Sedeco, 2024) [SD56] con ~50 mil tianguistas [SD57].
-- Mercomuna (vales de despensa canjeables en comercios de barrio): 335 mil familias en 2025 y más de 30 mil comercios registrados (dic-2025); meta de 700 mil familias en 2026 [SD58, SD59]. ⚪ Formato del vale y pago al comercio: no verificados.
-- 2021: Sedeco y Mercado Pago anunciaron tarjeta y QR en 335 mercados y 51 tianguis, con meses sin comisión; ⚪ no encontré resultados [SD60].
-- ⚪ No encontré un programa vigente de la CDMX para que comercios cobren con CoDi.
-
-**Usuarios potenciales cerca:** personas mayores de la Casa de Día, jóvenes del centro digital (posibles "embajadores"), familias del comedor y la lavandería, y comercios de la zona (⚪ mercados cercanos no verificados).
-
-## K06.9 · Personas (situaciones típicas; personas ficticias)
-| Persona | Dolores | Trabajos por hacer | Momento de pago |
-|---|---|---|---|
-| **Tianguista de fruta** (vende 3 días a la semana en distintos tianguis) | Montos chicos ($20–$150, ilustrativo); terminal cara para su volumen (débito hasta 3.95 % [SD24]); "ya te transferí" con captura [SD41]; señal intermitente | Cobrar en segundos, saber que sí llegó, cuadrar la venta del día | Fila de cuatro clientes; uno pregunta "¿le transfiero?" y enseña su pantalla |
-| **Fonda familiar** (menú del día, clientes oficinistas) | Clientes sin efectivo; con crédito un restaurante paga hasta 5.84 % (⚪ periodo) [SD63]; cuentas divididas; pedidos por WhatsApp | Cobrar mesas y pedidos para llevar, cerrar caja sin errores | Al terminar la comida, varios pagan por separado al mismo tiempo |
-| **Prestadora de servicios a domicilio** (limpieza, uñas o costura) | Comprobante falso o reversa cuando ya se fue [SD41]; sin RFC; "luego te pago" | Mandar el cobro antes o al terminar, recordar pendientes, demostrar ingresos (cuenta Nivel 2 Bis [SD09]) | En la puerta, al terminar el servicio |
-| **Cliente adulto mayor** (usuario de la Casa de Día) | Cobra su pensión en tarjeta [SD49]; casi no usa apps (~10 % de 60+ [SD47]); miedo al fraude (32 % de quejas [SD39]); depende de sus hijos | Pagar sin equivocarse, saber a quién y cuánto paga, tener un comprobante que entienda | En el puesto, sin lentes y con el vendedor apurado |
-
-## K06.10 · Diez datos para el pitch
-Confianza: alta en datos de INEGI, Banxico y DOF; media en cifras citadas por la prensa.
-1. ~85 % de los adultos usa sobre todo efectivo en compras de hasta $500 — ENIF 2024 [SD10, SD18].
-2. Solo 4.4 % usa transferencias o apps en esas compras (1.6 % en 2021) — ENIF 2024 [SD10].
-3. 54.3 % de las personas ocupadas (32.6 millones) trabaja en la informalidad — ENOE, sep-2026 [SD20].
-4. 95.4 % de los negocios del país son micro (0 a 10 personas) — Censos Económicos 2024, dato 2023 [SD21].
-5. Una miscelánea paga hasta 3.95 % por cobro con débito; Clip, 3.00–3.60 % — Banxico, jul-2026 [SD24].
-6. CoDi: 21.8 M cuentas validadas, pero solo 2.5 M han pagado alguna vez — Banxico, sep-2025 [SD33].
-7. 21.5 M operaciones CoDi en casi 7 años contra 833.5 M operaciones SPEI en un solo mes — Banxico, jul-2026 y sep-2026 [SD32, SD12].
-8. 2.48 M reclamaciones por posible fraude en un semestre; los bancos devolvieron ~24 % del monto — Condusef, ene–jun 2025 [SD38].
-9. Solo 57.8 % de las personas de 65 a 74 años usa internet (30.3 % de 75 o más) — ENDUTIH 2025 [SD45].
-10. 14-dic-2026: fecha límite para que todas las apps homologuen transferencias y procesen cobros CoDi — Banxico, Circular 9/2026 [SD01].
-
-**Recomendación:** abrir con los datos 1, 6 y 10 (problema, paradoja y urgencia) y cerrar con el 5 traducido a pesos.
-
-## K06.11 · Oportunidades donde IA + CoDi resuelven algo real
-**Recomendación:** ordenadas por impacto y factibilidad en 4 horas. Lo técnico sale de K03 (Pey) y K04 (OpenAI); no lo verifiqué aparte.
-
-| # | Idea | Dolor (dato) | Impacto | Factible en 4 h | Dependencias |
-|---|---|---|---|---|---|
-| 1 | **"Cóbrale" por voz o WhatsApp:** dictas "cóbrale 85 de jitomate"; la IA arma el cobro CoDi (QR dinámico) y avisa "ya llegó" con recibo | Comisión de tarjeta [SD24]; no saber usar apps [SD45] | Alto | Alta | QR + webhook de Pey (K03.4, K03.5); voz (K04) |
-| 2 | **Detector de comprobante falso:** la IA lee monto y clave de rastreo de la captura y los compara con cobros confirmados | Comprobantes falsos [SD41]; fraude [SD38] | Alto | Alta (solo cobros propios) | Estado y `trackingKey` en Pey (K03.4) |
-| 3 | **Recibo hablado + modo familiar:** audio y letra grande, con copia opcional a un familiar | Personas mayores [SD47, SD39] | Medio-alto | Alta | WhatsApp o web simple |
-| 4 | **Corte de caja conversacional:** "¿cuánto vendí hoy?" + resumen diario | Sin registros; historial para crédito [SD09] | Medio | Alta | Datos locales |
-| 5 | **Alta guiada:** la IA explica Nivel 2 Bis, alta del celular y primer cobro de prueba | Registro engorroso [SD35, SD36] | Medio | Media | ⚪ oferta de Nivel 2 Bis por banco |
-| 6 | **Cobro a domicilio:** cobro al celular del cliente, QR o liga por WhatsApp + recordatorio | "Luego te pago" | Medio | Media | `POST /codi/pn`, vigencia y liga de pago (K03.4, K03.5); ⚪ requisitos del celular del cliente |
-
-**Recomendación de MVP:** unir 1 + 2 + 3: dictar → QR → un juez paga con su app → "ya llegó" en voz → recibo. Pey no tiene sandbox (K03.6): si algo falla, plan B de K03.6 con "SIMULACIÓN" visible (AGENTS.md). Fuera de alcance: terminales, NFC, crédito y facturación.
-
-## Fuentes
-| ID | Título | URL | Consultado |
-|---|---|---|---|
-| SD01 | DOF · Circular 9/2026 de Banxico (modifica la 14/2017; homologación de transferencias móviles) | https://dof.gob.mx/nota_detalle_popup.php?codigo=5790862 | 2026-11-06 |
-| SD02 | SIDOF · Circular 10/2026 de Banxico (modifica la 3/2012), DOF 17-jun-2026 | https://sidof.segob.gob.mx/notas/5790863 | 2026-11-06 |
-| SD03 | Expansión · La CLABE no desaparece: Banco de México cambiará las transferencias (6-sep-2026) | https://expansion.mx/finanzas-personales/2026/09/06/clabe-no-desaparece-banco-de-mexico-cambiara-transferencias | 2026-11-06 |
-| SD04 | N+ · Banxico ordena cambios obligatorios en transferencias antes de que termine 2026 | https://www.nmas.com.mx/economia/banxico-cambia-las-reglas-estas-son-modificaciones-transferencias-antes-termine-el-2026/ | 2026-11-06 |
-| SD05 | Grupo Animal · Transferencias bancarias sin CLABE: las nuevas reglas de Banxico | https://grupoanimal.mx/explicaciones/transferencias-bancarias-clabe-nuevas-reglas-banxico | 2026-11-06 |
-| SD06 | Ruptura360 · Banxico le dice adiós a la CLABE obligatoria (10-sep-2026) | https://ruptura360.mx/periodismo-de-servicio/banxico-nuevas-reglas-transferencias-bancarias-2026/ | 2026-11-06 |
-| SD07 | DPL News · Banxico publica guías para homologar experiencia de usuario en transferencias (18-jun-2026) | https://dplnews.com/banxico-publica-guias-para-homologar-experiencia-de-usuario-en-transferencias-electronicas/ | 2026-11-06 |
-| SD08 | Bloomberg Línea · Banxico emite medidas para simplificar pagos digitales y ampliar límite en cuentas sin registro ante el SAT (jun-2026) | https://www.bloomberglinea.com/latinoamerica/mexico/banxico-emite-medidas-para-simplificar-pagos-digitales-y-ampliar-limite-en-cuentas-sin-registro-ante-el-sat/ | 2026-11-06 |
-| SD09 | BBVA Research · México: regulación financiera, octubre 2026 | https://www.bbvaresearch.com/wp-content/uploads/2026/10/20261015_MexicoRegFinOct2026-1.pdf | 2026-11-06 |
-| SD10 | Expansión · Diputados aprueban Ley de Economía Digital (6-oct-2026) | https://expansion.mx/economia/2026/10/06/diputados-aprueban-ley-de-economia-digital | 2026-11-06 |
-| SD11 | Excélsior · Así será la transición de pagos con la ley de economía digital | https://www.excelsior.com.mx/nacional/sera-transicion-pagos-con-ley-economia-digital | 2026-11-06 |
-| SD12 | Xataka México · El Senado aprueba una nueva ley de pagos digitales (21-oct-2026) | https://www.xataka.com.mx/legislacion-y-derechos/mexico-quiere-que-pagues-tarjeta-transferencias-qr-senado-aprueba-nueva-ley-pagos-digitales | 2026-11-06 |
-| SD13 | Expansión · Ley de Economía Digital no será draconiana, dicen banqueros (28-oct-2026) | https://expansion.mx/economia/2026/10/28/ley-de-economia-digital-no-sera-draconiana-la-implementacion-de-pagos-digitales-sera-paulatina-dicen-banqueros | 2026-11-06 |
-| SD14 | DPL News · FinTech México respalda Ley de Pagos Digitales, pero plantea reservas sobre el QR (21-sep-2026) | https://dplnews.com/?p=330888 | 2026-11-06 |
-| SD15 | Por Esto · Gobierno plantea pagos con CoDi sin comisiones y cuentas de hasta 135 mil pesos (24-sep-2026) | https://www.poresto.com/mexico/2026/9/24/ley-de-economia-digital-gobierno-plantea-pagos-con-codi-sin-comisiones-y-cuentas-de-hasta-135-mil-pesos.html | 2026-11-06 |
-| SD16 | INEGI-CNBV · Comunicado 49/25, ENIF 2024 (13-mar-2025) | https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/enif/ENIF2024_CP.pdf | 2026-11-06 |
-| SD17 | El Financiero · Víctor Piz, "Cash: el peso del efectivo en México" (30-may-2025) | https://www.elfinanciero.com.mx/opinion/victor-piz/2025/05/30/cash-el-peso-del-efectivo-en-mexico/ | 2026-11-06 |
-| SD18 | Publimetro · 40 % de mexicanos cree que su dinero no está seguro en bancos (mar-2025) | https://www.publimetro.com.mx/noticias/2025/03/14/desconfianza-total-40-de-mexicanos-cree-que-su-dinero-no-esta-seguro-en-bancos/ | 2026-11-06 |
-| SD19 | IDC Online · SPEI, cerca de superar a las tarjetas como medio de pago digital en 2026 (14-ago-2026) | https://idconline.mx/finanzas/2026/08/14/spei-cerca-de-superar-a-las-tarjetas-como-medio-de-pago-digital-en-mexico-durante-2026 | 2026-11-06 |
-| SD20 | INEGI · Indicadores de ocupación y empleo, septiembre de 2026 (22-oct-2026) | https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/iooe/IOE2026_10.pdf | 2026-11-06 |
-| SD21 | INEGI · Censos Económicos 2024, resultados definitivos (24-jul-2025) | https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/ce/CE2024_def.pdf | 2026-11-06 |
-| SD22 | INEGI · Censos Económicos 2024, resultados definitivos Ciudad de México | https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/ce/CE_2024_Def_CdMx.pdf | 2026-11-06 |
-| SD23 | INEGI · Censos Económicos 2024, monografía Ciudad de México | https://www.inegi.org.mx/contenidos/programas/ce/2024/doc/mcdmx_ce24.pdf | 2026-11-06 |
-| SD24 | Banxico · Tasas de descuento con tarjeta de débito, giro Miscelánea (julio 2026) | https://www.banxico.org.mx/servicios/tasas-de-descuento-para-tarjetas-de-debito-por-gir/%7BCE998D24-7B96-F2C4-AF17-C29673DC35D2%7D.pdf | 2026-11-06 |
-| SD25 | Banxico · Tasas de descuento en tarjetas (información vigente a julio de 2026) | https://www.banxico.org.mx/servicios/tasas-descuento-tarjetas-banc.html | 2026-11-06 |
-| SD26 | Tiendanube · Comisiones de Clip en 2026 (14-jul-2026; contenido comercial) | https://www.tiendanube.com/mx/blog/clip | 2026-11-06 |
-| SD27 | Diario de Yucatán (El Universal) · Cuotas cobradas a pagos con tarjeta son las más altas (8-ene-2026) | https://www.yucatan.com.mx/mexico/2026/01/08/cuotas-cobradas-a-pagos-con-tarjeta-son-las-mas-altas.html | 2026-11-06 |
-| SD28 | Expansión · Banxico y CNBV suavizan propuesta de cuotas por pagos con tarjeta (27-ago-2026) | https://expansion.mx/economia/2026/08/27/banxico-cnbv-suaviza-propuesta-cuotas-por-pagos-con-tarjeta | 2026-11-06 |
-| SD29 | El Imparcial · ¿Por qué Tiendas 3B suspendió el pago con tarjetas? (11-sep-2026) | https://www.elimparcial.com/mexico/2026/09/11/por-que-tiendas-3b-suspendio-el-pago-con-tarjetas/ | 2026-11-06 |
-| SD30 | Xataka México · Bancos aceptan bajar costos por pagos con tarjeta a tienditas, con una condición (25-nov-2025) | https://www.xataka.com.mx/banca-digital/bancos-aceptan-bajar-costos-pagos-tarjeta-a-tienditas-mexico-solo-condicion | 2026-11-06 |
-| SD31 | Expansión · ¿Te cobran comisión al aceptar tarjeta? Banxico tiene una alternativa (9-abr-2026) | https://expansion.mx/finanzas-personales/2026/04/09/cobrar-con-tarjeta-sin-comisiones-codi-banxico | 2026-11-06 |
-| SD32 | Expansión · Ley de economía digital: pagos con CoDi y DiMo (18-sep-2026) | https://expansion.mx/economia/2026/09/18/sheinbaum-ley-economia-digital-pagos-codi-dimo | 2026-11-06 |
-| SD33 | La Razón · Acusan falta de promoción y voluntad en impulso de CoDi (30-sep-2025) | https://www.razon.com.mx/negocios/2025/09/30/acusan-falta-de-promocion-y-voluntad-en-impulso-de-codi/ | 2026-11-06 |
-| SD34 | NBER WP 34280 · Drivers of Digital Payment Adoption: Lessons from Brazil, Costa Rica, and Mexico (2025) | https://ideas.repec.org/p/nbr/nberwo/34280.html | 2026-11-06 |
-| SD35 | Xataka México · Probamos CoDi: lo que nos encanta y lo que odiamos (1-oct-2019) | https://www.xataka.com.mx/banca-digital/probamos-codi-que-nos-encanta-que-odiamos-que-tiene-que-resolver-banxico-para-su-implementacion-mexico | 2026-11-06 |
-| SD36 | Excélsior · José Yuste, "Cruzada bancaria: a digitalizar" (29-may-2026) | https://www.excelsior.com.mx/opinion/jose-yuste/cruzada-bancaria-digitalizar | 2026-11-06 |
-| SD37 | ABM · Comunicado de prensa 14/2026 (26-ago-2026) | https://abm.org.mx/sala-de-prensa/img/fotogaleria/Comunicado_de_prensa_ABM_26082026.pdf | 2026-11-06 |
-| SD38 | Vanguardia · Más de 2.4 millones de fraudes bancarios en México durante 2025 (3-nov-2025) | https://vanguardia.com.mx/noticias/mexico/crece-la-estafa-digital-mas-de-24-millones-de-fraudes-bancarios-en-mexico-durante-2025-MK17956794 | 2026-11-06 |
-| SD39 | Xataka México · Fraudes bancarios encontraron su objetivo vulnerable: adultos mayores (19-abr-2026) | https://www.xataka.com.mx/banca-digital/fraudes-bancarios-mexico-encontraron-su-objetivo-vulnerable-adultos-mayores/amp | 2026-11-06 |
-| SD40 | La Crónica · Asociados a fraudes, 30 % de los expedientes en Condusef (17-mar-2026) | https://www.cronica.com.mx/negocios/2026/03/17/asociados-a-fraudes-30-por-ciento-de-los-expedientes-en-condusef/ | 2026-11-06 |
-| SD41 | Grupo Animal · ¿Recibiste una supuesta transferencia bancaria? Así verifícala (28-jul-2026) | https://grupoanimal.mx/explicaciones/transferencia-bancaria-falsa-comprobante | 2026-11-06 |
-| SD42 | UnoTV · Policía Cibernética de CDMX alerta por fraudes con QR (23-may-2025) | https://www.unotv.com/estados/ciudad-de-mexico/policia-cibernetica-de-cdmx-alerta-por-fraudes-con-qr-protegete-asi/ | 2026-11-06 |
-| SD43 | El Cronista · Qué ocurre si supera el límite del MTU en transferencias (1-oct-2025) | https://www.cronista.com/mexico/finanzas-economia/ya-no-hay-tiempo-que-ocurre-si-supera-el-limite-del-mtu-en-transferencias-bancarias-a-partir-de-este-1-de-octubre | 2026-11-06 |
-| SD44 | INEGI · ENDUTIH 2025, comunicado de prensa (16-jun-2026) | https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/endutih/ENDUTIH_25.pdf | 2026-11-06 |
-| SD45 | INEGI · ENDUTIH 2025, presentación de resultados | https://www.inegi.org.mx/contenidos/programas/endutih/2025/doc/presentacion_endutih2025.pdf | 2026-11-06 |
-| SD46 | Excélsior · Día de las Redes Sociales en México (29-jun-2025) | https://www.excelsior.com.mx/hacker/redes-sociales-en-mexico-2025/1724290 | 2026-11-06 |
-| SD47 | Xataka México · México quiere despedirse del efectivo en carreteras y gasolineras (27-abr-2026) | https://www.xataka.com.mx/politica/mexico-quiere-despedirse-efectivo-carreteras-gasolineras-problema-que-millones-necesitan/amp | 2026-11-06 |
-| SD48 | Xataka México · Solo 4 de cada 10 personas pagan con tarjeta o transferencia (28-nov-2025) | https://www.xataka.com.mx/banca-digital/solo-4-cada-10-personas-mexico-pagan-tarjeta-transferencia-motivo-claro-no-confian-instituciones | 2026-11-06 |
-| SD49 | UnoTV · Pensión del Bienestar 2026: 6,400 pesos (19-ene-2026) | https://www.unotv.com/pensiones/pension-del-bienestar-2026-apellidos-que-reciben-6400-pesos-del-19-al-23-de-enero/ | 2026-11-06 |
-| SD50 | Chilango · Utopía Elena Poniatowska abre en Coyoacán: servicios (ago-2026) | https://www.chilango.com/ciudad/utopia-elena-poniatowska-amor-abre-sus-puertas-en-coyoacan-estos-servicios-ofrecera/ | 2026-11-06 |
-| SD51 | La Crónica · Abre en Coyoacán la Utopía Elena Poniatowska con inversión de 242 mdp (9-ago-2026) | https://www.cronica.com.mx/metropoli/2026/08/09/abre-en-coyoacan-la-utopia-elena-poniatowska-con-inversion-de-242-mdp/ | 2026-11-06 |
-| SD52 | Diario de México · Utopía Elena Poniatowska Amor, inaugurada en Coyoacán (9-ago-2026) | https://www.diariodemexico.com/mi-ciudad/abandono-esperanza-es-utopia-elena-poniatowska-amor-inaugurada-por-clara-brugada-en-coyoacan | 2026-11-06 |
-| SD53 | Alcaldía Coyoacán · Boletín 037, inversión en mercados (22-ene-2025) | https://coyoacan.cdmx.gob.mx/boletines/files/2024_2027/BOLET%C3%8DN%20037%20COYOAC%C3%81N%2C%20QUIEN%20M%C3%81S%20INVIERTE%20EN%20MEJORAMIENTO%20DE%20MERCADOS%20-%2022ENE25.pdf | 2026-11-06 |
-| SD54 | Expansión Política · BJ, Coyoacán y Azcapotzalco concentran retos para población de 65+ (23-nov-2024) | https://politica.expansion.mx/cdmx/2024/11/23/bj-coyoacan-y-azcapotzalco-concentran-retos-para-poblacion-de-65-anos-y-mas | 2026-11-06 |
-| SD55 | Expansión Política · Las 14 acciones de la CDMX para mejorar los mercados (12-feb-2025) | https://politica.expansion.mx/cdmx/2025/02/12/las-14-acciones-que-emprendera-la-cdmx-para-mejorar-los-mercados | 2026-11-06 |
-| SD56 | Expansión Política · ¿Cuántos tianguis hay en la CDMX? (12-sep-2024) | https://politica.expansion.mx/cdmx/2024/09/12/cuantos-tianguis-hay-en-la-cdmx-y-que-alcaldias-tienen-mas | 2026-11-06 |
-| SD57 | La Razón · Coparmex CDMX promueve la formalización de tianguistas (16-oct-2024) | https://www.razon.com.mx/negocios/coparmex-cdmx-promover-formalizacion-tianguistas-597731 | 2026-11-06 |
-| SD58 | Chilango · Vales Mercomuna: CDMX entregará 700 mil apoyos en 2026 | https://www.chilango.com/noticias/vales-mercomuna-cdmx-entregara-700-mil-apoyos-2026/amp/ | 2026-11-06 |
-| SD59 | Chilango · Mercomuna beneficia a 335 mil familias y más de 30 mil comercios (13-dic-2025) | https://www.chilango.com/noticias/educacion/mercomuna-beneficia-a-335-mil-familias-y-fortalece-mas-de-30-mil-comercios-en-la-cdmx/amp/ | 2026-11-06 |
-| SD60 | Chilango · Aceptarán pago con tarjeta en mercados y tianguis (13-oct-2021) | https://www.chilango.com/noticias/pago-con-tarjeta-en-mercados-y-tianguis/ | 2026-11-06 |
-| SD61 | El CEO · Ley de Economía Digital carga con obstáculos por conectividad y costos (10-sep-2026) | https://elceo.com/negocios/ley-de-economia-digital-carga-con-obstaculos-para-pagos-sin-efectivo-por-conectividad-y-costos/ | 2026-11-06 |
-| SD62 | El CEO · CoDi y DiMo se fusionan: lo que se sabe (7-abr-2026) | https://elceo.com/economia/codi-y-dimo-se-fusionan-esto-es-lo-que-se-sabe-del-impulso-a-la-digitalizacion-de-pagos-en-mexico/ | 2026-11-06 |
-| SD63 | Banxico · Tasas de descuento con tarjeta de crédito por giro (periodo no indicado; archivo de 2025) | https://www.banxico.org.mx/servicios/tasas-de-descuento-para-tarjetas-de-credito/%7BA896D818-3D13-4922-B54B-4B6D58E99479%7D.pdf | 2026-11-06 |
-| SD64 | DOF · Ley de Economía Digital: texto y transitorios | https://sidof.segob.gob.mx/notas/docFuente/5803017 | 2026-11-07 |
-
-<!-- ===== FIN: conocimiento/06-contexto-pagos-y-comercios-mx.md ===== -->
-
-<!-- ===== INICIO: conocimiento/07-ideas-puntuadas.md ===== -->
-
----
-id: K07
-titulo: "Ideas puntuadas y top 3 con PRD"
-resumen: "Banco de ideas calificadas contra los criterios del evento, top 3 con PRD listo para Codex y la recomendación final."
-responde:
-  - "¿Qué construyo para ganar?"
-  - "¿Cuál es la idea recomendada y por qué?"
-  - "¿Cuál es la demo de 3 pasos y la arquitectura de cada idea finalista?"
-  - "¿Cómo adapto la idea si el reto oficial cambia?"
-actualizado: 2026-11-06
-confianza: media
-fuentes: [SA01, SA03, SA29, SA42, SA45, SA50, SA54, SB07, SB08, SB10, SB13, SB15, SB17, SB18, SB21, SB23, SB26, SB30, SB31, SB33, SB34, SB37, SB38, SB39, SB43, SC06, SC07, SC08, SC10, SC12, SC13, SC20, SC21, SC22, SC24, SC25, SC26, SC44, SC59, SD06, SD10, SD24, SD31, SD33, SD35, SD38, SD39, SD40, SD41, SD45, SD47, SD50, SD55, SD58, SD63]
----
-
-# K07 · Ideas puntuadas y top 3 con PRD
-
-## TL;DR
-
-- **Construye "¿Ya cayó?":** una caja de cobro CoDi para puestos de barrio que arma el cobro con IA y nunca acepta una captura como pago: si te enseñan un "ya te transferí", OpenAI lee la imagen y el sistema la busca en los pagos reales de pey (94/100, la mejor del banco).
-- **Demo en 3 pasos (≤ 80 s):** "Cóbrale un dulce de tamarindo" → QR de $1 · la clienta enseña una captura → "Todavía no cae: no entregues" · paga de verdad desde su banco → "¡Ya cayó!", confirmado por pey y en voz alta (K07.6).
-- **Top 3 con PRD:** ¿Ya cayó? (94), Cóbrale, caja por voz (90), y Mesa Dividida, un QR por comensal (78). Los tres usan el kit del día tal cual (Prompts 1–5 de `PROMPTS-CODEX.md`) más una tarea nueva con archivos propios: la Tarea 1 sale genérica y la idea se decide con el PRD, como pide el RUNBOOK.
-- **Por qué gana:** "voz o chat → QR" lo harán muchos; esta idea conserva ese cobro y le suma la verdad del pago, que ataca la desconfianza que frenó a CoDi [SA42]. El modelo lee y propone, el código decide, pey confirma y la persona aprueba [SA45].
-- **Si el reto cambia:** comunidad o solicitudes de pago → La Libreta o Mesa Dividida; "dentro de ChatGPT" → servidor MCP; flujos empresariales → corte de caja con conciliación (K07.6).
-- **Esta noche:** cobro real de $0.01–$1 con pey de punta a punta, una llamada de visión con una captura ficticia y Codex y Vercel listos; lo pagado a la cuenta de prueba de pey no se devuelve [SB07].
-
-## K07.1 · Rúbrica de puntuación
-
-Los criterios oficiales no están publicados [SA01]. Esta rúbrica traduce los criterios probables de K08.3 a seis preguntas para **elegir idea la víspera**. Es inferencia: si mañana publican criterios, recalcula en 5 minutos (K07.6).
-
-| # | Criterio | Peso | Pregunta | Equivale en K08.3 |
-|---|---|---|---|---|
-| R1 | Alineación con el reto | 20 % | ¿El cobro CoDi con pey es el centro, la IA de OpenAI es necesaria, es bien público y deja trabajo de Codex visible? | C1 + C3 |
-| R2 | Impacto real y usuario concreto | 20 % | ¿Hay una persona de K06.9 con un dolor medible y un dato con fuente? | C1 |
-| R3 | Wow de la demo en vivo | 15 % | ¿En 80 s o menos pasa algo que el jurado siente sin que se lo expliquen? | C2 + C5 |
-| R4 | Factibilidad: una persona, ~4.5 h, Codex web | 25 % | ¿Cabe en el kit del día (`PROMPTS-CODEX.md`) y todo lo ⚪ tiene respaldo? | C2 |
-| R5 | Originalidad | 10 % | ¿Casi nadie más la hará? | C4 |
-| R6 | Voto comunitario y continuidad | 10 % | ¿Se entiende en una frase, se comparte y puede seguir en el Hackatón México? | K08.6 + C5 |
-
-Por qué estos pesos: K08.3 pone la ejecución en 25 % y pide no sacrificarla nunca; los ganadores de Build Week fueron herramientas acotadas que funcionan [SA45]. En San Francisco el jurado calificó uso de Codex, valor práctico, claridad del pitch y ejecución [SA50]: aquí viven en R1, R2, R3 y R4.
-
-**Escala** (2 y 4 quedan entre las descripciones vecinas):
-
-| Criterio | 1 | 3 | 5 |
-|---|---|---|---|
-| R1 | Sin cobro CoDi real, o IA decorativa | pey y OpenAI aparecen, pero uno es accesorio o el usuario no es comercio ni comunidad | Cobro con pey en el flujo principal (crear → pagar → confirmar), IA necesaria para ese flujo y caso de un ejemplo oficial [SA01] |
-| R2 | Usuario vago | Usuario claro, dolor sin dato | Persona de K06.9, dolor medible con fuente, beneficio en pesos o minutos, pensada para no expertos |
-| R3 | Hay que imaginarla | Se entiende, pero es "una pantalla más" | Pasa algo frente al jurado: hablas y sale el QR, una captura queda en evidencia o la pantalla cambia con un pago real |
-| R4 | Depende de algo ⚪ sin alternativa o de terceros (aprobaciones, días hábiles) | Necesita una pieza ⚪ o infraestructura extra, con plan B | Cabe en los Prompts 1–5 más una tarea con archivos propios, y lo ⚪ tiene respaldo |
-| R5 | Lo harán decenas | Combinación conocida bien hecha | Ángulo propio en una frase: fiado, tandas, antifraude, personas mayores (K08.5) |
-| R6 | Difícil de explicar y sin siguiente paso | Se entiende con explicación | Una frase y una imagen bastan, y hay ruta al Hackatón México (14 nov–12 dic, CoDi y API de Pey) [SA03] |
-
-**Fórmula:** total = (R1 × 20 + R2 × 20 + R3 × 15 + R4 × 25 + R5 × 10 + R6 × 10) ÷ 5. Va de 20 a 100.
-
-**Vetos (no entra al top 3 aunque sume):**
-- **Veto 1:** sin cobro CoDi con pey en el flujo principal; el reto lo pide [SA01].
-- **Veto 2:** el modelo decide montos o cobra sin confirmación humana (K03.9) [SA45].
-- **Veto 3:** necesita datos personales reales en el repo público o en la demo (K08.9).
-- **Veto 4:** la IA es accesoria (R1 ≤ 2): un formulario haría lo mismo (K02.13, K08.5). Si la idea sirve, entra como capa de otra.
-
-**Tope:** si el camino crítico depende de algo ⚪ sin plan B, R4 vale 2 como máximo. **Desempate:** gana la de mayor R4; si siguen iguales, la de mayor R2.
-
-**Comprobación:** con los pesos de K08.3 (C1–C5) y las mismas notas, el top 3 queda en el mismo orden: ¿Ya cayó? 92, Cóbrale 85 y Mesa Dividida 77 (cálculo propio).
-
-## K07.2 · Banco de ideas puntuadas
-
-Quince ideas en formatos distintos (voz, chat, visión, ChatGPT, comunidad), ordenadas por puntuación. La columna de pey usa solo endpoints de K03.4; la de OpenAI, solo modelos y funciones de K04. Las personas son arquetipos de K06.9.
-
-| # | Idea | En una línea | Usuario (K06.9) | Qué hace OpenAI (K04) | Qué hace pey / CoDi (K03) | Momento wow | Riesgo principal | Pts |
-|---|---|---|---|---|---|---|---|---|
-| 1 | **¿Ya cayó?** | Caja CoDi que arma el cobro con IA y nunca acepta una captura: la IA lee el "ya te transferí" y el servidor lo busca en los pagos reales | Tianguista de fruta | `gpt-6.1-sol`: function calling `crear_cobro` + visión con `input_image` (forma ⚪) y salida estructurada `text.format` | `POST /codi/qr` → `GET /transaction/codi/qr/{id}`; búsqueda con `GET /transaction/api-key`; webhook | Captura → "Todavía no cae"; pago real → "¡Ya cayó!" | Solo verifica pagos hechos con pey: una transferencia SPEI a la CLABE no aparece | **94** |
-| 2 | **Cóbrale** | Dictas el pedido, sale el QR con el total y la caja avisa en voz alta cuando pey confirma | Tianguista de fruta | `crear_cobro` con catálogo + voz a texto con `gpt-transcribe` (ruta del endpoint ⚪) | `POST /codi/qr` → estado; webhook `codi.qr.payment_received` | Dices "cóbrale un dulce de tamarindo", pagas y escuchas "ya llegó tu dinero" | Ruido de la sala; idea común | **90** |
-| 3 | **Mesa Dividida** | La fonda dicta cómo se reparte la cuenta y cada comensal paga su parte con su QR | Fonda familiar | function calling `crear_reparto`; el código pone precios y divide | N × `POST /codi/qr` con `metadata` por comensal + estado de cada QR | Tablero de 3 QR que se pone verde persona por persona | Que otros paguen en vivo; tope más alto | **78** |
-| 4 | Paga Tranquilo | Modo grande y hablado: dice a quién y cuánto pagas y da un recibo sencillo para un familiar | Cliente adulto mayor (como los de la Casa de Día de la sede [SD50]) | `gpt-6.1-sol` para lenguaje sencillo; voz del navegador | `POST /codi/qr` con concepto claro + estado | "Vas a pagar 1 peso a Frutas (ejemplo)" en voz alta | Veto 4: IA accesoria; entra como capa de los finalistas | 78 |
-| 5 | La Libreta | Apuntas el fiado hablando y lo cobras sin pena con una notificación CoDi al celular | Fonda familiar (clientes frecuentes) o prestadora ("luego te pago") | function calling `anotar_fiado` y `crear_cobro` + redacción del recordatorio | `POST /codi/pn` → `GET /transaction/{id}`; webhook `codi.pn.payment_received` [SB18]; QR de respaldo | "Mándale su cobro a Ana" → vibra su celular | La notificación exige el celular del cliente ligado a CoDi (⚪); sin dato de fiado | 75 |
-| 6 | Cooperacha | Vaquita de la posada, la escuela o el mercado: un QR por persona y lista de quién ya cooperó | Fuera de K06 (organizadora vecinal) | Salida estructurada del plan + recordatorios | N × `POST /codi/qr` con `numRef` por persona + webhooks | La lista se llena sola mientras pagan | IA poco necesaria; sin dato | 74 |
-| 7 | Pizarrón a Caja | Foto del pizarrón de precios → catálogo editable → cobros por pedido | Fonda familiar | Visión + salida estructurada (catálogo) | `POST /codi/qr` + estado | Menú escrito a mano → caja lista en segundos | Letra a mano ilegible; más pantallas | 73 |
-| 8 | Te Mando el Cobro | La IA redacta y manda la solicitud de pago antes o al terminar un servicio | Prestadora a domicilio | Redacción + extracción de monto y fecha | `POST /codi/pn` o link de pago (`POST /payment-link/create`, campos ⚪) | El celular del cliente recibe el cobro | Notificación ⚪; campos del link no documentados en K03 | 71 |
-| 9 | Remisión a Cobro | El proveedor fotografía su nota de remisión y la tiendita recibe un cobro con folio para conciliar | Fuera de K06 (proveedor; "flujos empresariales") | Visión + salida estructurada | `POST /codi/qr` con `metadata` (folio) + webhook para conciliar | Nota de papel → cobro con folio | Persona fuera de K06; poco voto | 70 |
-| 10 | Mercado Conectado | Cada locatario registra su CLABE y cobra con su propio QR, directo a su cuenta | Tianguista o locatario (K06.8) | Asistente de alta y dudas | `POST /bank-account` → `bankAccountId` en `POST /codi/qr`; webhook `bank.account.updated` | Un mercado entero sin comisión | `ACTIVE` tarda hasta 5 días hábiles [SB13]; CLABEs reales | 67 |
-| 11 | Pedido por Chat | Chat tipo WhatsApp de una cooperativa: "quiero 2 kilos para el sábado" → pedido + QR | Fuera de K06 (cooperativa) | function calling para armar el pedido | `POST /codi/qr` con `metadata` (pedido) | Un mensaje informal se vuelve pedido pagado | Dos lados (cliente y comercio): más pantallas | 66 |
-| 12 | Alta Guiada | Asistente que explica la cuenta Nivel 2 Bis y cómo activar CoDi, y hace tu primer cobro de $1 | Tianguista sin experiencia digital | `gpt-6.1-sol` + caché de 12 h con la guía (K04.12) | `POST /codi/qr` de $1 + webhook | Tu primer cobro CoDi en 5 minutos | Chatbot genérico; datos bancarios que cambian | 64 |
-| 13 | Corte de Caja | "¿Cuánto vendí hoy?" contestado con los pagos reales | Fonda familiar | function calling `resumen_de_ventas` (K03.9) | `GET /transaction/api-key` | Total del día y comisión ahorrada en pesos | Poco wow: mejor como segundo acto | 63 |
-| 14 | Tanda Transparente | Turnos, recordatorios y cobros CoDi de una tanda | Fuera de K06 (grupo de comerciantes) | Calendario + recordatorios | `POST /codi/pn` o QR por ronda | La ronda se paga en vivo | pey no documenta pagos salientes para entregar la tanda | 61 |
-| 15 | Cobra desde ChatGPT | Plugin MCP: "cóbrale 120 a Memo" dentro de ChatGPT, con el QR en un widget | Fuera de K06 (comerciante que ya usa ChatGPT) | Plugin con servidor MCP en `/mcp` (K04.11) [SC22] | `POST /codi/qr` y estado como herramientas MCP | Cobrar sin salir de ChatGPT | Plus y modo desarrollador ⚪ [SC25][SC59]; 1–3 h | 60 |
-
-### Desglose de la puntuación
-
-| # | Idea | R1 ×20 | R2 ×20 | R3 ×15 | R4 ×25 | R5 ×10 | R6 ×10 | Total | Dato que sostiene R2 |
-|---|---|---|---|---|---|---|---|---|---|
-| 1 | ¿Ya cayó? | 5 | 4 | 5 | 5 | 4 | 5 | **94** | 2.48 M reclamaciones por posible fraude en un semestre [SD38]; comprobantes falsos [SD41] |
-| 2 | Cóbrale | 5 | 4 | 5 | 5 | 3 | 4 | **90** | ~85 % paga en efectivo [SD10]; débito hasta 3.95 % [SD24]; sin dato de preferencia por voz (⚪, K06.7) |
-| 3 | Mesa Dividida | 4 | 4 | 4 | 4 | 3 | 4 | **78** | Restaurantes con crédito: 2.55–5.84 % (⚪ periodo) [SD63] |
-| 4 | Paga Tranquilo | 2 | 5 | 3 | 5 | 4 | 4 | 78 · veto 4 | 57.8 % de 65–74 años usa internet [SD45]; 15–21 % de 60+ paga digital [SD47] |
-| 5 | La Libreta | 4 | 3 | 4 | 3 | 5 | 5 | 75 | Sin dato verificado sobre fiado (⚪) |
-| 6 | Cooperacha | 3 | 3 | 4 | 4 | 4 | 5 | 74 | Sin dato |
-| 7 | Pizarrón a Caja | 4 | 4 | 4 | 3 | 4 | 3 | 73 | Igual que Mesa Dividida [SD63] |
-| 8 | Te Mando el Cobro | 4 | 4 | 4 | 3 | 3 | 3 | 71 | Comprobante falso o reversa a domicilio [SD41] |
-| 9 | Remisión a Cobro | 4 | 3 | 4 | 4 | 3 | 2 | 70 | Sin dato (persona fuera de K06) |
-| 10 | Mercado Conectado | 4 | 4 | 3 | 2 | 4 | 4 | 67 | 339 mercados y ~300 mil personas en la CDMX [SD55] |
-| 11 | Pedido por Chat | 4 | 3 | 3 | 3 | 3 | 4 | 66 | Sin dato |
-| 12 | Alta Guiada | 3 | 4 | 2 | 4 | 2 | 3 | 64 | 21.8 M cuentas CoDi validadas, 2.5 M han pagado [SD33] |
-| 13 | Corte de Caja | 3 | 3 | 2 | 5 | 2 | 2 | 63 | Sin dato |
-| 14 | Tanda Transparente | 3 | 3 | 3 | 2 | 5 | 4 | 61 | Sin dato |
-| 15 | Cobra desde ChatGPT | 4 | 2 | 4 | 2 | 4 | 3 | 60 | Sin dato |
-
-### Lectura del banco
-
-- **Top 3: ¿Ya cayó?, Cóbrale y Mesa Dividida.** Los tres ponen el cobro CoDi en el centro, usan una persona de K06.9 con dato y caben en el kit del día.
-- **¿Por qué ¿Ya cayó? arriba de Cóbrale si la caja por voz es lo obvio?** Comparten el núcleo; ¿Ya cayó? suma originalidad y voto (todo México conoce la captura falsa) y su paso estrella no depende de un micrófono en una sala ruidosa: la captura se sube como archivo. Cóbrale queda a 4 puntos y también puede ganar.
-- **Paga Tranquilo** suma 78, pero cae en el veto 4: su letra grande y su aviso hablado entran a los tres finalistas como capa de accesibilidad.
-- **La Libreta** es la más original junto con la Tanda (R5 = 5). No hay dato verificado de fiado en la base y su notificación depende de algo ⚪; con un dato con fuente sube a 79. Es la adaptación natural si el reto oficial pide "solicitudes de pago" o comercio comunitario (K07.6).
-- **Corte de Caja** (R4 = 5) es el segundo acto más barato para cualquier finalista.
-
-### Núcleo común de los tres finalistas
-
-Es el kit del día sin cambios: Prompts 1, 2 y 5 de `PROMPTS-CODEX.md`, más los ajustes de cada finalista a los Prompts 2–5 y una tarea nueva.
-
-1. **Cobro:** `POST /api/cobros` valida el monto (> 0 y ≤ `MAX_MONTO_MXN`) y llama a pey `POST /codi/qr` con el monto en pesos, `generateImage: true`, `expiration: 600`, `numRef` y `metadata`; si `qrImage` llega `null`, el servidor dibuja `qrString` [SB10][SB23].
-2. **Estado:** la pantalla pregunta cada 2 s a `GET /api/estado?id=…`, que consulta `GET /transaction/codi/qr/{id}`: un item `PAID` → pagado; 404 → pendiente con aviso (QR de otra llave) [SB10][SB15]. Sin base de datos: la verdad del pago es pey (K03.7).
-3. **Webhook:** `POST /api/webhook-pey` verifica la firma Standard Webhooks y registra `codi.qr.payment_received`; es bitácora y respaldo [SB17][SB39]. Va en el dominio de producción, no en un preview [SB43]; es uno por llave [SB08].
-4. **Modos:** `MODO_PAGO` (`simulacion`, `prueba` o `comercio`) siempre visible en pantalla. Preview en SIMULACIÓN; Production en `prueba` con `MAX_MONTO_MXN=20` y cobros de $1, porque lo pagado a la cuenta de prueba no se devuelve [SB07] (AGENTS.md, K03.3).
-5. **Sin variables nuevas:** los tres finalistas usan solo las de `.env.example`.
-
-**Cómo no chocar con la Tarea 1 genérica:** la capa de cada idea va en una **Tarea 9** (plantilla R6) que solo crea archivos nuevos. La interfaz (Tarea 4) la carga con `import()` dinámico dentro de try/catch: mientras la Tarea 9 no se fusiona, su botón no aparece y nada se rompe. Así se puede elegir la idea con el PRD (11:00), como pide el RUNBOOK.
-
-## K07.3 · Finalista 1: ¿Ya cayó?, la captura no es dinero (94)
-
-### Problema
-- **Persona (K06.9): tianguista de fruta.** Cobra montos chicos con una fila de cuatro clientes; uno pregunta "¿le transfiero?" y enseña su pantalla. Con la fila encima no revisa su banco, y una captura de "ya te transferí" puede ser falsa o revertirse [SD41].
-- **Datos:** de enero a junio de 2025 hubo 2.48 millones de reclamaciones por posible fraude y el fraude digital superó 60 % de las quejas [SD38]; en la CDMX, 31.6 % de las 40,688 quejas de 2025 se ligaron a fraude [SD40]. La forma segura de verificar es el CEP de Banxico con la clave de rastreo o el saldo real, no la imagen [SD41]. Las personas de 60 años o más suman 32 % de las quejas por posible fraude (⚪ año del dato) [SD39]. La desconfianza es una de las causas que se citaban del poco uso de CoDi [SA42].
-- **Por qué ahora:** a más tardar el 14 de diciembre de 2026 todas las apps bancarias deberán dar comprobante con clave de rastreo y liga al CEP (K06.5) [SD06]: las capturas serán todavía más comunes.
-
-### Frase de valor
-"La captura no es dinero: cobra con QR CoDi y deja que pey, no una foto, te diga si ya cayó."
-
-### Demo exacta en 3 pasos (≤ 80 s)
-
-| Paso | Qué dice José | Qué se ve en la pantalla (proyectada) | Qué pasa en el celular de la clienta |
-|---|---|---|---|
-| 1 · Cobrar | Toca el ejemplo o dice: "Cóbrale un dulce de tamarindo." | Propuesta de la IA: 1 × Dulce de tamarindo · **$1.00** → **Confirmar y generar QR** → QR CoDi grande, "Esperando pago…" y banner MODO PRUEBA. | Nada todavía. |
-| 2 · La captura | "La clienta dice que ya me pagó y me enseña esto." Toca **Revisar una captura** y sube la imagen de ejemplo. | "Leí: $1.00 · 13:58 · clave de rastreo EJEMPLO123" → **"Todavía no cae. Pey no tiene ningún pago para este cobro: no entregues."** | La "clienta" solo enseña su captura; su banco no registra nada. |
-| 3 · ¡Ya cayó! | "Ahora sí, págame con CoDi." | En segundos (consulta cada 2 s): **"¡Ya cayó! $1.00 · confirmado por pey"**, vibración y voz: "Ya cayó tu dinero: un peso". | Abre su app → CoDi (en BBVA, "Pagar con CoDi") → escanea → ve monto y concepto → autoriza; su banco confirma [SB31][SB33]. |
-
-La captura de ejemplo es una imagen propia y ficticia ("Transferencia enviada", $1.00, 13:58, "Clave de rastreo EJEMPLO123", "Banco Ejemplo"), sin logos ni diseño de un banco real. Opcional (+15 s): subir la captura real del banco y ver "Coincide con el pago de $1.00 de las 14:05".
-
-### Alcance del MVP
-- **Sí:** pedido por texto o ejemplo → `crear_cobro` con catálogo de ejemplo → confirmación → QR CoDi con pey → estado cada 2 s → "¡Ya cayó!" con voz y vibración; botón "¿Ya cayó?" que consulta pey al instante; "Revisar una captura": foto o archivo → lectura con IA → veredicto con código → texto claro y clave de rastreo para el CEP; "Capturar a mano"; MODO PRUEBA y SIMULACIÓN visibles; tope `MAX_MONTO_MXN=20`.
-- **Debería (solo si a las 13:00 ya hubo un cobro real):** voz para dictar (Tarea 9 de K07.4); "¿Cuánto vendí hoy?" con `resumen_de_ventas` (K03.9).
-- **No:** verificar transferencias SPEI que no pasaron por pey (no hay API del CEP en la base, ⚪); guardar imágenes; decir "es falso"; devoluciones (pey no tiene endpoint [SB10]); cuentas de usuario; base de datos; varios comercios.
-
-### Arquitectura
-
-```
-app/
-├── index.html · css/estilos.css · js/app.js · js/textos.js            T4  pedido → confirmar → QR (+ "Revisar una captura") → pagado
-├── js/revisar.js                                                      T6  foto → /api/revisar → veredicto (carga dinámica)
-├── js/estado-pago.js · css/estado-pago.css                            T5  consulta cada 2 s → "¡Ya cayó!" + voz
-├── js/contrato.js · js/api.js · js/vistas.js                          T1  congelados
-├── api/agente.js · api/_lib/agente.js · api/_lib/catalogo.js          T3  crear_cobro + catálogo de ejemplo
-├── api/revisar.js · api/_lib/extractor.js · api/_lib/coincidencias.js T6  lectura con IA + veredicto con código
-├── api/cobros.js · api/estado.js · api/webhook-pey.js · api/_lib/pey.js  T2  pey (+ listarPagosRecientes)
-├── api/salud.js · api/_lib/config.js · api/_lib/http.js               T1  congelados
-└── tests/  base · pey · agente · estado-pago · revisar                 cada tarea la suya
-```
-
-| Ruta | Qué hace | OpenAI o pey | Tarea |
-|---|---|---|---|
-| `POST /api/agente` | Texto → `{respuesta, propuesta}` | Responses API, `gpt-6.1-sol`, `reasoning.effort: "low"`, `crear_cobro` con `strict: true` [SC08][SC13] | T3 |
-| `POST /api/cobros` | Propuesta confirmada → cobro con QR | `POST /codi/qr` [SB10] | T2 |
-| `GET /api/estado?id=` | ¿Ya cayó? | `GET /transaction/codi/qr/{id}` [SB15] | T2 |
-| `POST /api/webhook-pey` | Registro firmado | `codi.qr.payment_received` [SB17][SB39] | T2 |
-| `POST /api/revisar` | `{imagenBase64, mime, cobroId}` → `{leido, veredicto, pago}` | Lectura: Responses API con `input_image` (forma de K04.2, ⚪) y `text.format` estricto [SC06][SC12]; búsqueda: `GET /transaction/api-key`, 80 por página [SB10] | T6 |
-
-**Lectura de la captura** (salida estructurada; lo que no se ve va `null`) [SC12]:
-
-```json
-{
-  "type": "json_schema", "name": "captura", "strict": true,
-  "schema": {
-    "type": "object",
-    "properties": {
-      "es_comprobante": { "type": "boolean" },
-      "monto": { "type": ["number", "null"] },
-      "fecha": { "type": ["string", "null"], "description": "YYYY-MM-DD" },
-      "hora": { "type": ["string", "null"], "description": "HH:MM, 24 h" },
-      "clave_rastreo": { "type": ["string", "null"] },
-      "legible": { "type": "boolean" }
-    },
-    "required": ["es_comprobante", "monto", "fecha", "hora", "clave_rastreo", "legible"],
-    "additionalProperties": false
-  }
-}
-```
-
-**Veredicto (código, no modelo):**
-1. **Con un cobro activo:** manda el estado de ese QR en pey. `PAID` → "¡Ya cayó!"; si no → "Todavía no cae", diga lo que diga la captura. Si el monto leído no coincide con el cobro, se muestra ("La captura dice $350; tu cobro es de $1").
-2. **Sin cobro activo:** busca pagos `PAID` de las últimas 2 horas (máximo 3 páginas). Mismo monto (±$0.01) y hora a ±15 min → "Coincide"; mismo monto a otra hora → "Revísalo"; nada → "No encuentro este pago en tus cobros de pey; si te transfirieron a tu cuenta, revisa tu banco o el CEP con la clave de rastreo" [SD41]. Si la clave leída es igual a `metadata.trackingKey`, se dice (⚪ que ese campo sea la clave SPEI [SB21]).
-3. **Ilegible:** "No pude leer la captura: escribe el monto o usa «¿Ya cayó?»".
-4. Nunca se dice "falso" ni se acusa; hora de CDMX = UTC−6 todo el año (K03.9).
-
-**Variables:** solo las del núcleo, con `MAX_MONTO_MXN=20`. **Costo:** un cobro con `gpt-6.1-sol` (≈ 1,500 tokens de entrada y 150 de salida) ronda US$0.005 más razonamiento ⚪ (cálculo propio con [SC07]); el costo de una revisión depende de los tokens de imagen, que K04 no da (⚪).
-
-### Riesgos y plan B
-
-| Riesgo | Señal | Plan B |
-|---|---|---|
-| pey no habilita la llave o el pago real falla | `PEY_NO_AUTORIZADO`, 503 o el QR no se paga | Video del cobro real de anoche; `MODO_PAGO=simulacion` con banner "SIMULACIÓN" (R5 de `PROMPTS-CODEX.md`), dicho en voz alta (K03.6) |
-| La lectura falla (reflejo, foto borrosa, forma de `input_image` ⚪) | Campos vacíos o mal leídos | Subir archivo en vez de foto; monto editable; el veredicto con cobro activo no depende de la lectura |
-| Tarea 9 no llega a las 13:00 | El botón "Revisar una captura" no aparece | El paso 2 se hace con el botón "¿Ya cayó?" (consulta pey, K06.6) y la captura queda como siguiente paso en el pitch |
-| Le pagaron por SPEI normal, no con el QR | No aparece en pey | Texto honesto con la clave de rastreo para el CEP [SD41]; en el pitch, "por eso cobramos con QR CoDi" |
-| La búsqueda tarda | Más de 5 s | Ventana de 2 h y máximo 3 páginas de 80 [SB10] |
-| Datos personales en capturas | Nombres o cuentas visibles | No se guarda nada; la captura de la demo es ficticia |
-| OpenAI sin saldo o caído | 503 `IA_SIN_SALDO` | "Capturar a mano" (Tarea 1) y monto escrito para la revisión |
-| Se acaba el límite de Codex (Plus comparte una bolsa de 5 h y las tareas cloud gastan más [SC44]) | Tablero de uso bajo | Lanza primero 2, 3 y 9; la 4 y la 5 después; el pulido es lo primero que cae |
-
-### Plan de tareas para Codex
-
-| K07 | Se lanza como | Cuándo (RUNBOOK) | Toca SOLO | Qué agrega en ¿Ya cayó? |
-|---|---|---|---|---|
-| T1 | Prompt 1 tal cual ("Idea: ¿Ya cayó?…") | 10:35, sola | Esqueleto de `app/` | Nada específico |
-| T2 | Prompt 2 + ajuste | 11:10, en paralelo | `app/api/_lib/pey.js`, `app/api/cobros.js`, `app/api/estado.js`, `app/api/webhook-pey.js`, `app/tests/pey.test.js` | `listarPagosRecientes()` |
-| T3 | Prompt 3 + ajuste | 11:10 | `app/api/agente.js`, `app/api/_lib/agente.js`, `app/api/_lib/catalogo.js`, `app/tests/agente.test.js` | Catálogo de ejemplo; precios puestos por el servidor |
-| T4 | Prompt 4 + ajuste | 11:10 | `app/index.html`, `app/css/estilos.css`, `app/js/app.js`, `app/js/textos.js` | Botón "Revisar una captura" con carga dinámica |
-| T5 | Prompt 5 + ajuste | 11:10 | `app/js/estado-pago.js`, `app/css/estado-pago.css`, `app/tests/estado-pago.test.js` | "¡Ya cayó!", botón "¿Ya cayó?" y voz |
-| T6 | **Tarea 9** (abajo) | 11:10 | `app/js/revisar.js`, `app/api/revisar.js`, `app/api/_lib/extractor.js`, `app/api/_lib/coincidencias.js`, `app/tests/revisar.test.js` | Captura → lectura → veredicto |
-| Cierre | Prompts 6 y 7 | 13:00 | Ver `PROMPTS-CODEX.md` | README con "qué es real", pulido |
-
-```text
-AJUSTES DE ¿YA CAYÓ? (pega cada bloque al final del prompt indicado; prevalecen sobre lo anterior)
-
-Prompt 2: además exporta listarPagosRecientes({desdeEpoch}) en app/api/_lib/pey.js con GET /transaction/api-key
-(80 por página con nextToken, máximo 3 páginas, K03.4). Regresa solo PAID desde desdeEpoch como
-[{id, monto, fechaPago, claveRastreo}] (claveRastreo = metadata.trackingKey o null; ⚪ que sea la clave SPEI).
-En simulación, 2 pagos de ejemplo marcados "SIMULACIÓN". Pruebas con fetch simulado, incluida la paginación.
-
-Prompt 3: en cada elemento de detalle agrega producto_id (string o null). Si existe en app/api/_lib/catalogo.js,
-el servidor pone el precio del catálogo y recalcula el monto: el modelo nunca pone precios del catálogo.
-"Un cuarto" = 0.25 kg; "medio" = 0.5 kg. Si el comerciante dice el monto ("cóbrale 85 de dos tacos"), detalle puede
-ir vacío. Prueba extra: "cóbrale un dulce de tamarindo" → monto 1.
-
-Prompt 4: en #vista-pedido y #vista-qr agrega el botón #btn-revisar "Revisar una captura". Al tocarlo, carga
-./revisar.js con import() dinámico dentro de try/catch y llama abrirRevision({cobroActivo}). Si el módulo todavía
-no existe (lo crea otra tarea en paralelo), oculta el botón y sigue. Marca y títulos: "¿Ya cayó?".
-
-Prompt 5: la vista PAGADO dice "¡Ya cayó!" y anuncia "Ya cayó tu dinero: N pesos" con speechSynthesis
-(lang "es-MX"; si el equipo no tiene voz en español, solo texto y vibración, ⚪). Crea dentro de #vista-qr un botón
-"¿Ya cayó?" que consulta /api/estado de inmediato y anuncia "Todavía no cae" o "¡Ya cayó!".
-```
-
-```text
-TAREA 9 · Revisar una captura: foto → lectura con IA → veredicto con pey
-CONTEXTO: ¿Ya cayó? (K07.3). Es el paso 2 de la demo: una captura de "ya te transferí" no es dinero.
-Si esta tarea falla, la demo sigue con el botón "¿Ya cayó?": no rompas nada fuera de tus archivos.
-LEE: AGENTS.md; docs/PRD.md; K03.4 (estados y objeto transacción); K04.2 y K04.5 (input_image y salida
-estructurada); K07.3 (esquema de lectura, reglas del veredicto y textos). No cambies app/js/contrato.js,
-app/js/api.js ni app/api/_lib/config.js.
-ALCANCE (solo archivos nuevos): app/js/revisar.js · app/api/revisar.js · app/api/_lib/extractor.js ·
-app/api/_lib/coincidencias.js · app/tests/revisar.test.js
-QUÉ HACER:
-1. revisar.js exporta abrirRevision({cobroActivo}): crea su propia sección accesible (label, foco, aria-live)
-   con <input type="file" accept="image/*" capture="environment">; reduce la imagen a 1280 px como JPEG 0.8 con
-   canvas; la envía con fetch a POST /api/revisar {imagenBase64, mime, cobroId}; muestra lo leído (monto editable)
-   y el veredicto con los textos de K07.3.
-2. extractor.js: extraerCaptura({imagenBase64, mime}) con la Responses API, model = OPENAI_MODEL, reasoning
-   "low", input_text + input_image (data URL), text.format con el esquema de K07.3. Negativa o "incomplete" →
-   {legible: false}. Instrucción: "Lee la captura. Si un dato no se ve, null. No juzgues si es real."
-3. coincidencias.js: reglas del veredicto de K07.3, sin IA. Con cobroId manda el estado del QR
-   (consultarEstado); sin cobroId usa listarPagosRecientes. Importa app/api/_lib/pey.js con `import * as`:
-   si listarPagosRecientes aún no existe (la Tarea 2 corre en paralelo), usa pagos de SIMULACIÓN etiquetados.
-4. api/revisar.js: valida tipo y tamaño (413 si pasa de 1.5 MB), une extractor y coincidencias, responde
-   {leido, veredicto, pago}. Sin OPENAI_API_KEY → 503 con "Escribe el monto a mano".
-5. No guardes la imagen ni lo leído; logs solo con códigos y tiempos. Nunca digas "falso".
-CRITERIOS DE ACEPTACIÓN:
-1) `npm test --prefix app` pasa con fetch simulado: cobro activo PENDING → todavia_no_cae aunque la captura
-   diga lo mismo; PAID → ya_cayo; sin cobro: mismo monto y hora cercana → coincide; hora lejana → dudoso;
-   nada → no_encontrado; ilegible; centavos; zona horaria.
-2) En SIMULACIÓN, la captura de ejemplo con un cobro activo da "Todavía no cae".
-3) A 360 px el veredicto se lee sin desplazarse.
-CÓMO PROBARLO: npm test --prefix app; en el preview, crear un cobro y subir la captura de ejemplo.
-ENTREGA: PR "Tarea 9: revisar una captura" con el formato de AGENTS.md.
-```
-
-```text
-MARCADORES PARA PROMPTS-CODEX
-[IDEA ELEGIDA] ¿Ya cayó?: caja de cobro CoDi (pey) para puestos de barrio que arma el cobro con IA y nunca acepta una captura como pago: la IA la lee y el sistema la busca en los pagos reales.
-[FRASE DE VALOR] La captura no es dinero: cobra con QR CoDi y deja que pey, no una foto, te diga si ya cayó.
-[PERSONA] Tianguista de fruta: cobra montos chicos con fila de clientes; le enseñan capturas de "ya te transferí" y no tiene tiempo de revisar su banco.
-[DEMO PASO 1] Tocar o decir "cóbrale un dulce de tamarindo" → propuesta de $1 → Confirmar → QR CoDi.
-[DEMO PASO 2] "Revisar una captura" con la captura de ejemplo → la IA lee monto, hora y clave → "Todavía no cae: no entregues".
-[DEMO PASO 3] La clienta paga el QR desde su banco → "¡Ya cayó!" confirmado por pey, en voz alta.
-[FRASE DE DEMO] cóbrale un dulce de tamarindo
-[MONTO DEMO] 1
-[HERRAMIENTAS EXTRA] ninguna (la lectura de capturas es la Tarea 9, fuera del agente)
-[CATÁLOGO DE EJEMPLO] dulce de tamarindo $1 · mango $15 · plátano $25/kg · fresa $60/kg (precios de ejemplo)
-[ESTILO] alto contraste para sol de tianguis; verde solo para "¡Ya cayó!", ámbar para "Todavía no cae"; números enormes
-```
-
-### Guion de 30 segundos
-
-> "En el tianguis alguien enseña su celular: 'ya te transferí'. Con la fila encima nadie revisa su banco, y a veces ese dinero nunca llega. ¿Ya cayó? cambia la regla. Digo 'cóbrale un dulce de tamarindo' y sale el QR CoDi de pey, sin comisión. Si me enseñan una captura, OpenAI la lee y el sistema la busca en los pagos reales: no está, no entrego. Cuando pagan de verdad, pey lo confirma en segundos: ya cayó."
->
-> Cierre opcional (+5 s): "Lo construí hoy, solo, con [N] tareas de Codex."
-
-### Por qué gana
-- **R1 · 5:** es cobro para comercios de barrio, el primer ejemplo oficial [SA01], con QR de pey y confirmación real; OpenAI es necesaria dos veces (entender el pedido y leer la captura) y Codex queda visible en seis tareas y sus PRs.
-- **R2 · 4:** el momento de pago de la tianguista de K06.9 es justo "alguien enseña su pantalla"; fraude medido por Condusef [SD38]. Límite honesto: solo verifica pagos hechos con pey.
-- **R3 · 5:** el jurado ve una captura quedar en evidencia y luego un pago real que cae en segundos.
-- **R4 · 5:** usa el kit tal cual más una tarea; si la lectura falla, el veredicto con cobro activo sigue, porque lo decide el estado de pey.
-- **R5 · 4:** "la captura no es dinero" es un ángulo propio; K06.11 ya lo listaba, así que alguien más podría intentarlo.
-- **R6 · 5:** "¿ya cayó?" se entiende sin explicar; sigue en el Hackatón México con CEP, clave de rastreo y varios comercios [SA03] (⚪ si allá se permite continuar un proyecto, K01.10).
-- **A "¿qué hace la IA que un formulario no?":** lee cualquier captura en segundos y entiende cómo habla el comerciante; el código decide y la persona confirma (patrón de Build Week [SA45]).
-
-## K07.4 · Finalista 2: Cóbrale, caja por voz con cobro CoDi (90)
-
-### Problema
-- **Persona (K06.9): tianguista de fruta** con las manos ocupadas y fila de clientes; cobra montos chicos y no quiere teclear ni hacer cuentas.
-- **Datos:** ~85 % de los adultos paga sobre todo en efectivo las compras de hasta $500 y solo 4.4 % usa transferencias o apps [SD10]; a una miscelánea, cobrar con débito le cuesta de 1.15 % a 3.95 % por venta [SD24]; CoDi no cobra comisión y el dinero llega en segundos [SD31], pero de 21.8 millones de cuentas validadas solo 2.5 millones han pagado alguna vez [SD33]. En la prueba de 2019, las apps no avisaban del pago [SD35].
-
-### Frase de valor
-"Dices lo que te compraron, tu cliente escanea y en segundos escuchas que ya llegó tu dinero: sin comisión y sin teclear."
-
-### Demo exacta en 3 pasos (≤ 60 s)
-
-| Paso | Qué dice José | Qué se ve en la pantalla | Qué pasa en el celular del cliente |
-|---|---|---|---|
-| 1 · Dictar | Mantiene el botón del micrófono: "Cóbrale un dulce de tamarindo." | "Entendí: cóbrale un dulce de tamarindo" → 1 × Dulce de tamarindo · **$1.00** → **Confirmar y generar QR**. | Nada todavía. |
-| 2 · Cobrar | "Mi cliente paga con la app de cualquier banco." | QR CoDi grande, "$1.00 · Dulce de tamarindo", "Esperando pago…". | Escanea con su app, ve monto y concepto y autoriza [SB31]. |
-| 3 · Avisar | "No tengo que ver la pantalla: me avisa." | **PAGADO $1.00 · confirmado por pey**, vibración y voz: "Ya llegó tu dinero: un peso". | Su banco confirma el pago [SB31]. |
-
-Respaldo del paso 1: chip "Ejemplo: cóbrale un dulce de tamarindo" o campo de texto. Para lucir el catálogo sin pagar, muestra solo la propuesta de "un mango y un dulce" ($16).
-
-### Alcance del MVP
-- **Sí:** mantener presionado para hablar (o escribir) → `crear_cobro` con precios del catálogo → confirmación → QR → estado → PAGADO con voz y vibración; "Capturar a mano"; MODO PRUEBA y SIMULACIÓN; `MAX_MONTO_MXN=20`; letra grande (capa de Paga Tranquilo).
-- **Debería:** "Revisar una captura" (Tarea 9 de K07.3) como segundo acto; "¿Cuánto vendí hoy?" (K03.9).
-- **No:** voz full-duplex (GPT-Live-1, español ⚪, K04.8), cuentas, base de datos, devoluciones, WhatsApp real.
-
-### Arquitectura
-Núcleo común (K07.2) más:
-
-| Archivo en `app/` | Qué hace | OpenAI | Tarea |
-|---|---|---|---|
-| `js/voz.js` | Mantener presionado → `MediaRecorder` → `POST /api/transcribir` → texto al agente | — | T6 |
-| `api/transcribir.js` | Audio de hasta 15 s → `{texto}` | `gpt-transcribe` a US$0.0045/min [SC07]; ruta y campos del endpoint ⚪ (no están en K04) | T6 |
-| `api/agente.js` + `api/_lib/agente.js` + `api/_lib/catalogo.js` | Texto → propuesta con precios del catálogo | Responses API, `gpt-6.1-sol`, `crear_cobro` estricto [SC13] | T3 |
-| `js/estado-pago.js` | PAGADO + "Ya llegó tu dinero" con `speechSynthesis` del navegador (no es OpenAI; voces es-MX por equipo ⚪) | — | T5 |
-
-Alternativa de voz solo si anoche la probaste en español: Realtime `gpt-realtime-2.1` con llave efímera y WebRTC (K04.7, K04.16) [SC10]; el español de ese modelo no está verificado (⚪).
-
-### Riesgos y plan B
-
-| Riesgo | Señal | Plan B |
-|---|---|---|
-| La voz no entiende (ruido, permiso, idioma) | Transcripción vacía o errónea | "Entendí: …" siempre visible; chip de ejemplo y campo de texto |
-| La ruta de transcripción no se confirma | Tarea 9 con `TODO(⚪)` | José la prueba anoche y la pega en el prompt; si no, voz fuera y chips |
-| El aviso hablado no suena | No hay voz en español | Pantalla verde y vibración |
-| pey o OpenAI fallan | Igual que K07.3 | Igual que K07.3 |
-| Parecerse a otros proyectos | Varias "cajas por voz" en el evento | Pago real en vivo, aviso hablado y "Revisar una captura" como segundo acto |
-
-### Plan de tareas para Codex
-
-| K07 | Se lanza como | Toca SOLO | Qué agrega en Cóbrale |
-|---|---|---|---|
-| T1 | Prompt 1 tal cual | Esqueleto | Nada específico |
-| T2 | Prompt 2 | Archivos de pey (núcleo) | Nada específico |
-| T3 | Prompt 3 + ajuste de K07.3 (catálogo y `producto_id`) | Archivos del agente | Precios del catálogo puestos por el servidor |
-| T4 | Prompt 4 + ajuste | `app/index.html`, `app/css/estilos.css`, `app/js/app.js`, `app/js/textos.js` | `#btn-voz` (≥ 72 px) y `#transcripcion`, ocultos hasta cargar `./voz.js` con `import()` dinámico; `onTexto` llena `#entrada-pedido` y envía |
-| T5 | Prompt 5 + ajuste | Archivos de `estado-pago` | Voz "Ya llegó tu dinero: N pesos" con `speechSynthesis` (`es-MX`) y botón "Repetir aviso" creado dentro de `#vista-pagado` |
-| T6 | **Tarea 9** (abajo) | `app/js/voz.js`, `app/api/transcribir.js`, `app/tests/voz.test.js` | Voz a texto |
-
-```text
-TAREA 9 · Voz: mantener presionado para hablar → texto para el agente
-CONTEXTO: Cóbrale (K07.4). El paso 1 de la demo se dice en voz alta ("cóbrale un dulce de tamarindo").
-Si esta tarea falla, la demo sigue con texto: no rompas nada fuera de tus archivos.
-LEE: AGENTS.md; docs/PRD.md; K04.3 (modelos de transcripción). No cambies archivos congelados.
-ALCANCE (solo archivos nuevos): app/js/voz.js · app/api/transcribir.js · app/tests/voz.test.js
-QUÉ HACER:
-1. voz.js exporta crearGrabadora({onTexto, onEstado, onError}) → {iniciar, detener, disponible}. Graba con
-   MediaRecorder mientras #btn-voz está presionado (pointerdown/pointerup; con teclado, Espacio), máximo 15 s.
-   Sin micrófono o sin MediaRecorder: disponible = false.
-2. Al soltar, manda el audio crudo con fetch a POST /api/transcribir; avisa "Escuchando…" y "Transcribiendo…"
-   con onEstado y entrega el texto con onTexto.
-3. transcribir.js: valida tipo y tamaño (≤ 1 MB) y llama a la transcripción de OpenAI con el modelo
-   "gpt-transcribe" (K04.3). La ruta y los campos del endpoint NO están en K04: usa los que José confirmó
-   ([RUTA CONFIRMADA]) o la documentación oficial si tienes internet; si no, TODO(⚪) visible y dilo en el PR.
-   Sin llave → 503 IA_NO_DISPONIBLE; más de 15 s → 504 IA_TIEMPO_AGOTADO.
-4. Con ?voz=simulada en la URL, la grabadora entrega "cóbrale un dulce de tamarindo" sin red (ensayo sin micrófono).
-5. Nunca guardes ni registres el audio ni el texto.
-CRITERIOS DE ACEPTACIÓN: 1) `npm test --prefix app` pasa con fetch simulado (éxito, sin llave, audio grande,
-tiempo agotado). 2) En el preview, desde un celular: mantener, decir la frase y soltar → el texto aparece.
-3) Sin micrófono, el botón no aparece y el campo de texto sigue funcionando.
-ENTREGA: PR "Tarea 9: voz (mantener para hablar)" con el formato de AGENTS.md.
-```
-
-```text
-MARCADORES PARA PROMPTS-CODEX
-[IDEA ELEGIDA] Cóbrale: caja por voz para puestos de tianguis que cobra con QR CoDi (pey) y avisa en voz alta cuando el pago ya está confirmado.
-[FRASE DE VALOR] Dices lo que te compraron, tu cliente escanea y en segundos escuchas que ya llegó tu dinero: sin comisión y sin teclear.
-[PERSONA] Tianguista de fruta: cobra montos chicos con las manos ocupadas y fila de clientes.
-[DEMO PASO 1] Decir "cóbrale un dulce de tamarindo" → "Entendí: …" → propuesta de $1 → Confirmar.
-[DEMO PASO 2] QR CoDi grande → el cliente escanea con la app de su banco y autoriza.
-[DEMO PASO 3] PAGADO "confirmado por pey", vibración y voz "Ya llegó tu dinero: un peso".
-[FRASE DE DEMO] cóbrale un dulce de tamarindo
-[MONTO DEMO] 1
-[HERRAMIENTAS EXTRA] ninguna (la voz es la Tarea 9)
-[CATÁLOGO DE EJEMPLO] dulce de tamarindo $1 · mango $15 · plátano $25/kg · fresa $60/kg (precios de ejemplo)
-[ESTILO] alto contraste para sol de tianguis; botón de micrófono enorme; verde solo para PAGADO
-```
-
-### Guion de 30 segundos
-
-> "En el tianguis casi todo se paga en efectivo, y a una miscelánea la terminal le cobra hasta 3.95 % por venta. CoDi cobra 0 %, pero casi nadie lo usa. Con Cóbrale, con las manos ocupadas, digo 'cóbrale un dulce de tamarindo', mi cliente escanea y en segundos escucho 'ya llegó tu dinero'. OpenAI entiende el pedido, el código pone los precios y pey confirma el pago, no una captura."
-
-### Por qué gana
-- **R1 · 5:** primer ejemplo oficial [SA01]; pey en el centro; la voz hace necesaria a la IA.
-- **R2 · 4:** dolor en pesos (hasta 3.95 % contra 0 %) [SD24][SD31]; falta un dato de preferencia por voz (⚪, K06.7).
-- **R3 · 5:** hablas, pagas y la caja te avisa; resuelve lo que falló en 2019: nadie avisaba del pago [SD35].
-- **R4 · 5:** kit tal cual más una tarea; la voz tiene respaldo de texto.
-- **R5 · 3:** la idea es común; se diferencia por pago real y aviso hablado.
-- **R6 · 4:** "le dices y cobra" se entiende en una frase; sigue en el Hackatón México [SA03].
-
-## K07.5 · Finalista 3: Mesa Dividida, cada quien paga lo suyo (78)
-
-### Problema
-- **Persona (K06.9): fonda familiar** con clientes de oficina: "al terminar la comida, varios pagan por separado al mismo tiempo"; clientes sin efectivo y cuentas divididas.
-- **Datos:** con crédito, un restaurante paga de 2.55 % a 5.84 % por cobro (⚪ periodo del dato) [SD63]; CoDi no cobra comisión y el dinero llega en segundos [SD31]; ~85 % paga en efectivo las compras de hasta $500 [SD10].
-
-### Frase de valor
-"Cada quien paga lo suyo con su propio QR CoDi: sin comisión, sin cuentas en la servilleta y con la mesa en verde cuando todos pagaron."
-
-### Demo exacta en 3 pasos (≤ 80 s)
-
-| Paso | Qué dice José | Qué se ve en la pantalla | Qué pasa en el celular del comensal |
-|---|---|---|---|
-| 1 · Repartir | "Mesa 3: dos comidas corridas y un agua de litro, parejo entre Ana y Beto; Carlos solo un dulce." | Reparto hecho por el servidor: Ana $110.00 · Beto $110.00 · Carlos $1.00 · **Total $221.00** → **Confirmar y generar QR**. | — |
-| 2 · Tres QR | "Cada quien escanea el suyo." | Tablero con tres tarjetas (nombre, monto, estado); al tocar la de Carlos, su QR se ve grande. | José, como Carlos, escanea y autoriza $1 [SB31]. |
-| 3 · La mesa en verde | "Carlos pagó con CoDi y Ana en efectivo." | Carlos en verde "confirmado por pey"; José toca "Pagó en efectivo" en Ana (gris, "registrado por ti"); arriba: "Pagado $111.00 de $221.00 · falta Beto". | Su banco confirma el pago. |
-
-**Tope:** las partes de $110 no caben en `MAX_MONTO_MXN=20`. Esta idea pide `MAX_MONTO_MXN=150` en Production; paga solo la tarjeta de $1, porque lo pagado a la cuenta de prueba no se devuelve [SB07].
-
-### Alcance del MVP
-- **Sí:** dictar o escribir el reparto → `crear_reparto` → partes calculadas por el servidor → confirmar → un cobro por comensal (máximo 6) → tablero con estado por persona → "Pagó en efectivo" → resumen; SIMULACIÓN y MODO PRUEBA visibles.
-- **Debería:** voz (Tarea 9 de K07.4); propina opcional; "Mesa pagada" en voz alta.
-- **No:** comandas, inventario, propinas obligatorias, cuentas de usuario, base de datos.
-
-### Arquitectura
-Núcleo común (K07.2) más:
-
-| Archivo en `app/` | Qué hace | OpenAI o pey | Tarea |
-|---|---|---|---|
-| `api/agente.js` + `api/_lib/agente.js` | "Mesa 3: …" → propuesta de mesa | Responses API, `gpt-6.1-sol`, `crear_cobro` y `crear_reparto` estrictos [SC13] | T3 |
-| `api/_lib/reparto.js` | Precio del catálogo × cantidad; cada consumo se divide entre quienes lo pagan; los centavos sobrantes al primero; la suma es exacta | — (código) | T3 |
-| `api/cobros.js` (× N) | Un cobro por comensal | `POST /codi/qr` con `metadata` (mesa y comensal) [SB10] | T2 |
-| `js/mesa.js` + `css/mesa.css` | Tablero, QR grande al tocar, "Pagó en efectivo", resumen; usa `crearSeguidor` de `estado-pago.js` | — | T6 |
-
-```json
-{
-  "type": "function",
-  "name": "crear_reparto",
-  "description": "Propone cómo dividir la cuenta de una mesa. NO cobra: el servidor pone precios del catálogo, divide y suma; la persona confirma.",
-  "strict": true,
-  "parameters": {
-    "type": "object",
-    "properties": {
-      "mesa": { "type": "string" },
-      "comensales": { "type": "array", "items": { "type": "string" } },
-      "consumos": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "producto_id": { "type": "string" },
-            "cantidad": { "type": "number" },
-            "pagan": { "type": "array", "items": { "type": "string" }, "description": "Quiénes pagan este consumo en partes iguales" }
-          },
-          "required": ["producto_id", "cantidad", "pagan"],
-          "additionalProperties": false
-        }
-      }
-    },
-    "required": ["mesa", "comensales", "consumos"],
-    "additionalProperties": false
-  }
-}
-```
-
-Si crear tres QR con imagen tarda, la Tarea 2 puede usar `generateImage: false` y dibujar `qrString` con `qrcode` [SB10][SB23].
-
-### Riesgos y plan B
-
-| Riesgo | Señal | Plan B |
-|---|---|---|
-| Nadie más tiene CoDi activo | Un juez no puede pagar | José paga la parte de $1; las demás quedan pendientes o "en efectivo"; no pidas a los jueces pagar montos altos. La activación puede pedir depósito y SMS [SB34] |
-| Tope alto con dinero real | Alguien paga una tarjeta de $110 | Paga solo la de $1; regresa `MAX_MONTO_MXN=20` después de la demo |
-| Límite de peticiones de pey (⚪) | 429 | Una consulta cada 4 s por QR, con desfase |
-| Reparto ambiguo | La suma no cuadra o falta un nombre | El servidor recalcula y pregunta; confirmación antes de cobrar |
-| pey caído | 5xx | SIMULACIÓN etiquetada y video |
-
-### Plan de tareas para Codex
-
-| K07 | Se lanza como | Toca SOLO | Qué agrega en Mesa Dividida |
-|---|---|---|---|
-| T1 | Prompt 1 tal cual | Esqueleto | Nada específico |
-| T2 | Prompt 2 | Archivos de pey (núcleo) | Nada específico |
-| T3 | Prompt 3 + ajuste | Archivos del agente + `app/api/_lib/reparto.js` y `app/tests/reparto.test.js` (nuevos) | `crear_reparto`; catálogo: comida corrida $95, agua de litro $30, café de olla $15, dulce $1 (precios de ejemplo); propuesta `{tipo: "mesa", mesa, total, comensales: [{etiqueta, concepto, monto, detalle}]}`; prueba con la frase de demo → 110, 110 y 1 |
-| T4 | Prompt 4 + ajuste | Archivos de interfaz | Vista de confirmación con la lista de partes; al confirmar, `import("./mesa.js")` dinámico → `mostrarMesa(propuesta)`; si falla, ofrece cobrar el total en un solo QR |
-| T5 | Prompt 5 | Archivos de `estado-pago` | `crearSeguidor` exportado y estable (ya lo pide el Prompt 5) |
-| T6 | **Tarea 9** (abajo) | `app/js/mesa.js`, `app/css/mesa.css`, `app/tests/mesa.test.js` | Tablero de la mesa |
-
-```text
-TAREA 9 · Tablero de la mesa: un cobro y un QR por comensal
-CONTEXTO: Mesa Dividida (K07.5). Pasos 2 y 3 de la demo: cada quien paga su QR y la mesa se pone verde.
-LEE: AGENTS.md; docs/PRD.md; app/js/api.js y app/js/estado-pago.js (NO los cambies).
-ALCANCE (solo archivos nuevos): app/js/mesa.js · app/css/mesa.css · app/tests/mesa.test.js
-QUÉ HACER:
-1. mostrarMesa(propuesta, {alTerminar}): crea su propia sección; por comensal crea un cobro con api.crearCobro
-   (en paralelo, máximo 6) y pinta una tarjeta: nombre, monto, estado y QR chico; al tocarla, QR grande.
-2. Sigue cada cobro con crearSeguidor de estado-pago.js (importa con `import * as`; si aún no existe, consulta
-   api.consultarEstado cada 4 s), con desfase entre tarjetas y sin dos consultas a la vez del mismo cobro.
-3. Resumen: "Pagado $X de $Y · faltan N". Cuando todas estén pagadas, alTerminar().
-4. Botón "Pagó en efectivo" por tarjeta: estado EFECTIVO ("registrado por ti"), distinto de PAGADO por pey.
-5. "Simular pago" por tarjeta solo si cobro.entorno === 'simulacion'.
-CRITERIOS DE ACEPTACIÓN: 1) `npm test --prefix app` pasa con un seguidor falso (pagar una tarjeta no cambia
-las demás; efectivo no cuenta como pey; resumen correcto). 2) A 360 px una columna; a 1280 px tres por fila.
-3) En SIMULACIÓN: confirmar la mesa → 3 QR → "Simular pago" en una → su tarjeta en verde.
-ENTREGA: PR "Tarea 9: tablero de la mesa" con el formato de AGENTS.md.
-```
-
-```text
-MARCADORES PARA PROMPTS-CODEX
-[IDEA ELEGIDA] Mesa Dividida: la fonda dicta la cuenta y cómo se reparte; cada comensal paga su parte con su propio QR CoDi (pey).
-[FRASE DE VALOR] Cada quien paga lo suyo con su propio QR CoDi: sin comisión, sin cuentas en la servilleta y con la mesa en verde cuando todos pagaron.
-[PERSONA] Fonda familiar con clientes de oficina: al terminar la comida, varios pagan por separado al mismo tiempo.
-[DEMO PASO 1] "Mesa 3: dos comidas corridas y un agua de litro, parejo entre Ana y Beto; Carlos solo un dulce" → 110, 110 y 1 → Confirmar.
-[DEMO PASO 2] Tablero con 3 QR; Carlos escanea el suyo y paga $1.
-[DEMO PASO 3] Carlos en verde "confirmado por pey"; Ana "pagó en efectivo"; resumen "Pagado $111 de $221".
-[FRASE DE DEMO] Mesa 3: dos comidas corridas y un agua de litro, parejo entre Ana y Beto; Carlos solo un dulce
-[MONTO DEMO] 1 (la parte de Carlos; MAX_MONTO_MXN=150 en esta idea)
-[HERRAMIENTAS EXTRA] crear_reparto (K07.5)
-[CATÁLOGO DE EJEMPLO] comida corrida $95 · agua de litro $30 · café de olla $15 · dulce $1 (precios de ejemplo)
-[ESTILO] cálido de fonda con alto contraste; una tarjeta grande por persona; verde = pagado por pey, gris = efectivo
-```
-
-### Guion de 30 segundos
-
-> "Dos de la tarde en una fonda: la mesa pide la cuenta y empieza el '¿cuánto es de cada quien?'. Con tarjeta, la fonda paga comisión en cada cobro. Con Mesa Dividida digo 'dos corridas y un agua de litro, parejo entre Ana y Beto; Carlos solo un dulce', y cada quien recibe su propio QR CoDi: paga desde su banco, sin comisión, directo a la cuenta de la fonda. OpenAI reparte, el código suma y pey confirma."
-
-### Por qué gana
-- **R1 · 4:** cobro CoDi múltiple con pey; la IA entiende el reparto dicho en español.
-- **R2 · 4:** fonda de K06.9 con su momento de pago exacto; comisión con crédito en restaurantes (⚪ periodo) [SD63].
-- **R3 · 4:** tablero que se pone verde persona por persona; un juez puede pagar la parte de $1.
-- **R4 · 4:** kit más reparto determinista y varios seguidores; pide subir el tope.
-- **R5 · 3:** dividir la cuenta ya existe; con CoDi y lenguaje natural, poco.
-- **R6 · 4:** "¿cuánto es de cada quien?" es universal.
-
-## K07.6 · Recomendación final
-
-### La idea número 1 y por qué
-
-**Recomendación:** construye **¿Ya cayó?** (K07.3).
-
-1. **Mejor puntuación** (94) y primera también con los pesos de K08.3 (92) (K07.1).
-2. **Es el reto completo:** cobro para comercios de barrio con CoDi y pey [SA01], dinero directo a la cuenta del comercio [SB38], comisión 0 % como pide AI Builders [SA03], y la experiencia de quien recibe el dinero, que pey dice que falta resolver [SB37].
-3. **Ataca la causa, no el síntoma:** CoDi no despegó por fricción y desconfianza [SA42]; K06.6 pide justo esto: nunca validar con captura y un botón "¿ya me pagaron?" que consulte el estado real.
-4. **Demo robusta:** la captura se sube como archivo (sin micrófono ni ruido) y el veredicto con cobro activo lo decide el estado de pey, no el modelo [SA45].
-5. **Crece sin rehacer nada:** comparte núcleo con Cóbrale y Mesa Dividida; si sobra tiempo, la voz de Cóbrale (su Tarea 9) se suma como otra tarea con archivos propios.
-
-### Su demo en 3 pasos
-1. **Cobrar:** "Cóbrale un dulce de tamarindo" → $1 → Confirmar → QR CoDi.
-2. **La captura:** "Revisar una captura" → la IA lee $1.00, 13:58 y la clave → "Todavía no cae: no entregues".
-3. **¡Ya cayó!:** la clienta paga desde su banco → "¡Ya cayó! $1.00, confirmado por pey", en voz alta.
-
-En el guion de K09.3, los pasos 1 y 2 de K09 se vuelven el paso 1 de aquí, y el paso 2 de K09 pasa a ser la captura.
-
-### Si el reto o los criterios oficiales piden otra cosa
-
-| Si piden… | Haz esto | Tiempo |
-|---|---|---|
-| 1 · Comercio comunitario o "solicitudes de pago" | Cambia a **La Libreta** (idea 5): fiado apuntado con IA y cobro con `POST /codi/pn` al celular del cliente, seguido con `GET /transaction/{id}` [SB10][SB18]; QR de respaldo si la notificación no llega (⚪, depende del banco del cliente [SB30]). Para varios pagadores, **Mesa Dividida** (K07.5) | 45–60 min sobre el núcleo |
-| 2 · Lo más nuevo de OpenAI o una app "dentro de ChatGPT" | La caja sigue como demo principal; suma un servidor MCP en `/mcp` con `crear_cobro`, `consultar_cobro` y la revisión de capturas (K04.11, K05.14) [SC22][SC24]. Hazlo en una tarea sola porque agrega dependencias; Plus y modo desarrollador ⚪ [SC25][SC59]. Plugins y MCP Events fueron novedad del DevDay 2026 [SA29] | 45–60 min sin interfaz |
-| 3 · Flujos empresariales o conciliación | Suma el corte de caja con `resumen_de_ventas` y `metadata` por pedido (K03.9), o Remisión a Cobro (idea 9) con visión | 30–60 min |
-
-**Si publican criterios con pesos:** ponlos en R1–R6, recalcula el desglose de K07.2 y cambia de idea solo si otra le gana a ¿Ya cayó? por 5 puntos o más; menos que eso está dentro del error de la estimación. **Si pey no da llaves o no se puede cobrar:** misma idea en SIMULACIÓN etiquetada más el video del cobro real de esta noche (K03.6).
-
-### Qué cortar primero si no alcanza el tiempo
-1. Todo lo "Debería" (voz para dictar, resumen del día).
-2. El aviso hablado: queda "¡Ya cayó!" en pantalla y la vibración.
-3. La lectura con IA de la captura: el monto se escribe a mano y el veredicto contra pey sigue.
-4. "Revisar una captura" completa: el paso 2 se hace con el botón "¿Ya cayó?" que consulta pey.
-5. El agente: "Capturar a mano".
-
-**Nunca cortes:** confirmar → QR real → estado de pey → "¡Ya cayó!"; las etiquetas MODO PRUEBA o SIMULACIÓN; el README que dice qué es real; el video de respaldo (K08.3, K08.13).
-
-### Hitos del sábado (reloj del RUNBOOK: T = 10:30)
-
-| Hora | Hito de ¿Ya cayó? | Si no se cumple |
-|---|---|---|
-| 10:35 | Prompt 1 lanzado tal cual | Sigue: no depende de la idea |
-| 11:00 | `docs/PRD.md` copiado de K07.3 | Toma K07.3 tal cual |
-| 11:10–11:20 | Prompts 2–5 con ajustes y Tarea 9 lanzados | Con límite bajo: 2, 3 y 9 primero |
-| 13:00 | Cobro real de $1 en producción y "Todavía no cae" con la captura de ejemplo | Recortes 3 y 4; congela funciones nuevas (K08.4) |
-| 14:45 | Congelar | Se congela igual |
-| 15:15 | Videos: los 3 pasos y el cobro real | Graba con el celular |
-| 15:30 | Entrega interna | Lo que falte, domingo antes de las 11:00 |
-
-### Lo que José resuelve esta noche
-1. **pey de punta a punta:** cuenta de prueba ligada a tu llave, cobro real de $0.01–$1 con el `curl` de K03.3 pagado desde tu app con CoDi activo (algunos bancos validan con depósito y SMS [SB34]) y la pantalla grabada. Revisa que `GET /transaction/api-key` regrese ese pago: es la base de la búsqueda. Lo pagado no se devuelve [SB07].
-2. **OpenAI con visión:** llave con saldo (US$5 o más te pasa al tier Build [SC26]) y una llamada a `gpt-6.1-sol` con `input_image` y salida estructurada sobre tu captura ficticia (la forma de K04.2 es ⚪). Haz esa imagen hoy, sin marcas de bancos reales.
-3. **Codex y Vercel listos:** entorno de Codex publicado y tablero de uso revisado (Plus comparte una bolsa de 5 horas y las tareas cloud gastan más [SC44]); Vercel con Root Directory `app`, Preview en SIMULACIÓN y el dominio de producción anotado para el webhook [SB43].
-
-## K07.7 · Ideas descartadas y antipatrones
-
-| Idea o patrón | Por qué no | Base |
-|---|---|---|
-| Chatbot de educación financiera o "asesor CoDi" sin cobro | El reto pide cobros CoDi con pey; un chat genérico sin cobro aleja a los organizadores (K02.13) | [SA01] |
-| Agente que cobra solo | El modelo propone, la persona confirma y el servidor impone el tope (K03.9) | [SA45] |
-| Terminal con un chat pegado | IA decorativa: C3 nivel 1 de K08.5 | K08.5 |
-| Cripto o stablecoins "sobre CoDi" | Fuera del reto; aunque sea fortaleza de José (K10.1), distrae del cobro CoDi | [SA01] |
-| Cobros a turistas con CoDi | Se cobra a cuentas de bancos participantes con app compatible [SB26][SB30]; el turista típico no la tiene (inferencia) | [SB30] |
-| Tandas o pagos a terceros desde la app | pey solo documenta cobros, consultas, CLABEs y links (K03.4); no hay pagos salientes y se manejaría dinero ajeno | [SB10] |
-| Prometer que se verifica cualquier transferencia SPEI | No hay API del CEP en la base (⚪); se promete lo que no se muestra | [SD41] |
-| Registrar en vivo CLABEs reales de locatarios | `ACTIVE` tarda hasta 5 días hábiles y se exponen datos personales | [SB13] |
-| WhatsApp Business real | Alta y aprobación fuera de la base (⚪); no cabe en 4.5 h; mejor un chat web con estilo conocido | — |
-| Vales Mercomuna con CoDi | Formato del vale y pago al comercio no verificados (K06.8 ⚪) | [SD58] |
-| Crédito o scoring con IA | Datos personales y regulación; no se demuestra en 80 s | — |
-| Agent Builder, Assistants API o `gpt-image-1` | Se apagan o ya se apagaron | [SC20][SC21] |
-| Plataforma de varios lados o marketplace | Demasiadas pantallas para 80 s | K08.11 |
-| Depender de que los jueces tengan CoDi activo | La activación puede pedir depósito y SMS: la demo se atora | [SB34] |
-| Montos reales altos con la cuenta de prueba | Lo pagado no se devuelve | [SB07] |
-
-**Antipatrones de ejecución (restan aunque la idea sea buena):** demo sin respaldo; SIMULACIÓN sin etiqueta; datos o testimonios inventados; llaves en el repo, que OpenAI desactiva si se filtran [SA54]; Codex sin evidencia (tareas, PRs, bitácora; K08.12); pitch de más de 2–3 minutos [SA50]; voz o visión como único camino sin respaldo de texto.
-
-## Fuentes
-
-| ID | Título | URL | Consultado |
-|---|---|---|---|
-| SA01 | DevDay Exchange Community Hackathon: Mexico City (página oficial en Luma; coincide con el boleto del participante) | https://luma.com/f755f0k6 | 2026-11-06 |
-| SA03 | Newsletter de AI Builders, 31 oct 2026 | (correo; sin URL pública) | 2026-11-06 (previo) |
-| SA29 | InfoQ: OpenAI DevDay 2026 | https://infoq.com/news/2026/10/openai-devday-2026 | 2026-11-06 |
-| SA42 | DPL News: México, desestiman a CoDi población y comercios (2022) | https://dplnews.com/?p=173032 | 2026-11-06 |
-| SA45 | OpenAI Developers Blog: Build Week winners | https://developers.openai.com/blog/build-week-winners | 2026-11-06 |
-| SA50 | Codex Community Mini-Hackathon, San Francisco #5 | https://luma.com/7025i1j5 | 2026-11-06 |
-| SA54 | GitHub Changelog: RubyGems, Adobe and OpenAI are now secret scanning integrators (8 jun 2021) | https://github.blog/changelog/2021-06-08-rubygems-adobe-and-openai-are-now-github-secret-scanning-integrators | 2026-11-06 |
-| SB07 | Documentación de pey: Crear una API key | https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key/ | 2026-11-06 |
-| SB08 | Documentación de pey: Configurar webhooks | https://docs.pey.mx/docs/tutorials/getting-started/set-up-webhooks/ | 2026-11-06 |
-| SB10 | CoDi API: especificación OpenAPI (versión 2026-10-20) | https://docs.pey.mx/openapi.json | 2026-11-06 |
-| SB13 | Documentación de pey: Register Bank Account | https://docs.pey.mx/docs/api/register-bank-account | 2026-11-06 |
-| SB15 | Documentación de pey: Get CoDi QR Transactions | https://docs.pey.mx/docs/api/get-co-di-qr-transactions | 2026-11-06 |
-| SB17 | Documentación de pey: webhook CoDi QR, pago recibido | https://docs.pey.mx/docs/webhooks/codi/qr | 2026-11-06 |
-| SB18 | Documentación de pey: webhook CoDi notificación push, pago recibido | https://docs.pey.mx/docs/webhooks/codi/pn | 2026-11-06 |
-| SB21 | Documentación de pey: tipo Respuesta de metadata | https://docs.pey.mx/docs/types/metadata-response | 2026-11-06 |
-| SB23 | Documentación de pey: tutorial Mostrar un QR CoDi | https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr | 2026-11-06 |
-| SB26 | Banco de México: CoDi, Cobro Digital | https://www.banxico.org.mx/sistemas-de-pago/codi-cobro-digital-banco-me.html | 2026-11-06 |
-| SB30 | CoDi (codi.org.mx): CoDi® para cobrar | https://www.codi.org.mx/secundarias/cobrar.html | 2026-11-06 |
-| SB31 | CoDi (codi.org.mx): CoDi® para pagar | https://www.codi.org.mx/secundarias/pagar.html | 2026-11-06 |
-| SB33 | Expansión: cómo pagar con CoDi en BBVA, Santander y otros bancos (2026) | https://expansion.mx/finanzas-personales/2026/07/27/como-pagar-codi-bba-santander-bancos | 2026-11-06 |
-| SB34 | Expansión: cobrar sin comisiones con CoDi (abril 2026) | https://expansion.mx/finanzas-personales/2026/04/09/cobrar-con-tarjeta-sin-comisiones-codi-banxico | 2026-11-06 |
-| SB37 | Merca2.0: Pey, AI Builders México y SpaceXAI realizarán hackatón de pagos digitales (noviembre 2026) | https://www.merca20.com/pey-ai-builders-mexico-y-spacexai-realizaran-hackaton-de-pagos-digitales-en-mexico/ | 2026-11-06 |
-| SB38 | InformaBTL: el 14 de diciembre cambiarán las transferencias; Pey apuesta por pagos QR sin comisiones (noviembre 2026) | https://www.informabtl.com/pagos-qr-mexico-14-diciembre-2026-pey-codi/ | 2026-11-06 |
-| SB39 | Standard Webhooks: especificación | https://github.com/standard-webhooks/standard-webhooks/blob/main/spec/standard-webhooks.md | 2026-11-06 |
-| SB43 | Vercel: Deployment Protection | https://vercel.com/docs/deployment-protection | 2026-11-06 |
-| SC06 | Models (OpenAI API docs) | https://developers.openai.com/api/docs/models | 2026-11-06 |
-| SC07 | Pricing (OpenAI API docs) | https://developers.openai.com/api/docs/pricing | 2026-11-06 |
-| SC08 | GPT-6.1 Sol: Features, Benchmarks, Pricing, and Access (DataCamp) | https://www.datacamp.com/blog/gpt-6-1-sol | 2026-11-06 |
-| SC10 | WebRTC (OpenAI API docs) | https://developers.openai.com/api/docs/guides/voice-webrtc | 2026-11-06 |
-| SC12 | Structured model outputs (OpenAI API docs) | https://developers.openai.com/api/docs/guides/structured-outputs.md | 2026-11-06 |
-| SC13 | Function calling (OpenAI API docs) | https://developers.openai.com/docs/guides/function-calling | 2026-11-06 |
-| SC20 | Agent Builder (OpenAI API docs) | https://developers.openai.com/api/docs/guides/agent-builder | 2026-11-06 |
-| SC21 | Deprecations (OpenAI API docs) | https://developers.openai.com/api/docs/deprecations | 2026-11-06 |
-| SC22 | Connect and test your plugin (OpenAI) | https://developers.openai.com/plugins/deploy/connect-chatgpt | 2026-11-06 |
-| SC24 | MCP server and UI quickstart (OpenAI) | https://developers.openai.com/apps-sdk/quickstart | 2026-11-06 |
-| SC25 | ChatGPT Developer Mode: Where It Is and How to Turn It On (Carly) | https://www.usecarly.com/blog/chatgpt-developer-mode/ | 2026-11-06 |
-| SC26 | Rate limits (OpenAI API docs) | https://developers.openai.com/api/docs/guides/rate-limits.md | 2026-11-06 |
-| SC44 | Codex Pricing (OpenAI; redirige a learn.chatgpt.com/docs/pricing.md) | https://developers.openai.com/codex/pricing.md | 2026-11-06 |
-| SC59 | How to Connect GitHub to ChatGPT — via MCP (AnythingMCP) | https://anythingmcp.com/guides/connect-github-to-chatgpt | 2026-11-06 |
-| SD06 | Ruptura360 · Banxico le dice adiós a la CLABE obligatoria (10-sep-2026) | https://ruptura360.mx/periodismo-de-servicio/banxico-nuevas-reglas-transferencias-bancarias-2026/ | 2026-11-06 |
-| SD10 | Expansión · Diputados aprueban Ley de Economía Digital (6-oct-2026) | https://expansion.mx/economia/2026/10/06/diputados-aprueban-ley-de-economia-digital | 2026-11-06 |
-| SD24 | Banxico · Tasas de descuento con tarjeta de débito, giro Miscelánea (julio 2026) | https://www.banxico.org.mx/servicios/tasas-de-descuento-para-tarjetas-de-debito-por-gir/%7BCE998D24-7B96-F2C4-AF17-C29673DC35D2%7D.pdf | 2026-11-06 |
-| SD31 | Expansión · ¿Te cobran comisión al aceptar tarjeta? Banxico tiene una alternativa (9-abr-2026) | https://expansion.mx/finanzas-personales/2026/04/09/cobrar-con-tarjeta-sin-comisiones-codi-banxico | 2026-11-06 |
-| SD33 | La Razón · Acusan falta de promoción y voluntad en impulso de CoDi (30-sep-2025) | https://www.razon.com.mx/negocios/2025/09/30/acusan-falta-de-promocion-y-voluntad-en-impulso-de-codi/ | 2026-11-06 |
-| SD35 | Xataka México · Probamos CoDi: lo que nos encanta y lo que odiamos (1-oct-2019) | https://www.xataka.com.mx/banca-digital/probamos-codi-que-nos-encanta-que-odiamos-que-tiene-que-resolver-banxico-para-su-implementacion-mexico | 2026-11-06 |
-| SD38 | Vanguardia · Más de 2.4 millones de fraudes bancarios en México durante 2025 (3-nov-2025) | https://vanguardia.com.mx/noticias/mexico/crece-la-estafa-digital-mas-de-24-millones-de-fraudes-bancarios-en-mexico-durante-2025-MK17956794 | 2026-11-06 |
-| SD39 | Xataka México · Fraudes bancarios encontraron su objetivo vulnerable: adultos mayores (19-abr-2026) | https://www.xataka.com.mx/banca-digital/fraudes-bancarios-mexico-encontraron-su-objetivo-vulnerable-adultos-mayores/amp | 2026-11-06 |
-| SD40 | La Crónica · Asociados a fraudes, 30 % de los expedientes en Condusef (17-mar-2026) | https://www.cronica.com.mx/negocios/2026/03/17/asociados-a-fraudes-30-por-ciento-de-los-expedientes-en-condusef/ | 2026-11-06 |
-| SD41 | Grupo Animal · ¿Recibiste una supuesta transferencia bancaria? Así verifícala (28-jul-2026) | https://grupoanimal.mx/explicaciones/transferencia-bancaria-falsa-comprobante | 2026-11-06 |
-| SD45 | INEGI · ENDUTIH 2025, presentación de resultados | https://www.inegi.org.mx/contenidos/programas/endutih/2025/doc/presentacion_endutih2025.pdf | 2026-11-06 |
-| SD47 | Xataka México · México quiere despedirse del efectivo en carreteras y gasolineras (27-abr-2026) | https://www.xataka.com.mx/politica/mexico-quiere-despedirse-efectivo-carreteras-gasolineras-problema-que-millones-necesitan/amp | 2026-11-06 |
-| SD50 | Chilango · Utopía Elena Poniatowska abre en Coyoacán: servicios (ago-2026) | https://www.chilango.com/ciudad/utopia-elena-poniatowska-amor-abre-sus-puertas-en-coyoacan-estos-servicios-ofrecera/ | 2026-11-06 |
-| SD55 | Expansión Política · Las 14 acciones de la CDMX para mejorar los mercados (12-feb-2025) | https://politica.expansion.mx/cdmx/2025/02/12/las-14-acciones-que-emprendera-la-cdmx-para-mejorar-los-mercados | 2026-11-06 |
-| SD58 | Chilango · Vales Mercomuna: CDMX entregará 700 mil apoyos en 2026 | https://www.chilango.com/noticias/vales-mercomuna-cdmx-entregara-700-mil-apoyos-2026/amp/ | 2026-11-06 |
-| SD63 | Banxico · Tasas de descuento con tarjeta de crédito por giro (periodo no indicado; archivo de 2025) | https://www.banxico.org.mx/servicios/tasas-de-descuento-para-tarjetas-de-credito/%7BA896D818-3D13-4922-B54B-4B6D58E99479%7D.pdf | 2026-11-06 |
-
-(previo) = dato verificado por el equipo antes de esta sesión y no reconsultado aquí. No se agregaron fuentes SE: el límite de búsquedas web de la sesión estaba agotado; todo lo nuevo sin fuente está marcado ⚪ o como cálculo propio.
-
-<!-- ===== FIN: conocimiento/07-ideas-puntuadas.md ===== -->
 
 <!-- ===== INICIO: conocimiento/08-criterios-y-jueces.md ===== -->
 
@@ -3492,20 +1511,21 @@ responde:
   - "¿Qué errores restan puntos o descalifican?"
   - "¿Qué tipo de proyectos han ganado en hackatones de Codex y OpenAI, y por qué?"
   - "¿Cómo demuestro en el pitch que usé Codex?"
-actualizado: 2026-11-06
+  - "¿Qué pidieron en el arranque y cómo cambia la evaluación?"
+actualizado: 2026-11-07
 confianza: media
-fuentes: [SA01, SA03, SA05, SA06, SA07, SA08, SA09, SA10, SA11, SA28, SA29, SA40, SA45, SA46, SA47, SA48, SA49, SA50, SA51, SA52, SA53, SA54, SA58]
+fuentes: [SA01, SA03, SA05, SA06, SA07, SA08, SA09, SA10, SA11, SA28, SA29, SA40, SA45, SA46, SA47, SA48, SA49, SA50, SA51, SA52, SA53, SA54, SA58, SD64, SF01]
 ---
 
 # K08 · Criterios, jueces y cómo ganar
 
 ## TL;DR
 
-- Los criterios oficiales del 7 de noviembre no están publicados: habrá jurado y después un voto comunitario [SA01]. Los pesos de K08.3 son inferencia.
+- Al 7 de noviembre (página revisada de nuevo) los criterios oficiales siguen sin publicarse: habrá jurado y después un voto comunitario [SA01]. En el arranque pidieron creatividad, aprovechar la nueva ley de pagos digitales y la app de un servicio que integre la API de pey [SF01]. Los pesos de K08.3 son inferencia. Resumen del concurso: [K00](00-bases-del-concurso.md).
 - En eventos hermanos se repiten cuatro ejes: utilidad o impacto, que funcione (ejecución técnica), uso interesante de Codex u OpenAI, y originalidad con un pitch claro [SA07][SA45][SA50].
 - Lo que ha ganado: herramientas para un usuario concreto, con código determinista y un modelo acotado, la persona en control y buen detalle de UX [SA45].
-- Restan o descalifican: demo que falla, datos inventados, no usar Codex u OpenAI, llaves expuestas y romper reglas de código previo (⚪ regla no publicada) [SA50][SA54].
-- Demuestra Codex con evidencia verificable: AGENTS.md, tareas en paralelo, PRs enlazados y tiempos, resumidos en una diapositiva (K08.12).
+- Restan o descalifican: demo que falla, datos inventados, no usar OpenAI ni pey, llaves expuestas, afirmar obligaciones que la ley no tiene y romper reglas de código previo (⚪ regla no publicada) [SA01][SA54][SD64].
+- Demuestra cómo construiste (Codex; Claude también se permite [SF01]) con evidencia verificable: AGENTS.md, tareas en paralelo, PRs enlazados y tiempos, resumidos en una diapositiva (K08.12).
 - Entrega antes del domingo a las 13:00 un paquete que se defienda solo: demo con URL, video corto y README claro [SA01].
 
 ## K08.1 · Lo que sí sabemos de la evaluación (oficial)
@@ -3516,6 +1536,8 @@ fuentes: [SA01, SA03, SA05, SA06, SA07, SA08, SA09, SA10, SA11, SA28, SA29, SA40
 - Entrega en el portal del evento hasta el domingo 8 a las 13:00 [SA01].
 - Reto: herramientas de bien público con OpenAI y CoDi usando la API de pey [SA01].
 - Premio: bolsa de 10 boletos al DevDay Exchange oficial; ⚪ no se sabe si existe un "primer lugar" [SA01].
+- Revisión del 7 de noviembre: la página sigue sin criterios, jueces nombrados, URL del portal ni formato de entrega [SA01].
+- **Dicho en el arranque (de palabra, ⚪ no está por escrito):** la solución debe ser creativa; hay que ir de la mano con la nueva ley de pagos digitales y aprovecharla; el objetivo es la aplicación de un servicio, del que sea, que integre la API de pey; se puede usar Claude además de las herramientas de OpenAI [SF01].
 
 Implicación (inferencia): como el anuncio llega dos días después, el jurado probablemente revisará lo entregado en el portal, y quizá también una demo en vivo el sábado (⚪). El paquete entregado tiene que convencer aunque no estés presente.
 
@@ -3536,15 +1558,15 @@ Implicación (inferencia): como el anuncio llega dos días después, el jurado p
 
 ## K08.3 · Criterios probables y pesos estimados (inferencia)
 
-No es oficial: combina K08.2 con el reto del 7 de noviembre [SA01].
+No es oficial: combina K08.2 con el reto escrito [SA01] y lo dicho en el arranque [SF01]. Respecto a la versión del 6 de noviembre, creatividad y originalidad sube de 15% a 20% y pitch baja de 15% a 10%, porque en el arranque se pidió creatividad de forma explícita.
 
 | # | Criterio | Peso estimado | Por qué |
 |---|---|---|---|
-| C1 | Impacto y utilidad para comercios (bien público, comisión 0%) | 25% | Es el reto oficial y la misión de AI Builders [SA01][SA03]; utilidad en Bengaluru [SA07] |
-| C2 | Ejecución: funciona de punta a punta, con cobro CoDi real o de prueba | 25% | Ejecución y qué tan bien funciona [SA07][SA50] |
-| C3 | Uso de OpenAI y Codex: necesario, interesante y visible | 20% | Criterio explícito en San Francisco y Bengaluru [SA50][SA07]; el anfitrión es Codex Ambassador [SA01] |
-| C4 | Originalidad y calidad de la idea | 15% | [SA07][SA45] |
-| C5 | Pitch, diseño y respuestas | 15% | [SA45][SA50] |
+| C1 | Impacto, bien público y alineación con el reto: un servicio real que cobra con CoDi (comisión 0%) y aprovecha la nueva ley de pagos digitales | 25% | Es el reto oficial y la misión de AI Builders [SA01][SA03]; la ley se pidió en el arranque [SF01]; utilidad en Bengaluru [SA07] |
+| C2 | Ejecución: funciona de punta a punta, con cobro CoDi con la API de pey | 25% | Ejecución y qué tan bien funciona [SA07][SA50]; integrar pey se pidió en el arranque [SF01] |
+| C3 | Uso de OpenAI (y de Codex): necesario, interesante y visible | 20% | OpenAI está en el reto [SA01]; criterio explícito en San Francisco y Bengaluru [SA50][SA07]; el anfitrión es Codex Ambassador [SA01]; Claude se permite además [SF01] |
+| C4 | Creatividad, originalidad y calidad de la idea | 20% | Creatividad pedida en el arranque [SF01]; originalidad en Bengaluru y Build Week [SA07][SA45] |
+| C5 | Pitch, diseño y respuestas | 10% | [SA45][SA50] |
 
 El voto comunitario es un carril aparte; ahí probablemente pesa lo fácil que es entender y compartir la demo (inferencia).
 
@@ -3558,17 +1580,17 @@ El voto comunitario es un carril aparte; ahí probablemente pesa lo fácil que e
 | 2 | Usuario genérico ("las pymes") | Piezas sueltas que no se conectan |
 | 3 | Usuario claro, beneficio genérico | Funciona en local con datos simulados; lo simulado no está etiquetado |
 | 4 | Usuario concreto y dolor medible | Demo desplegada; cobro de prueba de punta a punta |
-| 5 | Usuario concreto (por ejemplo, un puesto de mercado), dolor medible (comisión, tiempo de cobro, conciliación, efectivo), beneficio con supuestos explícitos, pensado para personas no expertas y con siguiente paso real | URL pública que funciona en celular; crear cobro → QR o solicitud → pago → webhook con firma verificada → acción de la IA; errores manejados; SIMULACIÓN visible si aplica; video de respaldo; README reproducible; cero llaves en el repo |
+| 5 | Usuario concreto (un comercio o servicio específico), dolor medible (comisión, tiempo de cobro, conciliación, efectivo), beneficio con supuestos explícitos, pensado para personas no expertas y con siguiente paso real | URL pública que funciona en celular; crear cobro → QR o solicitud → pago → webhook con firma verificada → acción de la IA; errores manejados; SIMULACIÓN visible si aplica; video de respaldo; README reproducible; cero llaves en el repo |
 
 **Recomendación:** si C2 sigue en 3 o menos a las 13:00 del sábado, congela funciones nuevas y dedica todo a cerrar el flujo de cobro.
 
 ## K08.5 · Rúbrica 1–5: OpenAI y Codex (C3), originalidad (C4) y pitch (C5)
 
-| Nivel | C3 OpenAI y Codex | C4 Originalidad | C5 Pitch, diseño y respuestas |
+| Nivel | C3 OpenAI y Codex | C4 Creatividad y originalidad | C5 Pitch, diseño y respuestas |
 |---|---|---|---|
 | 1 | IA decorativa; Codex no aparece | Clon de una terminal de cobro | Demo sin historia y con jerga |
 | 3 | Una llamada útil al modelo; Codex usado sin evidencia | Combinación conocida bien hecha | Historia clara, pero se pasa del tiempo |
-| 5 | La IA es necesaria y está acotada (salida estructurada, montos validados por código, confirmación humana); evidencia de Codex: AGENTS.md, 3 o más tareas en paralelo, PRs fusionados con enlace y tiempos; una novedad de OpenAI solo si está probada | Ángulo propio explicable en una frase (canal: voz o chat; población: personas mayores; caso: fiado, tandas, cooperativas) | Problema → demo → impacto en 3 minutos o menos; una diapositiva de cómo se construyó; respuestas de 20 segundos; interfaz simple en español claro |
+| 5 | La IA es necesaria y está acotada (salida estructurada, montos validados por código, confirmación humana); evidencia de Codex: AGENTS.md, 3 o más tareas en paralelo, PRs fusionados con enlace y tiempos; una novedad de OpenAI solo si está probada | Ángulo propio y creativo explicable en una frase (por canal, población o caso de uso) que aprovecha la nueva ley sin exagerarla (K00.4) | Problema → demo → impacto en 3 minutos o menos; una diapositiva de cómo se construyó; respuestas de 20 segundos; interfaz simple en español claro |
 
 Los niveles 2 y 4 quedan entre las descripciones vecinas.
 
@@ -3602,8 +1624,10 @@ Lista inferida de los criterios de K08.2 y de las lecciones de Build Week [SA50]
 9. ¿Cuánto cuesta operar por comercio al mes? (Estimación con supuestos.)
 10. ¿Qué construiste hoy y qué existía antes? (Historial de commits y PRs con hora.)
 11. ¿Qué sigue en dos semanas? (Piloto o Hackatón México [SA03].)
+12. ¿Qué tiene de creativo? (Se pidió en el arranque [SF01].)
+13. ¿Cómo se relaciona con la nueva ley de pagos digitales? (Lo que sí dice: promueve los pagos digitales y la SHCP definirá sectores; lo que no: no obliga hoy a los comercios a aceptar QR [SD64]; detalle en K00.4.)
 
-**Recomendación:** ensaya en voz alta la 2, la 5 y la 6: tocan dinero, confianza en la IA y autoría, los tres temas más sensibles de este reto.
+**Recomendación:** ensaya en voz alta la 2, la 5, la 6 y la 13: tocan dinero, confianza en la IA, autoría y la ley, los temas más sensibles de este reto.
 
 ## K08.8 · Errores que restan o descalifican
 
@@ -3612,7 +1636,8 @@ Lista inferida de los criterios de K08.2 y de las lecciones de Build Week [SA50]
 | Usar código previo si no se permite (⚪ regla no publicada; Londres y Guadalajara permitían extender código abierto [SA10][SA08]) | Posible descalificación | Escribir el código del proyecto el sábado; declarar en el README qué existía antes (base de conocimiento, plantillas) y qué se hizo ese día |
 | Datos, comercios o testimonios inventados presentados como reales | Pierdes credibilidad | Etiquetar los datos de ejemplo; nada de cifras sin fuente |
 | Demo que falla | Golpe directo a C2 | Video de respaldo, datos semilla, modo SIMULACIÓN etiquetado como plan B y dos ensayos completos |
-| No usar Codex u OpenAI | En San Francisco era obligatorio usar ChatGPT y Codex [SA50] | Usar ambos y mostrarlo (K08.12) |
+| No usar OpenAI | Está en el reto escrito [SA01]; en San Francisco era obligatorio usar ChatGPT y Codex [SA50] | Usar OpenAI en el flujo principal y mostrarlo; Claude se permite además [SF01] (K08.12) |
+| Afirmar que la ley obliga hoy a aceptar QR o pagos digitales, o dar fechas que no tiene | Error que cualquier juez puede comprobar; la ley deja los sectores a la SHCP [SD64] | Usar lo que dice K00.4 |
 | Llaves expuestas | OpenAI desactiva llaves filtradas en repos públicos y la demo se rompe [SA54] | K08.9 |
 | Salirse del reto (sin CoDi ni pey) | Baja C1 [SA01] | El cobro con pey va en el flujo principal |
 | Pasarse del tiempo | En San Francisco: 2 min de pitch y 2 de preguntas [SA50] | Ensayar con cronómetro |
@@ -3623,7 +1648,7 @@ Lista inferida de los criterios de K08.2 y de las lecciones de Build Week [SA50]
 
 - Desde febrero de 2024, GitHub activa por defecto la protección de push contra secretos en repos públicos; se puede omitir, pero no conviene [SA53].
 - GitHub revisa los commits públicos en busca de llaves de OpenAI y se las envía a OpenAI, que las desactiva y avisa al dueño en segundos [SA54].
-- En la guía de entornos de Codex en la nube (versión legacy), los secretos solo están disponibles para el script de configuración y se eliminan antes de que trabaje el agente; las variables de entorno sí duran toda la tarea, y el internet del agente viene apagado por defecto [SA52]. ⚪ Revisa la guía vigente (K05).
+- En la guía de entornos de Codex en la nube (versión legacy), los secretos solo están disponibles para el script de configuración y se eliminan antes de que trabaje el agente; las variables de entorno sí duran toda la tarea, y el internet del agente viene apagado por defecto [SA52]. ⚪ Revisa la guía vigente de Codex antes de configurar secretos.
 
 **Recomendación:**
 - `.env` ya está en `.gitignore`; deja `.env.example` solo con nombres de variables.
@@ -3662,10 +1687,11 @@ Evidencia que un juez puede verificar:
 1. **AGENTS.md** en la raíz con stack, comandos de prueba, convenciones y una sección de "terminado cuando" [SA51]; Codex lo usa para encontrar los comandos de lint y de pruebas [SA52].
 2. **Tareas en paralelo** en Codex web: de 3 a 5 tareas independientes (interfaz, integración con pey, webhook, prompts, pruebas) en carpetas distintas, con captura de la lista de tareas [SA10][SA51].
 3. **PRs:** al terminar, Codex muestra su respuesta y el diff, y desde ahí puedes abrir un PR [SA52]; enlaza los PRs en el README con su hora.
-4. **Revisión:** pide a Codex revisar los PRs (la revisión de código en PRs fue novedad del DevDay 2026 [SA29]); ⚪ verifica cómo se activa (K05).
+4. **Revisión:** pide a Codex revisar los PRs (la revisión de código en PRs fue novedad del DevDay 2026 [SA29]); ⚪ verifica cómo se activa en la documentación vigente.
 5. **Bitácora de tiempos:** tabla hora → tarea → resultado (por ejemplo, 10:20 tarea lanzada, 10:45 PR fusionado).
 6. **Una diapositiva** "Cómo lo construí con Codex": tareas, PRs, horas y el prompt clave.
 7. **Honestidad:** qué falló con Codex y cómo lo corregiste; los embajadores valoran ese tipo de retroalimentación [SA28].
+8. **Otras herramientas:** si usas Claude (permitido según el arranque [SF01]), declara en el README qué hizo cada herramienta.
 
 **Recomendación:** anota en `BITACORA.md` la hora y el objetivo de cada tarea al lanzarla; al final esa bitácora se convierte casi sola en la diapositiva y en la respuesta a "¿qué hizo Codex y qué decidiste tú?".
 
@@ -3675,7 +1701,8 @@ Evidencia que un juez puede verificar:
 - [ ] Cobro con pey: crear → QR o solicitud → pago → webhook verificado → acción de la IA.
 - [ ] Todo lo simulado dice SIMULACIÓN de forma visible (regla de `AGENTS.md`).
 - [ ] Video de 60–90 segundos (y de menos de 3 minutos si piden uno más largo, como en Build Week [SA45]).
-- [ ] README: problema, usuario, demo, papel de OpenAI, uso de Codex, cobro CoDi, limitaciones y qué existía antes.
+- [ ] README: problema, usuario, demo, papel de OpenAI, herramientas de IA usadas (Codex, Claude), cobro CoDi, limitaciones y qué existía antes.
+- [ ] El README y el pitch explican cómo el proyecto aprovecha la nueva ley de pagos digitales sin afirmar obligaciones que no tiene (K00.4).
 - [ ] Cero llaves y cero datos personales en el repo; historial revisado.
 - [ ] AGENTS.md, PRs enlazados y bitácora de tiempos.
 - [ ] Pitch de 3 minutos o menos ensayado, con respuestas a K08.7.
@@ -3687,7 +1714,7 @@ Evidencia que un juez puede verificar:
 
 | ID | Título | URL | Consultado |
 |---|---|---|---|
-| SA01 | DevDay Exchange Community Hackathon: Mexico City (página oficial en Luma) | https://luma.com/f755f0k6 | 2026-11-06 |
+| SA01 | DevDay Exchange Community Hackathon: Mexico City (página oficial en Luma) | https://luma.com/f755f0k6 | 2026-11-07 |
 | SA03 | Newsletter de AI Builders, 31 oct 2026 | (correo; sin URL pública) | 2026-11-06 (previo) |
 | SA05 | DevDay Exchange Community: Bangkok | https://luma.com/6m83xldb | 2026-11-06 |
 | SA06 | DevDay Exchange Community: Paris | https://luma.com/6nccj7gu | 2026-11-06 |
@@ -3710,382 +1737,1435 @@ Evidencia que un juez puede verificar:
 | SA53 | GitHub Blog: Keeping secrets out of public repositories (29 feb 2024) | https://github.blog/2024-02-29-keeping-secrets-out-of-public-repositories | 2026-11-06 |
 | SA54 | GitHub Changelog: RubyGems, Adobe and OpenAI are now secret scanning integrators (8 jun 2021) | https://github.blog/changelog/2021-06-08-rubygems-adobe-and-openai-are-now-github-secret-scanning-integrators | 2026-11-06 |
 | SA58 | DEV Community: What AI hackathon winners actually have in common | https://dev.to/jsb-securedme/what-ai-hackathon-winners-actually-have-in-common-1kla | 2026-11-06 |
+| SD64 | DOF · Ley de Economía Digital: texto y transitorios | https://sidof.segob.gob.mx/notas/docFuente/5803017 | 2026-11-07 |
+| SF01 | Arranque del evento, notas de José (en persona, no público) | (sin URL; no público) | 2026-11-07 |
 
 (previo) = dato verificado por el equipo antes de esta sesión y no reconsultado aquí.
 
 <!-- ===== FIN: conocimiento/08-criterios-y-jueces.md ===== -->
 
-<!-- ===== INICIO: conocimiento/09-pitch-y-preguntas.md ===== -->
+<!-- ===== INICIO: pey/README.md ===== -->
 
----
-id: K09
-titulo: "Pitch, demo y preguntas difíciles"
-resumen: "Guion de 3 minutos, demo de 3 pasos, plan B y banco de 20 preguntas con respuesta modelo."
-responde:
-  - "¿Qué digo en el pitch y en qué orden?"
-  - "¿Cómo respondo las preguntas difíciles de los jueces?"
-actualizado: 2026-11-06
-confianza: media
-fuentes: []
----
-# K09 · Pitch, demo y preguntas difíciles
+# Documentación de pey (API CoDi) en Markdown
 
-## TL;DR
-- **Orden del pitch (3 min):** persona y dato con fuente → frase de valor → demo de 3 pasos en producción con un **pago CoDi real de $1** → decisiones de construcción → bien público, siguiente paso y URL (K09.1).
-- **Doble salida:** el jurado decide el lunes con lo entregado y no se sabe si habrá pitch en vivo el sábado (K01.11). Prepara el pitch en vivo **y** el video; el video corto sirve también para el voto comunitario (K09.9).
-- **Demo a prueba de fallas:** dominio de producción, frase de demo preparada en un botón, monto de $1, video cargado en el minuto del pago y frases de rescate ya ensayadas (K09.3, K09.7).
-- **Codex y OpenAI con evidencia, no con adjetivos:** PRs con hora, tareas en paralelo, `AGENTS.md` y el esquema de `crear_cobro` (el modelo propone; la persona confirma; el servidor valida) (K09.4).
-- **De memoria:** "¿Qué hizo la IA y qué hiciste tú?", "¿Cómo protegen los datos?" y "¿Qué sigue?" (K09.6, preguntas 1–3).
-- **Nada inventado:** las personas son arquetipos y se dicen como ejemplo (K06.9); cada dato lleva su fuente (K06.10); el modo prueba o la SIMULACIÓN se dicen en voz alta.
+Versión de trabajo, en español de México y con redacción propia, de toda la documentación pública de pey, consultada el **2026-11-07**. Es la base RAG para agentes que construyan con pey. **No es documentación oficial:** ante cualquier duda, manda la página oficial enlazada al final de cada sección.
 
-## K09.1 · Guion de 3 minutos (con marcadores)
+- **Qué se recorrió:** las 37 URL del [mapa del sitio](https://docs.pey.mx/sitemap.xml), el [OpenAPI completo](https://docs.pey.mx/openapi.json) (versión `2026-10-20`, 11 rutas) y la [página comercial de la API](https://pey.mx/api-codi).
+- **Marcas:** ⚪ = no confirmado en la fuente. "Recomendación" = decisión de ingeniería, no dicho por pey. Los ejemplos de código y JSON son propios, con valores ficticios.
+- **Síntesis con código probado y decisiones:** [K03 · CoDi y API de pey](../conocimiento/03-codi-y-api-pey.md).
+- **Datos personales:** no se copian la CLABE ni el titular de la cuenta de prueba, ni correos o teléfonos de personas; se enlaza la página oficial.
 
-Ritmo: unas 2.3 palabras por segundo; menos de 400 palabras en total, porque en la demo se habla poco. Llena los `[MARCADORES]` con `docs/PRD.md` y la bitácora, o con el prompt 6 de ChatGPT (`dia-del-evento/PROMPTS-CHATGPT.md`).
+## Cómo usar esta carpeta (agentes)
 
-| Tiempo | Segmento | Diapositiva ([DECK](../plantillas/DECK.md)) | Criterio que ataca (K08.3) |
-|---|---|---|---|
-| 0:00–0:20 | Gancho: persona real + un dato | 1 → 2 | C1 impacto |
-| 0:20–0:40 | Solución: frase de valor y ejemplo oficial del reto | 3 | C1, C4 |
-| 0:40–2:00 | Demo de 3 pasos, en vivo (K09.3) | 4 (la app) | C2 ejecución, C3 OpenAI |
-| 2:00–2:30 | Cómo lo construí: decisiones y evidencia | 5 | C3 Codex, C5 |
-| 2:30–3:00 | Bien público, siguiente paso y cierre con URL/QR | 6 → 7 | C1, C5 |
+1. ¿Vas a cobrar con QR? Lee [04](../pey/04-api-codi-qr-y-push.md) → [07](../pey/07-api-transacciones.md) → [09](../pey/09-webhooks.md).
+2. ¿Dudas de alta, llaves o pruebas? [02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md).
+3. ¿Un error de la API? Busca su `error.type` en [11](../pey/11-errores-y-limites.md).
+4. No inventes campos: si algo no está aquí ni en el OpenAPI, márcalo `TODO(⚪)`.
 
-**0:00–0:20 · Gancho** (unas 45 palabras)
-> "Pensemos en [ARQUETIPO, dicho como ejemplo; p. ej. 'un puesto de fruta en un tianguis' de K06.9]. Cobra montos chicos y casi todo en efectivo: [DATO 1 CON FUENTE; p. ej. 'el 85 % de los adultos paga en efectivo sus compras de hasta 500 pesos, según la ENIF 2024' (K06.10, dato 1)]. Y si acepta tarjeta, [DATO 2; p. ej. 'paga hasta 3.95 % por cobro con débito, según Banxico' (K06.10, dato 5)]."
+## Archivos
 
-**0:20–0:40 · Solución** (unas 45 palabras)
-> "[NOMBRE] es [FRASE DE VALOR]. Responde al reto de hoy, herramientas de bien público con OpenAI y CoDi, en su ejemplo de [EJEMPLO OFICIAL; p. ej. 'cobro para comercios de barrio' (K01.4)]: el comercio dice lo que vendió, la IA arma el cobro, aparece un QR de CoDi sin comisión y el pago se confirma solo."
-
-**0:40–2:00 · Demo** (unas 60 palabras; el detalle está en K09.3)
-> Paso 1: "Él no llena formularios: dice '[FRASE DE DEMO]'." · Paso 2: "La IA no cobra: propone. Yo confirmo y pey genera el QR CoDi." · Paso 3: "Pago un peso real desde la app de mi banco… y listo: confirmado por pey, no por una captura."
-
-**2:00–2:30 · Cómo lo construí** (unas 60 palabras)
-> "Lo construí hoy, solo, con Codex: [N] tareas, [M] en paralelo, cada una con criterios de aceptación y su preview desplegado; [P] PRs fusionados. Tomé tres decisiones: la IA solo propone, con una función acotada, `crear_cobro`, y la persona confirma; el pago lo confirma pey con un webhook firmado, no una captura; y todo estuvo en producción desde la primera hora."
-
-**2:30–3:00 · Impacto y cierre** (unas 60 palabras)
-> "Es bien público porque cobrar cuesta cero y, con la cuenta del comercio, el dinero le llega directo. Y es el momento: [POR QUÉ AHORA; p. ej. 'el 14 de diciembre todas las apps bancarias deben procesar cobros CoDi con el mismo estándar' (K06.10, dato 10)]. Siguiente paso: un piloto con [N] comercios de barrio y llevarlo al Hackatón México. Está en vivo: escaneen el QR. Gracias."
-
-**Tarjeta de memoria** (5 palabras por segmento, en el celular): `Persona · efectivo · comisión` → `Dice · propone · QR · confirma` → `Frase · confirmo · pago · PAGADO` → `Codex · paralelo · PRs · decisiones` → `Cero comisión · 14 dic · piloto · QR`.
-
-## K09.2 · Reglas del pitch
-
-1. **Persona antes que tecnología.** En los primeros 40 segundos no hay jerga: ni "API", ni "LLM", ni "webhook".
-2. **Un número a la vez y con su fuente dicha en voz alta** ("según Banxico…"). Si es estimación, di "estimo" y el supuesto.
-3. **Di qué ejemplo oficial del reto resuelves** y por qué es bien público (K01.4). Es lo primero que el jurado va a cotejar.
-4. **Demo en el dominio de producción**, nunca en local ni en un preview (los previews piden sesión de Vercel).
-5. **Un pago real de $1 vale más que diez pantallas.** Si estás en modo prueba o en SIMULACIÓN, dilo antes de que pregunten.
-6. **Decisiones, no herramientas.** En "Cómo lo construí" cuenta 2 o 3 decisiones y la evidencia; no enumeres productos.
-7. **No leas.** Usa la tarjeta de memoria; mira al jurado al decir la frase de valor.
-8. **Cronómetro visible.** Si a los 2:00 no terminó la demo, salta al cierre: el cierre con la URL no se sacrifica.
-9. **Cierra con una petición concreta** (piloto, mentoría, acceso) y con la URL/QR en pantalla.
-10. **Respuestas de 20 a 30 segundos:** respuesta directa → evidencia → silencio. Si no sabes: "No lo sé todavía; lo verificaría así: …".
-11. **Nada de hablar mal** de otras herramientas, organizadores o bancos, ni presumir alianzas que no existen (K02.13).
-12. **El formato del organizador manda:** si dan 2 minutos o una diapositiva (como en San Francisco, K08.2), usa la versión corta (K09.8).
-13. **Ensaya dos veces con cronómetro** y graba una de las dos en el celular para escucharte.
-
-## K09.3 · Demo de 3 pasos y cómo hacerla a prueba de fallas
-
-**Los 3 pasos** (≤ 80 segundos; cambia los marcadores con los del PRD):
-
-| Paso | Lo que haces | Lo que dices | Lo que ve el jurado | Si falla (K09.7) |
-|---|---|---|---|---|
-| 1 · Pide el cobro con sus palabras (0:40–1:05) | Tocas el botón de ejemplo "[FRASE DE DEMO]" (o la dices o escribes) | "No llena formularios: dice lo que vendió." | La propuesta de la IA: concepto, detalle y total; botón Confirmar | IA lenta → "Capturar a mano" |
-| 2 · Confirma y aparece el QR (1:05–1:30) | Tocas "Confirmar y generar QR" | "La IA no cobra: propone. Yo confirmo, y pey genera el QR CoDi, sin comisión." | QR grande, monto y, si aplica, el banner MODO PRUEBA | Error de pey → video |
-| 3 · El cliente paga y se confirma solo (1:30–2:00) | Escaneas con la app de tu banco y autorizas $1 | "Pago real de un peso desde mi banco… confirmado por pey, no por una captura." | La pantalla cambia a PAGADO con palomita y hora | > 20 s sin confirmar → video |
-
-**El monto de la demo.** Pey no tiene sandbox; mañana la llave está ligada a la cuenta de prueba de pey y lo que se paga no se devuelve (K03.3, K03.6). Usa una frase de demo cuyo total sea **$1 o menos** (p. ej. "[un dulce de un peso]") y `MAX_MONTO_MXN=20`. Si quieres una orden más realista, súbele el monto sabiendo que ese dinero no regresa.
-
-**Diseño a prueba de fallas (ya está en los prompts de Codex):**
-- Un solo camino feliz, con botón de ejemplo para no teclear en vivo y `?presentar=1` para el proyector.
-- La confirmación no depende del webhook: la pantalla pregunta a pey cada 2 segundos (K03.6, plan B1).
-- "Capturar a mano" siempre disponible: si la IA falla, el cobro sigue.
-- La pantalla nunca miente: PAGADO solo si pey lo confirma; banner de MODO PRUEBA o SIMULACIÓN cuando aplica.
-- "Reiniciar demo" para volver al paso 1 en un toque, y `/api/salud` para revisar el modo antes de subir.
-
-**10 minutos antes:** la lista "Pitch" de `dia-del-evento/CHECKLIST.md`. Lo crítico: app del banco abierta y con sesión, un cobro de prueba en los últimos 15 minutos, `/api/salud` con el modo correcto, el video local pausado justo en el momento del pago, No molestar en laptop y celular.
-
-## K09.4 · Cómo contar el uso de Codex y de la API de OpenAI (con evidencia)
-
-**Codex: muestra, no adjetives** (K08.12):
-- `AGENTS.md` en la raíz: las reglas que Codex siguió (stack, pruebas, seguridad, definición de terminado).
-- Captura de la lista de tareas corriendo **en paralelo** (se toma al lanzar la oleada 1; RUNBOOK, 11:10).
-- Lista de PRs fusionados, con título y hora; cada uno con su preview de Vercel.
-- `BITACORA.md`: hora → tarea → resultado. Es la fuente de los números del pitch: **nunca los redondees hacia arriba**.
-- Honestidad: una cosa que falló con Codex y cómo la corregiste (por ejemplo, una tarea que se atoró y dividiste). Los embajadores valoran esa retroalimentación (K08.12).
-
-**La API de OpenAI dentro del producto:**
-- Responses API con function calling: el modelo traduce lenguaje natural a una llamada estructurada a `crear_cobro` (esquema de K03.9 y K04.15).
-- La IA está acotada: el modelo solo **propone**; el servidor valida (monto > 0, tope `MAX_MONTO_MXN`, que el detalle sume) y el QR se crea en pey solo cuando la persona confirma. Es el patrón de los ganadores de Build Week: código determinista para el dinero, modelo para el lenguaje y la persona en control (K08.10).
-- Las llaves solo viven en el servidor; al modelo solo le llega el texto del pedido (`store: false` si K04 lo confirma ⚪).
-- Si probaste alguna novedad del DevDay 2026, menciónala solo si funciona en la demo (K02.4, K08.5).
-
-**Frase para la diapositiva 5:** "Codex escribió el código en [P] PRs y [M] tareas en paralelo; yo escribí los contratos, revisé cada preview y decidí: la IA propone, la persona confirma y pey confirma el pago."
-
-## K09.5 · Cierre: siguiente paso hacia el Hackatón México (el nacional)
-
-- **Frase de cierre:** "Siguiente paso: un piloto con [N] comercios de barrio [zona ⚪] en las próximas dos semanas y llevar este mismo proyecto al Hackatón México, del 14 de noviembre al 12 de diciembre. Está en vivo: escaneen el QR."
-- **Plan de 30 días** (para preguntas y para la diapositiva 6; son metas, no resultados):
-  1. Semana 1: piloto con [N] comercios reales (con su consentimiento) y la cuenta del comercio activa en pey (la CLABE tarda 5 días hábiles, K03.3).
-  2. Semana 2: medir tiempo por cobro, pagos confirmados y cobros capturados a mano contra por voz o texto.
-  3. Semanas 3 y 4: la función que más pidan (p. ej. corte del día) y la entrega en el Hackatón México, el hackatón nacional de hackatonmexico.com (más de 1 millón de pesos en premios, créditos y recursos; CoDi y API de Pey; K01.10). ⚪ Confirma que allá se puede continuar un proyecto iniciado el 7 de noviembre.
-- **Por qué ahora:** a más tardar el 14 de diciembre de 2026 todas las apps bancarias deben homologar sus transferencias y procesar los cobros CoDi con el mismo estándar (K06.5).
-- **Petición concreta** (elige una): a pey, acceso temprano para el piloto con cuentas de comercio; a AI Builders, mentoría para el Hackatón México; a los anfitriones, contactos con locatarios o mercados.
-- Si ganas boletos: el DevDay Exchange es el martes 10 a las 14:00 (K01.3); lleva la demo lista.
-
-## K09.6 · Banco de 20 preguntas difíciles con respuesta modelo
-
-Respuestas de 20 a 30 segundos. Cambia los `[MARCADORES]` por datos reales de la bitácora. Las tres primeras van de memoria.
-
-**1. ¿Qué hizo la IA y qué hiciste tú?**
-"Codex escribió casi todo el código en [P] PRs chicos, varios en paralelo; ChatGPT me ayudó con el PRD y los textos. Yo elegí el problema, escribí el contrato y los criterios de aceptación de cada tarea, probé cada PR en su preview y tomé las decisiones: la IA propone y la persona confirma; el pago lo confirma pey, no una captura; y todo desplegado desde la primera hora."
-*Evidencia:* PRs con hora, `BITACORA.md`, `AGENTS.md`, captura de tareas en paralelo. *No digas:* "la IA lo hizo todo" ni "yo programé todo".
-
-**2. ¿Cómo protegen los datos? ¿Dónde viven las llaves?**
-"Las llaves de OpenAI y de pey viven solo en el servidor, como variables de entorno; el navegador nunca las ve y el repo público no tiene ninguna. No guardamos datos del cliente. Al modelo solo le llega el texto del pedido. Cada webhook de pey se verifica con su firma, su hora y su id, y los montos tienen un tope que impone el servidor."
-*Evidencia:* `.env.example` (solo nombres), la prueba de que ninguna respuesta filtra llaves, el verificador sin "posible secreto". *No digas:* "es 100 % seguro".
-
-**3. ¿Qué sigue?**
-"Un piloto con [N] comercios de barrio en dos semanas para medir tiempo de cobro y pagos confirmados; [la función que más pidan]; y llevarlo al Hackatón México, del 14 de noviembre al 12 de diciembre. Además, el 14 de diciembre todas las apps bancarias deben procesar cobros CoDi con el mismo estándar: es el momento."
-*Evidencia:* sección "Qué sigue" del README; K06.10, dato 10. *No digas:* alianzas que no existen.
-
-**4. ¿Por qué esto es bien público?**
-"Porque baja a cero el costo de cobrar para quien tiene menos margen: CoDi no cobra comisión ni a quien paga ni a quien cobra. La IA quita la barrera de aprender una app: el comercio dice lo que vendió. Y el código es abierto, para que un mercado o una cooperativa lo reutilice."
-*Evidencia:* K03.1 (sin comisión), K06.10 (dato 5), licencia del repo ⚪ (elígela antes de entregar). *No digas:* "acaba con la informalidad".
-
-**5. ¿Qué construiste hoy y qué existía antes?**
-"Antes del evento solo preparé investigación en Markdown: la base de conocimiento, plantillas y las reglas para Codex. Todo el código del producto, en `app/`, se escribió hoy: lo ven en el historial de git y en los PRs con su hora."
-*Evidencia:* historial de `app/`, sección "Qué existía antes" del README. *No digas:* nada que el historial contradiga. ⚪ Ajusta la respuesta a la regla que den los organizadores (K01.11).
-
-**6. ¿Quién es el usuario exacto y cómo sabes que tiene este problema?**
-"[PERSONA], por ejemplo un puesto que cobra montos de 20 a 150 pesos (caso ilustrativo, K06.9). Lo sustento con datos, no con entrevistas: [DATO K06.10]. Todavía no lo pruebo con comerciantes reales; es lo primero del piloto."
-*Evidencia:* K06.9, K06.10. *No digas:* testimonios inventados ("doña X me dijo…").
-
-**7. ¿El cobro es real o simulado?**
-"Real: fue un pago CoDi de un peso, confirmado por pey. Hoy cae en la cuenta de prueba que publica pey, porque registrar mi CLABE ante Banxico tarda 5 días hábiles; con la cuenta del comercio funciona igual. Cuando algo es simulación, la pantalla dice SIMULACIÓN."
-*Evidencia:* banner de la app, "Webhook Logs" del portal de pey, video. *No digas:* "es real" si estabas en SIMULACIÓN.
-
-**8. ¿Por qué CoDi y no tarjeta o transferencia?**
-"Con tarjeta, una miscelánea paga hasta 3.95 % por cobro con débito, según Banxico. CoDi no cobra comisión y el dinero llega en segundos. Frente a una transferencia, el cliente no teclea CLABE ni monto: escanea y autoriza, y el comercio recibe la confirmación automática."
-*Evidencia:* K06.10 (dato 5), K03.1. *No digas:* que CoDi ya es masivo (no lo es; K06.10, dato 6).
-
-**9. ¿Qué hace la IA que un formulario no podría?**
-"Entiende cómo habla el comercio: '[FRASE DE DEMO]' se vuelve un cobro con concepto, detalle y monto, sin menús. Pero está acotada: solo propone con una función estructurada, el servidor valida y la persona confirma. Si la IA falla, el formulario manual sigue ahí: la IA acelera, no es requisito para cobrar."
-*Evidencia:* esquema de `crear_cobro`, botón "Capturar a mano". *No digas:* "la IA decide".
-
-**10. ¿Cómo evitas que el modelo invente montos?**
-"Con tres candados: el modelo devuelve una propuesta estructurada, no texto libre; el servidor valida que el monto sea positivo, que no pase del tope y que el detalle sume; y la persona ve el total y confirma antes de que exista el QR. Además, las instrucciones le prohíben inventar precios: si falta uno, pregunta."
-*Evidencia:* pruebas de `agente.test.js` (suma inválida, tope). *No digas:* "el modelo no se equivoca".
-
-**11. ¿Cómo sabes que el pago es real y no una captura de pantalla?**
-"La pantalla solo cambia a PAGADO cuando pey lo confirma: la app consulta el estado del QR y además recibe un webhook firmado con el estándar Standard Webhooks; verificamos la firma, la hora y que no venga repetido. El comercio ya no revisa capturas."
-*Evidencia:* `webhook-pey.js` y sus pruebas; "Webhook Logs". *No digas:* que nunca puede fallar.
-
-**12. ¿Qué pasa si falla el webhook o el internet?**
-"El webhook no es indispensable: mientras el QR está vigente, la app pregunta a pey cada 2 segundos. Si se cae la red, muestra 'Reconectando…' y nunca marca pagado sin confirmación. CoDi sí necesita internet; sin red, el comercio cobra como siempre."
-*Evidencia:* `estado-pago.js` y su prueba de 3 errores seguidos. *No digas:* "funciona sin internet".
-
-**13. ¿Cuánto cuesta operarlo por comercio al mes?**
-"Pey es gratis por ahora y CoDi no cobra comisión. El costo variable es la IA: una llamada corta por cobro. Hoy hice [N] llamadas y costaron [X] según el panel de uso de OpenAI; con [C] cobros al día serían unos [Y] al mes. Es una estimación con esos supuestos. Un cobro capturado a mano no cuesta IA."
-*Evidencia:* panel de uso de OpenAI; precios en K04.2. *No digas:* cifras que no calculaste.
-
-**14. ¿Cómo se sostiene si no cobra comisión?**
-"Hoy el objetivo es bien público y adopción. Hay dos hipótesis para validar en el piloto: que el comercio pague por funciones extra, como el corte del día, o que una organización (un mercado, una cooperativa o una alcaldía) lo ofrezca como servicio. No lo afirmo: es lo que voy a probar."
-*Evidencia:* "Qué sigue" del README. *No digas:* un modelo de negocio con números inventados.
-
-**15. ¿Por qué lo usaría un comercio que hoy cobra en efectivo?**
-"Porque el efectivo domina, pero no todos los clientes lo traen, y las terminales cobran comisión. Aquí no compra equipo, no paga comisión y cobra hablando. La barrera es la confianza; por eso el pago se confirma solo y hay comprobante."
-*Evidencia:* K06.10 (datos 1 y 5), K06.6 (fraude y desconfianza). *No digas:* que la adopción está garantizada.
-
-**16. ¿Qué pasa si el cliente no tiene CoDi activado o su banco no lo soporta?**
-"Es la debilidad real de CoDi: 21.8 millones de cuentas validadas, pero solo 2.5 millones han pagado alguna vez, según Banxico. Por eso importa el 14 de diciembre, cuando todas las apps deberán procesar cobros CoDi con el mismo estándar. Mientras, el comercio sigue aceptando efectivo: sumamos, no reemplazamos."
-*Evidencia:* K06.10 (datos 6 y 10). *No digas:* que todos los bancos ya lo soportan bien.
-
-**17. ¿Escala? ¿Qué se rompe con 10,000 comercios?**
-"El servidor no guarda estado y la verdad del pago vive en pey, así que crece horizontalmente. Lo primero que habría que construir: una cuenta y una llave de pey por comercio, límites de uso de IA por comercio y una base de datos para historial y conciliación. Hoy es un prototipo para un comercio."
-*Evidencia:* arquitectura del README. *No digas:* "escala infinito".
-
-**18. ¿Qué pasa si se cae OpenAI o pey?**
-"Si cae OpenAI, el comercio captura monto y concepto a mano y el cobro sigue igual. Si cae pey, no hay cobro CoDi: la app lo dice claro y el comercio cobra en efectivo. Nunca presentamos una simulación como pago real."
-*Evidencia:* mensajes de error de la app (IA no disponible, pey no disponible). *No digas:* que no puede fallar.
-
-**19. ¿Y la regulación: Banxico, datos personales, lavado de dinero?**
-"No custodiamos dinero: el pago va de banco a banco por CoDi y la integración la opera pey [lo que diga K02.7 ⚪]. No guardamos datos personales del cliente. Para un piloto con comercios reales falta un aviso de privacidad y revisar con pey las obligaciones de cada parte. No presumo certificaciones que no tengo."
-*Evidencia:* sección de seguridad y privacidad del README; K02.7. *No digas:* "cumplimos con todo".
-
-**20. ¿Qué fue lo más difícil? ¿Qué falló con Codex?**
-"[LO MÁS DIFÍCIL REAL, de la bitácora; p. ej. 'confirmar el pago en tiempo real sin websockets' o 'una tarea de Codex que se atoró'.] Lo resolví [CÓMO]. Aprendí a darle a Codex tareas chicas, con archivos propios y criterios verificables."
-*Evidencia:* el PR del arreglo y su línea en la bitácora. *No digas:* "nada falló".
-
-## K09.7 · Plan B de la demo
-
-| Falla | Señal | Qué dices (literal) | Qué haces | Tiempo máximo |
-|---|---|---|---|---|
-| Internet de la sala | La página no carga en 5 s | "Me cambio al hotspot; mientras, les cuento el problema." | Hotspot del celular y recargas | 30 s; si no carga, el video |
-| La IA tarda o falla | "Pensando…" por más de 8 s, o el mensaje de IA no disponible | "La IA está tardando; el comercio también puede capturar a mano, y el cobro sigue igual." | "Capturar a mano": monto y concepto | 10 s |
-| El pago no se confirma | Más de 20 s en "Esperando pago" | "Mientras CoDi confirma, les muestro la misma operación grabada hace una hora en producción." | Video local en el minuto del pago; si se confirma después, regresas y lo muestras | 20 s |
-| pey no responde | Error de pey al generar el QR | "pey no responde en este momento; por eso grabé el flujo completo en producción." | Video | Inmediato |
-| Falla el proyector | No hay imagen | "Se los muestro aquí." | Pantalla de la laptop o el celular hacia el jurado, o el video en el celular | 30 s |
-| Se apaga la laptop | — | "La app es móvil primero." | Abres la URL en el celular; video y deck en PDF también están ahí | 30 s |
-| Te quedas en blanco | — | La frase de valor | Tarjeta de memoria (K09.1) | — |
-| Te recortan el tiempo | Aviso del moderador | — | Versión de 1 minuto (K09.8) | — |
-
-**Regla de oro:** si cambias a video o a SIMULACIÓN, lo dices. Un respaldo honesto suma puntos; un pago simulado presentado como real te quita la credibilidad (K02.13).
-
-## K09.8 · Versión de 1 minuto
-
-Unas 140 palabras. Sirve para un pitch recortado, para la conversación de pasillo con un juez y como narración del video corto.
-
-> **[0:00–0:10]** "Pensemos en [ARQUETIPO]: cobra casi todo en efectivo y, si acepta tarjeta, paga hasta 3.95 % de comisión (Banxico)."
-> **[0:10–0:20]** "[NOMBRE] es [FRASE DE VALOR], con CoDi, sin comisión."
-> **[0:20–0:45]** "Miren: digo '[FRASE DE DEMO]', la IA propone el cobro, confirmo, pey genera el QR CoDi… pago un peso desde mi banco… y se confirma solo."
-> **[0:45–1:00]** "Lo construí hoy con Codex, en tareas paralelas, y con la API de OpenAI acotada: la IA propone y la persona decide. Siguiente paso: piloto con comercios de barrio y el Hackatón México. Está en vivo: [URL]."
-
-**Versión de 30 segundos** (unas 70 palabras): problema en una frase con un dato → frase de valor → "la IA propone, tú confirmas, pey confirma el pago" → URL.
-
-## K09.9 · Versión en video y material para la votación
-
-El jurado anuncia ganadores el lunes 9 en la mañana y después hay un voto comunitario (K01.6). El video puede ser tu pitch si no hay presentación en vivo, y es lo que se comparte para el voto.
-
-**Video de entrega** (≤ 3 min o lo que pida el portal ⚪; Build Week pedía menos de 3 minutos, K08.2):
-- Mismo guion de K09.1, sin tiempos muertos: corta las esperas y deja la URL visible todo el video.
-- Primeros 3 segundos: nombre, frase de valor y "pago CoDi real en el minuto [X]".
-- El pago real en primer plano: graba la pantalla de la laptop con tu voz y, si puedes, la pantalla del celular al autorizar el pago. Si no da tiempo, narra el pago y deja que se vea PAGADO.
-- Texto en pantalla en cada paso (muchos lo verán sin audio).
-- Di el modo: "pago real de un peso a la cuenta de prueba de pey".
-- Una toma buena basta. El domingo en la mañana puedes regrabar en silencio (RUNBOOK).
-
-**Video corto** (60–90 s, para compartir; K08.6): gancho en 3 segundos; QR → pago → PAGADO; termina con la URL y un QR. Que se entienda sin audio. Subtítulos con el prompt 12 de ChatGPT.
-
-**Respaldos:** el video del pago de $0.01 de la noche anterior (CHECKLIST) y el del sábado. Guarda copias locales en la laptop y en el celular.
-
-**Publicación:** enlace no listado o "cualquiera con el enlace" ⚪; ábrelo en una ventana de incógnito antes de ponerlo en el README y en el portal.
-
-**Material para el voto comunitario** (prompt 12 de ChatGPT):
-- URL de la demo (estable, sin registro y funcionando en celular), QR a la demo y una imagen de portada (captura de la app con la frase de valor).
-- Un texto para WhatsApp y otro para LinkedIn o X.
-- Respuestas cortas a "¿Esto ya existe?", "¿Es seguro?" y "¿Cuánto cuesta?".
-- Comparte sin spam y sin ofrecer nada a cambio de votos (K08.6). El jurado sigue siendo lo principal.
-- Mientras dure el voto: no fusiones cambios, revisa el saldo de OpenAI y deja `MAX_MONTO_MXN` bajo.
-
-<!-- ===== FIN: conocimiento/09-pitch-y-preguntas.md ===== -->
-
-<!-- ===== INICIO: conocimiento/10-perfil-y-mitigaciones.md ===== -->
-
----
-id: K10
-titulo: "Perfil de José: fortalezas, riesgos y cómo cubrirlos"
-resumen: "Cómo aprovechar la experiencia de José y cubrir los riesgos de ir solo, 100% en la nube y en un evento de Codex."
-responde:
-  - "¿En qué es fuerte José y cómo se aprovecha en el producto y el pitch?"
-  - "¿Qué riesgos tiene y cómo se cubren?"
-  - "¿Qué debe poder explicar José sin ayuda frente a los jueces?"
-  - "¿Cómo deben trabajar Codex y ChatGPT con José?"
-actualizado: 2026-11-06
-confianza: media
-fuentes: [SM01, SM02]
----
-# K10 · Perfil de José: fortalezas, riesgos y cómo cubrirlos
-
-## TL;DR
-- Fortalezas: ritmo de hackatón reciente, conocimiento de pagos y fintech, velocidad con agentes de IA, método propio con verificación y evidencia. Él presenta el pitch.
-- Riesgos: va solo; su flujo habitual es con Claude y este evento es de Codex; la API de Pey es nueva para él; todo depende del internet; "la IA hizo todo" exige que domine las decisiones.
-- Regla del día: **Codex construye, ChatGPT redacta, José decide y presenta.** Todo con evidencia.
-
-## K10.1 · Fortalezas y cómo usarlas
-| Fortaleza | Evidencia | Cómo se aprovecha |
+| Archivo | Tema | Páginas oficiales |
 |---|---|---|
-| Experiencia reciente en hackatones | Quedó entre los ganadores de GOYA HACK (CriptoUNAM, oct 2026); se inscribió al Chilangatón (25 oct) en esta misma Utopía; proyectos de InnovaFest [SM01] [SM02] | Conoce la sede y el formato: seguir el runbook sin improvisar |
-| Pagos y fintech | Aprobó Foundations del Solana Engineering Track (nov 2026); GOYA HACK fue de CriptoUNAM [SM02] | Hablar con autoridad de CoDi, SPEI, comisiones y confianza |
-| Velocidad con agentes de IA | 15 repos con actividad desde el 1 de octubre de 2026: webs, agentes, fine-tuning [SM01] | Repartir tareas en paralelo a Codex sin miedo |
-| Método propio | Repo `claude-tec-playbook`: contratos, bitácora, verificación, anti-alucinación [SM01] | El mismo rigor con Codex: criterios de aceptación y evidencia en cada PR |
-| Pitch | José presenta | Proteger en el runbook el tiempo de ensayo |
+| [01-que-es-pey-y-codi.md](../pey/01-que-es-pey-y-codi.md) | Qué es pey, qué hace la API, dos formas de cobrar, precio, contradicción sobre llaves de prueba | [Inicio](https://docs.pey.mx/) · [API CoDi®](https://pey.mx/api-codi) · [Introducción](https://docs.pey.mx/docs/api/codi-api) |
+| [02-primeros-pasos-cuenta-llaves-y-prueba.md](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md) | Portal, perfil, cuentas `codi`/`stripe`, crear API key, prueba en producción, entornos | [Crear una API key](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key) |
+| [03-referencia-api-convenciones.md](../pey/03-referencia-api-convenciones.md) | URL base, autenticación, IDs, montos, fechas, paginación, metadata, errores, mapa de endpoints | [Referencia de la API](https://docs.pey.mx/docs/category/api-reference) · [OpenAPI](https://docs.pey.mx/openapi.json) |
+| [04-api-codi-qr-y-push.md](../pey/04-api-codi-qr-y-push.md) | `POST /codi/qr`, `POST /codi/pn` | [Create QR](https://docs.pey.mx/docs/api/create-qr) · [Create Push Notification](https://docs.pey.mx/docs/api/create-push-notification) |
+| [05-api-cuentas-bancarias.md](../pey/05-api-cuentas-bancarias.md) | `POST /bank-account`, `GET /bank-account/{id}`, `codiStatus`, multi-cuenta | [Register Bank Account](https://docs.pey.mx/docs/api/register-bank-account) · [Get Bank Account](https://docs.pey.mx/docs/api/get-bank-account) |
+| [06-api-ligas-de-pago.md](../pey/06-api-ligas-de-pago.md) | `POST /payment-link/create`, `/update`, `GET /payment-link/{id}` | [Create](https://docs.pey.mx/docs/api/create-payment-link) · [Update](https://docs.pey.mx/docs/api/update-payment-link) · [Get](https://docs.pey.mx/docs/api/get-payment-link) |
+| [07-api-transacciones.md](../pey/07-api-transacciones.md) | Las 4 rutas `/transaction/...` y cuál usar para confirmar un pago | [Get Transaction](https://docs.pey.mx/docs/api/get-transaction) · [API Key](https://docs.pey.mx/docs/api/get-api-key-transactions) · [CoDi QR](https://docs.pey.mx/docs/api/get-co-di-qr-transactions) · [Bank Account](https://docs.pey.mx/docs/api/get-bank-account-transactions) |
+| [08-tipos-de-datos.md](../pey/08-tipos-de-datos.md) | Transacción, desglose del monto, metadata, cuenta bancaria, error, enumeraciones | [Tipos](https://docs.pey.mx/docs/category/types) |
+| [09-webhooks.md](../pey/09-webhooks.md) | Registro, firma Standard Webhooks, historial, 4 eventos con todos sus campos | [Webhooks](https://docs.pey.mx/docs/webhooks/introduction) · [Configurar webhooks](https://docs.pey.mx/docs/tutorials/getting-started/set-up-webhooks) |
+| [10-tutorial-mostrar-qr-codi.md](../pey/10-tutorial-mostrar-qr-codi.md) | Tutorial oficial de QR y versión propia en JavaScript | [Mostrar un QR CoDi](https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr) |
+| [11-errores-y-limites.md](../pey/11-errores-y-limites.md) | `error.type` por endpoint, cómo reaccionar, límites, lo no documentado | [OpenAPI](https://docs.pey.mx/openapi.json) |
+| [12-recursos-de-marca.md](../pey/12-recursos-de-marca.md) | Logos pey y pey + CoDi, animación CoDi | [Recursos de marca](https://docs.pey.mx/brand-assets) |
+| [13-registro-de-cambios.md](../pey/13-registro-de-cambios.md) | Changelog oficial y diferencias con K03 | [Registro de cambios](https://docs.pey.mx/docs/category/changelog) |
 
-## K10.2 · Riesgos y cómo se cubren
-| Riesgo | Mitigación concreta | Dónde |
-|---|---|---|
-| Va solo: nadie prueba ni revisa | Tareas de Codex en paralelo en carpetas separadas; pruebas automáticas; ChatGPT como juez simulado | `dia-del-evento/RUNBOOK.md`, `dia-del-evento/PROMPTS-CODEX.md` |
-| Su flujo habitual es con Claude; el evento es de Codex | `AGENTS.md` listo; Codex web como constructor; Claude solo como revisor opcional | `AGENTS.md`, K05 |
-| La API de Pey es nueva | Llave de desarrollo antes del evento; K03 con endpoints y ejemplos; modo **SIMULACIÓN** etiquetado como plan B | K03, `dia-del-evento/CHECKLIST.md` |
-| La API de OpenAI se paga aparte de ChatGPT Plus | Crear la API key y cargar saldo antes del evento | K04, `dia-del-evento/CHECKLIST.md` |
-| Todo en la nube depende del internet | Hotspot del celular; video de respaldo de la demo | `dia-del-evento/RUNBOOK.md` |
-| "La IA hizo todo": preguntas de los jueces | Decisiones escritas en cada PR; José domina las 5 decisiones de K10.3 y un diagrama de arquitectura | K09 |
-| Cansancio por preparar la víspera | Dormir; checklist corta en la mañana | `dia-del-evento/CHECKLIST.md` |
+## Endpoints (11)
 
-## K10.3 · Lo que José debe poder explicar sin ayuda
-1. **Por qué CoDi con Pey:** cobro sin comisión y el dinero llega directo a la cuenta del comercio (K03).
-2. **Dónde viven las llaves y cómo se confirma un pago:** en el servidor; el pago se confirma con el estado de Pey o su webhook, nunca con una captura de pantalla (K03).
-3. **Qué hace el modelo de OpenAI y qué no:** entiende, propone y redacta; no cobra por su cuenta, siempre pide confirmación (K04).
-4. **Cómo lo construyó:** Codex con tareas en paralelo, PRs con criterios de aceptación y previews en Vercel (K05).
-5. **Qué sigue:** continuar en el Hackatón Nacional (14 nov–12 dic) y un piloto con comercios reales (K01, K02).
-
-## K10.4 · Cómo deben trabajar Codex y ChatGPT con José
-- Respuestas cortas, en español, con el "por qué" en una línea.
-- Opciones numeradas con una recomendación clara.
-- No pedirle a José lo que un agente puede hacer. Sí pedirle, y marcarlo como 🧑, solo lo que únicamente él puede hacer: cuentas, llaves, pagos reales, aprobar el merge a `main` y el pitch.
-- Después de cada entrega, decirle en 3 líneas qué cambió y cómo probarlo desde el celular.
-
-## Fuentes
-| ID | Título | URL | Consultado |
+| Método | Ruta | Éxito | Archivo |
 |---|---|---|---|
-| SM01 | Perfil público de GitHub de José (lista de repositorios) | https://github.com/jose2501106-IA | 2026-11-05 |
-| SM02 | Correos personales de José (confirmaciones de eventos y resultados) | no público | 2026-11-05 |
+| POST | `/codi/qr` | 201 | [04](../pey/04-api-codi-qr-y-push.md) |
+| POST | `/codi/pn` | 200 | [04](../pey/04-api-codi-qr-y-push.md) |
+| POST | `/bank-account` | 200 | [05](../pey/05-api-cuentas-bancarias.md) |
+| GET | `/bank-account/{id}` | 200 | [05](../pey/05-api-cuentas-bancarias.md) |
+| POST | `/payment-link/create` | 200 | [06](../pey/06-api-ligas-de-pago.md) |
+| POST | `/payment-link/update` | 200 | [06](../pey/06-api-ligas-de-pago.md) |
+| GET | `/payment-link/{id}` | 200 | [06](../pey/06-api-ligas-de-pago.md) |
+| GET | `/transaction/{id}` | 200 | [07](../pey/07-api-transacciones.md) |
+| GET | `/transaction/api-key` | 200 | [07](../pey/07-api-transacciones.md) |
+| GET | `/transaction/codi/qr/{id}` | 200 | [07](../pey/07-api-transacciones.md) |
+| GET | `/transaction/bank-account/{id}` | 200 | [07](../pey/07-api-transacciones.md) |
 
-<!-- ===== FIN: conocimiento/10-perfil-y-mitigaciones.md ===== -->
+Eventos de webhook (4): `codi.qr.payment_received`, `codi.pn.payment_received`, `bank.account.updated`, `payment_link.status_updated` → [09](../pey/09-webhooks.md).
+
+## Cobertura del mapa del sitio (37 URL, consultado 2026-11-07)
+
+| URL | Dónde quedó |
+|---|---|
+| https://docs.pey.mx/ | 01 |
+| https://docs.pey.mx/brand-assets | 12 |
+| https://docs.pey.mx/docs/api/codi-api | 01, 03 |
+| https://docs.pey.mx/docs/api/create-qr | 04 |
+| https://docs.pey.mx/docs/api/create-push-notification | 04 |
+| https://docs.pey.mx/docs/api/register-bank-account | 05 |
+| https://docs.pey.mx/docs/api/get-bank-account | 05 |
+| https://docs.pey.mx/docs/api/create-payment-link | 06 |
+| https://docs.pey.mx/docs/api/update-payment-link | 06 |
+| https://docs.pey.mx/docs/api/get-payment-link | 06 |
+| https://docs.pey.mx/docs/api/get-transaction | 07 |
+| https://docs.pey.mx/docs/api/get-api-key-transactions | 07 |
+| https://docs.pey.mx/docs/api/get-co-di-qr-transactions | 07 |
+| https://docs.pey.mx/docs/api/get-bank-account-transactions | 07 |
+| https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key | 02 |
+| https://docs.pey.mx/docs/tutorials/getting-started/set-up-webhooks | 09 |
+| https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr | 10 |
+| https://docs.pey.mx/docs/types/transaction-object | 08 |
+| https://docs.pey.mx/docs/types/amount-breakdown | 08 |
+| https://docs.pey.mx/docs/types/metadata-response | 08 |
+| https://docs.pey.mx/docs/types/bank-account | 05, 08 |
+| https://docs.pey.mx/docs/webhooks/introduction | 09 |
+| https://docs.pey.mx/docs/webhooks/codi/qr | 09 |
+| https://docs.pey.mx/docs/webhooks/codi/pn | 09 |
+| https://docs.pey.mx/docs/webhooks/bank-account/updated | 09 |
+| https://docs.pey.mx/docs/webhooks/payment-link/status-update | 09 |
+| https://docs.pey.mx/docs/changelog/introduction | 13 |
+| https://docs.pey.mx/docs/changelog/bank-accounts | 13 |
+| https://docs.pey.mx/docs/category/api-reference | 03 (índice) |
+| https://docs.pey.mx/docs/category/webhooks | 09 (índice) |
+| https://docs.pey.mx/docs/category/examples | 10 (índice: un solo ejemplo) |
+| https://docs.pey.mx/docs/category/getting-started | Índice de las guías de 02 y 09 (⚪ página no abierta; sus enlaces sí) |
+| https://docs.pey.mx/docs/category/tutorials | Índice de tutoriales (⚪ no abierta; sus enlaces sí) |
+| https://docs.pey.mx/docs/category/types | Índice de tipos (⚪ no abierta; sus 4 tipos sí) |
+| https://docs.pey.mx/docs/category/changelog | Índice del changelog (⚪ no abierta; sus 2 entradas sí) |
+| https://docs.pey.mx/docs/tags | Índice de etiquetas (⚪ no abierta) |
+| https://docs.pey.mx/docs/tags/general | Etiqueta "general" de las entradas del changelog (⚪ no abierta) |
+
+Notas del recorrido: las páginas `/docs/api/...` se dibujan en el navegador desde el OpenAPI; leídas como texto solo traen descripción y códigos, así que los campos salen del OpenAPI. docs.pey.mx no respondió a `curl` desde este entorno (proxy); todo se leyó con un lector web. Las versiones en inglés (`/en/...`) no se recorrieron por separado.
+
+## Contradicciones y huecos principales
+
+- **Llaves de prueba:** la página comercial dice que hay llaves de prueba y productivas; la documentación técnica solo tiene producción y un sandbox "próximamente" ([01](../pey/01-que-es-pey-y-codi.md)).
+- **Estados de link de pago:** la API incluye `partial`; el webhook no ([06](../pey/06-api-ligas-de-pago.md)).
+- **Respuesta ante firma inválida:** el ejemplo de pey responde 500; K03 usa 401. Ambos son "no 2xx" ([09](../pey/09-webhooks.md)).
+- **⚪ Sin documentar:** límite de peticiones, idempotencia, código de llave inválida, reintentos y orden de webhooks, cancelación y devoluciones, comisión por tarjeta ([11](../pey/11-errores-y-limites.md)).
+
+Fuente: [pey: mapa del sitio](https://docs.pey.mx/sitemap.xml) · [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: API CoDi®](https://pey.mx/api-codi) · consultado 2026-11-07
+
+<!-- ===== FIN: pey/README.md ===== -->
+
+<!-- ===== INICIO: pey/01-que-es-pey-y-codi.md ===== -->
+
+---
+titulo: "Qué es pey y su API CoDi"
+resumen: "Quién está detrás de pey, qué hace su API (CoDi con QR y push, cuentas bancarias, links de pago, transacciones), cuánto cuesta, a dónde llega el dinero y la contradicción sobre llaves de prueba."
+actualizado: 2026-11-07
+fuentes:
+  - https://pey.mx/api-codi
+  - https://docs.pey.mx/
+  - https://docs.pey.mx/docs/api/codi-api
+---
+
+# 01 · Qué es pey y su API CoDi
+
+## Quién es pey
+
+- pey (se escribe en minúsculas, con ®) ofrece una API pública para cobrar en México con CoDi® y con tarjeta. La documentación vive en `docs.pey.mx`, en español (predeterminado) y en inglés (rutas con `/en/`).
+- El pie de la documentación muestra el copyright 2026 de **Koshi SA de CV**.
+- pey.mx enlaza otros productos que no son parte de la API: Restaurantes, Boletera y Personas/PyMEs (app). Aquí solo se documenta la API.
+- La portada de la documentación muestra logotipos de empresas (CMR, Grupo Presidente, Office Depot, SEDECO del Gobierno de la CDMX y El Micky). ⚪ No hay detalle de qué usa cada una: no lo presentes como testimonio ni cifra.
+
+Fuente: [pey: documentación, inicio](https://docs.pey.mx/) · [pey: API CoDi®](https://pey.mx/api-codi) · consultado 2026-11-07
+
+## Qué hace la API
+
+La especificación se llama **CoDi API**, versión `2026-10-20`. Según su descripción, sirve para:
+
+| Capacidad | Endpoints | Archivo |
+|---|---|---|
+| Cobrar con un **QR CoDi** generado vía Banxico | `POST /codi/qr` | [04](../pey/04-api-codi-qr-y-push.md) |
+| Pedir un pago con una **notificación push CoDi** al celular del cliente | `POST /codi/pn` | [04](../pey/04-api-codi-qr-y-push.md) |
+| **Registrar CLABEs** para cobrar a nombre de cada cuenta | `POST /bank-account`, `GET /bank-account/{id}` | [05](../pey/05-api-cuentas-bancarias.md) |
+| Crear y consultar **links de pago** (checkout alojado) | `POST /payment-link/create`, `POST /payment-link/update`, `GET /payment-link/{id}` | [06](../pey/06-api-ligas-de-pago.md) |
+| Consultar **transacciones** | `GET /transaction/{id}`, `GET /transaction/api-key`, `GET /transaction/codi/qr/{id}`, `GET /transaction/bank-account/{id}` | [07](../pey/07-api-transacciones.md) |
+| Recibir **webhooks** firmados | 4 eventos | [09](../pey/09-webhooks.md) |
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [CoDi API: introducción](https://docs.pey.mx/docs/api/codi-api) · consultado 2026-11-07
+
+## Dos formas de cobrar
+
+Las dos usan **la misma API key** y **el mismo endpoint de webhooks**:
+
+1. **CoDi®**: transferencias por la red CoDi® de Banxico, liquidadas en pesos (MXN). Puedes mostrar un QR o mandar la solicitud de pago al número de celular del cliente.
+2. **Links de pago**: una página de cobro alojada por pey que acepta CoDi, tarjetas, Apple Pay y Google Pay; al terminar (o cancelar) regresa al cliente a las URL de tu sitio.
+
+El flujo base que muestra la portada: creas el cobro (QR o push) → lo compartes con tu cliente → recibes un webhook cuando llega el pago.
+
+Fuente: [pey: documentación, inicio](https://docs.pey.mx/) · consultado 2026-11-07
+
+## Precio y destino del dinero
+
+- **Precio de la API:** la documentación dice que hoy no hay cuota de alta, plan mensual ni cobro por solicitud. La página comercial lo matiza: gratis «por el momento» y «100% gratuita» en sus preguntas frecuentes. No hay tabla de precios publicada.
+- **Destino del dinero:** vinculas la cuenta bancaria que ya tienes (de cualquier banco); no necesitas abrir cuenta ni monedero en pey. La tecnología no depende de una institución financiera.
+- **Comisiones con tarjeta:** ⚪ no publicadas. Lo único documentado es que las transacciones traen `applicationFee` (comisión retenida por pey; puede ser `null`) y `amountBreakdown.fee` (comisión que paga quien paga) — ver [08](../pey/08-tipos-de-datos.md).
+
+Fuente: [pey: documentación, inicio](https://docs.pey.mx/) · [pey: API CoDi®](https://pey.mx/api-codi) · [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+## Lo que promete la página comercial
+
+pey.mx/api-codi presenta la API para empresas y equipos de desarrollo con cinco atributos: funciona con cualquier banco; sin costo por ahora; autoservicio (creas tus llaves sin esperar a que pey te contacte); infraestructura en la nube; y webhooks REST firmados con Standard Webhooks.
+
+Sus tres pasos: preparar el acceso (guía del portal y una API key), conectar tu sistema (implementar las peticiones) y configurar webhooks (registrar la URL y validar firmas con el secreto). Enlaza a dos guías: [Crear una API key](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key/) y [Configurar webhooks](https://docs.pey.mx/docs/tutorials/getting-started/set-up-webhooks/).
+
+Contacto comercial para la API: [formulario con servicio "api-codi"](https://pey.mx/contacto?servicio=api-codi); la página también tiene un botón de WhatsApp (número no copiado aquí).
+
+Fuente: [pey: API CoDi®](https://pey.mx/api-codi) · consultado 2026-11-07
+
+## Contradicción: ¿hay llaves de prueba?
+
+| Fuente | Qué dice |
+|---|---|
+| Página comercial (pey.mx/api-codi) | En sus preguntas frecuentes afirma que la documentación distingue llaves de prueba (desarrollo) y llaves productivas; su paso 1 habla de crear una API key "para el ambiente de desarrollo". |
+| Documentación técnica (docs.pey.mx) | Solo existe producción (`https://api.pey.mx`); el entorno de pruebas aparece como "Próximamente" y recomienda probar en producción con montos pequeños como $0.01 MXN. La guía para crear llaves no menciona llaves de prueba. |
+
+**Cómo actuar:** trata toda llave como productiva y todo pago como real. ⚪ Pregunta a pey si hay llaves de prueba para el hackatón. Detalle en [02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md).
+
+Fuente: [pey: API CoDi®](https://pey.mx/api-codi) · [pey: Crear una API key](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key) · [CoDi API: introducción](https://docs.pey.mx/docs/api/codi-api) · consultado 2026-11-07
+
+<!-- ===== FIN: pey/01-que-es-pey-y-codi.md ===== -->
+
+<!-- ===== INICIO: pey/02-primeros-pasos-cuenta-llaves-y-prueba.md ===== -->
+
+---
+titulo: "Primeros pasos: perfil, cuenta de pago, API key y prueba en producción"
+resumen: "Cómo darse de alta en portal.mipey.mx, qué cuentas de pago existen (codi y stripe), cómo crear la API key, cuánto tarda la CLABE y cómo probar sin sandbox."
+actualizado: 2026-11-07
+fuentes:
+  - https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key
+  - https://docs.pey.mx/docs/api/codi-api
+  - https://docs.pey.mx/
+---
+
+# 02 · Primeros pasos: cuenta, llaves y prueba
+
+## El portal
+
+Todo el alta pasa en **portal.mipey.mx**:
+
+| Sección del portal | URL | Para qué |
+|---|---|---|
+| Inicio / perfil | https://portal.mipey.mx/ | Crear tu perfil |
+| Finanzas | https://portal.mipey.mx/finance | Crear cuentas de pago |
+| Desarrollador | https://portal.mipey.mx/developers | Crear API keys, configurar el webhook y ver sus registros |
+
+⚪ La guía no dice qué datos pide el perfil (correo, RFC, identificación…).
+
+Fuente: [pey: Crear una API key](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key) · consultado 2026-11-07
+
+## Paso 1 · Crea un perfil
+
+Entra a portal.mipey.mx y crea tu perfil. Si ya tienes uno, sáltate este paso.
+
+Fuente: [pey: Crear una API key](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key) · consultado 2026-11-07
+
+## Paso 2 · Agrega una cuenta de pago
+
+En **Finanzas** creas una cuenta de pago. Hay dos tipos:
+
+| Tipo | Qué recibe | Cómo se da de alta |
+|---|---|---|
+| `codi` | Pagos CoDi® | Capturas directamente los datos de tu cuenta bancaria existente. Solo cuentas bancarias mexicanas. |
+| `stripe` | Tarjetas, Apple Pay y Google Pay | Agregas tus datos bancarios por medio de la integración con Stripe. |
+
+- **Tiempo:** el registro de una cuenta bancaria ante Banxico tarda **5 días hábiles** (la referencia de tipos dice "hasta 5 días hábiles").
+- **Alternativa por API:** puedes registrar y consultar cuentas con `POST /bank-account` y `GET /bank-account/{id}`, y mandar su `id` como `bankAccountId` al crear un QR o una push. Ver [05](../pey/05-api-cuentas-bancarias.md).
+
+Fuente: [pey: Crear una API key](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key) · [pey: tipo Cuenta bancaria](https://docs.pey.mx/docs/types/bank-account) · consultado 2026-11-07
+
+## Paso 3 · Crea una API key
+
+1. Con la cuenta de pago lista, entra a **Desarrollador** (menú lateral del portal).
+2. Da clic en **"Crear API Key"** y ponle un nombre.
+3. Vincula una de tus cuentas de pago ya creadas.
+
+Reglas: cada llave puede tener **una cuenta `codi` y una `stripe` al mismo tiempo**, y necesita **al menos una**. La cuenta `codi` vinculada es la que recibe los cobros CoDi cuando no mandas `bankAccountId`.
+
+⚪ No documentado: si la llave se muestra una sola vez, si caduca, si hay permisos por llave o cuántas llaves puedes tener. Cópiala al crearla y guárdala como secreto del servidor.
+
+Fuente: [pey: Crear una API key](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key) · [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+## Prueba en producción y cuenta de prueba
+
+- **No hay sandbox.** pey dice que tendrá un entorno de pruebas dedicado "pronto"; mientras, recomienda probar en producción con bancos, notificaciones CoDi y webhooks reales, usando montos pequeños como **$0.01 MXN**.
+- **Cuenta de prueba:** la guía publica una cuenta bancaria de prueba (CLABE y titular) en su sección "Prueba en producción". Se activa **de inmediato**, así que puedes probar el mismo día mientras se activa tu CLABE. **Lo que se le pague no se devuelve.**
+- Por privacidad, esta carpeta **no copia** la CLABE ni el nombre del titular: tómalos de la [sección oficial](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key#test-in-production).
+
+Fuente: [pey: Crear una API key, Prueba en producción](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key#test-in-production) · [CoDi API: introducción](https://docs.pey.mx/docs/api/codi-api) · consultado 2026-11-07
+
+## Entornos
+
+| Entorno | API | Portal |
+|---|---|---|
+| Producción | `https://api.pey.mx` | `portal.mipey.mx` |
+| Pruebas | Próximamente | Próximamente |
+
+El esquema de seguridad del OpenAPI se llama `dev-PublicApiLambdaAuthorizer`, pero el único servidor declarado es producción; no deduzcas un entorno "dev" de ese nombre. Sobre las llaves de prueba que menciona la página comercial, ver la contradicción en [01](../pey/01-que-es-pey-y-codi.md).
+
+Fuente: [pey: documentación, inicio](https://docs.pey.mx/) · [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+## Lista para un agente (Recomendación)
+
+1. La llave y el secreto del webhook van solo en variables de entorno del servidor (en este repo: `PEY_API_KEY` y `PEY_WEBHOOK_SECRET`). Nunca en el navegador, el repo ni los logs.
+2. Prueba de humo con 1 centavo (ejemplo propio; espera HTTP 201 con `id` y `qrString`):
+
+```bash
+curl -sS https://api.pey.mx/codi/qr \
+  -H "Authorization: Bearer $PEY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{"amount":0.01,"concept":"Prueba de humo","expiration":600,"numRef":"42"}'
+```
+
+3. Convierte `qrString` en QR, págalo desde la app de tu banco y confirma con `GET /transaction/codi/qr/{id}` ([07](../pey/07-api-transacciones.md)) o con el webhook ([09](../pey/09-webhooks.md)).
+4. Mientras uses la cuenta de prueba, pon un tope de monto bajo en tu servidor: ese dinero no regresa.
+
+Fuente: [pey: Crear una API key](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key) · [pey: tutorial Mostrar un QR CoDi](https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr) · consultado 2026-11-07
+
+<!-- ===== FIN: pey/02-primeros-pasos-cuenta-llaves-y-prueba.md ===== -->
+
+<!-- ===== INICIO: pey/03-referencia-api-convenciones.md ===== -->
+
+---
+titulo: "Referencia de la API: convenciones generales"
+resumen: "URL base, autenticación Bearer, headers, identificadores (ULID, IDC, folio CoDi), montos, fechas, paginación con nextToken, metadata, formato de error, propiedad de recursos y mapa de los 11 endpoints."
+actualizado: 2026-11-07
+fuentes:
+  - https://docs.pey.mx/openapi.json
+  - https://docs.pey.mx/docs/api/codi-api
+  - https://docs.pey.mx/docs/category/api-reference
+---
+
+# 03 · Referencia de la API: convenciones
+
+## Especificación y servidor
+
+- **Especificación:** OpenAPI 3.1.1, título "CoDi API", versión `2026-10-20`. Descarga: https://docs.pey.mx/openapi.json
+- **Servidor único:** `https://api.pey.mx` (producción).
+- Las páginas de referencia (`/docs/api/...`) se generan del OpenAPI y se dibujan en el navegador; leídas como texto solo muestran descripción y códigos de respuesta. **El OpenAPI es la fuente completa** de campos, tipos y errores.
+- La sección `webhooks` del OpenAPI está vacía: los eventos solo se documentan en páginas ([09](../pey/09-webhooks.md)).
+- La referencia agrupa los endpoints en: Introduction, CoDi (2), Bank Account (2), Payment Link (3) y Transaction (4).
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [Referencia de la API (categoría)](https://docs.pey.mx/docs/category/api-reference) · consultado 2026-11-07
+
+## Autenticación y headers
+
+- Esquema `http`, tipo `bearer`: la API key va en el header `Authorization: Bearer <API key>`. Todas las rutas usan el mismo esquema (`dev-PublicApiLambdaAuthorizer`).
+- El tutorial agrega `Content-Type: application/json` y `Accept: application/json`.
+- **Sin llave o con llave inválida** no hay un 401 documentado. Lo que sí aparece en ejemplos de error: en transacciones, un 400 `INVALID_REQUEST` (ejemplo `authError`, "apiKeyId no incluido"); en links de pago, un 400 `AUTH_ERROR` (ejemplo `authError`). ⚪ El código real ante una llave mala no está confirmado: maneja 400, 401 y 403.
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: tutorial Mostrar un QR CoDi](https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr) · consultado 2026-11-07
+
+## Identificadores
+
+| Identificador | Formato | Dónde aparece |
+|---|---|---|
+| IDC del QR | texto asignado por Banxico (el tutorial muestra uno de 10 caracteres hexadecimales) | `id` de `POST /codi/qr`; `codiQrId` en el webhook; ruta de `GET /transaction/codi/qr/{id}` |
+| Transacción | ULID | `transactionId` (push y webhooks), `id` de transacciones |
+| Folio CoDi de la push | 20 dígitos, asignado por Banxico | `codiId` de `POST /codi/pn` |
+| Cuenta bancaria | ULID | `id` / `bankAccountId` |
+| Link de pago | ULID | `id` / `paymentLinkId` |
+| API key | texto | `apiKeyId` en webhooks; `ownerId` en `bank.account.updated` |
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: tutorial Mostrar un QR CoDi](https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr) · consultado 2026-11-07
+
+## Montos, moneda y fechas
+
+- **Montos en pesos MXN** como número con decimales (`150`, `25.5`, `0.01`), **no en centavos**.
+- `POST /payment-link/update` redondea a 2 decimales (mitad hacia arriba) antes de guardar; ⚪ el redondeo en los demás endpoints no está documentado: manda siempre 2 decimales.
+- `currency` en transacciones usa códigos ISO 4217 (en la práctica `MXN`).
+- **Fechas** (`dateCreated`, `datePaid`): marca de tiempo Unix **en segundos**.
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+## Paginación
+
+- Las listas regresan `{ "items": [...], "nextToken": "<texto o null>" }`, de la más reciente a la más antigua.
+- Para la página siguiente manda `?nextToken=<valor>`; omítelo en la primera. `nextToken` es `null` cuando ya no hay más.
+- Tamaño: **80** por página en `/transaction/api-key` y `/transaction/bank-account/{id}`; **20** en `/transaction/codi/qr/{id}`.
+- Un `nextToken` inválido da 400 `INVALID_PARAMETERS` (ejemplo `invalidNextToken`).
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+## metadata propia
+
+- `POST /codi/qr`, `POST /codi/pn` y `POST /payment-link/create` aceptan `metadata`: hasta **50** pares; claves de hasta **40** caracteres; valores **escalares** (texto, número, booleano o null; sin objetos ni arreglos) de hasta **500** caracteres.
+- Todo se guarda y regresa **como texto** (`12345` → `"12345"`, `false` → `"false"`, `null` → `"null"`).
+- En transacciones y webhooks CoDi regresa dentro de `metadata.externalMetadata`; en `GET /payment-link/{id}` regresa en `metadata` del link. Ver [08](../pey/08-tipos-de-datos.md).
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: tipo Respuesta de metadata](https://docs.pey.mx/docs/types/metadata-response) · consultado 2026-11-07
+
+## Formato de error y propiedad de recursos
+
+Todas las rutas responden errores con la misma forma (ejemplo propio):
+
+```json
+{ "error": { "message": "Texto legible", "type": "INVALID_AMOUNT", "requestId": "req-ficticio-123" } }
+```
+
+- Programa contra `error.type` (enumeración estable por endpoint), no contra `message`. Guarda `requestId` para soporte.
+- **Propiedad:** solo ves recursos creados o registrados con tu llave. Un QR, transacción o cuenta de otra llave responde **404** (igual que si no existiera); un link de pago de otra llave puede responder **403** `FORBIDDEN`.
+- Catálogo completo por endpoint: [11](../pey/11-errores-y-limites.md).
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+## Mapa de endpoints (11)
+
+| Método | Ruta | Resumen en el OpenAPI | Éxito | Archivo |
+|---|---|---|---|---|
+| POST | `/codi/qr` | Create QR | 201 | [04](../pey/04-api-codi-qr-y-push.md) |
+| POST | `/codi/pn` | Create Push Notification | 200 | [04](../pey/04-api-codi-qr-y-push.md) |
+| POST | `/bank-account` | Register Bank Account | 200 | [05](../pey/05-api-cuentas-bancarias.md) |
+| GET | `/bank-account/{id}` | Get Bank Account | 200 | [05](../pey/05-api-cuentas-bancarias.md) |
+| POST | `/payment-link/create` | Create Payment Link | 200 | [06](../pey/06-api-ligas-de-pago.md) |
+| POST | `/payment-link/update` | Update Payment Link | 200 | [06](../pey/06-api-ligas-de-pago.md) |
+| GET | `/payment-link/{id}` | Get Payment Link | 200 | [06](../pey/06-api-ligas-de-pago.md) |
+| GET | `/transaction/{id}` | Get Transaction | 200 | [07](../pey/07-api-transacciones.md) |
+| GET | `/transaction/api-key` | Get API Key Transactions | 200 | [07](../pey/07-api-transacciones.md) |
+| GET | `/transaction/codi/qr/{id}` | Get CoDi QR Transactions | 200 | [07](../pey/07-api-transacciones.md) |
+| GET | `/transaction/bank-account/{id}` | Get Bank Account Transactions | 200 | [07](../pey/07-api-transacciones.md) |
+
+No hay endpoints para cancelar un QR o una push, devolver un pago, listar cuentas bancarias, listar links de pago ni administrar el webhook.
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+## Lo que la referencia no documenta (⚪)
+
+Límite de peticiones (rate limit), idempotencia o llaves de idempotencia, encabezado de versión, CORS (asume que solo se llama desde servidor), tiempos de respuesta garantizados, largo máximo de `concept` y política de compatibilidad entre versiones.
+
+Fuente: [CoDi API: introducción](https://docs.pey.mx/docs/api/codi-api) · [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+<!-- ===== FIN: pey/03-referencia-api-convenciones.md ===== -->
+
+<!-- ===== INICIO: pey/04-api-codi-qr-y-push.md ===== -->
+
+---
+titulo: "API CoDi: crear QR y notificación push"
+resumen: "POST /codi/qr y POST /codi/pn campo por campo: tipos, reglas, valores por defecto, respuestas, errores con ejemplos y cuándo usar cada uno."
+actualizado: 2026-11-07
+fuentes:
+  - https://docs.pey.mx/openapi.json
+  - https://docs.pey.mx/docs/api/create-qr
+  - https://docs.pey.mx/docs/api/create-push-notification
+---
+
+# 04 · CoDi: QR y notificación push
+
+## POST /codi/qr · Crear QR
+
+Genera vía Banxico un QR CoDi para recibir un pago. Respuesta exitosa: **201**.
+
+**Cuerpo (JSON):**
+
+| Campo | Tipo | Obligatorio | Reglas | Default | Qué hace |
+|---|---|---|---|---|---|
+| `amount` | number | sí | `>= 0` | — | Monto en pesos MXN. Con `0`, quien paga escribe el monto al escanear. Sin máximo publicado. |
+| `concept` | string | no | largo máximo ⚪ no documentado | — | Concepto que ve quien paga. |
+| `expiration` | integer | no | `0`, o `>= 360` | `0` | Vigencia en segundos. `0` = no vence. Si la usas, mínimo 360 (6 min). |
+| `numRef` | string | no | `^[0-9]{1,7}$` | `"0"` | Referencia numérica de 1 a 7 dígitos, solo números. |
+| `generateImage` | boolean | no | — | `false` | Si es `true`, la respuesta trae `qrImage`. Generarla hace más lenta la respuesta; para ir rápido, pey sugiere dibujar el QR en tu lado a partir de `qrString`. |
+| `bankAccountId` | string (ULID) | no | cuenta con `codiStatus: ACTIVE` | — | Cuenta registrada que recibe el pago. Sin él, se usa la cuenta `codi` vinculada a la API key. |
+| `metadata` | object | no | hasta 50 pares; clave `<= 40`; valor escalar `<= 500` | — | Datos tuyos; regresan como texto en `metadata.externalMetadata`. |
+
+**Respuesta 201:**
+
+| Campo | Tipo | Qué es |
+|---|---|---|
+| `id` | string | IDC: identificador único que asigna Banxico. Con él consultas los pagos del QR. |
+| `qrString` | string | Contenido que debes codificar como imagen QR. |
+| `qrImage` | string o null | PNG en base64. Solo viene con `generateImage: true`; es `null` si falló la imagen (el QR sí se creó). |
+
+**Errores:** 400 (`INVALID_REQUEST`, `PEY_CONSISTENCY_ERROR`, `INVALID_STATE`, `INVALID_AMOUNT`, `INVALID_PARAMETER`), 503 (`SERVICE_UNAVAILABLE`, `FLAGS_UNAVAILABLE`), 500 (`INTERNAL_SERVER_ERROR`). Ejemplos con nombre del OpenAPI:
+
+| Ejemplo | HTTP | `error.type` | Causa (parafraseada) |
+|---|---|---|---|
+| `invalidAmount` | 400 | `INVALID_AMOUNT` | Monto no numérico o negativo |
+| `invalidExpiration` | 400 | `INVALID_PARAMETER` | Vigencia distinta de 0 y menor a 360 s |
+| `codiNotEnabled` | 400 | `INVALID_STATE` | La API key no tiene CoDi habilitado |
+| `missingBankAccount` | 400 | `PEY_CONSISTENCY_ERROR` | La API key no tiene cuenta bancaria vinculada |
+| `invalidRequest` | 400 | `INVALID_REQUEST` | Cuerpo que no es JSON válido |
+| `maintenance` | 503 | `SERVICE_UNAVAILABLE` | Endpoint en mantenimiento; reintenta después |
+| `invokeError` | 500 | `INTERNAL_SERVER_ERROR` | Falló la creación del QR |
+| `requestIdError` | 500 | `INTERNAL_SERVER_ERROR` | Falló la obtención del ID de solicitud |
+
+**Ejemplo propio (valores ficticios):**
+
+```json
+// Petición
+{ "amount": 85.5, "concept": "Pedido 318", "expiration": 900, "numRef": "318",
+  "generateImage": true, "metadata": { "pedido": "318", "mesa": 4 } }
+// Respuesta 201
+{ "id": "a0b1c2d3e4", "qrString": "<contenido CoDi a codificar>", "qrImage": "<PNG en base64 o null>" }
+```
+
+Notas: pey no devuelve la hora de vencimiento (calcúlala con `expiration`); no hay endpoint para cancelar un QR.
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: Create QR](https://docs.pey.mx/docs/api/create-qr) · consultado 2026-11-07
+
+## POST /codi/pn · Crear notificación push
+
+Manda vía Banxico una solicitud de pago CoDi al celular de quien paga. Respuesta exitosa: **200**.
+
+**Cuerpo (JSON):**
+
+| Campo | Tipo | Obligatorio | Reglas | Default | Qué hace |
+|---|---|---|---|---|---|
+| `amount` | number | sí | `> 0` y `<= 1,000,000` | — | Monto en pesos MXN. |
+| `phoneNumber` | string | sí | `^[0-9]{10}$` | — | Celular de 10 dígitos que recibe la notificación. |
+| `concept` | string | no | largo ⚪ no documentado | — | Concepto que ve quien paga. |
+| `expiration` | integer | no | `>= 360` | `360` | Vigencia de la notificación en segundos. |
+| `numRef` | string | no | `^[0-9]{1,7}$` | `"0"` | Referencia numérica de 1 a 7 dígitos. |
+| `bankAccountId` | string (ULID) | no | cuenta `ACTIVE` | — | Cuenta que recibe; sin él, la cuenta `codi` de la llave. |
+| `metadata` | object | no | igual que en QR | — | Datos tuyos, regresan como texto. |
+
+**Respuesta 200:**
+
+| Campo | Tipo | Qué es |
+|---|---|---|
+| `transactionId` | string (ULID) | ID interno para seguir el pago con `GET /transaction/{id}`. |
+| `codiId` | string | Folio CoDi de 20 dígitos asignado por Banxico. |
+
+**Errores:** 400 (`INVALID_REQUEST`, `INCOMPLETE_PARAMETERS`, `INVALID_PARAMETER`, `INVALID_AMOUNT`, `INVALID_STATE`, `PEY_CONSISTENCY_ERROR`, `BAD_REQUEST`), 503 (`SERVICE_UNAVAILABLE`, `FLAGS_UNAVAILABLE`), 500 (`INTERNAL_SERVER_ERROR`).
+
+| Ejemplo | HTTP | `error.type` | Causa (parafraseada) |
+|---|---|---|---|
+| `missingPhone` | 400 | `INCOMPLETE_PARAMETERS` | Falta `phoneNumber` |
+| `invalidPhone` | 400 | `INVALID_PARAMETER` | `phoneNumber` no es texto de 10 dígitos |
+| `invalidAmount` | 400 | `INVALID_AMOUNT` | Monto no mayor que 0 |
+| `codiNotEnabled` | 400 | `INVALID_STATE` | La llave no tiene CoDi habilitado |
+| `maintenance` | 503 | `SERVICE_UNAVAILABLE` | Endpoint en mantenimiento |
+| `invokeError` | 500 | `INTERNAL_SERVER_ERROR` | Falló la creación de la push |
+
+**Ejemplo propio:**
+
+```json
+// Petición
+{ "amount": 120, "phoneNumber": "5500000000", "concept": "Mensualidad", "expiration": 600, "numRef": "77" }
+// Respuesta 200
+{ "transactionId": "01JD0000000000000000000000", "codiId": "00000000000000000000" }
+```
+
+⚪ No documentado: qué pasa si el celular no está ligado a CoDi en ningún banco, y si existe un evento de push rechazada o vencida (solo hay evento de pago recibido).
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: Create Push Notification](https://docs.pey.mx/docs/api/create-push-notification) · consultado 2026-11-07
+
+## QR o push: cuál usar (Recomendación)
+
+| Criterio | QR (`/codi/qr`) | Push (`/codi/pn`) |
+|---|---|---|
+| Requiere conocer al cliente | No | Sí, su celular |
+| Monto abierto (`amount: 0`) | Sí | No (`> 0`) |
+| Vigencia mínima | 0 (no vence) o 360 s | 360 s |
+| Cómo confirmar | `GET /transaction/codi/qr/{id}` o webhook `codi.qr.payment_received` | `GET /transaction/{transactionId}` o webhook `codi.pn.payment_received` |
+| Riesgo de reintento | Un QR duplicado no cobra dos veces por sí solo | Reintentar tras un timeout puede mandar dos solicitudes al cliente |
+
+Para una demo en vivo conviene el QR: no depende de datos del cliente. No reintentes a ciegas ninguna creación tras un timeout: la API no documenta idempotencia (⚪).
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+<!-- ===== FIN: pey/04-api-codi-qr-y-push.md ===== -->
+
+<!-- ===== INICIO: pey/05-api-cuentas-bancarias.md ===== -->
+
+---
+titulo: "API de cuentas bancarias: registrar y consultar CLABEs"
+resumen: "POST /bank-account y GET /bank-account/{id}: campos, ciclo de vida de codiStatus (PENDING, PROCESSING, ACTIVE, ERROR), errores y cómo cobrar a nombre de cada cuenta con bankAccountId."
+actualizado: 2026-11-07
+fuentes:
+  - https://docs.pey.mx/openapi.json
+  - https://docs.pey.mx/docs/api/register-bank-account
+  - https://docs.pey.mx/docs/api/get-bank-account
+  - https://docs.pey.mx/docs/types/bank-account
+  - https://docs.pey.mx/docs/changelog/bank-accounts
+---
+
+# 05 · Cuentas bancarias
+
+## POST /bank-account · Registrar una cuenta
+
+Registra una CLABE bajo tu API key para que pueda recibir pagos CoDi. La cuenta nace en `PENDING`; pey la registra ante Banxico (hasta 5 días hábiles) y la pasa a `ACTIVE`. Respuesta exitosa: **200**.
+
+**Cuerpo (JSON), los cuatro campos son obligatorios:**
+
+| Campo | Tipo | Reglas | Qué es |
+|---|---|---|---|
+| `alias` | string | 1 a 255 caracteres | Nombre amigable de la cuenta. |
+| `name` | string | 1 a 255 caracteres | Nombre legal completo del titular (persona física o moral). |
+| `clabe` | string | `^[0-9]{18}$` y dígito verificador válido | CLABE de 18 dígitos. El banco debe tener CoDi habilitado. |
+| `entity` | string (enum) | `BUSINESS` o `PERSON` | Tipo de titular. |
+
+**Respuesta 200:** `id` (ULID de la cuenta en pey) y `codiStatus` (`PENDING` | `PROCESSING` | `ACTIVE` | `ERROR`).
+
+**Errores:** 400 (`INVALID_REQUEST`, `INCOMPLETE_PARAMETERS`, `INVALID_PARAMETER`, `INVALID_CLABE`), 503 (`SERVICE_UNAVAILABLE`, `FLAGS_UNAVAILABLE`), 500 (`INTERNAL_SERVER_ERROR`).
+
+| Ejemplo | HTTP | `error.type` | Causa (parafraseada) |
+|---|---|---|---|
+| `missingFields` | 400 | `INCOMPLETE_PARAMETERS` | Faltan campos obligatorios |
+| `invalidClabe` | 400 | `INVALID_CLABE` | CLABE inválida |
+| `invalidEntity` | 400 | `INVALID_PARAMETER` | `entity` distinto de `BUSINESS` o `PERSON` |
+| (sin nombre) | 503 | `SERVICE_UNAVAILABLE` | Endpoint en mantenimiento |
+| (sin nombre) | 500 | `INTERNAL_SERVER_ERROR` | Falló la creación de la cuenta |
+
+**Ejemplo propio (datos ficticios):**
+
+```json
+// Petición
+{ "alias": "Puesto de tamales", "name": "Nombre Legal Ficticio", "clabe": "<CLABE de 18 dígitos>", "entity": "PERSON" }
+// Respuesta 200
+{ "id": "01JE0000000000000000000000", "codiStatus": "PENDING" }
+```
+
+⚪ La cuenta puede traer `taxId` (RFC) "si se proporcionó al registrar", pero el cuerpo de este endpoint no tiene campo `taxId`: no está documentado cómo se envía.
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: Register Bank Account](https://docs.pey.mx/docs/api/register-bank-account) · consultado 2026-11-07
+
+## GET /bank-account/{id} · Consultar una cuenta
+
+Regresa una cuenta registrada con `POST /bank-account` y su estado CoDi; sirve para ver cuándo pasa de `PENDING` a `ACTIVE`. Solo ves cuentas registradas con tu llave: las de otra llave o inexistentes dan **404**.
+
+- **Parámetro de ruta:** `id` (obligatorio, ULID de la cuenta).
+- **Respuesta 200:** el objeto Cuenta bancaria completo: `id`, `alias`, `name`, `clabe`, `entity`, `taxId` (opcional), `codiStatus`, `errorMessage` (solo con `ERROR`) y `dateCreated` (Unix en segundos). Detalle en [08](../pey/08-tipos-de-datos.md).
+- **Errores:** 400 `INVALID_REQUEST` o `INCOMPLETE_PARAMETERS` (falta el id en la ruta); 404 `BANK_ACCOUNT_NOT_FOUND`; 503 `SERVICE_UNAVAILABLE` o `FLAGS_UNAVAILABLE`; 500 `INTERNAL_SERVER_ERROR` (falló la lectura de la cuenta).
+
+```json
+// Respuesta 200 (ejemplo propio)
+{ "id": "01JE0000000000000000000000", "alias": "Puesto de tamales", "name": "Nombre Legal Ficticio",
+  "clabe": "<CLABE de 18 dígitos>", "entity": "PERSON", "codiStatus": "ACTIVE", "dateCreated": 1794000000 }
+```
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: Get Bank Account](https://docs.pey.mx/docs/api/get-bank-account) · consultado 2026-11-07
+
+## Ciclo de vida de codiStatus
+
+| Valor | Significado | Qué hacer |
+|---|---|---|
+| `PENDING` | Recibida; aún no se manda a Banxico | Esperar |
+| `PROCESSING` | Registro ante Banxico en curso | Esperar (hasta 5 días hábiles en total) |
+| `ACTIVE` | Registrada; ya puede recibir pagos CoDi | Usar su `id` como `bankAccountId` |
+| `ERROR` | Falló el registro | Leer `errorMessage` y corregir |
+
+- Solo las cuentas `ACTIVE` reciben pagos.
+- Al pasar a `ACTIVE`, pey manda el webhook `bank.account.updated` (único aviso: `PENDING`, `PROCESSING` y `ERROR` no generan evento; consúltalos con `GET /bank-account/{id}`). Ver [09](../pey/09-webhooks.md).
+
+Fuente: [pey: tipo Cuenta bancaria](https://docs.pey.mx/docs/types/bank-account) · [pey: webhook Cuenta bancaria actualizada](https://docs.pey.mx/docs/webhooks/bank-account/updated) · consultado 2026-11-07
+
+## Cobrar a nombre de cada cuenta (multi-cuenta)
+
+1. Registra la CLABE de cada persona o negocio con `POST /bank-account` y guarda el `id`.
+2. Espera `ACTIVE` (webhook o consulta).
+3. Crea el QR o la push con `bankAccountId: <id>`: el pago va a esa cuenta. Sin `bankAccountId`, va a la cuenta `codi` vinculada a la llave.
+4. Los webhooks de pago traen `bankAccountId` solo si lo mandaste al crear el cobro.
+5. Para ver lo cobrado por esa cuenta: `GET /transaction/bank-account/{id}` ([07](../pey/07-api-transacciones.md)).
+
+No hay endpoint para listar, editar ni borrar cuentas registradas (⚪ ni vía documentada para hacerlo).
+
+Fuente: [pey: registro de cambios, Cuentas bancarias](https://docs.pey.mx/docs/changelog/bank-accounts) · [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+<!-- ===== FIN: pey/05-api-cuentas-bancarias.md ===== -->
+
+<!-- ===== INICIO: pey/06-api-ligas-de-pago.md ===== -->
+
+---
+titulo: "API de links de pago: crear, actualizar monto y consultar"
+resumen: "POST /payment-link/create, POST /payment-link/update y GET /payment-link/{id}: campos, estados (pending, processing, paid, partial), errores 400/403/404/409 y diferencias con el webhook."
+actualizado: 2026-11-07
+fuentes:
+  - https://docs.pey.mx/openapi.json
+  - https://docs.pey.mx/docs/api/create-payment-link
+  - https://docs.pey.mx/docs/api/update-payment-link
+  - https://docs.pey.mx/docs/api/get-payment-link
+---
+
+# 06 · Links de pago
+
+## Qué es un link de pago
+
+Una página de cobro alojada por pey. Acepta CoDi, tarjetas, Apple Pay y Google Pay; al terminar o cancelar, regresa al cliente a tus URL. Para tarjetas, la API key necesita una cuenta `stripe` vinculada ([02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md)). ⚪ Comisión por tarjeta no publicada.
+
+Fuente: [pey: documentación, inicio](https://docs.pey.mx/) · [pey: Create Payment Link](https://docs.pey.mx/docs/api/create-payment-link) · consultado 2026-11-07
+
+## POST /payment-link/create · Crear
+
+Respuesta exitosa: **200**.
+
+| Campo | Tipo | Obligatorio | Reglas | Default | Qué hace |
+|---|---|---|---|---|---|
+| `amount` | number | sí | `> 0` | — | Monto en pesos MXN. |
+| `successUrl` | string (uri) | sí | HTTPS | — | A dónde regresa el cliente tras pagar. |
+| `backUrl` | string (uri) | sí | HTTPS | — | A dónde regresa si cancela o se regresa. |
+| `hasTip` | boolean | no | — | `false` | Activa propina en la página de pago. |
+| `clientReferenceId` | string | no | hasta 255 caracteres | — | Tu referencia (p. ej. número de pedido); regresa en el webhook. |
+| `metadata` | object | no | 50 pares; clave `<= 40`; valor escalar `<= 500` | — | Regresa como texto. |
+
+**Respuesta 200:** `id` (ULID del link) y `url` (dirección completa para pagar).
+
+**Errores:** 400 (`AUTH_ERROR`, `PEY_CONSISTENCY_ERROR`, `REQUEST_PARSING_ERROR`, `INCOMPLETE_PARAMETERS`, `INVALID_URL`, `INVALID_AMOUNT`, `INVALID_HAS_TIP`, `INVALID_CLIENT_REFERENCE_ID`) y 500 (`INTERNAL_SERVER_ERROR`). No declara 503.
+
+| Ejemplo | `error.type` | Causa (parafraseada) |
+|---|---|---|
+| `missingFields` | `INCOMPLETE_PARAMETERS` | Falta `amount`, `successUrl` o `backUrl` |
+| `invalidUrl` | `INVALID_URL` | Alguna URL no es HTTPS |
+| `invalidAmount` | `INVALID_AMOUNT` | Monto no mayor que 0 |
+| `authError` | `AUTH_ERROR` | No se pudo leer la autenticación |
+| `parseError` | `REQUEST_PARSING_ERROR` | Cuerpo ilegible |
+| `missingApiKeyId` | `PEY_CONSISTENCY_ERROR` | Falta el id de la llave en la autenticación |
+| `missingBankAccount` | `PEY_CONSISTENCY_ERROR` | La llave no tiene cuenta bancaria ni de Stripe |
+| `invalidHasTip` | `INVALID_HAS_TIP` | `hasTip` no es booleano |
+| `invalidClientReferenceId` | `INVALID_CLIENT_REFERENCE_ID` | Referencia no es texto o pasa de 255 |
+| `ulidError`, `dbError`, `requestIdError` | `INTERNAL_SERVER_ERROR` (500) | Fallas internas |
+
+```json
+// Petición (ejemplo propio)
+{ "amount": 349, "successUrl": "https://mi-tienda.example/gracias", "backUrl": "https://mi-tienda.example/carrito",
+  "hasTip": false, "clientReferenceId": "pedido-2041" }
+// Respuesta 200
+{ "id": "01JF0000000000000000000000", "url": "https://<url de pago que entrega pey>" }
+```
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: Create Payment Link](https://docs.pey.mx/docs/api/create-payment-link) · consultado 2026-11-07
+
+## POST /payment-link/update · Cambiar el monto
+
+Solo cambia `amount`; ningún otro atributo. Solo para links creados con tu llave y **solo mientras el estado sea `pending`**: en cuanto un pago empieza a procesarse o se completa, el monto queda fijo. Respuesta exitosa: **200**.
+
+| Campo | Tipo | Obligatorio | Reglas |
+|---|---|---|---|
+| `paymentLinkId` | string (ULID) | sí | Link a modificar |
+| `amount` | number | sí | `> 0`; se redondea a 2 decimales (mitad hacia arriba) |
+
+El cuerpo no admite otros campos (`additionalProperties: false`). **Respuesta 200:** `id` y `amount` (nuevo monto).
+
+| HTTP | `error.type` | Ejemplo y causa (parafraseada) |
+|---|---|---|
+| 400 | `INCOMPLETE_PARAMETERS` | `missingFields`: falta `paymentLinkId` o `amount` |
+| 400 | `INVALID_PARAMETER` | `unexpectedField`: mandaste un campo extra (p. ej. `successUrl`) |
+| 400 | `INVALID_AMOUNT` | `invalidAmount`: monto no mayor que 0 |
+| 400 | `INVALID_REQUEST` | `invalidRequest`: la petición no trae el id de la llave |
+| 400 | `REQUEST_PARSING_ERROR` | `notAnObject`: el cuerpo no es un objeto JSON |
+| 403 | `FORBIDDEN` | Sin permiso sobre ese link |
+| 404 | `NOT_FOUND` | El link no existe |
+| 409 | `PAYMENT_LINK_NOT_PENDING` | `notPending`: ya no está `pending` |
+| 409 | `CONCURRENT_UPDATE` | `concurrentUpdate`: dejó de estar `pending` (o perdiste permiso) durante la actualización |
+| 500 | `INTERNAL_SERVER_ERROR` | `retrieveError`, `updateError` |
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: Update Payment Link](https://docs.pey.mx/docs/api/update-payment-link) · consultado 2026-11-07
+
+## GET /payment-link/{id} · Consultar
+
+Detalle de un link creado con tu llave. Parámetro de ruta `id` (ULID). Respuesta exitosa: **200**.
+
+| Campo | Tipo | Notas |
+|---|---|---|
+| `id` | string | ULID |
+| `amount` | number | MXN |
+| `status` | enum | `pending` \| `processing` \| `paid` \| `partial` (significados ⚪ no definidos) |
+| `successUrl`, `backUrl` | string (uri) | |
+| `hasTip` | boolean | |
+| `paymentMethods` | array de string | Métodos disponibles; sin enumeración formal (el ejemplo muestra `CODI` y `CARD`) |
+| `dateCreated` | integer | Unix |
+| `clientReferenceId` | string | |
+| `metadata` | object | Valores como texto |
+| `transactions` | array | Pagos del link: `transactionId`, `paymentMethod`, `datePaid`, `amount`, `amountBreakdown` (solo componentes distintos de cero), `applicationFee` (number o null), `metadata` |
+
+Esta respuesta **no** incluye `url`: guárdala al crear el link.
+
+**Errores:** 400 `AUTH_ERROR` (`authError`), `PEY_CONSISTENCY_ERROR` (`missingApiKeyId`), `INCOMPLETE_PARAMETERS` (`missingId`: falta el id en la ruta); 403 `FORBIDDEN`; 404 `NOT_FOUND`; 500 `INTERNAL_SERVER_ERROR` (`retrieveError`, `requestIdError`).
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: Get Payment Link](https://docs.pey.mx/docs/api/get-payment-link) · consultado 2026-11-07
+
+## Estados: diferencia entre la API y el webhook
+
+| Fuente | Valores de `status` |
+|---|---|
+| `GET /payment-link/{id}` (OpenAPI) | `pending`, `processing`, `paid`, `partial` |
+| Webhook `payment_link.status_updated` | `paid`, `pending`, `processing` |
+
+⚪ `partial` no aparece en el webhook y ninguna fuente explica su significado. Recomendación: trata cualquier valor desconocido como "no pagado" y confirma con `GET /payment-link/{id}`.
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: webhook Actualización de estado del link de pago](https://docs.pey.mx/docs/webhooks/payment-link/status-update) · consultado 2026-11-07
+
+## Flujo típico (Recomendación)
+
+1. Tu servidor crea el link con `clientReferenceId` = id de tu pedido y guarda `id` y `url`.
+2. Rediriges al cliente a `url`.
+3. Llega `payment_link.status_updated` con `status: "paid"` → verificas la firma y confirmas con `GET /payment-link/{id}`.
+4. La redirección a `successUrl` no prueba el pago: el cliente puede abrir esa URL a mano.
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: webhooks, introducción](https://docs.pey.mx/docs/webhooks/introduction) · consultado 2026-11-07
+
+<!-- ===== FIN: pey/06-api-ligas-de-pago.md ===== -->
+
+<!-- ===== INICIO: pey/07-api-transacciones.md ===== -->
+
+---
+titulo: "API de transacciones: consultar pagos"
+resumen: "GET /transaction/{id}, /transaction/api-key, /transaction/codi/qr/{id} y /transaction/bank-account/{id}: campos, paginación, errores y cuál usar para confirmar un pago."
+actualizado: 2026-11-07
+fuentes:
+  - https://docs.pey.mx/openapi.json
+  - https://docs.pey.mx/docs/api/get-transaction
+  - https://docs.pey.mx/docs/api/get-api-key-transactions
+  - https://docs.pey.mx/docs/api/get-co-di-qr-transactions
+  - https://docs.pey.mx/docs/api/get-bank-account-transactions
+---
+
+# 07 · Transacciones
+
+## Campos de una transacción (forma completa)
+
+| Campo | Tipo | Notas |
+|---|---|---|
+| `id` | string | ULID |
+| `status` | enum | `PENDING` \| `PAID` |
+| `amount` | number | Total en MXN |
+| `amountBreakdown` | object | `base`, `tip`, `fee`; el `fee` lo paga quien paga |
+| `currency` | string | ISO 4217 |
+| `paymentMethod` | enum | `CARD` \| `CODI` |
+| `payableType` | enum | Qué se pagó: `PAYMENT_LINK` \| `API_CODI_QR` \| `API_CODI_PN` |
+| `payableId` | string | ID del recurso pagado, si existe |
+| `description` | string | Concepto o descripción, si existe |
+| `applicationFee` | number | Comisión de la operación, si existe |
+| `dateCreated` | integer | Unix |
+| `datePaid` | integer | Unix; solo cuando ya está pagada |
+| `metadata` | object | Depende del método y flujo; ver [08](../pey/08-tipos-de-datos.md) |
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+## GET /transaction/{id} · Una transacción
+
+- Una transacción recibida con tu llave. Si no existe o es de otra llave: **404** (no se distinguen los dos casos).
+- **Un QR no es una transacción:** para los pagos de un QR usa `GET /transaction/codi/qr/{id}`.
+- Sirve para seguir una push: usa el `transactionId` que regresó `POST /codi/pn`.
+- **Ruta:** `id` (ULID). **Respuesta 200:** un objeto con los campos de arriba.
+- **Errores:** 400 `INVALID_REQUEST` (`authError`: no viene el id de la llave) o `INCOMPLETE_PARAMETERS` (`missingId`); 404 `NOT_FOUND`; 500 `INTERNAL_SERVER_ERROR`.
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: Get Transaction](https://docs.pey.mx/docs/api/get-transaction) · consultado 2026-11-07
+
+## GET /transaction/api-key · Todo lo de tu llave
+
+- Todas las transacciones recibidas por tu llave (la llave sale del header `Authorization`), **80 por página**, de la más reciente a la más antigua.
+- **Query:** `nextToken` (opcional). **Respuesta 200:** `{ items: [transacción completa…], nextToken }`; `nextToken` es `null` al final.
+- **Errores:** 400 `INVALID_REQUEST` (`authError`) o `INVALID_PARAMETERS` (`invalidNextToken`); 500 `INTERNAL_SERVER_ERROR`.
+- No hay filtros por fecha, estado ni método: filtra en tu servidor.
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: Get API Key Transactions](https://docs.pey.mx/docs/api/get-api-key-transactions) · consultado 2026-11-07
+
+## GET /transaction/codi/qr/{id} · Pagos de un QR
+
+- Pagos de un QR creado con tu llave, **20 por página**, de la más reciente a la más antigua. QR inexistente o de otra llave: **404** `NOT_FOUND`.
+- **Ruta:** `id` = IDC del QR (el `id` que regresó `POST /codi/qr`). **Query:** `nextToken`.
+- **Cada item:** `id`, `status` (`PENDING` | `PAID`), `amount`, `amountBreakdown`, `currency`, `paymentMethod` (`CODI`), `description`, `applicationFee`, `dateCreated`, `datePaid` (solo pagada) y `metadata`. El esquema de esta ruta no lista `payableType` ni `payableId`.
+- **Errores:** 400 `INVALID_REQUEST` (`authError`), `INCOMPLETE_PARAMETERS` (`missingId`) o `INVALID_PARAMETERS` (`invalidNextToken`); 404 `NOT_FOUND`; 500 `INTERNAL_SERVER_ERROR`.
+
+```json
+// Respuesta 200 (ejemplo propio)
+{ "items": [ { "id": "01JG0000000000000000000000", "status": "PAID", "amount": 85.5, "currency": "MXN",
+               "paymentMethod": "CODI", "amountBreakdown": { "base": 85.5, "tip": 0, "fee": 0 },
+               "description": "Pedido 318", "dateCreated": 1794000000, "datePaid": 1794000042,
+               "metadata": { "externalMetadata": { "pedido": "318", "mesa": "4" } } } ],
+  "nextToken": null }
+```
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: Get CoDi QR Transactions](https://docs.pey.mx/docs/api/get-co-di-qr-transactions) · consultado 2026-11-07
+
+## GET /transaction/bank-account/{id} · Lo cobrado por una cuenta registrada
+
+- Transacciones **pagadas** que recibió una cuenta registrada con `POST /bank-account`: QR y push CoDi creados con ese `bankAccountId`. **80 por página**, de la más reciente a la más antigua. Cuenta inexistente o de otra llave: **404**.
+- **Ruta:** `id` (ULID de la cuenta). **Query:** `nextToken`.
+- **Cada item:** `id`, `status` (solo `PAID`), `amount`, `amountBreakdown`, `currency`, `paymentMethod` (solo `CODI`), `payableType` (`API_CODI_QR` | `API_CODI_PN`), `payableId`, `description`, `applicationFee`, `dateCreated`, `datePaid`, `metadata` (con `externalMetadata` de texto a texto; admite más campos).
+- **Errores:** 400 `INVALID_REQUEST` (`authError`), `INCOMPLETE_PARAMETERS` (`missingId`) o `INVALID_PARAMETERS` (`invalidNextToken`); 404 `BANK_ACCOUNT_NOT_FOUND`; 503 `SERVICE_UNAVAILABLE` o `FLAGS_UNAVAILABLE`; 500 `INTERNAL_SERVER_ERROR`.
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: Get Bank Account Transactions](https://docs.pey.mx/docs/api/get-bank-account-transactions) · consultado 2026-11-07
+
+## Cuál usar para confirmar un pago (Recomendación)
+
+| Cobraste con… | Confirma con… | Pagado si… |
+|---|---|---|
+| QR | `GET /transaction/codi/qr/{id}` (IDC) | algún item tiene `status: "PAID"` y el `amount` esperado |
+| Push | `GET /transaction/{transactionId}` | `status: "PAID"` |
+| Link de pago | `GET /payment-link/{id}` | `status: "paid"` ([06](../pey/06-api-ligas-de-pago.md)) |
+| Cuenta registrada | `GET /transaction/bank-account/{id}` | aparece el pago con su `payableId` |
+
+- Un 404 no prueba que no pagaron: puede ser un ID equivocado o de otra llave.
+- Compara monto y moneda en tu servidor; no basta con encontrar cualquier `PAID`.
+- La ruta de pagos de un QR regresa una lista paginada, lo que sugiere que un QR puede tener más de un pago (⚪ no confirmado): revisa todos los items.
+- ⚪ Límite de peticiones no documentado: si haces polling, espacia las consultas (p. ej. cada 3 a 5 s) y detente al vencer el cobro.
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+<!-- ===== FIN: pey/07-api-transacciones.md ===== -->
+
+<!-- ===== INICIO: pey/08-tipos-de-datos.md ===== -->
+
+---
+titulo: "Tipos de datos de pey"
+resumen: "Objeto de transacción (forma resumida y completa), desglose del monto, respuesta de metadata (campos CoDi y externalMetadata), cuenta bancaria, objeto de error y todas las enumeraciones."
+actualizado: 2026-11-07
+fuentes:
+  - https://docs.pey.mx/docs/types/transaction-object
+  - https://docs.pey.mx/docs/types/amount-breakdown
+  - https://docs.pey.mx/docs/types/metadata-response
+  - https://docs.pey.mx/docs/types/bank-account
+  - https://docs.pey.mx/openapi.json
+---
+
+# 08 · Tipos de datos
+
+## Objeto de transacción (forma resumida)
+
+Es la forma corta que aparece en `GET /payment-link/{id}` y en el webhook `payment_link.status_updated`. La forma completa (con estado, moneda y recurso pagado) sale de `GET /transaction/{id}` ([07](../pey/07-api-transacciones.md)).
+
+| Campo | Tipo | Notas |
+|---|---|---|
+| `transactionId` | string | ULID |
+| `paymentMethod` | string | Método usado (el ejemplo muestra `CARD`; la forma completa enumera `CARD` y `CODI`) |
+| `datePaid` | number | Unix en segundos |
+| `amount` | number | Total cobrado; incluye propina y comisión |
+| `amountBreakdown` | object | Ver "Desglose del monto" |
+| `applicationFee` | number o null | Comisión de aplicación que retiene pey |
+| `metadata` | object | Depende del método y el flujo; ver "Respuesta de metadata" |
+
+Fuente: [pey: tipo Objeto de transacción](https://docs.pey.mx/docs/types/transaction-object) · consultado 2026-11-07
+
+## Desglose del monto (amountBreakdown)
+
+| Campo | Tipo | Qué es |
+|---|---|---|
+| `base` | number | Monto base |
+| `tip` | number | Propina incluida |
+| `fee` | number | Comisión incluida; según el OpenAPI la paga quien paga |
+
+- La página del tipo no da fórmula; el objeto de transacción dice que `amount` incluye propina y comisión, y el ejemplo del webhook de links es consistente con `amount = base + tip + fee` (⚪ inferencia, no regla escrita).
+- En los links de pago, el desglose solo incluye componentes distintos de cero: trata un campo ausente como 0.
+
+Fuente: [pey: tipo Desglose del monto](https://docs.pey.mx/docs/types/amount-breakdown) · [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+## Respuesta de metadata
+
+Los campos dependen del método de pago y del flujo:
+
+| Campo | Tipo | Cuándo viene | Qué es |
+|---|---|---|---|
+| `clabe` | string | método `CODI` | CLABE (18 dígitos) que recibe |
+| `bankCode` | number | método `CODI` | Código de banco de Banxico (5 dígitos) |
+| `accountType` | number | método `CODI` | Código de tipo de cuenta de Banxico (2 dígitos) |
+| `description` | string | método `CODI` | Descripción de la transacción |
+| `trackingKey` | string | método `CODI` | Clave de rastreo interna de Banxico |
+| `externalMetadata` | object | solo si mandaste `metadata` al crear el recurso por la API REST | Tus pares clave/valor, **todos como texto** |
+
+- ⚪ No documentado: qué campos trae `metadata` en pagos con tarjeta.
+- `clabe` y `trackingKey` son datos bancarios: no los registres en logs públicos.
+
+Fuente: [pey: tipo Respuesta de metadata](https://docs.pey.mx/docs/types/metadata-response) · consultado 2026-11-07
+
+## Cuenta bancaria
+
+| Campo | Tipo | Notas |
+|---|---|---|
+| `id` | string | ULID; úsalo como `bankAccountId` |
+| `alias` | string | Nombre amigable |
+| `name` | string | Nombre legal completo del titular |
+| `clabe` | string | 18 dígitos |
+| `entity` | string | `BUSINESS` \| `PERSON` |
+| `taxId` | string | RFC; solo si se dio al registrar |
+| `codiStatus` | string | `PENDING` \| `PROCESSING` \| `ACTIVE` \| `ERROR` |
+| `errorMessage` | string | Solo con `ERROR` |
+| `dateCreated` | number | Unix en segundos |
+
+`POST /bank-account` solo regresa `id` y `codiStatus`; el objeto completo sale de `GET /bank-account/{id}`. Ciclo de vida en [05](../pey/05-api-cuentas-bancarias.md).
+
+Fuente: [pey: tipo Cuenta bancaria](https://docs.pey.mx/docs/types/bank-account) · consultado 2026-11-07
+
+## Objeto de error
+
+| Campo | Tipo | Qué es |
+|---|---|---|
+| `error.message` | string | Texto legible (no programes contra él) |
+| `error.type` | string (enum por endpoint) | Código para tu lógica |
+| `error.requestId` | string | ID para soporte |
+
+Catálogo completo en [11](../pey/11-errores-y-limites.md).
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+## Enumeraciones (resumen)
+
+| Campo | Valores | Dónde |
+|---|---|---|
+| `status` (transacción) | `PENDING`, `PAID` | `/transaction/*` (`/transaction/bank-account/{id}` solo `PAID`) |
+| `paymentMethod` | `CARD`, `CODI` | transacciones |
+| `payableType` | `PAYMENT_LINK`, `API_CODI_QR`, `API_CODI_PN` | `/transaction/{id}`, `/transaction/api-key`, `/transaction/bank-account/{id}` |
+| `status` (link de pago) | `pending`, `processing`, `paid`, `partial` | `GET /payment-link/{id}` (el webhook solo lista `paid`, `pending`, `processing`) |
+| `codiStatus` | `PENDING`, `PROCESSING`, `ACTIVE`, `ERROR` | cuentas bancarias |
+| `entity` | `BUSINESS`, `PERSON` | cuentas bancarias |
+| `ownerType` | `API_KEY` (cuentas registradas por API) | webhook `bank.account.updated` |
+| `type` (evento) | `codi.qr.payment_received`, `codi.pn.payment_received`, `bank.account.updated`, `payment_link.status_updated` | webhooks |
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: webhooks, introducción](https://docs.pey.mx/docs/webhooks/introduction) · consultado 2026-11-07
+
+<!-- ===== FIN: pey/08-tipos-de-datos.md ===== -->
+
+<!-- ===== INICIO: pey/09-webhooks.md ===== -->
+
+---
+titulo: "Webhooks de pey: configuración, firma y eventos"
+resumen: "Cómo se registra el webhook (uno por API key), cómo verificar la firma Standard Webhooks con el cuerpo crudo, historial de entregas y los cuatro eventos con todos sus campos."
+actualizado: 2026-11-07
+fuentes:
+  - https://docs.pey.mx/docs/webhooks/introduction
+  - https://docs.pey.mx/docs/tutorials/getting-started/set-up-webhooks
+  - https://docs.pey.mx/docs/webhooks/codi/qr
+  - https://docs.pey.mx/docs/webhooks/codi/pn
+  - https://docs.pey.mx/docs/webhooks/bank-account/updated
+  - https://docs.pey.mx/docs/webhooks/payment-link/status-update
+---
+
+# 09 · Webhooks
+
+## Cómo funcionan
+
+- pey te avisa en tiempo real cuando pasa algo en tu cuenta, en lugar de que consultes la API a cada rato.
+- El webhook se liga a la **API key**: **una llave tiene un solo webhook** (una sola URL). CoDi y links de pago llegan al mismo endpoint.
+- Todas las peticiones van **firmadas con Standard Webhooks** (https://www.standardwebhooks.com/).
+- La sección `webhooks` del OpenAPI está vacía: los eventos solo se documentan en las páginas de abajo.
+
+Fuente: [pey: webhooks, introducción](https://docs.pey.mx/docs/webhooks/introduction) · [pey: Configurar webhooks](https://docs.pey.mx/docs/tutorials/getting-started/set-up-webhooks) · [pey: documentación, inicio](https://docs.pey.mx/) · consultado 2026-11-07
+
+## Configurar el webhook en el portal
+
+1. Ten una API key ([02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md)).
+2. En **Desarrollador** (https://portal.mipey.mx/developers), busca tu llave y da clic en su **ícono de engrane**.
+3. En la ventana, escribe la URL que recibirá los eventos y da clic en **"Crear Webhook"**.
+4. Se muestra el **secreto de firma**: guárdalo (lo necesitas para verificar). Puedes **rotarlo** cuando quieras desde el mismo engrane.
+
+La URL debe ser pública y estable. ⚪ No documentado: si exige HTTPS, si se puede cambiar la URL sin borrar el webhook y si hay API para administrarlo.
+
+Fuente: [pey: Configurar webhooks](https://docs.pey.mx/docs/tutorials/getting-started/set-up-webhooks) · consultado 2026-11-07
+
+## Firma: Standard Webhooks
+
+Lo que dice pey:
+- Verifica la firma para confirmar que el evento viene de pey; recomienda los **SDK oficiales de Standard Webhooks** ([lista de implementaciones](https://github.com/standard-webhooks/standard-webhooks?tab=readme-ov-file#reference-implementations)).
+- Verifica con el **cuerpo crudo**, sin parsear ni reformatear.
+- El header **`webhook-id`** es la llave de idempotencia: úsalo para descartar entregas repetidas.
+- Su ejemplo (Python con la librería de Standard Webhooks, en AWS Lambda detrás de API Gateway) lee el secreto de una variable de entorno o gestor de secretos (marcador con prefijo `whsec_`), responde 400 si el JSON no se puede leer, 200 si la firma es válida y **500** si no lo es.
+
+Lo que viene de la especificación Standard Webhooks (pey no lo repite en sus páginas, ⚪ en pey): headers `webhook-id`, `webhook-timestamp` y `webhook-signature` (`v1,<firma en base64>`, puede haber varias separadas por espacio); la firma es HMAC-SHA256 de `id.timestamp.cuerpo` con el secreto sin `whsec_` decodificado de base64. Detalle y fuentes en [K03.5](../conocimiento/03-codi-y-api-pey.md).
+
+Fuente: [pey: webhooks, introducción](https://docs.pey.mx/docs/webhooks/introduction) · consultado 2026-11-07
+
+## Ejemplo propio de verificación (Node.js 20+, sin dependencias)
+
+```js
+// Verifica un webhook de pey (Standard Webhooks). `cuerpo` es el texto crudo: await request.text().
+import crypto from "node:crypto";
+
+export function firmaValida({ secreto, headers, cuerpo, toleranciaSeg = 300 }) {
+  const id = headers.get("webhook-id");
+  const ts = headers.get("webhook-timestamp");
+  const firmas = headers.get("webhook-signature");
+  if (!secreto || !id || !ts || !firmas) return false;
+  if (Math.abs(Date.now() / 1000 - Number(ts)) > toleranciaSeg) return false; // evita repeticiones viejas
+  const llave = Buffer.from(secreto.replace(/^whsec_/, ""), "base64");
+  const esperada = crypto.createHmac("sha256", llave).update(`${id}.${ts}.${cuerpo}`).digest();
+  return firmas.split(" ").some((f) => {
+    const [version, b64] = f.split(",");
+    const recibida = Buffer.from(b64 ?? "", "base64");
+    return version === "v1" && recibida.length === esperada.length && crypto.timingSafeEqual(recibida, esperada);
+  });
+}
+```
+
+Una versión equivalente con pruebas automatizadas está en [K03.7](../conocimiento/03-codi-y-api-pey.md). La tolerancia de 5 minutos es decisión propia.
+
+Fuente: [pey: webhooks, introducción](https://docs.pey.mx/docs/webhooks/introduction) · consultado 2026-11-07
+
+## Respuesta, reintentos e historial
+
+- Responde rápido con 2xx cuando la firma sea válida; el ejemplo de pey responde 200.
+- **Historial:** Desarrollador → engrane de la llave → botón **"Webhook Logs"**. Muestra cada intento de entrega, el payload enviado, la respuesta de tu endpoint y otros datos. Úsalo para depurar.
+- ⚪ No documentado: política y calendario de reintentos, tiempo máximo de espera, orden de entrega y si hay eventos duplicados. Diseña para entregas repetidas y fuera de orden.
+
+Fuente: [pey: webhooks, introducción](https://docs.pey.mx/docs/webhooks/introduction) · consultado 2026-11-07
+
+## Evento codi.qr.payment_received
+
+Se dispara cuando entra un pago a un QR CoDi creado por la API.
+
+| Campo | Tipo | Notas |
+|---|---|---|
+| `type` | string | `codi.qr.payment_received` |
+| `amount` | number | MXN |
+| `apiKeyId` | string | Llave dueña del webhook |
+| `bankAccountId` | string | Solo si lo mandaste al crear el QR |
+| `codiQrId` | string | IDC del QR (el `id` de `POST /codi/qr`) |
+| `concept` | string | Concepto que vio quien pagó |
+| `datePaid` | number | Unix en **segundos** |
+| `metadata` | object | Campos CoDi (`clabe`, `bankCode`, `accountType`, `description`, `trackingKey`) y `externalMetadata` ([08](../pey/08-tipos-de-datos.md)) |
+| `numRef` | string | Número de referencia (la página dice que lo asigna Banxico) |
+| `transactionId` | string | ULID de la transacción |
+
+```json
+{ "type": "codi.qr.payment_received", "amount": 85.5, "apiKeyId": "llave-ficticia", "codiQrId": "a0b1c2d3e4",
+  "concept": "Pedido 318", "datePaid": 1794000042, "numRef": "318", "transactionId": "01JG0000000000000000000000",
+  "metadata": { "trackingKey": "<clave de rastreo>", "externalMetadata": { "pedido": "318" } } }
+```
+
+Fuente: [pey: webhook QR CoDi, pago recibido](https://docs.pey.mx/docs/webhooks/codi/qr) · consultado 2026-11-07
+
+## Evento codi.pn.payment_received
+
+Se dispara cuando se completa un pago de notificación push CoDi. Mismos campos que el evento de QR **sin `codiQrId`**: `type` (`codi.pn.payment_received`), `amount`, `apiKeyId`, `bankAccountId` (solo si lo mandaste al crear la push), `concept`, `datePaid`, `metadata`, `numRef` y `transactionId` (el mismo que regresó `POST /codi/pn`).
+
+Fuente: [pey: webhook notificación push CoDi, pago recibido](https://docs.pey.mx/docs/webhooks/codi/pn) · consultado 2026-11-07
+
+## Evento bank.account.updated
+
+Se manda **solo** cuando una cuenta registrada por API pasa a `ACTIVE` (no por `PENDING`, `PROCESSING` ni `ERROR`).
+
+| Campo | Tipo | Notas |
+|---|---|---|
+| `type` | string | `bank.account.updated` |
+| `bankAccountId` | string | ULID; úsalo como `bankAccountId` en cobros |
+| `name` | string | Nombre legal del titular |
+| `ownerType` | string | `API_KEY` si se registró por API |
+| `ownerId` | string | ID de la llave cuando `ownerType` es `API_KEY` |
+| `taxId` | string | RFC; opcional |
+| `codiStatus` | string | Siempre `ACTIVE` aquí |
+| `clabe` | string | 18 dígitos |
+| `entity` | string | `BUSINESS` \| `PERSON` |
+
+No trae `alias`, `errorMessage` ni `dateCreated`: pídelos con `GET /bank-account/{id}`. Trae datos personales y bancarios: no los registres completos.
+
+Fuente: [pey: webhook Cuenta bancaria actualizada](https://docs.pey.mx/docs/webhooks/bank-account/updated) · consultado 2026-11-07
+
+## Evento payment_link.status_updated
+
+Se dispara cuando cambia el estado de un link de pago.
+
+| Campo | Tipo | Notas |
+|---|---|---|
+| `type` | string | `payment_link.status_updated` |
+| `apiKeyId` | string | Llave dueña |
+| `paymentLinkId` | string | ULID del link |
+| `status` | string | `paid` \| `pending` \| `processing` (la API además tiene `partial`; ver [06](../pey/06-api-ligas-de-pago.md)) |
+| `clientReferenceId` | string | La referencia que mandaste al crear |
+| `transactions` | array | Objetos de transacción resumidos: `transactionId`, `paymentMethod`, `datePaid`, `amount`, `amountBreakdown`, `applicationFee`, `metadata` |
+
+No trae el monto del link: si lo necesitas, usa `GET /payment-link/{id}`.
+
+Fuente: [pey: webhook Actualización de estado del link de pago](https://docs.pey.mx/docs/webhooks/payment-link/status-update) · consultado 2026-11-07
+
+## Reglas para el handler (Recomendación)
+
+1. Lee el cuerpo crudo, verifica la firma y solo después parsea.
+2. Deduplica por `webhook-id` (y por `transactionId` si generas efectos de negocio), en almacenamiento persistente: la memoria de una función serverless no dura.
+3. Enruta por `type`; ignora con 2xx los tipos que no conozcas.
+4. No confíes solo en el evento para dinero: confirma con la API ([07](../pey/07-api-transacciones.md)) y compara monto y moneda.
+5. Registra solo identificadores (`webhook-id`, `type`, `transactionId`), nunca CLABE, nombre ni el cuerpo completo.
+6. El secreto vive en una variable de entorno del servidor; si se filtra, rótalo desde el engrane.
+
+Fuente: [pey: webhooks, introducción](https://docs.pey.mx/docs/webhooks/introduction) · consultado 2026-11-07
+
+<!-- ===== FIN: pey/09-webhooks.md ===== -->
+
+<!-- ===== INICIO: pey/10-tutorial-mostrar-qr-codi.md ===== -->
+
+---
+titulo: "Tutorial: mostrar un QR CoDi"
+resumen: "Los tres pasos del tutorial oficial (crear el QR, dibujar la imagen desde qrString, esperar el webhook) y una versión propia en JavaScript para navegador y servidor."
+actualizado: 2026-11-07
+fuentes:
+  - https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr
+  - https://docs.pey.mx/openapi.json
+---
+
+# 10 · Tutorial: mostrar un QR CoDi
+
+## Requisito
+
+Una API key ligada a una cuenta de pago con acceso `codi` ([02](../pey/02-primeros-pasos-cuenta-llaves-y-prueba.md)). Es el único ejemplo de la categoría "Ejemplos" de la documentación.
+
+Fuente: [pey: tutorial Mostrar un QR CoDi](https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr) · [pey: Ejemplos](https://docs.pey.mx/docs/category/examples) · consultado 2026-11-07
+
+## Paso 1 · Crear el QR
+
+- `POST https://api.pey.mx/codi/qr` con `Authorization: Bearer <llave>`, `Content-Type: application/json` y `Accept: application/json`.
+- El ejemplo oficial (Python con `requests`) manda monto, concepto, `expiration: 0` (sin vencimiento) y un `numRef`, y guarda la respuesta.
+- La respuesta trae `id` (identificador del QR) y `qrString`. El `qrString` del ejemplo es un texto largo con forma de JSON y campos cifrados (claves como `TYP`, `v`, `ic`, `CRY`): **no lo modifiques**, solo codifícalo.
+- Opción: `generateImage: true` agrega `qrImage` en base64 (PNG según el OpenAPI). El tutorial sugiere un decodificador base64 en línea para verlo; no subas QRs reales a sitios de terceros.
+
+Fuente: [pey: tutorial Mostrar un QR CoDi](https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr) · [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+## Paso 2 · Generar la imagen
+
+- El tutorial usa la librería de Python `qrcode` (https://pypi.org/project/qrcode/): tamaño automático, corrección de errores nivel M, módulos de 10 px y borde de 4 módulos; negro sobre blanco; guarda un PNG.
+- Cualquier app bancaria compatible con CoDi puede escanear la imagen resultante.
+- No da guía de tamaño mínimo ni de contraste. **Recomendación:** muéstralo grande (al menos ~250 px de lado en pantalla), negro sobre blanco y con el borde blanco intacto.
+
+Fuente: [pey: tutorial Mostrar un QR CoDi](https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr) · consultado 2026-11-07
+
+## Paso 3 · Esperar el pago
+
+Cuando el cliente escanea y paga, pey manda el webhook `codi.qr.payment_received` ([09](../pey/09-webhooks.md)). Como respaldo puedes consultar `GET /transaction/codi/qr/{id}` ([07](../pey/07-api-transacciones.md)).
+
+Fuente: [pey: tutorial Mostrar un QR CoDi](https://docs.pey.mx/docs/tutorials/use-cases/display-codi-qr) · consultado 2026-11-07
+
+## Versión propia en JavaScript
+
+El tutorial solo trae Python. Equivalente propio: el servidor crea el QR y el navegador lo dibuja.
+
+```js
+// Servidor (Node 20+): crea el QR. La llave sale de una variable de entorno.
+const r = await fetch("https://api.pey.mx/codi/qr", {
+  method: "POST",
+  headers: { Authorization: `Bearer ${process.env.PEY_API_KEY}`, "Content-Type": "application/json", Accept: "application/json" },
+  body: JSON.stringify({ amount: 1, concept: "Demo", expiration: 600, numRef: "1", generateImage: true }),
+});
+const { id, qrString, qrImage } = await r.json(); // manda al navegador solo id, qrString y qrImage
+
+// Navegador: usa la imagen de pey si vino; si no, dibuja qrString con una librería de QR.
+const img = document.querySelector("#qr");
+if (qrImage) img.src = `data:image/png;base64,${qrImage}`;
+// else: genera el QR desde qrString con la librería que elijas (⚪ pey no recomienda ninguna en JS).
+img.alt = "Código QR CoDi para pagar";
+```
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+<!-- ===== FIN: pey/10-tutorial-mostrar-qr-codi.md ===== -->
+
+<!-- ===== INICIO: pey/11-errores-y-limites.md ===== -->
+
+---
+titulo: "Errores y límites de la API de pey"
+resumen: "Catálogo de error.type por endpoint y código HTTP, cómo reaccionar a cada familia, límites documentados (montos, vigencias, referencias, metadata, paginación) y lo que no está documentado."
+actualizado: 2026-11-07
+fuentes:
+  - https://docs.pey.mx/openapi.json
+---
+
+# 11 · Errores y límites
+
+## Errores por endpoint
+
+Forma común: `{ "error": { "message", "type", "requestId" } }`. Valores exactos del OpenAPI:
+
+| Endpoint | 400 | 403 | 404 | 409 | 503 | 500 |
+|---|---|---|---|---|---|---|
+| `POST /codi/qr` | `INVALID_REQUEST`, `PEY_CONSISTENCY_ERROR`, `INVALID_STATE`, `INVALID_AMOUNT`, `INVALID_PARAMETER` | — | — | — | `SERVICE_UNAVAILABLE`, `FLAGS_UNAVAILABLE` | `INTERNAL_SERVER_ERROR` |
+| `POST /codi/pn` | `INVALID_REQUEST`, `INCOMPLETE_PARAMETERS`, `INVALID_PARAMETER`, `INVALID_AMOUNT`, `INVALID_STATE`, `PEY_CONSISTENCY_ERROR`, `BAD_REQUEST` | — | — | — | igual | igual |
+| `POST /bank-account` | `INVALID_REQUEST`, `INCOMPLETE_PARAMETERS`, `INVALID_PARAMETER`, `INVALID_CLABE` | — | — | — | igual | igual |
+| `GET /bank-account/{id}` | `INVALID_REQUEST`, `INCOMPLETE_PARAMETERS` | — | `BANK_ACCOUNT_NOT_FOUND` | — | igual | igual |
+| `POST /payment-link/create` | `AUTH_ERROR`, `PEY_CONSISTENCY_ERROR`, `REQUEST_PARSING_ERROR`, `INCOMPLETE_PARAMETERS`, `INVALID_URL`, `INVALID_AMOUNT`, `INVALID_HAS_TIP`, `INVALID_CLIENT_REFERENCE_ID` | — | — | — | — | igual |
+| `POST /payment-link/update` | `INVALID_REQUEST`, `REQUEST_PARSING_ERROR`, `INCOMPLETE_PARAMETERS`, `INVALID_PARAMETER`, `INVALID_AMOUNT` | `FORBIDDEN` | `NOT_FOUND` | `PAYMENT_LINK_NOT_PENDING`, `CONCURRENT_UPDATE` | — | igual |
+| `GET /payment-link/{id}` | `AUTH_ERROR`, `PEY_CONSISTENCY_ERROR`, `INCOMPLETE_PARAMETERS` | `FORBIDDEN` | `NOT_FOUND` | — | — | igual |
+| `GET /transaction/{id}` | `INVALID_REQUEST`, `INCOMPLETE_PARAMETERS` | — | `NOT_FOUND` | — | — | igual |
+| `GET /transaction/api-key` | `INVALID_REQUEST`, `INVALID_PARAMETERS` | — | — | — | — | igual |
+| `GET /transaction/codi/qr/{id}` | `INVALID_REQUEST`, `INCOMPLETE_PARAMETERS`, `INVALID_PARAMETERS` | — | `NOT_FOUND` | — | — | igual |
+| `GET /transaction/bank-account/{id}` | `INVALID_REQUEST`, `INCOMPLETE_PARAMETERS`, `INVALID_PARAMETERS` | — | `BANK_ACCOUNT_NOT_FOUND` | — | `SERVICE_UNAVAILABLE`, `FLAGS_UNAVAILABLE` | igual |
+
+Ojo con la ortografía: CoDi y cuentas usan `INVALID_PARAMETER` (singular); las rutas de transacciones usan `INVALID_PARAMETERS` (plural). Los ejemplos con nombre de cada error están en [04](../pey/04-api-codi-qr-y-push.md), [05](../pey/05-api-cuentas-bancarias.md), [06](../pey/06-api-ligas-de-pago.md) y [07](../pey/07-api-transacciones.md).
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+## Cómo reaccionar (Recomendación)
+
+| Familia | Ejemplos de `type` | Qué hacer |
+|---|---|---|
+| Datos inválidos | `INVALID_AMOUNT`, `INVALID_PARAMETER(S)`, `INCOMPLETE_PARAMETERS`, `INVALID_URL`, `INVALID_CLABE`, `INVALID_HAS_TIP`, `INVALID_CLIENT_REFERENCE_ID`, `INVALID_REQUEST`, `REQUEST_PARSING_ERROR`, `BAD_REQUEST` | No reintentes igual: corrige la entrada y muestra un mensaje claro. Valida antes en tu servidor. |
+| Cuenta o llave mal configurada | `INVALID_STATE` (CoDi no habilitado), `PEY_CONSISTENCY_ERROR` (llave sin cuenta vinculada), `AUTH_ERROR` | Revisa el portal: cuenta `codi` activa y vinculada a la llave. Mensaje sugerido: "Tu cuenta de pey todavía no está habilitada para cobrar." |
+| No existe o no es tuyo | `NOT_FOUND`, `BANK_ACCOUNT_NOT_FOUND`, `FORBIDDEN` | Revisa el ID y que uses la misma llave con la que lo creaste. Un 404 no prueba que no hubo pago. |
+| Estado no permite la acción | `PAYMENT_LINK_NOT_PENDING`, `CONCURRENT_UPDATE` | Vuelve a leer el link; no reintentes la actualización. |
+| Servicio | `SERVICE_UNAVAILABLE`, `FLAGS_UNAVAILABLE` (503), `INTERNAL_SERVER_ERROR` (500) | Reintenta solo lecturas (GET) con espera creciente. Antes de repetir una creación, verifica si la primera sí se creó. |
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+## Límites documentados
+
+| Dato | Límite |
+|---|---|
+| `amount` en QR | `>= 0` (0 = monto abierto); sin máximo publicado |
+| `amount` en push | `> 0` y `<= 1,000,000` |
+| `amount` en links | `> 0`; al actualizar se redondea a 2 decimales |
+| `expiration` en QR | `0` (no vence, default) o `>= 360` s |
+| `expiration` en push | `>= 360` s (default 360) |
+| `numRef` | 1 a 7 dígitos (`^[0-9]{1,7}$`), default `"0"` |
+| `phoneNumber` | 10 dígitos |
+| `metadata` | 50 pares; clave `<= 40`; valor escalar `<= 500`; regresa como texto |
+| `clientReferenceId` | `<= 255` caracteres |
+| `successUrl`, `backUrl` | HTTPS obligatorio |
+| `alias`, `name` (cuenta) | 1 a 255 caracteres |
+| `clabe` | 18 dígitos con dígito verificador válido; banco con CoDi habilitado |
+| `bankAccountId` | solo cuentas `ACTIVE` |
+| Página de resultados | 80 (`/transaction/api-key`, `/transaction/bank-account/{id}`); 20 (`/transaction/codi/qr/{id}`) |
+| Webhook | uno por API key |
+| Cuentas por llave | una `codi` y una `stripe`, mínimo una |
+| Registro de CLABE | hasta 5 días hábiles |
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: Crear una API key](https://docs.pey.mx/docs/tutorials/getting-started/create-an-api-key) · [pey: Configurar webhooks](https://docs.pey.mx/docs/tutorials/getting-started/set-up-webhooks) · consultado 2026-11-07
+
+## No documentado (⚪)
+
+- Límite de peticiones por minuto y qué código regresa al excederlo.
+- Idempotencia de `POST /codi/qr`, `POST /codi/pn` y `POST /payment-link/create`.
+- Código HTTP exacto con una llave ausente o inválida (los ejemplos muestran 400 `INVALID_REQUEST` o `AUTH_ERROR`).
+- Largo máximo de `concept`; monto máximo de un QR; límites por banco.
+- Reintentos, timeout y orden de los webhooks; eventos de pago rechazado, vencido o devuelto.
+- Cancelación de QR o push y devoluciones por API.
+- Significado de `partial` en links y de `FLAGS_UNAVAILABLE`.
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: webhooks, introducción](https://docs.pey.mx/docs/webhooks/introduction) · consultado 2026-11-07
+
+<!-- ===== FIN: pey/11-errores-y-limites.md ===== -->
+
+<!-- ===== INICIO: pey/12-recursos-de-marca.md ===== -->
+
+---
+titulo: "Recursos de marca de pey y CoDi"
+resumen: "Los cinco archivos oficiales (logos pey, pey + CoDi para fondo claro y oscuro, animación de pago CoDi) con sus URL y la única regla publicada."
+actualizado: 2026-11-07
+fuentes:
+  - https://docs.pey.mx/brand-assets
+---
+
+# 12 · Recursos de marca
+
+## Archivos oficiales
+
+pey publica logotipos para usarlos en tu checkout, app o documentación, y pide **descargarlos en lugar de recrearlos**.
+
+| Recurso | Formato | URL de descarga |
+|---|---|---|
+| Logo pey, azul | SVG | https://docs.pey.mx/img/design/pey_blue.svg |
+| Logo pey, blanco | SVG | https://docs.pey.mx/img/design/pey-logo-blanco.svg |
+| pey + CoDi, fondo claro | SVG | https://docs.pey.mx/img/design/pey_codi_light.svg |
+| pey + CoDi, fondo oscuro | SVG | https://docs.pey.mx/img/design/pey_codi_dark.svg |
+| Animación de pago CoDi | GIF | https://docs.pey.mx/img/design/loading_codi.gif |
+
+La vista previa de la animación usa `loading_codi_preview.gif`, pero la descarga apunta a `loading_codi.gif`.
+
+Fuente: [pey: Recursos de marca](https://docs.pey.mx/brand-assets) · consultado 2026-11-07
+
+## Reglas de uso
+
+- La página no publica manual de marca: sin colores ni códigos hex, sin área de respeto, sin tamaño mínimo, sin lista de usos permitidos o prohibidos ni aviso de marcas (⚪).
+- pey.mx usa además `https://pey.mx/pey.svg` y `https://pey.mx/pey-white.svg` en su sitio; no están en la página de recursos (⚪ no confirmados como recursos para terceros).
+- **Recomendación:** usa los SVG tal cual (sin deformar ni recolorear), con buen contraste, y respeta el símbolo ® al escribir "pey®" y "CoDi®" en textos formales.
+
+Fuente: [pey: Recursos de marca](https://docs.pey.mx/brand-assets) · [pey: API CoDi®](https://pey.mx/api-codi) · consultado 2026-11-07
+
+<!-- ===== FIN: pey/12-recursos-de-marca.md ===== -->
+
+<!-- ===== INICIO: pey/13-registro-de-cambios.md ===== -->
+
+---
+titulo: "Registro de cambios de la API de pey"
+resumen: "Qué dice el changelog oficial (introducción vacía y la entrada de Cuentas bancarias), la versión del OpenAPI y qué cambió respecto a lo que se sabía antes."
+actualizado: 2026-11-07
+fuentes:
+  - https://docs.pey.mx/docs/changelog/introduction
+  - https://docs.pey.mx/docs/changelog/bank-accounts
+  - https://docs.pey.mx/openapi.json
+---
+
+# 13 · Registro de cambios
+
+## Versionado
+
+- El OpenAPI declara la versión `2026-10-20` (forma de fecha).
+- La introducción del changelog dice que ahí irá el registro general conforme evolucione la API, y por ahora no tiene contenido.
+- ⚪ No documentado: encabezado para fijar versión, política de compatibilidad, avisos de cambios que rompen y fechas de cada entrada.
+
+Fuente: [pey: registro de cambios, introducción](https://docs.pey.mx/docs/changelog/introduction) · [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · consultado 2026-11-07
+
+## Entrada "Cuentas bancarias" (sin fecha publicada)
+
+**Se agregó:**
+- `POST /bank-account` (Register Bank Account): registra una CLABE bajo tu llave; empieza en `PENDING` y pasa a `ACTIVE` cuando termina el registro ante Banxico.
+- `GET /bank-account/{id}` (Get Bank Account): consulta la cuenta y su `codiStatus`.
+- El tipo "Cuenta bancaria".
+- El webhook `bank.account.updated`, al pasar a `ACTIVE`.
+
+**Cambió:**
+- `POST /codi/qr` y `POST /codi/pn` aceptan `bankAccountId` opcional: si viene, el pago va a esa cuenta; si no, a la cuenta `codi` de la llave.
+- Los webhooks `codi.qr.payment_received` y `codi.pn.payment_received` incluyen `bankAccountId` cuando se mandó al crear el cobro.
+- `GET /transaction/bank-account/{id}` documenta `externalMetadata` y solo lista transacciones CoDi.
+
+No se listan eliminaciones ni pasos de migración.
+
+Fuente: [pey: registro de cambios, Cuentas bancarias](https://docs.pey.mx/docs/changelog/bank-accounts) · consultado 2026-11-07
+
+## Diferencias frente a la síntesis previa del repo (K03, consultas del 2026-11-06)
+
+- Endpoint que K03 no listaba: `GET /transaction/bank-account/{id}`.
+- Errores de links de pago que K03 no listaba: `AUTH_ERROR`, `REQUEST_PARSING_ERROR`, `INVALID_URL`, `INVALID_HAS_TIP`, `INVALID_CLIENT_REFERENCE_ID` y `FORBIDDEN` (403, link de otra llave; no es el error de llave inválida).
+- `amountBreakdown.fee` lo paga quien paga; en links, el desglose omite componentes en cero.
+- `webhook-id` es la llave de idempotencia según pey; su ejemplo responde 500 ante firma inválida.
+- La misma versión del OpenAPI (`2026-10-20`) sigue publicada.
+
+Fuente: [CoDi API: especificación OpenAPI](https://docs.pey.mx/openapi.json) · [pey: webhooks, introducción](https://docs.pey.mx/docs/webhooks/introduction) · consultado 2026-11-07
+
+<!-- ===== FIN: pey/13-registro-de-cambios.md ===== -->
 
 <!-- ===== INICIO: AGENTS.md ===== -->
 
 # AGENTS.md
 
-Instrucciones para Codex (web y CLI) y para cualquier agente que trabaje en este repo. Léelas completas antes de actuar.
+Instrucciones para cualquier agente (Claude Code, Codex, ChatGPT) que trabaje en este repo. Léelas completas antes de actuar.
 
 ## 1. Misión
-Construir en unas 4.5 horas, dentro de `app/`, un prototipo **funcional y desplegado** para el *DevDay Exchange Community Hackathon: Mexico City* (sábado 7 de noviembre de 2026): una herramienta que use la **API de OpenAI** para acercar los **cobros CoDi sin comisión** (con la **API de Pey**) a comercios y personas. Tiene que verse y funcionar perfecto en una demo en vivo de 3 pasos.
+Construir, para el *DevDay Exchange Community Hackathon: Mexico City* (sábado 7 de noviembre de 2026; entrega el domingo 8 a las 13:00), un prototipo **funcional y desplegado** de **bien público** que use la **API de OpenAI** y cobre con **CoDi** mediante la **API de pey**. El problema y el alcance los define José; cuando estén definidos vivirán en `docs/PRD.md`.
 
-José participa solo: él decide, aprueba y presenta. Tú construyes.
+José participa solo: él decide, aprueba y presenta. Tú construyes y verificas.
 
 ## 2. Cómo usar la base de conocimiento
-1. Abre primero `conocimiento/INDICE.md`. Ahí está cada archivo y cada sección con su ID (por ejemplo `K03.4`).
+1. Empieza por `conocimiento/00-bases-del-concurso.md` (K00): todo lo que pide el concurso en un solo lugar. El índice de preguntas está en `conocimiento/INDICE.md`.
 2. Lee solo lo que tu tarea necesita:
 
 | Si tu tarea toca… | Lee |
 |---|---|
-| Cobros CoDi, QR, webhooks de Pey | K03 |
-| API de OpenAI (Responses, Realtime, Agents SDK, Apps SDK) | K04 |
-| Codex web, Codespaces, Vercel, despliegue | K05 |
-| Usuarios, datos y textos con contexto | K06 |
-| La idea elegida, el PRD y el plan de tareas | `docs/PRD.md` (se crea el sábado) y K07 |
-| Lo que califican los jueces | K08 |
+| Qué pide el concurso, fechas, entrega y premios | K00 y K01 |
+| Organizadores y qué buscan | K02 |
+| Cobros CoDi, QR, webhooks y errores de pey | K03 y la carpeta `pey/` (empieza en `pey/README.md`) |
+| Cómo se evalúa y qué resta puntos | K08 |
 
-3. En la descripción del PR, cita los IDs que usaste ("según K03.4…").
-4. Lo marcado ⚪ no está verificado. Si necesitas un dato que no está (endpoint, campo, nombre de modelo, precio), **no lo inventes**: consulta la documentación oficial si tienes internet; si no, deja `TODO(⚪): …` visible en el código y dilo en el PR.
+3. En la descripción del PR o del commit, cita los IDs que usaste ("según K03.4…").
+4. Lo marcado ⚪ no está verificado. Si necesitas un dato que no está (endpoint, campo, nombre de modelo de OpenAI, precio), **no lo inventes**: consulta la documentación oficial; si no puedes, deja `TODO(⚪): …` visible en el código y dilo.
 
 ## 3. Reglas de producto
-- Todo texto visible en **español de México**. Diseño **mobile-first**: 360 px sin desplazamiento horizontal, botones de al menos 44 px.
-- **La demo manda**: primero el flujo de 3 pasos de `docs/PRD.md`, de punta a punta y desplegado; después todo lo demás.
+- Todo texto visible en **español de México**. Diseño **mobile-first**: 360 px sin desplazamiento horizontal y botones de al menos 44 px.
+- **La demo manda**: primero el flujo principal de punta a punta y desplegado; después lo demás.
 - **Nada inventado**: sin testimonios ni cifras sin fuente. Si existe un modo de simulación de pago, la interfaz dice **"SIMULACIÓN"** de forma visible.
-- **Dinero real con cuidado**: ningún cobro sin confirmación explícita de la persona; monto máximo configurable (`MAX_MONTO_MXN`). Pey solo tiene entorno de producción: en pruebas y demo se cobran montos de $0.01 a $1 (K03.3).
-- Accesible: contraste AA, etiquetas en formularios, foco visible, todo usable con teclado.
+- **Dinero real con cuidado**: ningún cobro sin confirmación explícita de la persona y con un monto máximo en el servidor. pey solo tiene entorno de producción: en pruebas y en la demo se cobran montos de $0.01 a $1, que no se devuelven (K03.3).
+- Accesible: contraste AA, etiquetas en formularios, foco visible y todo usable con teclado.
 
 ## 4. Reglas de seguridad
-- Las llaves viven solo en el servidor como variables de entorno (`.env.example` tiene los nombres). **Nunca** en el navegador, en el repo ni en los logs.
-- Las llamadas a OpenAI y a Pey viven en funciones de servidor (`app/api/`). El navegador solo habla con `app/api/`.
-- Verifica la firma de los webhooks (K03). Valida entradas: montos mayores que 0, con máximo, tipos correctos.
+- Las llaves viven solo en el servidor como variables de entorno (nombres en `.env.example`). **Nunca** en el navegador, en el repo, en los logs ni en el chat.
+- Las llamadas a OpenAI y a pey viven en funciones de servidor. El navegador solo habla con tu propia API.
+- Verifica la firma de los webhooks de pey (K03.5). Valida entradas: montos mayores que 0, con máximo y tipos correctos.
 
 ## 5. Stack por defecto (si `docs/PRD.md` no dice otra cosa)
-- `app/` es la raíz del proyecto en Vercel.
-- Frontend: HTML + CSS + JavaScript sin framework y sin paso de build (`app/index.html`, `app/css/`, `app/js/`).
-- Backend: Vercel Functions en Node.js 20 o superior (ESM) en `app/api/*.js`, con `fetch` nativo; el SDK oficial `openai` solo si simplifica.
-- Pruebas: archivos `*.test.js` en `app/tests/`, con `fetch` simulado (las pruebas no llaman servicios reales). Se corren con `npm test --prefix app` (`app/package.json` con `"test": "node --test"`) o con `cd app && node --test`. Ojo: en Node 22, `node --test app/tests/` falla.
-- Datos persistentes solo si el PRD los necesita; antes de montar una base, intenta consultar el estado directo en Pey.
+- Frontend: HTML + CSS + JavaScript sin framework y sin paso de build.
+- Backend: Vercel Functions en Node.js 22 (ESM). Sin framework, cada archivo de `api/` es una función que exporta `GET(request)` o `POST(request)` y regresa un `Response`; el `package.json` necesita `"type": "module"` ([doc de Vercel](https://vercel.com/docs/functions/functions-api-reference)). El código compartido va **fuera** de `api/` ([doc de Vercel](https://vercel.com/docs/functions/configuring-functions/advanced-configuration)).
+- Pruebas con `node:test` y `fetch` simulado: las pruebas no llaman servicios reales.
+- Datos persistentes solo si el PRD los necesita; antes de montar una base de datos, intenta consultar el estado directo en pey.
 
 ## 6. Forma de trabajar
-- Tareas pequeñas y verificables: un PR por tarea, con título en español.
-- No toques archivos fuera de tu tarea. Las tareas en paralelo trabajan en carpetas distintas (ver `dia-del-evento/PROMPTS-CODEX.md`).
-- No modifiques `conocimiento/`, `dia-del-evento/`, `plantillas/` ni `fuentes/` salvo que la tarea lo pida.
-- Antes de terminar: corre `npm test --prefix app` y revisa que el diff no tenga llaves.
-- Descripción del PR: **Qué cambió · Cómo probarlo (pasos) · Variables de entorno nuevas · Pendientes ⚪ · IDs de conocimiento usados**.
+- Tareas pequeñas y verificables. Las tareas en paralelo trabajan en archivos distintos.
+- No modifiques `conocimiento/`, `pey/` ni `fuentes/` salvo que la tarea lo pida. Si agregas un dato, agrega su fuente en la tabla "## Fuentes" del archivo y corre `python3 scripts/unir_registros.py` y `python3 scripts/verificar_conocimiento.py`.
+- Antes de terminar: corre las pruebas y revisa que el diff no tenga llaves.
+- Avance, decisiones y bloqueos: `BITACORA.md`.
 
 ## 7. Definición de terminado
-Una tarea está terminada cuando cumple sus criterios de aceptación, las pruebas pasan, funciona en el preview de Vercel (si aplica) y el PR explica cómo probarla. "Creo que funciona" no es evidencia.
+Una tarea está terminada cuando cumple sus criterios de aceptación, las pruebas pasan, funciona desplegada (si aplica) y hay evidencia de cómo se probó. "Creo que funciona" no es evidencia.
 
 <!-- ===== FIN: AGENTS.md ===== -->

@@ -10,9 +10,10 @@ responde:
   - "¿Qué premio hay y quién organiza?"
   - "¿Cómo llego en transporte público a UTOPÍA Coyoacán?"
   - "¿Qué falta confirmar con los organizadores al llegar?"
-actualizado: 2026-11-06
+  - "¿Qué dijeron los organizadores en el arranque?"
+actualizado: 2026-11-07
 confianza: alta
-fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA15, SA16, SA17, SA18, SA19, SA20, SA21, SA22, SA23, SA24, SA25, SA26, SA33, SA34, SA35, SA43, SA44, SA55, SA56, SA57, SA61]
+fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA15, SA16, SA17, SA18, SA19, SA20, SA21, SA22, SA23, SA24, SA25, SA26, SA33, SA34, SA35, SA43, SA44, SA55, SA56, SA57, SA61, SD01, SD64, SF01]
 ---
 
 # K01 · Ficha verificada del evento
@@ -20,11 +21,11 @@ fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA15, SA16, SA17, SA18
 ## TL;DR
 
 - **Cuándo y dónde:** sábado 7 de noviembre de 2026 en UTOPÍA Elena Poniatowska Amor, Av. Miguel Hidalgo 128, Barrio de San Lucas, Coyoacán, CP 04100. La agenda oficial marca 10:00–16:00 (GMT-6); **llega a las 9:00** [SA01].
-- **Reto:** herramientas de bien público con OpenAI y CoDi usando la API gratuita de pey; ejemplos oficiales: cobro para comercios de barrio, comercio comunitario, QR y solicitudes de pago, flujos empresariales [SA01].
+- **Reto:** herramientas de bien público con OpenAI y CoDi usando la API gratuita de pey; ejemplos oficiales: cobro para comercios de barrio, comercio comunitario, QR y solicitudes de pago, flujos empresariales [SA01]. En el arranque pidieron una solución creativa que aproveche la nueva ley de pagos digitales: la app de un servicio, del que sea, que integre la API de pey; Claude se permite además de OpenAI [SF01].
 - **Entrega:** domingo 8 de noviembre a las 13:00 en el portal del evento; se vale seguir construyendo después del sábado [SA01].
 - **Ganadores:** el jurado los anuncia el lunes 9 por la mañana; después un voto de la comunidad elige de 1 a 3 ganadores más [SA01].
 - **Premio:** bolsa de 10 boletos al DevDay Exchange oficial de OpenAI en CDMX (martes 10 de noviembre, 14:00); no se anuncian efectivo ni créditos [SA01][SA04].
-- **Sin publicar:** criterios, elegibilidad, reglas de código previo, formato de entrega y reparto de boletos (⚪ no verificado); pregúntalo en la primera hora (K01.11).
+- **Sin publicar al 7 de noviembre** (página revisada de nuevo): criterios, jueces, elegibilidad, reglas de código previo, URL y formato de entrega y reparto de boletos (⚪) [SA01]; pregúntalo (K01.11). Resumen de todo el concurso: [K00](00-bases-del-concurso.md).
 
 ## K01.1 · Datos clave verificados
 
@@ -38,7 +39,7 @@ fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA15, SA16, SA17, SA18
 | Anfitriones | Ben Kim (presentado como el Codex Ambassador local) y Esteban Constante | [SA01] |
 | Organizan | AI Builders México, con UTOPÍAS, SEDECO y pey | [SA01] |
 | Carácter | Hackatón comunitario, separado del DevDay Exchange oficial | [SA01] |
-| Cupo | Limitado y con aprobación del anfitrión; la página mostraba 264 personas confirmadas | [SA01] |
+| Cupo | Limitado y con aprobación del anfitrión; la página mostraba 265 personas confirmadas el 7 de noviembre (264 el 6) | [SA01] |
 | Participación | Solo o en equipo; llevar laptop | [SA01] |
 | Idioma | Página bilingüe (español e inglés) | [SA01] |
 
@@ -57,7 +58,7 @@ No confundir con "OpenAI DevDay Exchange Community: Mexico City", otro evento de
 
 | Cuándo | Qué pasa | Fuente |
 |---|---|---|
-| Sáb 7 nov, 10:00–16:00 | Construcción presencial en UTOPÍA Coyoacán con mentores de AI Builders México | [SA01] |
+| Sáb 7 nov, 10:00–16:00 | Construcción presencial en UTOPÍA Coyoacán con mentores de AI Builders México; en el arranque se dieron indicaciones de palabra (K01.4) | [SA01][SF01] |
 | Sáb 7 nov (sin hora) | La página menciona demos de proyectos y evaluación; ⚪ no dice si hay demo en vivo el sábado | [SA01] |
 | Dom 8 nov, 13:00 | Fecha límite de entrega en el portal del evento (sin URL publicada) | [SA01] |
 | Lun 9 nov, mañana | Anuncio de ganadores del jurado; después, voto comunitario por 1–3 ganadores más | [SA01] |
@@ -72,11 +73,12 @@ No confundir con "OpenAI DevDay Exchange Community: Mexico City", otro evento de
 - El reto, en palabras de la página: "Prototipa herramientas de bien público con OpenAI y CoDi" [SA01].
 - Ahí CoDi se describe como la red de pagos instantáneos y gratuitos de Banco de México, a la que se accede con la API gratuita de pey, que la página llama de código abierto [SA01]. ⚪ La página de la API de pey no menciona código abierto ni repositorio [SA11].
 - Ideas de ejemplo oficiales: cobro para comercios de barrio, comercio comunitario, códigos QR y flujos de solicitud de pago, y flujos empresariales sobre pagos instantáneos [SA01].
-- Tecnologías: OpenAI y Codex; el anfitrión es Codex Ambassador y la página enlaza a Codex [SA01]; los newsletters confirman OpenAI, CoDi y la API de Pey [SA02].
+- Tecnologías: OpenAI y Codex; el anfitrión es Codex Ambassador y la página enlaza a Codex, aunque no exige Codex por escrito [SA01]; los newsletters confirman OpenAI, CoDi y la API de Pey [SA02].
+- **Arranque (7 de noviembre, en persona):** la solución debe ser creativa; hay que ir de la mano con la nueva ley de pagos digitales y aprovecharla; el objetivo es desarrollar la aplicación de un servicio, del que sea, que integre la API de pey, que funciona con CoDi. También dijeron que se puede usar Claude además de las herramientas de OpenAI [SF01]. ⚪ No está por escrito. Qué dice la ley y qué no: [K00](00-bases-del-concurso.md) (K00.4).
 - API de pey: autoservicio, gratuita por ahora, funciona con cualquier banco, webhooks firmados con Standard Webhooks y documentación en docs.pey.mx; su página habla de llaves de prueba y de producción [SA11], pero K03 reporta que la referencia técnica solo documenta producción (⚪). Detalle: K03.
 - En Bengaluru, hackatón hermano, se sugirió explorar lo nuevo del DevDay 2026: agentes persistentes, plugins de ChatGPT, Agents API, MCP events y Codex en la nube [SA07].
 
-**Recomendación:** que un solo flujo muestre las tres piezas: (1) IA de OpenAI resolviendo algo real para un comercio, (2) un cobro CoDi con pey de punta a punta (monto chico en producción o, como plan B, SIMULACIÓN etiquetada; ver K03) y (3) evidencia de que se construyó con Codex.
+**Recomendación:** que un solo flujo muestre las tres piezas: (1) IA de OpenAI resolviendo algo real para un comercio o servicio, (2) un cobro CoDi con pey de punta a punta (monto chico en producción o, como plan B, SIMULACIÓN etiquetada; ver K03) y (3) evidencia de cómo se construyó (Codex, y Claude si se usa [SF01]). Súmale el ángulo creativo y la conexión con la ley que se pidieron en el arranque, sin afirmar obligaciones que la ley no tiene.
 
 ## K01.5 · Organizadores y aliados (resumen)
 
@@ -95,7 +97,7 @@ Detalle de cada actor y de lo que busca: K02.
 - Premio publicado: bolsa de 10 boletos al DevDay Exchange oficial en la Ciudad de México [SA01].
 - No hay lugares (1.º, 2.º, 3.º) publicados ni premios en efectivo o créditos. ⚪ No se sabe si habrá "primer lugar" ni cuántos boletos recibe cada ganador o equipo.
 - Mecánica: el jurado anuncia ganadores el lunes 9 por la mañana y después la comunidad vota por 1–3 ganadores más [SA01].
-- La propia página dice que la asignación de boletos, la elegibilidad y las condiciones se confirmarán más adelante [SA01] (⚪).
+- La propia página dice que la asignación de boletos, la elegibilidad y las condiciones se confirmarán más adelante; seguía igual el 7 de noviembre [SA01] (⚪).
 - Precedentes: París y Bengaluru también repartieron 10 boletos a su DevDay Exchange; en Bengaluru se aclaró que participar o presentar no garantizaba boleto [SA06][SA07].
 - Valor del premio: el DevDay Exchange oficial incluye sesiones técnicas con equipos de producto e ingeniería de OpenAI, proyectos reales y flujos de Codex, orientación práctica para proyectos propios y conversación con el equipo; empieza a las 14:00 [SA04].
 
@@ -147,19 +149,20 @@ Detalle de cada actor y de lo que busca: K02.
 | Sáb 14 nov | Arranque presencial del Cursor Hackatón México en 7 ciudades | [SA03] |
 | 14 nov–12 dic | Hackatón México (hackatonmexico.com): CoDi y API de Pey; individual o en equipo; más de 1 millón de pesos en premios, créditos y recursos; con SpaceXAI y Pey | [SA03] |
 | 12 dic / 14 dic | Entregas / resultados del Hackatón México | [SA03] |
-| 14 dic | Fecha límite para que los bancos permitan recibir transferencias con el número de celular (circulares 9/2026 y 10/2026 de Banxico) | [SA43] |
+| 14 dic | Fecha límite para que los bancos permitan recibir transferencias con el número de celular (circulares 9/2026 y 10/2026 de Banxico); la 9/2026 fija ese plazo en su segundo transitorio | [SA43][SD01] |
+| Por definir (⚪) | Ley de Economía Digital para Pagos Digitales y Electrónicos (decreto expedido el 4 nov): entra en vigor al día siguiente de su publicación en el DOF; desde ahí, la SHCP tiene 15 días hábiles para definir sectores y luego hay 15 más para reglas (K00.4) | [SD64] |
 
-**Recomendación:** diseña el proyecto de mañana para que pueda crecer en el Hackatón México; ⚪ confirma si allá se permite continuar un proyecto iniciado el 7 de noviembre.
+**Recomendación:** diseña el proyecto de hoy para que pueda crecer en el Hackatón México; ⚪ confirma si allá se permite continuar un proyecto iniciado el 7 de noviembre.
 
 ## K01.11 · Pendiente de confirmar al llegar (⚪)
 
-Nada de esto está publicado o verificado; pregúntalo a Ben Kim o a los mentores de AI Builders en la primera hora:
+Al 7 de noviembre nada de esto estaba publicado [SA01]; pregúntalo a Ben Kim o a los mentores de AI Builders:
 
 1. Criterios de evaluación, pesos y quiénes son los jueces (la página dice que se confirmarán) [SA01].
 2. ¿Habrá demo en vivo el sábado? ¿Cuánto dura el pitch? ¿Hay preguntas del jurado?
 3. URL del portal del evento y qué se entrega: repo, demo desplegada, video (¿duración?), presentación o formulario.
 4. ¿Se permite código previo, plantillas o librerías propias? ¿La base de conocimiento preparada antes cuenta como código previo?
-5. ¿Es obligatorio usar Codex u OpenAI? ¿Cómo quieren la evidencia?
+5. OpenAI es parte del reto [SA01] y en el arranque dijeron que Claude también se permite [SF01]: ¿se puede confirmar por escrito? ¿Codex es obligatorio? ¿Cómo quieren la evidencia?
 6. Elegibilidad y condiciones de los boletos: ¿cuántos por ganador o equipo? ¿Existe "primer lugar"?
 7. Mecánica del voto comunitario: dónde, quién vota y hasta cuándo.
 8. ¿Hay créditos de OpenAI o de pey para participantes?
@@ -167,14 +170,15 @@ Nada de esto está publicado o verificado; pregúntalo a Ben Kim o a los mentore
 10. Hora real de cierre presencial (15:00 o 16:00), Wi-Fi, enchufes, comida y acceso.
 11. ¿El proyecto puede continuar en el Hackatón México?
 12. Política de fotos y video, y uso de datos de comercios reales.
+13. ¿Cómo pesará en la evaluación aprovechar la nueva ley de pagos digitales, que se mencionó en el arranque [SF01]?
 
-**Recomendación:** anota las respuestas en `BITACORA.md` y actualiza K08 si se publican criterios.
+**Recomendación:** anota las respuestas en `BITACORA.md` y actualiza K00 y K08 si se publican criterios.
 
 ## Fuentes
 
 | ID | Título | URL | Consultado |
 |---|---|---|---|
-| SA01 | DevDay Exchange Community Hackathon: Mexico City (página oficial en Luma; coincide con el boleto del participante) | https://luma.com/f755f0k6 | 2026-11-06 |
+| SA01 | DevDay Exchange Community Hackathon: Mexico City (página oficial en Luma; coincide con el boleto del participante) | https://luma.com/f755f0k6 | 2026-11-07 |
 | SA02 | Newsletter The Build Log, AI Builders, 26 oct y 2 nov 2026 | (correo; sin URL pública) | 2026-11-06 (previo) |
 | SA03 | Newsletter de AI Builders, 31 oct 2026 | (correo; sin URL pública) | 2026-11-06 (previo) |
 | SA04 | OpenAI DevDay Exchange 2026 | https://events.openai.com/devdayexchange2026/ | 2026-11-06 |
@@ -203,5 +207,8 @@ Nada de esto está publicado o verificado; pregúntalo a Ben Kim o a los mentore
 | SA56 | Luma: Popular events in Mexico City (listado) | https://luma.com/mexico-city | 2026-11-06 |
 | SA57 | Codex Community Events (calendario de Luma) | https://luma.com/codex-community | 2026-11-06 |
 | SA61 | Crónica: Digitalizarán trámites para locatarios de mercados públicos en la CDMX | https://www.cronica.com.mx/metropoli/2025/01/11/digitalizaran-tramites-para-locatarios-de-mercados-publicos-en-la-cdmx/ | 2026-11-06 |
+| SD01 | DOF · Circular 9/2026 de Banxico (modifica la 14/2017; homologación de transferencias móviles) | https://dof.gob.mx/nota_detalle_popup.php?codigo=5790862 | 2026-11-07 |
+| SD64 | DOF · Ley de Economía Digital: texto y transitorios | https://sidof.segob.gob.mx/notas/docFuente/5803017 | 2026-11-07 |
+| SF01 | Arranque del evento, notas de José (en persona, no público) | (sin URL; no público) | 2026-11-07 |
 
 (previo) = dato verificado por el equipo antes de esta sesión y no reconsultado aquí.

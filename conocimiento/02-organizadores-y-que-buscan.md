@@ -11,9 +11,10 @@ responde:
   - "¿Qué es SpaceXAI y por qué aparece en el ecosistema del evento?"
   - "¿Qué papel tienen UTOPÍAS y SEDECO?"
   - "¿Qué conquista a los organizadores y qué los aleja?"
-actualizado: 2026-11-06
+  - "¿Qué pidieron los organizadores en el arranque del 7 de noviembre?"
+actualizado: 2026-11-07
 confianza: media
-fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA12, SA13, SA14, SA15, SA27, SA28, SA29, SA30, SA31, SA32, SA33, SA34, SA35, SA36, SA37, SA38, SA39, SA40, SA41, SA42, SA43, SA44, SA45, SA50, SA53, SA54, SA59, SA60, SA61]
+fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA12, SA13, SA14, SA15, SA27, SA28, SA29, SA30, SA31, SA32, SA33, SA34, SA35, SA36, SA37, SA38, SA39, SA40, SA41, SA42, SA43, SA44, SA45, SA50, SA53, SA54, SA59, SA60, SA61, SD64, SF01]
 ---
 
 # K02 · Organizadores y qué buscan
@@ -25,7 +26,8 @@ fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA12, SA13, SA14, SA15
 - La comunidad Codex quiere ver Codex usado de forma visible, práctica e interesante, y lo nuevo del DevDay 2026 (Agents API, plugins con MCP Events, Codex en la nube) [SA07][SA29][SA50].
 - AI Builders quiere que cobrar no cueste un porcentaje y que builders mexicanos hagan herramientas que acerquen CoDi a comercios y personas [SA03].
 - pey quiere comercios cobrando con CoDi a través de su API gratuita (cualquier banco, webhooks firmados) [SA11][SA12].
-- Los aleja: demo sin cobro real, IA decorativa, datos inventados, llaves expuestas y proyectos sin un comercio concreto (K02.13).
+- En el arranque (7 de noviembre) pidieron una solución creativa, ir de la mano con la nueva ley de pagos digitales y una app de un servicio, del que sea, que integre la API de pey; Claude se permite además de OpenAI [SF01] (K02.14).
+- Los aleja: demo sin cobro real, IA decorativa, datos inventados, llaves expuestas, proyectos sin un comercio o servicio concreto y afirmaciones falsas sobre la ley (K02.13).
 
 ## K02.1 · Mapa de actores y qué quiere cada uno
 
@@ -70,7 +72,7 @@ fuentes: [SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA11, SA12, SA13, SA14, SA15
 - **Plugins de ChatGPT y MCP Events:** paneles, barra lateral y visores dentro de ChatGPT; las apps conectadas pueden avisar a ChatGPT cuando algo ocurre [SA29][SA31].
 - **Decisions API** (vista previa limitada, modelo Luna) para clasificar y enrutar [SA29]; **Dots** (agentes persistentes) y **ChatGPT Space** [SA29][SA30]; **Sign in with ChatGPT** [SA30][SA31].
 - El hackatón hermano de Bengaluru invitaba a explorar varias de estas piezas [SA07].
-- ⚪ No verificado: qué está disponible para un participante individual con ChatGPT Plus y API de pago (ver K04).
+- ⚪ No verificado: qué está disponible para un participante individual con ChatGPT Plus y API de pago.
 
 **Recomendación:** idea natural para el reto: el webhook de pey (pago recibido) dispara una acción del agente o un aviso en ChatGPT. Úsalo solo si la pieza está disponible y probada; si no, la API estándar de OpenAI bien acotada gana más que una novedad rota.
 
@@ -100,7 +102,7 @@ Inferencia: comunidad multiherramienta (OpenAI, Vercel, Cursor, SpaceXAI) que pr
 - **API CoDi:** permite a negocios y desarrolladores aceptar cobros CoDi desde su propio software sin construir la conexión desde cero; autoservicio; gratuita por ahora; funciona con cualquier banco; menciona llaves de prueba y de producción; webhooks REST firmados con Standard Webhooks y secreto para verificar la firma; documentación en docs.pey.mx [SA11]. ⚪ K03 reporta que la referencia técnica solo documenta producción.
 - **Código abierto:** la página del hackatón describe la API como gratuita y de código abierto [SA01]; ⚪ la página de la API no lo menciona.
 - **Prensa:** merca20 informó que Pey, AI Builders México y SpaceXAI harían un hackatón de pagos digitales [SA13]; informabtl destacó que la API genera QR con importe y concepto, y que el 14 de diciembre cambian las transferencias en México [SA14].
-- **Contexto regulatorio:** antes del 14 de diciembre de 2026 los bancos deben permitir recibir transferencias con el número de celular, según las circulares 9/2026 y 10/2026 de Banxico; la CLABE sigue funcionando [SA43].
+- **Contexto regulatorio:** antes del 14 de diciembre de 2026 los bancos deben permitir recibir transferencias con el número de celular, según las circulares 9/2026 y 10/2026 de Banxico; la CLABE sigue funcionando [SA43]. Aparte, el 4 de noviembre de 2026 se expidió el decreto de la Ley de Economía Digital para Pagos Digitales y Electrónicos: promueve los pagos digitales, no obliga hoy a los comercios y deja a la SHCP definir los sectores donde el pago digital podrá ser la única forma aceptada [SD64]. Lo esencial y lo que no se puede afirmar: [K00](00-bases-del-concurso.md) (K00.4).
 
 Detalle técnico de endpoints y webhooks: K03.
 
@@ -131,7 +133,7 @@ Inferencia (⚪, pey no lo declara así): abrir la API convierte a cada builder 
 - En México: SpaceXAI coorganiza con AI Builders y Pey el Hackatón México nacional [SA03] y aparece entre los logos aliados de AI Builders [SA32]. Un hackatón de Cursor en Mérida (13–14 de noviembre) se registra en Luma con una dirección que incluye "spacexai" (inferencia de vínculo) [SA39].
 - No aparece como organizador del hackatón del 7 de noviembre [SA01].
 
-**Recomendación:** mañana es un evento de la comunidad Codex: construye y presenta con OpenAI y Codex. No hables mal de herramientas de la competencia; si preguntan, explica por qué OpenAI por sus méritos. Para el Hackatón México ⚪ revisa qué herramientas exige o permite.
+**Recomendación:** es un evento de la comunidad Codex: construye y presenta con OpenAI y Codex. En el arranque dijeron que también se puede usar Claude [SF01]; si lo usas, que se sume sin quitarle a OpenAI su papel en el reto. No hables mal de herramientas de la competencia; si preguntan, explica por qué OpenAI por sus méritos. Para el Hackatón México ⚪ revisa qué herramientas exige o permite.
 
 ## K02.11 · Gobierno CDMX: UTOPÍAS y SEDECO
 
@@ -145,7 +147,9 @@ Inferencia: al gobierno le interesan herramientas de bien público para comercio
 ## K02.12 · Lo que los conquista
 
 Síntesis de este archivo; las fuentes van en cada punto:
-- Un problema real de un comercio mexicano dicho en una frase (tiendita, puesto de mercado, fonda, servicio a domicilio), alineado con el reto de bien público [SA01].
+- Un problema real de un comercio o servicio mexicano, del que sea, dicho en una frase y alineado con el reto de bien público [SA01][SF01].
+- Una solución creativa, como se pidió en el arranque [SF01].
+- Que aproveche la nueva ley de pagos digitales con datos correctos: adopción voluntaria y preparación, no obligaciones inventadas [SF01][SD64].
 - Cobro CoDi de punta a punta con pey, confirmado por webhook verificado [SA11].
 - IA con un papel necesario y acotado: el código determinista maneja montos y estados, el modelo interpreta y explica, y la persona confirma (patrón de los ganadores de Build Week) [SA45].
 - Uso visible de Codex y, si funciona, de una novedad de OpenAI [SA07][SA50].
@@ -165,14 +169,30 @@ Síntesis de riesgos; las fuentes van en cada punto:
 - Demo sin respaldo cuando falla el internet.
 - Hablar mal de otras herramientas u organizadores, o presumir alianzas con gobierno, bancos o pey que no existen.
 - Exponer datos personales (CLABE, teléfonos) de personas reales.
+- Afirmar que la ley ya obliga a aceptar QR o pagos digitales, o dar fechas que la ley no tiene: los sectores los definirá la SHCP [SD64].
 
 **Recomendación:** antes de entregar, revisa esta lista contra el repo y la demo; corrige cualquier punto en rojo antes de pulir lo visual.
+
+## K02.14 · Lo que pidieron en el arranque (7 de noviembre)
+
+Según las notas de José, tomadas en persona (no hay versión escrita) [SF01]:
+- La solución debe ser creativa.
+- Hay que ir de la mano con la nueva ley de pagos digitales y aprovecharla.
+- El objetivo es desarrollar la aplicación de un servicio, del que sea, que integre la API de pey, que funciona con CoDi.
+- Se puede usar Claude además de las herramientas de OpenAI.
+
+Lectura por actor (inferencia, ⚪):
+- **pey y AI Builders:** confirman que su prioridad es la integración real de la API de pey; "un servicio, del que sea" abre el reto más allá de las tiendas [SF01].
+- **Gobierno (UTOPÍAS y SEDECO):** la ley es política pública reciente; un proyecto que ayude a adoptar pagos digitales encaja con su agenda, siempre que no se presente como obligación [SD64].
+- **OpenAI y la comunidad Codex:** OpenAI sigue en el reto escrito [SA01]; Claude se permite como herramienta adicional [SF01].
+
+**Recomendación:** que el pitch diga en una frase qué tiene de creativo y cómo ayuda a aprovechar la ley, con lo que la ley sí dice (K00.4).
 
 ## Fuentes
 
 | ID | Título | URL | Consultado |
 |---|---|---|---|
-| SA01 | DevDay Exchange Community Hackathon: Mexico City (página oficial en Luma) | https://luma.com/f755f0k6 | 2026-11-06 |
+| SA01 | DevDay Exchange Community Hackathon: Mexico City (página oficial en Luma) | https://luma.com/f755f0k6 | 2026-11-07 |
 | SA02 | Newsletter The Build Log, AI Builders, 26 oct y 2 nov 2026 | (correo; sin URL pública) | 2026-11-06 (previo) |
 | SA03 | Newsletter de AI Builders, 31 oct 2026 | (correo; sin URL pública) | 2026-11-06 (previo) |
 | SA04 | OpenAI DevDay Exchange 2026 | https://events.openai.com/devdayexchange2026/ | 2026-11-06 |
@@ -209,5 +229,7 @@ Síntesis de riesgos; las fuentes van en cada punto:
 | SA59 | Get on Board: OpenAI Codex – Mexico City (8 abr 2026) | https://www.getonbrd.com/events/2026/openai-codex-mexico-city-valdivia-chile | 2026-11-06 |
 | SA60 | Expansión Política: Las 14 acciones que emprenderá la CDMX para mejorar los mercados | https://politica.expansion.mx/cdmx/2025/02/12/las-14-acciones-que-emprendera-la-cdmx-para-mejorar-los-mercados | 2026-11-06 |
 | SA61 | Crónica: Digitalizarán trámites para locatarios de mercados públicos en la CDMX | https://www.cronica.com.mx/metropoli/2025/01/11/digitalizaran-tramites-para-locatarios-de-mercados-publicos-en-la-cdmx/ | 2026-11-06 |
+| SD64 | DOF · Ley de Economía Digital: texto y transitorios | https://sidof.segob.gob.mx/notas/docFuente/5803017 | 2026-11-07 |
+| SF01 | Arranque del evento, notas de José (en persona, no público) | (sin URL; no público) | 2026-11-07 |
 
 (previo) = dato verificado por el equipo antes de esta sesión y no reconsultado aquí.
