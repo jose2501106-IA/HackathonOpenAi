@@ -180,6 +180,7 @@ del archivo que la usa y vuelve a correr el script.
 | SC62 | Forwarding ports in your codespace (GitHub Docs) | https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace?tool=webui | 2026-11-06 | K05 |
 | SC63 | OpenAI Codex (AI agent) (Wikipedia) | https://en.wikipedia.org/wiki/OpenAI_Codex_(AI_agent) | 2026-11-06 | K05 |
 | SC64 | OpenAI DevDay 2026: Everything Announced and What It All Means (God of Prompt; el contenido describe el DevDay 2025) | https://godofprompt.ai/blog/openai-devday-2026/ | 2026-11-06 | K04 |
+| SC65 | Functions API Reference (Vercel) | https://vercel.com/docs/functions/functions-api-reference | 2026-11-07 | K05 |
 | SD01 | DOF · Circular 9/2026 de Banxico (modifica la 14/2017; homologación de transferencias móviles) | https://dof.gob.mx/nota_detalle_popup.php?codigo=5790862 | 2026-11-06 | K06 TL;DR, K06.4, K06.5, K06.10 |
 | SD02 | SIDOF · Circular 10/2026 de Banxico (modifica la 3/2012), DOF 17-jun-2026 | https://sidof.segob.gob.mx/notas/5790863 | 2026-11-06 | K06.5 |
 | SD03 | Expansión · La CLABE no desaparece: Banco de México cambiará las transferencias (6-sep-2026) | https://expansion.mx/finanzas-personales/2026/09/06/clabe-no-desaparece-banco-de-mexico-cambiara-transferencias | 2026-11-06 | K06 TL;DR, K06.5, K06.6 |
@@ -243,7 +244,6 @@ del archivo que la usa y vuelve a correr el script.
 | SD61 | El CEO · Ley de Economía Digital carga con obstáculos por conectividad y costos (10-sep-2026) | https://elceo.com/negocios/ley-de-economia-digital-carga-con-obstaculos-para-pagos-sin-efectivo-por-conectividad-y-costos/ | 2026-11-06 | K06.1, K06.3 |
 | SD62 | El CEO · CoDi y DiMo se fusionan: lo que se sabe (7-abr-2026) | https://elceo.com/economia/codi-y-dimo-se-fusionan-esto-es-lo-que-se-sabe-del-impulso-a-la-digitalizacion-de-pagos-en-mexico/ | 2026-11-06 | K06.4 |
 | SD63 | Banxico · Tasas de descuento con tarjeta de crédito por giro (periodo no indicado; archivo de 2025) | https://www.banxico.org.mx/servicios/tasas-de-descuento-para-tarjetas-de-credito/%7BA896D818-3D13-4922-B54B-4B6D58E99479%7D.pdf | 2026-11-06 | K06.3, K06.9 |
+| SD64 | DOF · Ley de Economía Digital: texto y transitorios | https://sidof.segob.gob.mx/notas/docFuente/5803017 | 2026-11-07 | K06 |
 | SM01 | Perfil público de GitHub de José (lista de repositorios) | https://github.com/jose2501106-IA | 2026-11-05 | K10 |
 | SM02 | Correos personales de José (confirmaciones de eventos y resultados) | no público | 2026-11-05 | K10 |
-
-| SD64 | DOF · Ley de Economía Digital: texto y transitorios | https://sidof.segob.gob.mx/notas/docFuente/5803017 | 2026-11-07 |

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 720 1280" font-family="Arial, Helvetica, sans-serif">
+  <title>Captura de ejemplo FICTICIA: transferencia enviada por $1.00 (Banco Ejemplo)</title>
+  <!-- Comprobante inventado para la demo de ¿Ya cayó?. Sin logos ni diseño de bancos reales. -->
+  <rect width="720" height="1280" fill="#eef0f3"/>
+
+  <!-- Barra de estado del teléfono -->
+  <text x="40" y="54" font-size="28" font-weight="700" fill="#111827">13:58</text>
+  <rect x="600" y="34" width="56" height="26" rx="6" fill="none" stroke="#111827" stroke-width="3"/>
+  <rect x="605" y="39" width="38" height="16" rx="3" fill="#111827"/>
+
+  <!-- Encabezado genérico -->
+  <rect x="0" y="84" width="720" height="128" fill="#4b5563"/>
+  <circle cx="92" cy="148" r="34" fill="#e5e7eb"/>
+  <text x="92" y="159" text-anchor="middle" font-size="30" font-weight="700" fill="#4b5563">BE</text>
+  <text x="146" y="160" font-size="38" font-weight="700" fill="#ffffff">Banco Ejemplo</text>
+
+  <!-- Tarjeta del comprobante -->
+  <rect x="40" y="250" width="640" height="890" rx="28" fill="#ffffff" stroke="#d1d5db" stroke-width="2"/>
+  <circle cx="360" cy="350" r="58" fill="#d1fae5"/>
+  <path d="M328 352l22 22 42-46" fill="none" stroke="#065f46" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="360" y="470" text-anchor="middle" font-size="42" font-weight="700" fill="#111827">Transferencia enviada</text>
+  <text x="360" y="590" text-anchor="middle" font-size="104" font-weight="700" fill="#111827">$1.00</text>
+  <text x="360" y="636" text-anchor="middle" font-size="30" fill="#4b5563">MXN</text>
+
+  <line x1="80" y1="690" x2="640" y2="690" stroke="#e5e7eb" stroke-width="2"/>
+
+  <g font-size="28">
+    <text x="80" y="748" fill="#6b7280">Fecha</text>
+    <text x="640" y="748" text-anchor="end" font-weight="700" fill="#111827">07/11/2026</text>
+
+    <text x="80" y="818" fill="#6b7280">Hora</text>
+    <text x="640" y="818" text-anchor="end" font-weight="700" fill="#111827">13:58 h</text>
+
+    <text x="80" y="888" fill="#6b7280">Clave de rastreo</text>
+    <text x="640" y="888" text-anchor="end" font-weight="700" fill="#111827">EJEMPLO123</text>
+
+    <text x="80" y="958" fill="#6b7280">Concepto</text>
+    <text x="640" y="958" text-anchor="end" font-weight="700" fill="#111827">Dulce de tamarindo</text>
+
+    <text x="80" y="1028" fill="#6b7280">Destino</text>
+    <text x="640" y="1028" text-anchor="end" font-weight="700" fill="#111827">Puesto de ejemplo ****0000</text>
+
+    <text x="80" y="1098" fill="#6b7280">Banco destino</text>
+    <text x="640" y="1098" text-anchor="end" font-weight="700" fill="#111827">Banco Ejemplo</text>
+  </g>
+
+  <!-- Marca de agua -->
+  <g transform="rotate(-28 360 700)" fill="#dc2626" fill-opacity="0.14" font-size="132" font-weight="700" text-anchor="middle">
+    <text x="360" y="430">EJEMPLO</text>
+    <text x="360" y="760">EJEMPLO</text>
+    <text x="360" y="1090">EJEMPLO</text>
+  </g>
+
+  <text x="360" y="1200" text-anchor="middle" font-size="26" font-weight="700" fill="#6b7280">Comprobante ficticio · solo para demostración</text>
+</svg>

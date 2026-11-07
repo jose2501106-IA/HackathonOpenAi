@@ -4,11 +4,11 @@ Fuente de verdad para quien construye `app/`. Si algo no está aquí, pregunta a
 
 ## Reglas comunes
 - Todas las funciones viven en `app/api/*.js` (Vercel Functions, Node 20+, ESM) y exportan `GET(request)` o `POST(request)` con `Request`/`Response` web.
-- Respuestas JSON con `json()` de `app/api/_lib/http.js`. Errores: `{ "error": { "codigo": "MAYUSCULAS", "mensaje": "texto para la persona, en español" } }`.
-- Configuración solo con `leerConfig()` de `app/api/_lib/config.js` (léela dentro de cada handler, no al importar).
+- Respuestas JSON con `json()` de `app/lib/http.js`. Errores: `{ "error": { "codigo": "MAYUSCULAS", "mensaje": "texto para la persona, en español" } }`.
+- Configuración solo con `leerConfig()` de `app/lib/config.js` (léela dentro de cada handler, no al importar).
 - Dinero: el navegador manda y recibe **pesos** (`monto`, número con hasta 2 decimales). Adentro se valida en **centavos enteros** (`aCentavos`, `aPesos`). Monto válido: 0.01 a `maxMontoMxn` (por defecto 20).
 - `modoPago`: `"simulacion"` (sin llave de pey o elegido), `"prueba"` (cuenta de prueba de pey, dinero real de $0.01–$1) o `"comercio"`. La interfaz **siempre** lo muestra.
-- **Ticket:** cada cobro regresa un `ticket` firmado (`app/api/_lib/ticket.js`, secreto `cfg.secretoTickets`) con `{ id, montoCentavos, concepto, creadoEn, expiraEn, modoPago, simPagadoEn? }`. El navegador lo guarda y lo manda de vuelta. El servidor confía en el ticket, no en montos que mande el navegador.
+- **Ticket:** cada cobro regresa un `ticket` firmado (`app/lib/ticket.js`, secreto `cfg.secretoTickets`) con `{ id, montoCentavos, concepto, creadoEn, expiraEn, modoPago, simPagadoEn? }`. El navegador lo guarda y lo manda de vuelta. El servidor confía en el ticket, no en montos que mande el navegador.
 - Nunca se registra en logs una llave, un secreto, una imagen ni el cuerpo completo de un webhook.
 
 ## Endpoints
@@ -26,7 +26,7 @@ Salida `200`:
   "origen": "openai" }
 ```
 - `propuesta` puede ser `null` si no se entendió (con `respuesta` pidiendo el monto).
-- Con `OPENAI_API_KEY`: Responses API con function calling (`crear_cobro`, estricta) y el catálogo de `app/api/_lib/catalogo.js`; **el servidor pone los precios del catálogo** y recalcula el monto. Sin llave o si OpenAI falla: reglas locales (`origen: "reglas"`), por ejemplo "cóbrale 85 de dos tacos" → 85 y "un dulce de tamarindo" → catálogo.
+- Con `OPENAI_API_KEY`: Responses API con function calling (`crear_cobro`, estricta) y el catálogo de `app/lib/catalogo.js`; **el servidor pone los precios del catálogo** y recalcula el monto. Sin llave o si OpenAI falla: reglas locales (`origen: "reglas"`), por ejemplo "cóbrale 85 de dos tacos" → 85 y "un dulce de tamarindo" → catálogo.
 - Si el monto pasa de `maxMontoMxn`: `propuesta` con `monto` y `respuesta` que avisa el tope (la interfaz no deja confirmar).
 
 ### `POST /api/cobros` — crear el cobro (requiere confirmación humana)
@@ -51,10 +51,10 @@ Salida `200`:
 - `GET https://api.pey.mx/transaction/codi/qr/{id}`: un item `PAID` **con el mismo monto que el ticket** (±1 centavo) → `pagado` (`pagadoEn` ISO, `transactionId`). `PAID` con otro monto → `pendiente` + `aviso: "pago_con_monto_distinto"`.
 - 404 → `no_verificable` + `aviso: "qr_no_encontrado_con_esta_llave"`. Red o 5xx → `no_verificable` + `aviso: "pey_no_responde"`.
 - Sin `PAID` y `ahora > expiraEn` → `expirado` (aun así se consulta a pey primero: un pago tardío gana).
-- `simulacion`: `pagado` si el ticket trae `simPagadoEn`; si no, `pendiente`.
+- `simulacion`: `pagado` si el ticket trae `simPagadoEn`; si no, `pendiente` (o `expirado` si ya pasó `expiraEn`, agregado en la integración).
 
 ### `POST /api/simular-pago` — solo en simulación
-Entrada `{ "ticket": "…" }`. Si `modoPago !== "simulacion"` → `403 SOLO_SIMULACION`. Salida `200 { "ticket": "<nuevo ticket con simPagadoEn>", "estado": "pagado" }`.
+Entrada `{ "ticket": "…" }`. Si `modoPago !== "simulacion"` → `403 SOLO_SIMULACION`; cobro vencido sin pago → `409 COBRO_VENCIDO` (agregado en la integración). Salida `200 { "ticket": "<nuevo ticket con simPagadoEn>", "estado": "pagado" }`.
 
 ### `POST /api/webhook-pey` — registro firmado
 Cuerpo crudo (`await request.text()`), verificación Standard Webhooks con `PEY_WEBHOOK_SECRET` (K03.5, K03.7): `401 FIRMA_INVALIDA` si falla o el timestamp tiene más de 5 min; `200 { "recibido": true }` si pasa. Solo registra `type`, `webhook-id` e ids. No es la fuente de verdad del estado (lo es `/api/estado`).
@@ -75,20 +75,24 @@ Salida `200`:
   - Sin ticket: pagos `PAID` recientes de pey (últimas 2 h, máx. 3 páginas): mismo monto y hora ±15 min → `coincide`; mismo monto a otra hora → `dudoso`; nada → `no_encontrado` (mensaje honesto con la clave de rastreo para el CEP).
   - Nunca se dice "falso" ni se acusa a nadie.
 - Sin `OPENAI_API_KEY` y sin `montoManual`: en `simulacion`, lectura de ejemplo con `origen: "simulacion"`; en `prueba`/`comercio`, `503 IA_NO_DISPONIBLE` con mensaje "Escribe el monto a mano".
+- `pago` (definido en la construcción): `null` o `{ id, monto, pagadoEn, claveRastreo }`, más `simulacion: true` en los pagos de ejemplo.
 
-## Interfaz de `app/api/_lib/pey.js` (la usan otros módulos)
+## Códigos agregados durante la construcción
+La interfaz muestra `error.mensaje` para cualquier código. Además de los de arriba: `PEY_RECHAZO` (502, otro 4xx de pey al crear), `IA_SIN_SALDO` (503), `TEXTO_INVALIDO` (400, `/api/agente`), `IMAGEN_REQUERIDA` e `IMAGEN_INVALIDA` (400) y `MONTO_INVALIDO` (400, `montoManual`) en `/api/revisar`, `COBRO_VENCIDO` (409, `/api/simular-pago`). Con ticket y estado `no_verificable`, el veredicto es `no_verificable` ("no entregues todavía").
+
+## Interfaz de `app/lib/pey.js` (la usan otros módulos)
 ```js
 export class PeyError extends Error { /* status, codigo */ }
 export async function crearQr({ montoCentavos, concepto, numRef, expiracionSegundos }, cfg) // → { id, qrString, qrImageBase64|null }
 export async function consultarPagosQr(id, cfg)          // → [{ id, status: "PENDING"|"PAID", amount, datePaid|null, ... }] ; lanza PeyError(404) si no existe
 export async function listarPagosRecientes({ desdeEpoch }, cfg) // → [{ id, monto, fechaPago (ISO), claveRastreo|null }] solo PAID
 ```
-`app/api/_lib/estado.js` exporta `resolverEstado(ticketDatos, cfg, ahora = Date.now())` → el objeto de `/api/estado` (lo usan `/api/estado` y `/api/revisar`).
+`app/lib/estado.js` exporta `resolverEstado(ticketDatos, cfg, ahora = Date.now())` → el objeto de `/api/estado` (lo usan `/api/estado` y `/api/revisar`).
 
 ## Archivos y dueños (tareas en paralelo, no se pisan)
 | Dueño | Archivos |
 |---|---|
-| Base (hecho) | `app/package.json`, `app/api/_lib/config.js`, `app/api/_lib/http.js`, `app/api/_lib/ticket.js`, `app/api/salud.js`, `app/servidor-local.mjs` |
-| Pagos (pey) | `app/api/_lib/pey.js`, `app/api/_lib/qr.js`, `app/api/_lib/estado.js`, `app/api/cobros.js`, `app/api/estado.js`, `app/api/simular-pago.js`, `app/api/webhook-pey.js`, `app/tests/pey.test.js`, `app/tests/cobros-estado.test.js`, `app/tests/webhook.test.js` |
-| IA (OpenAI) | `app/api/_lib/openai.js`, `app/api/_lib/catalogo.js`, `app/api/_lib/agente.js`, `app/api/_lib/extractor.js`, `app/api/_lib/coincidencias.js`, `app/api/agente.js`, `app/api/revisar.js`, `app/tests/agente.test.js`, `app/tests/revisar.test.js` |
+| Base (hecho) | `app/package.json`, `app/lib/config.js`, `app/lib/http.js`, `app/lib/ticket.js`, `app/api/salud.js`, `app/servidor-local.mjs` |
+| Pagos (pey) | `app/lib/pey.js`, `app/lib/qr.js`, `app/lib/estado.js`, `app/api/cobros.js`, `app/api/estado.js`, `app/api/simular-pago.js`, `app/api/webhook-pey.js`, `app/tests/pey.test.js`, `app/tests/cobros-estado.test.js`, `app/tests/webhook.test.js` |
+| IA (OpenAI) | `app/lib/openai.js`, `app/lib/catalogo.js`, `app/lib/agente.js`, `app/lib/extractor.js`, `app/lib/coincidencias.js`, `app/api/agente.js`, `app/api/revisar.js`, `app/tests/agente.test.js`, `app/tests/revisar.test.js` |
 | Interfaz | `app/index.html`, `app/css/*.css`, `app/js/*.js`, `app/img/*` |

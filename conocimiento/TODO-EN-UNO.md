@@ -40,7 +40,7 @@
 | **K03** | [CoDi y API de Pey](03-codi-y-api-pey.md) | Qué es CoDi y cómo se usa la API CoDi de Pey (alta, llaves, endpoints, estados, webhooks, pagos reales de prueba, errores), con ejemplos probados en Node/Vercel y reglas para usarla desde un agente. Léelo completo antes de escribir código de cobro. | media | 20 |
 | **K04** | [API de OpenAI vigente (6 nov 2026): DevDay 2026, modelos, Responses, Realtime, Agents, plugins y costos](04-openai-api-nov-2026.md) | Qué anunció el DevDay 2026, qué modelos y precios usar hoy y ejemplos mínimos (Node.js y Python) de salida estructurada, function calling y voz Realtime; léelo antes de escribir cualquier código contra la API de OpenAI. | media | 18 |
 | **K05** | [Trabajar 100% en la nube: Codex (web y CLI), ChatGPT + GitHub, Codespaces y Vercel](05-codex-chatgpt-y-codespaces.md) | Cómo se usa hoy Codex en la nube (entorno, secretos, internet, AGENTS.md, tareas en paralelo, PRs y límites de Plus), Codex CLI en Codespaces, ChatGPT leyendo el repo, previews de Vercel y el flujo recomendado para el sábado; léelo antes de lanzar la primera tarea. | media | 23 |
-| **K06** | [Contexto: pagos, comercios y personas en México](06-contexto-pagos-y-comercios-mx.md) | Cifras verificadas (INEGI, Banxico, DOF, Condusef y prensa seria) sobre efectivo, informalidad, costo de cobrar con tarjeta, uso real de CoDi, lo que cambia el 14-dic-2026, fraude, brecha digital y Coyoacán; léelo al definir problema, 'por qué ahora', personas y datos del pitch. | media | 17 |
+| **K06** | [Contexto: pagos, comercios y personas en México](06-contexto-pagos-y-comercios-mx.md) | Cifras verificadas (INEGI, Banxico, DOF, Condusef y prensa seria) sobre efectivo, informalidad, costo de cobrar con tarjeta, uso real de CoDi, lo que cambia el 14-dic-2026, fraude, brecha digital y Coyoacán; léelo al definir problema, 'por qué ahora', personas y datos del pitch. | media | 18 |
 | **K07** | [Ideas puntuadas y top 3 con PRD](07-ideas-puntuadas.md) | Banco de ideas calificadas contra los criterios del evento, top 3 con PRD listo para Codex y la recomendación final. | media | 42 |
 | **K08** | [Criterios, jueces y cómo ganar: rúbrica, preguntas, errores y ganadores previos](08-criterios-y-jueces.md) | Criterios probables con pesos (inferencia), rúbrica 1–5, preguntas de jueces, errores que restan, ganadores previos y cómo demostrar Codex; léelo al elegir la idea y antes del pitch. | media | 10 |
 | **K09** | [Pitch, demo y preguntas difíciles](09-pitch-y-preguntas.md) | Guion de 3 minutos, demo de 3 pasos, plan B y banco de 20 preguntas con respuesta modelo. | media | 8 |
@@ -2183,9 +2183,9 @@ responde:
   - "¿Cómo hago que ChatGPT web lea mi repo de GitHub y cuándo conviene un MCP propio?"
   - "¿Cómo funcionan los previews de Vercel por PR y el puerto público de Codespaces para webhooks?"
   - "¿Cómo escribo buenas tareas para Codex y cuál es el flujo del sábado?"
-actualizado: 2026-11-06
+actualizado: 2026-11-07
 confianza: media
-fuentes: [SC01, SC02, SC22, SC25, SC33, SC34, SC35, SC36, SC37, SC38, SC39, SC40, SC41, SC42, SC43, SC44, SC45, SC46, SC47, SC48, SC49, SC50, SC51, SC52, SC53, SC54, SC55, SC56, SC57, SC58, SC59, SC60, SC61, SC62, SC63]
+fuentes: [SC01, SC02, SC22, SC25, SC33, SC34, SC35, SC36, SC37, SC38, SC39, SC40, SC41, SC42, SC43, SC44, SC45, SC46, SC47, SC48, SC49, SC50, SC51, SC52, SC53, SC54, SC55, SC56, SC57, SC58, SC59, SC60, SC61, SC62, SC63, SC64, SC65]
 ---
 
 # K05 · Codex, ChatGPT y Codespaces: flujo 100% en la nube
@@ -2397,7 +2397,8 @@ codex exec --sandbox workspace-write "Haz que npm test --prefix app pase sin toc
 - **Variables por entorno:** Production, Preview (todas las ramas que no son de producción, o una rama específica que sobrescribe) y Development (`vercel env pull`). Tipos: Config o Secret; un Secret ya no se puede leer después de guardarlo.
 - **Los cambios a variables sólo aplican a deploys nuevos:** haz Redeploy.
 - Tope de 64 KB de variables por deploy. Variables de sistema útiles: `VERCEL_GIT_PULL_REQUEST_ID` y `VERCEL_GIT_COMMIT_REF`.
-- ⚪ No verificado hoy: el ajuste "Root Directory = `app`"; que las carpetas con `_` inicial dentro de `api/` (como `app/api/_lib/`) no se publiquen como funciones; que los previews pidan sesión de Vercel.
+- **Funciones sin framework (verificado el 7-nov):** cada archivo de `api/` es una función; se escribe `export function GET(request) { return new Response(...) }` y el `package.json` necesita `"type": "module"` (o archivos `.mjs`) [SC65]. Vercel no convierte en función los **archivos** de `api/` que empiezan con `_` o `.` o terminan en `.d.ts`, y recomienda poner el código compartido **fuera** de `api/` e importarlo desde la función [SC64]. Por eso el código compartido de la app vive en `app/lib/`.
+- ⚪ No verificado hoy: el ajuste "Root Directory = `app`"; que los previews pidan sesión de Vercel.
 
 **Recomendación:** antes del primer PR carga en Production y Preview las variables de `.env.example` (`OPENAI_API_KEY`, `OPENAI_MODEL`, `PEY_API_KEY`, `PEY_WEBHOOK_SECRET`, `MAX_MONTO_MXN`, `MODO_PAGO`; la tabla por entorno está en `dia-del-evento/CHECKLIST.md`), con las llaves como Secret. Abre un preview en incógnito para ver si pide sesión; la demo, en la URL de producción.
 
@@ -2493,6 +2494,8 @@ Entrega: PR "[T3] Agente con Responses API" con Qué cambió · Cómo probarlo �
 | SC61 | Environment variables (Vercel) | https://vercel.com/docs/environment-variables.md | 2026-11-06 |
 | SC62 | Forwarding ports in your codespace (GitHub Docs) | https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace?tool=webui | 2026-11-06 |
 | SC63 | OpenAI Codex (AI agent) (Wikipedia) | https://en.wikipedia.org/wiki/OpenAI_Codex_(AI_agent) | 2026-11-06 |
+| SC64 | Advanced Configuration: adding utility files to the /api directory (Vercel) | https://vercel.com/docs/functions/configuring-functions/advanced-configuration | 2026-11-07 |
+| SC65 | Functions API Reference (Vercel) | https://vercel.com/docs/functions/functions-api-reference | 2026-11-07 |
 
 <!-- ===== FIN: conocimiento/05-codex-chatgpt-y-codespaces.md ===== -->
 
@@ -2609,7 +2612,7 @@ CoDi (Cobro Digital) es la plataforma de Banxico, lanzada el 30-sep-2019, para c
 
 **En paralelo**
 - Circular 11/2026: cuenta Nivel 2 Bis de hasta 15,000 UDIs al mes (≈$130–132 mil; hasta 3,000 UDIs en efectivo), sin RFC y con apertura remota [SD09, SD08, SD37]. ⚪ Fecha de oferta en cada banco: no verificada.
-- Ley de Economía Digital para Pagos Digitales y Electrónicos: publicación federal el 4-nov-2026; vigente desde el 5-nov. Transitorios tercero y cuarto: 15 días hábiles para la determinación de sectores por SHCP y otros 15 tras publicarla para reglas sectoriales. No acredita una obligación general de QR en CDMX el 19-nov. Artículo 19-IV: disposiciones Banxico/CNBV sobre QR en terminales [SD64]. ⚪ Sectores y calendarios concretos: pendientes de verificar.
+- Ley de Economía Digital para Pagos Digitales y Electrónicos: el Ejecutivo firmó el decreto el 4-nov-2026 y su texto ya aparece en el SIDOF; entra en vigor al día siguiente de su publicación en el DOF (⚪ la copia consultada no muestra la fecha de publicación) [SD64]. Transitorios tercero y cuarto: 15 días hábiles para la determinación de sectores por SHCP y otros 15 tras publicarla para reglas sectoriales. No acredita una obligación general de QR en CDMX el 19-nov. Artículo 19-IV: disposiciones Banxico/CNBV sobre QR en terminales [SD64]. ⚪ Sectores y calendarios concretos: pendientes de verificar.
 
 **Recomendación (por qué ahora):** ayudar al comercio a adoptar cobros digitales; distinguir el plazo bancario del 14-dic de las reglas sectoriales pendientes. El plazo normativo no demuestra implementación efectiva en todas las apps.
 
