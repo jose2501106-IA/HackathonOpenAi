@@ -196,7 +196,7 @@ Archivo: [`08-criterios-y-jueces.md`](08-criterios-y-jueces.md)
 
 # Proyecto · Objetivo del hackatón y definición sistémica
 
-> Documento rector. Dice **qué** hay que lograr, **por qué**, **con quién** y **bajo qué reglas**, antes de decidir qué se construye. El problema concreto (el de la familia de José) se llena en la sección P12 y después se baja a `docs/PRD.md`. Secciones numeradas P1–P12 para citarlas ("según P6…"). Cada dato remite a su archivo de la base: [K00](../conocimiento/00-bases-del-concurso.md), [K01](../conocimiento/01-evento-verificado.md), [K02](../conocimiento/02-organizadores-y-que-buscan.md), [K03](../conocimiento/03-codi-y-api-pey.md), [K08](../conocimiento/08-criterios-y-jueces.md), [`pey/`](../pey/README.md) y [`codi/`](../codi/README.md).
+> Documento rector. Dice **qué** hay que lograr, **por qué**, **con quién** y **bajo qué reglas**, antes de decidir qué se construye. El problema concreto (una taquería de la CDMX que solo acepta efectivo; José la conoce como cliente) se llena en la sección P12 y después se baja a `docs/PRD.md`. Secciones numeradas P1–P12 para citarlas ("según P6…"). Cada dato remite a su archivo de la base: [K00](../conocimiento/00-bases-del-concurso.md), [K01](../conocimiento/01-evento-verificado.md), [K02](../conocimiento/02-organizadores-y-que-buscan.md), [K03](../conocimiento/03-codi-y-api-pey.md), [K08](../conocimiento/08-criterios-y-jueces.md), [`pey/`](../pey/README.md) y [`codi/`](../codi/README.md).
 
 ## P1 · Objetivo del hackatón
 
@@ -371,18 +371,18 @@ Sirve para cualquier servicio; el PRD la ajusta.
 
 ## P12 · El problema (lo define José)
 
-Con estas respuestas, `/prd` escribe `docs/PRD.md`:
+Estado: **respondido** (7-nov, 14:19). La respuesta 2 es de José, palabra por palabra; las demás son los borradores que José mandó construir ("Hazlo ya"). El producto que sale de aquí, **Tócale** (nombre provisional), está en [`docs/PRD.md`](../docs/PRD.md) y su API en [`docs/CONTRATO-API.md`](../docs/CONTRATO-API.md).
 
-1. ¿Quién lo vive? Persona y contexto, sin datos personales.
-2. ¿Qué pasa hoy? Un ejemplo real.
-3. ¿Qué cuesta hoy? Tiempo, dinero, confianza o salud.
-4. ¿Qué haría la app, en una frase?
-5. ¿Dónde entra el cobro con pey y CoDi? Quién le cobra a quién y por qué.
-6. ¿Qué hace la IA de OpenAI que un formulario no podría?
-7. ¿Cómo aprovecha la ley de pagos digitales (adopción voluntaria y preparación)?
-8. ¿Qué tiene de creativo, en una frase?
+1. **¿Quién lo vive?** El cajero de una taquería de la CDMX que vende mucho pero solo cobra en efectivo, y sus clientes que llegan queriendo pagar sin efectivo. José es cliente de esa taquería, sin otra relación: no se nombra, y la app usa un negocio ficticio ("Taquería El Ejemplo") con menú y precios de ejemplo.
+2. **¿Qué pasa hoy?** En palabras de José: "El cliente llega queriendo pagar con tarjeta, y el cajero de la taquería solamente les puede vender en efectivo. Se pierden ventas."
+3. **¿Qué cuesta hoy?** Ventas que se pierden cuando el cliente no trae efectivo (⚪ sin cifra: nadie lo ha medido), tiempo dando cambio en la hora de más gente y el riesgo de manejar efectivo. Si aceptaran transferencias, el cajero tendría que revisar los comprobantes uno por uno.
+4. **¿Qué haría la app, en una frase?** Tocas la tarjeta (o escaneas el QR), escribes tu celular y pagas tus tacos con CoDi desde la app de tu banco; el cajero ve "pagado" sin terminal y sin comprobantes que revisar.
+5. **¿Dónde entra el cobro con pey y CoDi?** La taquería le cobra al cliente lo que consumió. El servidor pide a pey una solicitud de pago al celular del cliente (`POST /codi/pn`, con el número de pedido como `numRef` y un monto máximo en el servidor); el cliente la autoriza en su banco; el pago se confirma con pey (`GET /transaction/{id}`, y en la caja buscando el número de pedido en `GET /transaction/api-key`); el webhook `codi.pn.payment_received` trae el mismo `transactionId` ([`pey/04`](../pey/04-api-codi-qr-y-push.md), [`pey/07`](../pey/07-api-transacciones.md), [`pey/09`](../pey/09-webhooks.md)). Respaldo: un QR CoDi (`POST /codi/qr`) en la pantalla del cajero. CoDi no cobra comisión a quien paga ni a quien cobra ([`codi/01`](../codi/01-que-es-codi.md)) y la API de pey es gratuita "por el momento" ([`pey/01`](../pey/01-que-es-pey-y-codi.md)).
+6. **¿Qué hace la IA de OpenAI que un formulario no podría?** El cajero dicta o escribe el pedido como lo diría en voz alta ("cuatro de pastor con todo y una horchata") y la IA lo convierte en productos del menú. Los precios y la suma los pone el código; la IA nunca decide montos. Un formulario lo obligaría a picar botones con las manos ocupadas en plena hora de más gente.
+7. **¿Cómo aprovecha la ley de pagos digitales?** Como adopción voluntaria: la ley dice que los comercios "podrán implementar" pagos digitales (art. 11) y solo los sectores que designe la SHCP tendrán obligación (art. 13). La app prepara a un negocio de puro efectivo antes de que existan esas reglas, sin prometer que cumple con la ley (K00.4).
+8. **¿Qué tiene de creativo?** Una tarjeta NFC reprogramable que lleva tu pedido: la tocas y pagas con CoDi, sin terminal y sin efectivo.
 
-Estado: **pendiente** (7-nov).
+**Bien público (R3):** el reto escrito pide "bien público" (K00.2). Tócale se presenta como pagos digitales sin comisión para cualquier puesto que hoy solo acepta efectivo; la taquería es el primer caso, no el único.
 
 <!-- ===== FIN: docs/PROYECTO.md ===== -->
 

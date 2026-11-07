@@ -1,0 +1,17 @@
+{
+  "name": "tocale",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tócale: toca la tarjeta NFC (o escanea el QR) y paga con CoDi® vía pey®.",
+  "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "test": "node --test",
+    "dev": "node scripts/servidor_local.mjs"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  }
+}
