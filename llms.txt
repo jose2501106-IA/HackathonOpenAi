@@ -1,0 +1,33 @@
+# HackathonOpenAi
+
+> Base de conocimiento en Markdown para construir y presentar, el sábado 7 de noviembre de 2026, el proyecto de José en el DevDay Exchange Community Hackathon: Mexico City (Utopía Elena Poniatowska Amor, CDMX): una herramienta con Codex y la API de OpenAI que acerque los cobros CoDi sin comisión (API de Pey) a comercios y personas. Todo en español de México. Cada dato tiene fuente en fuentes/REGISTRO.md; lo no verificado está marcado con ⚪.
+
+## Empieza aquí
+- [Índice de la base de conocimiento](conocimiento/INDICE.md): qué archivo y qué sección responde cada pregunta.
+- [Todo en un solo archivo](conocimiento/TODO-EN-UNO.md): la base completa para leerla de una vez.
+- [Reglas para agentes](AGENTS.md): cómo debe trabajar Codex en este repo.
+
+## Conocimiento
+- [K00 Resumen ejecutivo](conocimiento/00-resumen-ejecutivo.md)
+- [K01 Evento verificado](conocimiento/01-evento-verificado.md)
+- [K02 Organizadores y qué buscan](conocimiento/02-organizadores-y-que-buscan.md)
+- [K03 CoDi y API de Pey](conocimiento/03-codi-y-api-pey.md)
+- [K04 API de OpenAI (noviembre 2026)](conocimiento/04-openai-api-nov-2026.md)
+- [K05 Codex web, ChatGPT y Codespaces](conocimiento/05-codex-chatgpt-y-codespaces.md)
+- [K06 Contexto de pagos y comercios en México](conocimiento/06-contexto-pagos-y-comercios-mx.md)
+- [K07 Ideas puntuadas y top 3 con PRD](conocimiento/07-ideas-puntuadas.md)
+- [K08 Criterios y jueces](conocimiento/08-criterios-y-jueces.md)
+- [K09 Pitch y preguntas difíciles](conocimiento/09-pitch-y-preguntas.md)
+- [K10 Perfil de José y mitigaciones](conocimiento/10-perfil-y-mitigaciones.md)
+
+## Día del evento
+- [Runbook minuto a minuto](dia-del-evento/RUNBOOK.md)
+- [Checklist](dia-del-evento/CHECKLIST.md)
+- [Prompts para Codex](dia-del-evento/PROMPTS-CODEX.md)
+- [Prompts para ChatGPT](dia-del-evento/PROMPTS-CHATGPT.md)
+
+## Opcional
+- [Plantilla de PRD](plantillas/PRD.md)
+- [Plantilla de README de entrega](plantillas/README-ENTREGA.md)
+- [Plantilla del deck](plantillas/DECK.md)
+- [Bitácora](BITACORA.md)
